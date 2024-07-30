@@ -9,32 +9,20 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// Load grammar.xml from /config/grammar.xml
-const grammarPath = path.join(__dirname, '..', 'config', 'grammar.xml');
+// Resolve the correct path to grammar.xml
+const grammarPath = path.join(__dirname, 'config', 'grammar.xml');
+if (!fs.existsSync(grammarPath)) {
+    console.error(`Grammar file not found at path: ${grammarPath}`);
+    process.exit(1);
+}
 const grammarData = fs.readFileSync(grammarPath, 'utf8');
 
 const LANGUAGE_TOOL_API_URL = 'https://api.languagetool.org/v2/check';
 
-app.post('/api/v2/check', async (req, res) => {
+app.post('/v2/check', async (req, res) => {
     const { text, language } = req.body;
 
     try {
         const response = await axios.post(LANGUAGE_TOOL_API_URL, {
-            text,
-            language,
-            customRules: grammarData
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        });
 
-        res.json(response.data);
-    } catch (error) {
-        console.error('Error processing request:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-module.exports = app;
+                                          
