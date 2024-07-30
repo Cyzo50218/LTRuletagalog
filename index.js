@@ -67,22 +67,16 @@ app.post('/api/v2/check', async (req, res) => {
   try {
     const customRules = grammarRules.map(rule => {
       return {
-        id: rule.id || enabledRuleIds.join(','),
+        id: rule.id || '',
         description: rule.name || '',
         pattern: rule.pattern ? JSON.stringify(rule.pattern) : '',
         message: rule.message || '',
         shortMessage: '',
-        url: '',
-        category: rule.category || {
-          id: 'CUSTOM',
-          name: 'Custom Rules'
-        }
+        url: ''
       };
     });
 
-    console.log('Grammar rules:', JSON.stringify(grammarRules, null, 2));
-    console.log('Custom rules:', JSON.stringify(customRules, null, 2));
-
+   
     const requestData = new URLSearchParams({
       text: text,
       language: language,
@@ -101,8 +95,7 @@ app.post('/api/v2/check', async (req, res) => {
       }, {})
     });
 
-    console.log('Sending to LanguageTool API:', requestData.toString());
-
+    
     const response = await axios.post(LANGUAGE_TOOL_API_URL, requestData, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
