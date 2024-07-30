@@ -3,7 +3,6 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-const xml2js = require('xml2js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,28 +10,24 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Resolve the path to grammar.xml
-const grammarPath = path.join(__dirname, 'config', 'grammar.xml');
+// Resolve the path to grammar.json
+const grammarPath = path.join(__dirname, 'config', 'grammar.json');
 
-// Parse the grammar.xml file
-const parseGrammarXml = async (filePath) => {
+// Load and parse grammar.json file
+const loadGrammarJson = () => {
     try {
-        const xmlData = fs.readFileSync(filePath, 'utf8');
-        const parser = new xml2js.Parser();
-        const result = await parser.parseStringPromise(xmlData);
-        console.log('Parsed XML:', result); // Debugging log
-        return result.rules.rule || [];
+        const jsonData = fs.readFileSync(grammarPath, 'utf8');
+        const result = JSON.parse(jsonData);
+        console.log('Parsed JSON:', result); // Debugging log
+        return result.rules || [];
     } catch (error) {
-        console.error('Error reading or parsing grammar.xml:', error);
+        console.error('Error reading or parsing grammar.json:', error);
         return [];
     }
 };
 
-// Load and parse grammar rules
-let grammarRules = [];
-parseGrammarXml(grammarPath).then(rules => {
-    grammarRules = rules;
-});
+// Load grammar rules
+let grammarRules = loadGrammarJson();
 
 // URL for LanguageTool API
 const LANGUAGE_TOOL_API_URL = 'https://api.languagetool.org/v2/check';
@@ -64,11 +59,11 @@ app.post('/api/v2/check', async (req, res) => {
         // Convert custom rules to LanguageTool's expected format
         const customRules = grammarRules.map(rule => {
             // Make sure to handle cases where properties might be undefined
-            const id = rule.id ? rule.id[0] : '';
-            const name = rule.name ? rule.name[0] : '';
-            const pattern = rule.pattern ? rule.pattern[0].token.join(' ') : '';
-            const message = rule.message ? rule.message[0] : '';
-            const example = rule.example ? rule.example[0].correction[0] : '';
+            const id = rule.id || '';
+            const name = rule.name || '';
+            const pattern = rule.pattern ? rule.pattern.token.join(' ') : '';
+            const message = rule.message || '';
+            const example = rule.example ? rule.example.correction : '';
             return { id, name, pattern, message, example };
         });
 
