@@ -27,10 +27,10 @@ const loadGrammarJson = () => {
 
 // Add this constant at the top of your file, after other imports
 const enabledRuleIds = [
-    "SPELLING_1", "SPELLING_2", "SPELLING_3", "SPELLING_4", "SPELLING_5",
-    "ORTHOGRAPHY_1", "ORTHOGRAPHY_2", "ORTHOGRAPHY_3", "ORTHOGRAPHY_4", "ORTHOGRAPHY_5",
-    "SYLLABICATION_1", "SYLLABICATION_2", "SYLLABICATION_3", "SYLLABICATION_4", "SYLLABICATION_5",
-    "BORROWING_1", "BORROWING_2", "BORROWING_3"
+  "SPELLING_1", "SPELLING_2", "SPELLING_3", "SPELLING_4", "SPELLING_5",
+  "ORTHOGRAPHY_1", "ORTHOGRAPHY_2", "ORTHOGRAPHY_3", "ORTHOGRAPHY_4", "ORTHOGRAPHY_5",
+  "SYLLABICATION_1", "SYLLABICATION_2", "SYLLABICATION_3", "SYLLABICATION_4", "SYLLABICATION_5",
+  "BORROWING_1", "BORROWING_2", "BORROWING_3"
 ];
 // Load grammar rules
 let grammarRules = loadGrammarJson();
@@ -53,13 +53,26 @@ const checkTextAgainstRules = (text, rules) => {
 
   rules.forEach(rule => {
     rule.pattern.forEach(pattern => {
-      const regex = new RegExp(pattern.token.value, 'gi');
+      const regex = new RegExp(pattern.regex, 'gi');
       let match;
       while ((match = regex.exec(text)) !== null) {
+        let replacements = [];
+        
+        rule.suggestions.forEach(suggestion => {
+          const suggestionText = suggestion.text.replace('$1', match[1]);
+          if (suggestion.condition) {
+            if (eval(`'${match[1]}'.${suggestion.condition}`)) {
+              replacements.push({ value: suggestionText });
+            }
+          } else {
+            replacements.push({ value: suggestionText });
+          }
+        });
+
         matches.push({
-          message: rule.message,
+          message: rule.message.replace('$1', match[1]),
           shortMessage: '',
-          replacements: [],
+          replacements: replacements,
           offset: match.index,
           length: match[0].length,
           context: {
@@ -105,4 +118,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-      
