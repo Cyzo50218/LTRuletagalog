@@ -1,0 +1,427 @@
+{
+  "rules": [
+    {
+      "id": "SPELLING_1",
+      "name": "Spelling Check for Common Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Check the spelling of this word.",
+      "example": {
+        "correction": "The word <marker>familia</marker> should be spelled 'pamilya'.",
+        "text": "The word <marker>familia</marker> should be spelled 'pamilya'."
+      }
+    },
+    {
+      "id": "SPELLING_2",
+      "name": "Use of Additional Letters",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[cfjñqvxz]" } }
+      ],
+      "message": "Ensure proper usage of additional letters (c, f, j, ñ, q, v, x, z).",
+      "example": {
+        "correction": "The word <marker>telefone</marker> should use the correct additional letters.",
+        "text": "The word <marker>telefone</marker> should use the correct additional letters."
+      }
+    },
+    {
+      "id": "SPELLING_3",
+      "name": "Correct Use of Native Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Check the spelling of this native word.",
+      "example": {
+        "correction": "The word <marker>pakibagayan</marker> should be spelled correctly.",
+        "text": "The word <marker>pakibagayan</marker> should be spelled correctly."
+      }
+    },
+    {
+      "id": "SPELLING_4",
+      "name": "Use of Diacritics in Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[\\u0300-\\u036F]" } }
+      ],
+      "message": "Ensure proper use of diacritics in words.",
+      "example": {
+        "correction": "The word <marker>pámahalaan</marker> should use diacritics correctly.",
+        "text": "The word <marker>pámahalaan</marker> should use diacritics correctly."
+      }
+    },
+    {
+      "id": "SPELLING_5",
+      "name": "Proper Nouns Capitalization",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[A-Z][a-z]*" } }
+      ],
+      "message": "Ensure proper capitalization of proper nouns.",
+      "example": {
+        "correction": "The name <marker>manila</marker> should be capitalized as 'Manila'.",
+        "text": "The name <marker>manila</marker> should be capitalized as 'Manila'."
+      }
+    },
+    {
+      "id": "ORTHOGRAPHY_1",
+      "name": "Proper Use of Hyphens",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Use hyphens correctly in compound words.",
+      "example": {
+        "correction": "The word <marker>araw-araw</marker> should use hyphens correctly.",
+        "text": "The word <marker>araw-araw</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "ORTHOGRAPHY_2",
+      "name": "Correct Use of Punctuation",
+      "pattern": [
+        { "token": { "value": "," } }
+      ],
+      "message": "Use punctuation marks correctly.",
+      "example": {
+        "correction": "Ensure proper punctuation: <marker>,</marker>",
+        "text": "Ensure proper punctuation: <marker>,</marker>"
+      }
+    },
+    {
+      "id": "ORTHOGRAPHY_3",
+      "name": "Use of Diacritics",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[\\u0300-\\u036F]" } }
+      ],
+      "message": "Ensure the correct use of diacritics.",
+      "example": {
+        "correction": "Check the diacritics in <marker>malígaya</marker>.",
+        "text": "Check the diacritics in <marker>malígaya</marker>."
+      }
+    },
+    {
+      "id": "ORTHOGRAPHY_4",
+      "name": "Correct Use of Ellipsis",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "\\.{2,}" } }
+      ],
+      "message": "Use ellipsis correctly, with exactly three dots.",
+      "example": {
+        "correction": "...",
+        "text": "The ellipsis <marker>....</marker> should be replaced with '…'."
+      }
+    },
+    {
+      "id": "ORTHOGRAPHY_5",
+      "name": "Comma Use in List",
+      "pattern": [
+        { "token": { "value": "," } },
+        { "token": { "value": "at" } }
+      ],
+      "message": "Do not use a comma before 'at' in a list.",
+      "example": {
+        "correction": "at",
+        "text": "The list should be <marker>apple, orange, at banana</marker>."
+      }
+    },
+    {
+      "id": "SYLLABICATION_1",
+      "name": "Syllabication Rules",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure correct syllabication.",
+      "example": {
+        "correction": "The word <marker>totoo</marker> should be syllabicated as 'to.to.o'.",
+        "text": "The word <marker>totoo</marker> should be syllabicated as 'to.to.o'."
+      }
+    },
+    {
+      "id": "SYLLABICATION_2",
+      "name": "Repetition of Syllables",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Check the repetition of syllables in this word.",
+      "example": {
+        "correction": "The word <marker>halo-halo</marker> should be checked for syllable repetition.",
+        "text": "The word <marker>halo-halo</marker> should be checked for syllable repetition."
+      }
+    },
+    {
+      "id": "SYLLABICATION_3",
+      "name": "Syllabication with Affixes",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure proper syllabication with affixes.",
+      "example": {
+        "correction": "The word <marker>pakikitungo</marker> should be syllabicated correctly.",
+        "text": "The word <marker>pakikitungo</marker> should be syllabicated correctly."
+      }
+    },
+    {
+      "id": "SYLLABICATION_4",
+      "name": "Splitting Words at Line Endings",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure correct splitting of words at line endings.",
+      "example": {
+        "correction": "The word <marker>pag-aaral</marker> should be split correctly.",
+        "text": "The word <marker>pag-aaral</marker> should be split correctly."
+      }
+    },
+    {
+      "id": "SYLLABICATION_5",
+      "name": "Hyphenated Words at Line Endings",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Check the correct use of hyphens at line endings.",
+      "example": {
+        "correction": "The word <marker>batá-batá</marker> should use hyphens correctly.",
+        "text": "The word <marker>batá-batá</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "BORROWING_1",
+      "name": "Borrowing Foreign Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure proper spelling of borrowed words.",
+      "example": {
+        "correction": "The word <marker>television</marker> should be borrowed correctly.",
+        "text": "The word <marker>television</marker> should be borrowed correctly."
+      }
+    },
+    {
+      "id": "BORROWING_2",
+      "name": "Technical and Scientific Terms",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Retain the original spelling for technical and scientific terms.",
+      "example": {
+        "correction": "The term <marker>photosynthesis</marker> should retain its original spelling.",
+        "text": "The term <marker>photosynthesis</marker> should retain its original spelling."
+      }
+    },
+    {
+      "id": "BORROWING_3",
+      "name": "Proper Nouns",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Keep the original spelling for proper nouns.",
+      "example": {
+        "correction": "The name <marker>Shakespeare</marker> should be spelled correctly.",
+        "text": "The name <marker>Shakespeare</marker> should be spelled correctly."
+      }
+    },
+    {
+      "id": "BORROWING_4",
+      "name": "Spelling of Borrowed Terms",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure correct spelling of borrowed terms.",
+      "example": {
+        "correction": "The borrowed term <marker>computer</marker> should be spelled correctly.",
+        "text": "The borrowed term <marker>computer</marker> should be spelled correctly."
+      }
+    },
+    {
+      "id": "BORROWING_5",
+      "name": "Proper Use of Foreign Plurals",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } },
+        { "token": { "value": "s" } }
+      ],
+      "message": "Ensure proper use of foreign plurals.",
+      "example": {
+        "correction": "The plural form <marker>computers</marker> should be used correctly.",
+        "text": "The plural form <marker>computers</marker> should be used correctly."
+      }
+    },
+    {
+      "id": "REPETITION_1",
+      "name": "Repeating Syllables in Root Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Check the repetition of syllables in root words.",
+      "example": {
+        "correction": "The word <marker>gabi-gabi</marker> should be checked for syllable repetition.",
+        "text": "The word <marker>gabi-gabi</marker> should be checked for syllable repetition."
+      }
+    },
+    {
+      "id": "REPETITION_2",
+      "name": "Repeating Syllables with Affixes",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure proper repetition of syllables with affixes.",
+      "example": {
+        "correction": "The word <marker>magsisi</marker> should be repeated correctly.",
+        "text": "The word <marker>magsisi</marker> should be repeated correctly."
+      }
+    },
+    {
+      "id": "REPETITION_3",
+      "name": "Repeating Syllables in Compound Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure proper repetition of syllables in compound words.",
+      "example": {
+        "correction": "The word <marker>bahay-bakasyunan</marker> should be checked for repetition.",
+        "text": "The word <marker>bahay-bakasyunan</marker> should be checked for repetition."
+      }
+    },
+    {
+      "id": "REPETITION_4",
+      "name": "Repeating Syllables in Reduplicated Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Ensure correct repetition in reduplicated words.",
+      "example": {
+        "correction": "The word <marker>ulan-ulan</marker> should be repeated correctly.",
+        "text": "The word <marker>ulan-ulan</marker> should be repeated correctly."
+      }
+    },
+    {
+      "id": "REPETITION_5",
+      "name": "Repetition in Affixed Words",
+      "pattern": [
+        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+      ],
+      "message": "Check repetition in words with affixes.",
+      "example": {
+        "correction": "The word <marker>nakikinig</marker> should have correct repetition.",
+        "text": "The word <marker>nakikinig</marker> should have correct repetition."
+      }
+    },
+    {
+      "id": "HYPHENS_1",
+      "name": "Proper Use of Hyphens in Repeated Words",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Use hyphens correctly in repeated words.",
+      "example": {
+        "correction": "The word <marker>gabi-gabi</marker> should use hyphens correctly.",
+        "text": "The word <marker>gabi-gabi</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "HYPHENS_2",
+      "name": "Hyphens in Compound Adjectives",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Ensure correct use of hyphens in compound adjectives.",
+      "example": {
+        "correction": "The phrase <marker>malamig-init</marker> should use hyphens correctly.",
+        "text": "The phrase <marker>malamig-init</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "HYPHENS_3",
+      "name": "Hyphens in Prefixes",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Check the use of hyphens with prefixes.",
+      "example": {
+        "correction": "The word <marker>re-examine</marker> should use hyphens correctly.",
+        "text": "The word <marker>re-examine</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "HYPHENS_4",
+      "name": "Hyphens in Compound Nouns",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Ensure correct use of hyphens in compound nouns.",
+      "example": {
+        "correction": "The compound noun <marker>kotse-bahay</marker> should use hyphens correctly.",
+        "text": "The compound noun <marker>kotse-bahay</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "HYPHENS_5",
+      "name": "Hyphens in Numbers",
+      "pattern": [
+        { "token": { "value": "-" } }
+      ],
+      "message": "Check the use of hyphens in written numbers.",
+      "example": {
+        "correction": "The number <marker>dalawampu't-isa</marker> should use hyphens correctly.",
+        "text": "The number <marker>dalawampu't-isa</marker> should use hyphens correctly."
+      }
+    },
+    {
+      "id": "PUNCTUATION_1",
+      "name": "Use of Periods",
+      "pattern": [
+        { "token": { "value": "." } }
+      ],
+      "message": "Ensure the correct use of periods at the end of sentences.",
+      "example": {
+        "correction": "The sentence <marker>Mag-aral ka</marker> should end with a period.",
+        "text": "The sentence <marker>Mag-aral ka</marker> should end with a period."
+      }
+    },
+    {
+      "id": "PUNCTUATION_2",
+      "name": "Use of Commas",
+      "pattern": [
+        { "token": { "value": "," } }
+      ],
+      "message": "Use commas correctly to separate elements in a sentence.",
+      "example": {
+        "correction": "The sentence <marker>Si Ana, isang guro</marker> should use commas correctly.",
+        "text": "The sentence <marker>Si Ana, isang guro</marker> should use commas correctly."
+      }
+    },
+    {
+      "id": "PUNCTUATION_3",
+      "name": "Use of Exclamation Marks",
+      "pattern": [
+        { "token": { "value": "!" } }
+      ],
+      "message": "Ensure the correct use of exclamation marks.",
+      "example": {
+        "correction": "The sentence <marker>Ang ganda!</marker> should use an exclamation mark.",
+        "text": "The sentence <marker>Ang ganda!</marker> should use an exclamation mark."
+      }
+    },
+    {
+      "id": "PUNCTUATION_4",
+      "name": "Use of Question Marks",
+      "pattern": [
+        { "token": { "value": "?" } }
+      ],
+      "message": "Ensure the correct use of question marks.",
+      "example": {
+        "correction": "The sentence <marker>Gusto mo ba?</marker> should use a question mark.",
+        "text": "The sentence <marker>Gusto mo ba?</marker> should use a question mark."
+      }
+    },
+    {
+      "id": "PUNCTUATION_5",
+      "name": "Use of Quotation Marks",
+      "pattern": [
+        { "token": { "value": "\"" } }
+      ],
+      "message": "Ensure the correct use of quotation marks.",
+      "example": {
+        "correction": "The sentence <marker>Si Ana ay nagsabi, \"Mag-aral ka.\"</marker> should use quotation marks correctly.",
+        "text": "The sentence <marker>Si Ana ay nagsabi, \"Mag-aral ka.\"</marker> should use quotation marks correctly."
+      }
+    }
+  ]
+}
+
