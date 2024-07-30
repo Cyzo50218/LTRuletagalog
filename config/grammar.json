@@ -1,222 +1,155 @@
-    {
+{
   "rules": [
+    //1. Salitang Mula sa Español 
     {
-      "id": "SPELLING_1",
-      "name": "Spelling Check for Common Words",
+      "id": "ESPANYOL1",
+      "name": "1. Hiram Mula sa Español",
       "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
+        { "token": { "value": "familia" } }
       ],
-      "message": "Check the spelling of this word.",
-      "example": {
-        "correction": "The word <marker>familia</marker> should be spelled 'pamilya'.",
-        "text": "The word <marker>familia</marker> should be spelled 'pamilya'."
-      }
+      "message": "Hiram na salita mula sa Español, sa tagalog ay 'pamilya'",
+      "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+      "suggestions": ["pamilya"]
+    },
+     {
+    "id": "ESPANYOL2",
+    "name": "2. Hiram Mula sa Español",
+    "pattern": [
+      { "token": { "value": "baño" } }
+      ],
+    "message": "Hiram na salita mula sa Español, sa tagalog ay 'banyo'",
+    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+    "suggestions": ["banyo"]
+  },
+     {
+    "id": "ESPANYOL3",
+    "name": "1. Hiram Mula sa Español",
+    "pattern": [
+      { "token": { "value": "cheque" } }
+      ],
+    "message": "Hiram na salita mula sa Español, sa tagalog ay 'tseke'",
+    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+    "suggestions": ["tseke"]
+  },
+  {
+    "id": "ESPANYOL4",
+    "name": "1. Hiram Mula sa Español",
+    "pattern": [
+      { "token": { "value": "maquina" } }
+      ],
+    "message": "Hiram na salita mula sa Español, sa tagalog ay 'maquina'",
+    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+    "suggestions": ["makina"]
+  },
+  //pag-uulit ng salitang-ugat na nagtatapos sa patinig na “e” hindi ito pinapalitan ng letrang “i”,Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.
+{
+  "id": "PAGUULIT",
+  "name": "1. Pag-uulit ng salitang ugat",
+  "pattern": [
+    {
+      "regex": "\\b(\\w*e)\\s*\\1\\b"
+    }
+  ],
+  "message": "Paguulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+  "description": "Ito ay ang pag-uulit ng salitang-ugat na nagtatapos sa patinig na “e” hindi ito pinapalitan ng letrang “i”, Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+  "suggestions": [
+    { "text": "$1-ng $1" },
+    { "text": "$1-$1" }
+  ]
+},
+{
+  "id": "PAGUULIT2",
+  "name": "2. Pag-uulit ng salitang ugat na nagtatapos sa patinig na 'o'",
+  "pattern": [
+    {
+      "regex": "\\b(\\w*o)\\s*\\1\\b"
+    }
+  ],
+  "message": "Paguulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
+  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na “o” hindi ito pinapalitan ng letrang “u”. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+  "suggestions": [
+    { "text": "$1-$1" }
+  ]
+},{
+  "id": "PAGHULAPIAN_COMBINED",
+  "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
+  "pattern": [
+    {
+      "regex": "\\b(\\w*e)\\b"
     },
     {
-      "id": "SPELLING_2",
-      "name": "Use of Additional Letters",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[cfjñqvxz]" } }
-      ],
-      "message": "Ensure proper usage of additional letters (c, f, j, ñ, q, v, x, z).",
-      "example": {
-        "correction": "The word <marker>telefone</marker> should use the correct additional letters.",
-        "text": "The word <marker>telefone</marker> should use the correct additional letters."
-      }
+      "regex": "\\b(\\w*o)\\b"
+    }
+  ],
+  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. Gayundin, may mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
+  "description": "Kapag ang salitang-ugat na nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-han'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian.",
+  "suggestions": [
+    {
+      "text": "$1-i",
+      "condition": "endsWith('e')",
+      "exceptions": ["sine", "bote", "onse", "base"],
+      "exception_suggestion": "$1han"
     },
     {
-      "id": "SPELLING_3",
-      "name": "Correct Use of Native Words",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Check the spelling of this native word.",
-      "example": {
-        "correction": "The word <marker>pakibagayan</marker> should be spelled correctly.",
-        "text": "The word <marker>pakibagayan</marker> should be spelled correctly."
-      }
-    },
-    {
-      "id": "SPELLING_4",
-      "name": "Use of Diacritics in Words",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[\\u0300-\\u036F]" } }
-      ],
-      "message": "Ensure proper use of diacritics in words.",
-      "example": {
-        "correction": "The word <marker>pámahalaan</marker> should use diacritics correctly.",
-        "text": "The word <marker>pámahalaan</marker> should use diacritics correctly."
-      }
-    },
-    {
-      "id": "SPELLING_5",
-      "name": "Proper Nouns Capitalization",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[A-Z][a-z]*" } }
-      ],
-      "message": "Ensure proper capitalization of proper nouns.",
-      "example": {
-        "correction": "The name <marker>manila</marker> should be capitalized as 'Manila'.",
-        "text": "The name <marker>manila</marker> should be capitalized as 'Manila'."
-      }
-    },
-    {
-      "id": "ORTHOGRAPHY_1",
-      "name": "Proper Use of Hyphens",
-      "pattern": [
-        { "token": { "value": "-" } }
-      ],
-      "message": "Use hyphens correctly in compound words.",
-      "example": {
-        "correction": "The word <marker>araw-araw</marker> should use hyphens correctly.",
-        "text": "The word <marker>araw-araw</marker> should use hyphens correctly."
-      }
-    },
-    {
-      "id": "ORTHOGRAPHY_2",
-      "name": "Correct Use of Punctuation",
-      "pattern": [
-        { "token": { "value": "," } }
-      ],
-      "message": "Use punctuation marks correctly.",
-      "example": {
-        "correction": "Ensure proper punctuation: <marker>,</marker>",
-        "text": "Ensure proper punctuation: <marker>,</marker>"
-      }
-    },
-    {
-      "id": "ORTHOGRAPHY_3",
-      "name": "Use of Diacritics",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[\\u0300-\\u036F]" } }
-      ],
-      "message": "Ensure the correct use of diacritics.",
-      "example": {
-        "correction": "Check the diacritics in <marker>malígaya</marker>.",
-        "text": "Check the diacritics in <marker>malígaya</marker>."
-      }
-    },
-    {
-      "id": "ORTHOGRAPHY_4",
-      "name": "Correct Use of Ellipsis",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "\\.{3}" } }
-      ],
-      "message": "Use ellipsis correctly, with exactly three dots.",
-      "example": {
-        "correction": "...",
-        "text": "The ellipsis <marker>....</marker> should be replaced with '…'."
-      }
-    },
-    {
-      "id": "ORTHOGRAPHY_5",
-      "name": "Comma Use in List",
-      "pattern": [
-        { "token": { "value": "," } },
-        { "token": { "value": "at" } }
-      ],
-      "message": "Do not use a comma before 'at' in a list.",
-      "example": {
-        "correction": "at",
-        "text": "The list should be <marker>apple, orange, at banana</marker>."
-      }
-    },
-    {
-      "id": "SYLLABICATION_1",
-      "name": "Syllabication Rules",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Ensure correct syllabication.",
-      "example": {
-        "correction": "The word <marker>totoo</marker> should be syllabicated as 'to.to.o'.",
-        "text": "The word <marker>totoo</marker> should be syllabicated as 'to.to.o'."
-      }
-    },
-    {
-      "id": "SYLLABICATION_2",
-      "name": "Repetition of Syllables",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Check the repetition of syllables in this word.",
-      "example": {
-        "correction": "The word <marker>halo-halo</marker> should be checked for syllable repetition.",
-        "text": "The word <marker>halo-halo</marker> should be checked for syllable repetition."
-      }
-    },
-    {
-      "id": "SYLLABICATION_3",
-      "name": "Syllabication with Affixes",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Ensure proper syllabication with affixes.",
-      "example": {
-        "correction": "The word <marker>pakikitungo</marker> should be syllabicated correctly.",
-        "text": "The word <marker>pakikitungo</marker> should be syllabicated correctly."
-      }
-    },
-    {
-      "id": "SYLLABICATION_4",
-      "name": "Splitting Words at Line Endings",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Ensure correct splitting of words at line endings.",
-      "example": {
-        "correction": "The word <marker>pag-aaral</marker> should be split correctly.",
-        "text": "The word <marker>pag-aaral</marker> should be split correctly."
-      }
-    },
-    {
-      "id": "SYLLABICATION_5",
-      "name": "Hyphenated Words at Line Endings",
-      "pattern": [
-        { "token": { "value": "-" } }
-      ],
-      "message": "Check the correct use of hyphens at line endings.",
-      "example": {
-        "correction": "The word <marker>batá-batá</marker> should use hyphens correctly.",
-        "text": "The word <marker>batá-batá</marker> should use hyphens correctly."
-      }
-    },
-    {
-      "id": "BORROWING_1",
-      "name": "Borrowing Foreign Words",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Ensure proper spelling of borrowed words.",
-      "example": {
-        "correction": "The word <marker>television</marker> should be borrowed correctly.",
-        "text": "The word <marker>television</marker> should be borrowed correctly."
-      }
-    },
-    {
-      "id": "BORROWING_2",
-      "name": "Technical and Scientific Terms",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[a-zA-Z]+" } }
-      ],
-      "message": "Check the spelling of technical and scientific terms.",
-      "example": {
-        "correction": "The term <marker>microbiology</marker> should be spelled correctly.",
-        "text": "The term <marker>microbiology</marker> should be spelled correctly."
-      }
-    },
-    {
-      "id": "BORROWING_3",
-      "name": "Proper Nouns and Foreign Names",
-      "pattern": [
-        { "token": { "regexp": "yes", "value": "[A-Z][a-z]+" } }
-      ],
-      "message": "Ensure proper spelling of foreign proper nouns and names.",
-      "example": {
-        "correction": "The name <marker>Einstein</marker> should be spelled correctly.",
-        "text": "The name <marker>Einstein</marker> should be spelled correctly."
-      }
+      "text": "$1-u",
+      "condition": "endsWith('o')"
     }
   ]
+},
+{
+  "id": "PAGTUNOG_E_O",
+  "name": "6. Pagbabago ng tunog na 'e' at 'o' sa mga hiram na salita",
+  "pattern": [
+    {
+      "regex": "\\b(mesa|uso|tela|selo|bote|tubo|santa|babay|korte|sabi|basil|sino|bango|sisi|honey|piso|binti|tanggap|pinta|mango)\\b"
     }
-        
+  ],
+  "message": "Makabuluhan ang tunog na 'e' at 'o' kapag inihahambing ang mga hiram na salita sa mga katutubo o hiram na salita.",
+  "description": "Ang tunog na 'e' at 'o' sa mga hiram na salita ay maaaring ihalin sa katutubong Tagalog na tunog.",
+  "suggestions": [
+    {
+      "text": "misa",
+      "condition": "matches('mesa')"
+    },
+    {
+      "text": "oso",
+      "condition": "matches('uso')"
+    },
+    {
+      "text": "tila",
+      "condition": "matches('tela')"
+    },
+    {
+      "text": "babae",
+      "condition": "matches('babay')"
+    },
+    {
+      "text": "korti",
+      "condition": "matches('korte')"
+    },
+    {
+      "text": "sabihin",
+      "condition": "matches('sabi')"
+    },
+    {
+      "text": "sinu",
+      "condition": "matches('sino')"
+    },
+    {
+      "text": "bangong",
+      "condition": "matches('bango')"
+    },
+    {
+      "text": "sising",
+      "condition": "matches('sisi')"
+    },
+    {
+      "text": "pisu",
+      "condition": "matches('piso')"
+    },
+    {
+      "text": "mangga",
+      "condition": "matches('mango')"
+    }
+  ]
+      }
