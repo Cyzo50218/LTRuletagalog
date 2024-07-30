@@ -20,6 +20,7 @@ const parseGrammarXml = async (filePath) => {
         const xmlData = fs.readFileSync(filePath, 'utf8');
         const parser = new xml2js.Parser();
         const result = await parser.parseStringPromise(xmlData);
+        console.log('Parsed XML:', result); // Debugging log
         return result.rules.rule || [];
     } catch (error) {
         console.error('Error reading or parsing grammar.xml:', error);
@@ -48,9 +49,16 @@ app.get('/', (req, res) => {
     res.send('LanguageTool Proxy Server is running.');
 });
 
-// Route for /v2/check with POST method
+// Route for /api/v2/check with POST method
 app.post('/api/v2/check', async (req, res) => {
     const { text, language } = req.body;
+
+    console.log('Received request:', { text, language });
+    console.log('Loaded grammar rules:', grammarRules); // Debugging log
+
+    if (!text || !language) {
+        return res.status(400).json({ error: 'Missing text or language' });
+    }
 
     try {
         // Convert custom rules to LanguageTool's expected format
@@ -86,4 +94,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-    
+         
