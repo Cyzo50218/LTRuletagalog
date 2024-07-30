@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 // Route for /v2/check with POST method
-app.post('/v2/check', async (req, res) => {
+app.post('/api/v2/check', async (req, res) => {
     const { text, language } = req.body;
 
     try {
