@@ -62,13 +62,15 @@ app.post('/api/v2/check', async (req, res) => {
 
     try {
         // Convert custom rules to LanguageTool's expected format
-        const customRules = grammarRules.map(rule => ({
-            id: rule.id[0],
-            name: rule.name[0],
-            pattern: rule.pattern[0].token.join(' '),
-            message: rule.message[0],
-            example: rule.example[0].correction[0]
-        }));
+        const customRules = grammarRules.map(rule => {
+            // Make sure to handle cases where properties might be undefined
+            const id = rule.id ? rule.id[0] : '';
+            const name = rule.name ? rule.name[0] : '';
+            const pattern = rule.pattern ? rule.pattern[0].token.join(' ') : '';
+            const message = rule.message ? rule.message[0] : '';
+            const example = rule.example ? rule.example[0].correction[0] : '';
+            return { id, name, pattern, message, example };
+        });
 
         const response = await axios.post(LANGUAGE_TOOL_API_URL, new URLSearchParams({
             text: text,
@@ -94,4 +96,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-         
