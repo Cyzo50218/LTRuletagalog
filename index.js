@@ -19,6 +19,12 @@ const grammarData = fs.readFileSync(grammarPath, 'utf8');
 
 const LANGUAGE_TOOL_API_URL = 'https://api.languagetool.org/v2/check';
 
+// Add a route for the root URL
+app.get('/', (req, res) => {
+    res.send('LanguageTool Proxy Server is running.');
+});
+
+// Add a route for /v2/check
 app.post('/v2/check', async (req, res) => {
     const { text, language } = req.body;
 
