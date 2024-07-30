@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
@@ -25,6 +24,7 @@ const loadGrammarJson = () => {
     return [];
   }
 };
+
 // Add this constant at the top of your file, after other imports
 const enabledRuleIds = [
     "SPELLING_1", "SPELLING_2", "SPELLING_3", "SPELLING_4", "SPELLING_5",
@@ -39,9 +39,6 @@ const enabledRuleIds = [
 // Load grammar rules
 let grammarRules = loadGrammarJson();
 
-// URL for LanguageTool API
-const LANGUAGE_TOOL_API_URL = 'https://api.languagetool.org/v2/check';
-
 // Enable CORS for all routes (optional, useful for testing)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -54,8 +51,41 @@ app.get('/', (req, res) => {
   res.send('LanguageTool Proxy Server is running.');
 });
 
+// Function to check text against custom rules
+const checkTextAgainstRules = (text, rules) => {
+  let matches = [];
+
+  rules.forEach(rule => {
+    rule.pattern.forEach(pattern => {
+      const regex = new RegExp(pattern.token.value, 'gi');
+      let match;
+      while ((match = regex.exec(text)) !== null) {
+        matches.push({
+          message: rule.message,
+          shortMessage: '',
+          replacements: [],
+          offset: match.index,
+          length: match[0].length,
+          context: {
+            text: text,
+            offset: match.index,
+            length: match[0].length
+          },
+          sentence: text,
+          rule: {
+            id: rule.id,
+            description: rule.name
+          }
+        });
+      }
+    });
+  });
+
+  return { matches };
+};
+
 // Route for /api/v2/check with POST method
-app.post('/api/v2/check', async (req, res) => {
+app.post('/api/v2/check', (req, res) => {
   const { text, language } = req.body;
 
   console.log('Received request:', { text, language });
@@ -65,38 +95,11 @@ app.post('/api/v2/check', async (req, res) => {
   }
 
   try {
-    const customRules = grammarRules.map(rule => {
-      return {
-        id: rule.id || '',
-        description: rule.name || '',
-        pattern: rule.pattern ? JSON.stringify(rule.pattern) : '',
-        message: rule.message || '',
-        shortMessage: '',
-        url: ''
-      };
-    });
-
-   
-    const requestData = new URLSearchParams({
-      text: text,
-      language: language,
-      enabledRules: enabledRuleIds.join(','), // Join the ids with commas
-      disabledRules: ''
-    });
-
-    
-    const response = await axios.post(LANGUAGE_TOOL_API_URL, requestData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-      }
-    });
-
-    res.json(response.data);
+    const result = checkTextAgainstRules(text, grammarRules);
+    res.json(result);
   } catch (error) {
     console.error('Error processing request:', error);
-    console.error('Error stack:', error.stack);
-    res.status(500).json({ error: error.message, stack: error.stack });
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -106,3 +109,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+      
