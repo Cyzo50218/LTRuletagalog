@@ -81,18 +81,7 @@ app.post('/api/v2/check', async (req, res) => {
       text: text,
       language: language,
       enabledRules: enabledRuleIds.join(','), // Join the ids with commas
-      disabledRules: '',
-      disabledCategories: '',
-      ...customRules.reduce((acc, rule, index) => {
-        acc[`rule_${index}_id`] = rule.id;
-        acc[`rule_${index}_description`] = rule.description;
-        acc[`rule_${index}_pattern`] = rule.pattern;
-        acc[`rule_${index}_message`] = rule.message;
-        acc[`rule_${index}_shortMessage`] = rule.shortMessage;
-        acc[`rule_${index}_url`] = rule.url;
-        acc[`rule_${index}_category`] = JSON.stringify(rule.category);
-        return acc;
-      }, {})
+      disabledRules: ''
     });
 
     
