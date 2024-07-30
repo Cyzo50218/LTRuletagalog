@@ -9,6 +9,13 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
 // Resolve the correct path to grammar.xml
 const grammarPath = path.join(__dirname, 'config', 'grammar.xml');
 if (!fs.existsSync(grammarPath)) {
@@ -27,7 +34,7 @@ app.get('/', (req, res) => {
 // Add a route for /v2/check
 app.post('/v2/check', async (req, res) => {
     const { text, language } = req.body;
-
+res.send('LanguageTool Proxy Server is running. Grammar Rule running');
     try {
         const response = await axios.post(LANGUAGE_TOOL_API_URL, {
             text,
