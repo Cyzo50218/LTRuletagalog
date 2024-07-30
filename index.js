@@ -34,19 +34,26 @@ app.get('/', (req, res) => {
 // Add a route for /v2/check
 app.post('/v2/check', async (req, res) => {
     const { text, language } = req.body;
-res.send('LanguageTool Proxy Server is running. Grammar Rule running');
+
     try {
-        const response = await axios.post(LANGUAGE_TOOL_API_URL, {
-            text,
-            language,
-            customRules: grammarData
-        }, {
+        // Ensure the language code matches the grammar rules
+        const response = await axios.post(LANGUAGE_TOOL_API_URL, new URLSearchParams({
+            text: text,
+            language: language, // Should match the language code in grammar.xml
+            customRules: grammarData // Ensure custom rules are correctly formatted
+        }), {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'
             }
         });
 
+        res.json(response.data);
+    } catch (error) {
+        console.error('Error processing request:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
         res.json(response.data);
     } catch (error) {
         console.error('Error processing request:', error);
