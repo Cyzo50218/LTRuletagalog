@@ -49,8 +49,7 @@ app.post('/api/v2/check', async (req, res) => {
     const { text, language } = req.body;
 
     console.log('Received request:', { text, language });
-    console.log('Loaded grammar rules:', grammarRules); // Debugging log
-
+    
     if (!text || !language) {
         return res.status(400).json({ error: 'Missing text or language' });
     }
