@@ -9,8 +9,8 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// Load grammar.xml
-const grammarPath = path.join(__dirname, '../config', 'grammar.xml');
+// Load grammar.xml from /config/grammar.xml
+const grammarPath = path.join(__dirname, '..', 'config', 'grammar.xml');
 const grammarData = fs.readFileSync(grammarPath, 'utf8');
 
 const LANGUAGE_TOOL_API_URL = 'https://api.languagetool.org/v2/check';
