@@ -60,11 +60,14 @@ app.post('/api/v2/check', async (req, res) => {
             // Make sure to handle cases where properties might be undefined
             const id = rule.id || '';
             const name = rule.name || '';
-            const pattern = rule.pattern ? rule.pattern.token.join(' ') : '';
+            const pattern = rule.pattern && rule.pattern.token ? rule.pattern.token.join(' ') : '';
             const message = rule.message || '';
             const example = rule.example ? rule.example.correction : '';
             return { id, name, pattern, message, example };
         });
+
+        console.log('Grammar rules:', JSON.stringify(grammarRules, null, 2));
+        console.log('Custom rules:', JSON.stringify(customRules, null, 2));
 
         const response = await axios.post(LANGUAGE_TOOL_API_URL, new URLSearchParams({
             text: text,
@@ -79,8 +82,9 @@ app.post('/api/v2/check', async (req, res) => {
 
         res.json(response.data);
     } catch (error) {
-        console.error('Error processing request:', error.message);
-        res.status(500).json({ error: error.message });
+        console.error('Error processing request:', error);
+        console.error('Error stack:', error.stack);
+        res.status(500).json({ error: error.message, stack: error.stack });
     }
 });
 
