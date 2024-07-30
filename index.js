@@ -24,5 +24,25 @@ app.post('/v2/check', async (req, res) => {
 
     try {
         const response = await axios.post(LANGUAGE_TOOL_API_URL, {
+            text,
+            language,
+            customRules: grammarData
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
 
-                                          
+        res.json(response.data);
+    } catch (error) {
+        console.error('Error processing request:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+module.exports = app;
