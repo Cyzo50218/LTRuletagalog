@@ -67,51 +67,15 @@ if (!grammarRules.length)  {
     "suggestions": ["makina"]
   },
   {
-    "id": "PAGUULIT_O",
-    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
-    "pattern": [
-      {
-        "regex": "\\b(\\w*o)\\s*\\1\\b"
-      }
-    ],
-    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
-    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-    "examples": [
-      "ano - ano-ano",
-      "sino - sino-sino",
-      "pito - pito-pito",
-      "halo - halo-halo (magkakasama ang iba’t ibang bagay)",
-      "buto - buto-buto",
-      "piso - piso-piso"
-    ],
-    "suggestions": [
-      { "text": "$1-$1" }
-    ]
-  },
-  {
-    "id": "PAGUULIT_E",
-    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
-    "pattern": [
-      {
-        "regex": "\\b(\\w*e)\\s*\\1\\b"
-      }
-    ],
-    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
-    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-    "examples": [
-      "tseke - tseke-tseke",
-      "bente - bente-bente",
-      "pale - pale-pale"
-    ],
-    "suggestions": [
-      { "text": "$1-ng $1" },
-      { "text": "$1-$1" }
-    ]
-  },
-{
-  "id": "PAGHULAPIAN_COMBINED",
-  "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
+  "id": "PAGUULIT_HULAPIAN_COMBINED",
+  "name": "Pag-uulit at Pagbabago ng Huling Pantig ng Salitang-ugat",
   "pattern": [
+    {
+      "regex": "\\b(\\w*e)\\s*\\1\\b"
+    },
+    {
+      "regex": "\\b(\\w*o)\\s*\\1\\b"
+    },
     {
       "regex": "\\b(\\w*e)\\b"
     },
@@ -119,13 +83,32 @@ if (!grammarRules.length)  {
       "regex": "\\b(\\w*o)\\b"
     }
   ],
-  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. Gayundin, may mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
-  "description": "Kapag ang salitang-ugat na nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-ihan'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian. Gayunman, hindi puwedeng palitan ng 'i' ang 'e' at 'o' sa 'u'. Dapat pa ring gamitin ang baybay na matagal na o lagi nang ginagamit.",
+  "message": "Pag-uulit at pagbabago ng huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o'. Ang tamang hulapi at pag-uulit ay dapat i-apply.",
+  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa 'e' o 'o', i-apply ang tamang hulapi at format. Ang salitang-ugat na nagtatapos sa 'e' o 'o' ay nagbabago ang hulapi at maaaring gamitin ang gitling sa pagitan ng salitang-ugat.",
+  "examples": [
+    "ano - ano-ano",
+    "sino - sino-sino",
+    "pito - pito-pito",
+    "halo - halo-halo",
+    "buto - buto-buto",
+    "piso - piso-piso",
+    "tseke - tseke-tseke",
+    "bente - bente-bente",
+    "pale - pale-pale"
+  ],
   "suggestions": [
+    {
+      "text": "$1-$1",
+      "condition": "matches(['o'])"
+    },
+    {
+      "text": "$1-ng $1",
+      "condition": "matches(['e'])"
+    },
     {
       "text": "$1ihan",
       "condition": "endsWith('e')",
-      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base","cheque"]
+      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base", "cheque"]
     },
     {
       "text": "$1an",
@@ -674,34 +657,6 @@ app.post('/api/v2/check', async (req, res) => {
       return res.json(result);
     } else {
       console.log('No matches found. Looking up Language Tool API...');
-
-      // Define Language Tool API URL and parameters
-      const languageToolUrl = 'https://api.languagetool.org/v2/check';
-      const params = new URLSearchParams();
-      params.append('text', text);
-      params.append('language', language);
-
-      try {
-        // Make a request to Language Tool API
-        const response = await axios.post(languageToolUrl, params.toString(), {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        });
-
-        const languageToolResult = response.data;
-
-        // Convert result to JSON string if it's an object
-        const resultString = typeof languageToolResult === 'object' 
-          ? JSON.stringify(languageToolResult, null, 2)
-          : languageToolResult;
-
-        console.log('Language Tool API result:', resultString);
-        return res.send(resultString);
-      } catch (apiError) {
-        console.error('Error from Language Tool API:', apiError);
-        return res.status(500).json({ error: 'Error from Language Tool API' });
-      }
     }
   } catch (error) {
     console.error('Error processing request:', error);
