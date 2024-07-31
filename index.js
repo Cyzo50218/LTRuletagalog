@@ -113,11 +113,11 @@ if (!grammarRules.length)  {
   "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
   "pattern": [
     {
-      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle)(\\w*e)\\b",
+      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|sinosino|tseke|bente|pale|)(\\w*e)\\b",
     "exceptions": ["\\b(\\w*e\\1)\\b"]
 },
     {
-      "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso)(\\w*o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b"]
     }
   ],
@@ -571,6 +571,7 @@ if (!grammarRules.length)  {
 }
 ];
 }
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -581,16 +582,50 @@ app.get('/', (req, res) => {
   res.send('LanguageTool Proxy Server is running.');
 });
 
-const checkTextAgainstRules = (text, rules) => {
+const generateTypoPatterns = (word) => {
+  let patterns = [];
+  let chars = word.split('');
+
+  for (let i = 0; i < chars.length; i++) {
+    for (let j = i + 1; j < chars.length; j++) {
+      let swappedChars = [...chars];
+      [swappedChars[i], swappedChars[j]] = [swappedChars[j], swappedChars[i]];
+      patterns.push(swappedChars.join(''));
+    }
+  }
+
+  return patterns;
+};
+
+const callLanguageToolAPI = async (text) => {
+  const apiUrl = 'https://api.languagetool.org/v2/check';
+  const params = new URLSearchParams();
+  params.append('text', text);
+  params.append('language', 'tl-PH');  // Adjust the language as needed
+
+  try {
+    const response = await axios.post(apiUrl, params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error calling LanguageTool API:', error);
+    return null;
+  }
+};
+
+const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
 
-  rules.forEach(rule => {
+  for (const rule of rules) {
     if (!rule.pattern) {
       console.warn(`Rule ${rule.id} has no pattern defined.`);
-      return;
+      continue;
     }
 
-    rule.pattern.forEach(patternObj => {
+    for (const patternObj of rule.pattern) {
       let regex;
       if (patternObj.token && patternObj.token.value) {
         // Exact match for tokens
@@ -600,7 +635,7 @@ const checkTextAgainstRules = (text, rules) => {
         regex = new RegExp(patternObj.regex, 'gi');
       } else {
         console.warn(`Invalid pattern in rule ${rule.id}`);
-        return;
+        continue;
       }
 
       let match;
@@ -622,15 +657,7 @@ const checkTextAgainstRules = (text, rules) => {
         }
 
         // Check for repeated words without space and handle accordingly
-        if (rule.id === "PAGUULIT_E") {
-          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
-          const textWithoutSpaces = text.replace(/\s+/g, '');
-
-          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
-            // Skip if it involves repeated words without space
-            continue;
-          }
-        }else if (rule.id === "PAGUULIT_O") {
+        if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
           const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
           const textWithoutSpaces = text.replace(/\s+/g, '');
 
@@ -641,27 +668,12 @@ const checkTextAgainstRules = (text, rules) => {
         }
 
         // Handle Spanish word exceptions
-        if (rule.id.startsWith("ESPANYOL1")) {
+        if (rule.id.startsWith("ESPANYOL")) {
           const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
           if (espanyolPattern.test(text)) {
             suggestions = rule.suggestions; // Use the suggestions from the rule
           }
-        }else if (rule.id.startsWith("ESPANYOL2")) {
-  const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-  if (espanyolPattern.test(text)) {
-    suggestions = rule.suggestions; // Use the suggestions from the rule
-  }
-} else if (rule.id.startsWith("ESPANYOL3")) {
-          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-          if (espanyolPattern.test(text)) {
-            suggestions = rule.suggestions; // Use the suggestions from the rule
-          }
-        }else if (rule.id.startsWith("ESPANYOL4")) {
-  const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-  if (espanyolPattern.test(text)) {
-    suggestions = rule.suggestions; // Use the suggestions from the rule
-  }
-}
+        }
 
         matches.push({
           message: rule.message,
@@ -684,13 +696,65 @@ const checkTextAgainstRules = (text, rules) => {
           }
         });
       }
-    });
-  });
+    }
+
+    // Add typo detection logic here
+    if (rule.pattern.some(patternObj => patternObj.token && patternObj.token.value)) {
+      let word = rule.pattern.find(patternObj => patternObj.token && patternObj.token.value).token.value;
+      let typoPatterns = generateTypoPatterns(word);
+
+      for (const typoPattern of typoPatterns) {
+        let typoRegex = new RegExp(`\\b${typoPattern}\\b`, 'gi');
+        let typoMatch;
+        while ((typoMatch = typoRegex.exec(text)) !== null) {
+          let typoSuggestions = rule.suggestions || [];
+
+          matches.push({
+            message: `Possible typo detected for '${typoMatch[0]}'. Did you mean '${word}'?`,
+            shortMessage: rule.name || '',
+            replacements: typoSuggestions.length ? typoSuggestions : [`${word}`],
+            offset: typoMatch.index,
+            length: typoMatch[0].length,
+            context: {
+              text: text.slice(Math.max(0, typoMatch.index - 20), typoMatch.index + typoMatch[0].length + 20),
+              offset: Math.min(20, typoMatch.index),
+              length: typoMatch[0].length
+            },
+            sentence: text.slice(
+              Math.max(0, text.lastIndexOf('.', typoMatch.index) + 1),
+              text.indexOf('.', typoMatch.index + typoMatch[0].length) + 1
+            ),
+            rule: {
+              id: rule.id,
+              description: rule.description || rule.name
+            }
+          });
+        }
+      }
+    }
+  }
+
+  if (matches.length === 0) {
+    const languageToolResult = await callLanguageToolAPI(text);
+    if (languageToolResult && languageToolResult.matches) {
+      matches = languageToolResult.matches.map(match => ({
+        message: match.message,
+        shortMessage: match.rule.id || '',
+        replacements: match.replacements.map(replacement => replacement.value),
+        offset: match.offset,
+        length: match.length,
+        context: match.context,
+        sentence: match.sentence,
+        rule: {
+          id: match.rule.id,
+          description: match.rule.description
+        }
+      }));
+    }
+  }
 
   return { matches };
 };
-
-
 
 app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
@@ -710,22 +774,21 @@ app.post('/api/v2/check', async (req, res) => {
 
     console.log('Number of grammar rules:', grammarRules.length);
 
-    const result = checkTextAgainstRules(text, grammarRules);
+    const result = await checkTextAgainstRules(text, grammarRules);
 
     if (result.matches && result.matches.length > 0) {
       console.log('Number of matches found:', result.matches.length);
       console.log('Check result:', JSON.stringify(result, null, 2));
       return res.json(result);
     } else {
-      console.log('No matches found. Looking up Language Tool API...')
+      console.log('No matches found. LanguageTool API returned no matches.');
+      return res.json({ matches: [] });
     }
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
