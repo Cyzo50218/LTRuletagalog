@@ -644,9 +644,21 @@ app.post('/api/v2/check', (req, res) => {
   }
 
   try {
+    // Check if grammarRules is defined and is an array
+    if (!Array.isArray(grammarRules)) {
+      throw new Error('grammarRules is not an array or is undefined');
+    }
+
     console.log('Number of grammar rules:', grammarRules.length);
+
     const result = checkTextAgainstRules(text, grammarRules);
-    console.log('Number of matches found:', result.matches.length);
+    
+    if (result.matches) {
+      console.log('Number of matches found:', result.matches.length);
+    } else {
+      console.log('No matches found.');
+    }
+
     console.log('Check result:', JSON.stringify(result, null, 2));
     res.json(result);
   } catch (error) {
@@ -654,6 +666,7 @@ app.post('/api/v2/check', (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
