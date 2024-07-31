@@ -12,9 +12,17 @@ const grammarPath = path.join(__dirname, 'config', 'grammar.json');
 
 const loadGrammarJson = () => {
   try {
+    console.log('Attempting to read grammar.json from:', grammarPath);
     const jsonData = fs.readFileSync(grammarPath, 'utf8');
+    console.log('Successfully read grammar.json');
     const result = JSON.parse(jsonData);
-    return result.rules || [];
+    console.log('Successfully parsed grammar.json');
+    if (!result.rules || !Array.isArray(result.rules)) {
+      console.error('Invalid format in grammar.json: "rules" property is missing or not an array');
+      return [];
+    }
+    console.log(`Loaded ${result.rules.length} rules from grammar.json`);
+    return result.rules;
   } catch (error) {
     console.error('Error reading or parsing grammar.json:', error);
     return [];
@@ -22,6 +30,7 @@ const loadGrammarJson = () => {
 };
 
 let grammarRules = loadGrammarJson();
+console.log(`Loaded ${grammarRules.length} grammar rules on server startup`);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
