@@ -17,7 +17,6 @@ const loadGrammarJson = () => {
   try {
     const jsonData = fs.readFileSync(grammarPath, 'utf8');
     const result = JSON.parse(jsonData);
-    console.log('Parsed JSON:', result); // Debugging log
     return result.rules || [];
   } catch (error) {
     console.error('Error reading or parsing grammar.json:', error);
@@ -25,13 +24,6 @@ const loadGrammarJson = () => {
   }
 };
 
-// Add this constant at the top of your file, after other imports
-const enabledRuleIds = [
-  "SPELLING_1", "SPELLING_2", "SPELLING_3", "SPELLING_4", "SPELLING_5",
-  "ORTHOGRAPHY_1", "ORTHOGRAPHY_2", "ORTHOGRAPHY_3", "ORTHOGRAPHY_4", "ORTHOGRAPHY_5",
-  "SYLLABICATION_1", "SYLLABICATION_2", "SYLLABICATION_3", "SYLLABICATION_4", "SYLLABICATION_5",
-  "BORROWING_1", "BORROWING_2", "BORROWING_3"
-];
 // Load grammar rules
 let grammarRules = loadGrammarJson();
 
@@ -57,7 +49,7 @@ const checkTextAgainstRules = (text, rules) => {
       let match;
       while ((match = regex.exec(text)) !== null) {
         let replacements = [];
-        
+
         rule.suggestions.forEach(suggestion => {
           const suggestionText = suggestion.text.replace('$1', match[1]);
           if (suggestion.condition) {
@@ -84,7 +76,8 @@ const checkTextAgainstRules = (text, rules) => {
           rule: {
             id: rule.id,
             description: rule.name
-          }
+          },
+          suggestions: replacements.map(replacement => replacement.value) // Add suggestions array
         });
       }
     });
@@ -96,8 +89,6 @@ const checkTextAgainstRules = (text, rules) => {
 // Route for /api/v2/check with POST method
 app.post('/api/v2/check', (req, res) => {
   const { text, language } = req.body;
-
-  console.log('Received request:', { text, language });
 
   if (!text || !language) {
     return res.status(400).json({ error: 'Missing text or language' });
@@ -118,3 +109,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+                         
