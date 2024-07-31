@@ -27,55 +27,91 @@ let grammarRules = []; // Initialize as an empty array by default
 if (!grammarRules.length)  {
   console.log('No rules loaded from file, using hardcoded test rule');
   grammarRules = [{
-      "id": "ESPANYOL1",
-      "name": "1. Hiram Mula sa Español",
-      "pattern": [
-        { "token": { "value": "familia" } }
-      ],
-      "message": "Hiram na salita mula sa Español, sa tagalog ay 'pamilya'",
-      "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
-      "suggestions": ["pamilya"]
-    },
-     {
-    "id": "ESPANYOL2",
-    "name": "2. Hiram Mula sa Español",
-    "pattern": [
-      { "token": { "value": "baño" } }
-      ],
-    "message": "Hiram na salita mula sa Español, sa tagalog ay 'banyo'",
-    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
-    "suggestions": ["banyo"]
-  },
-     {
-    "id": "ESPANYOL3",
-    "name": "1. Hiram Mula sa Español",
-    "pattern": [
-      { "token": { "value": "cheque" } }
-      ],
-    "message": "Hiram na salita mula sa Español, sa tagalog ay 'tseke'",
-    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
-    "suggestions": ["tseke"]
-  },
-  {
-    "id": "ESPANYOL4",
-    "name": "1. Hiram Mula sa Español",
-    "pattern": [
-      { "token": { "value": "maquina" } }
-      ],
-    "message": "Hiram na salita mula sa Español, sa tagalog ay 'maquina'",
-    "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
-    "suggestions": ["makina"]
-  },
-  {
-  "id": "PAGUULIT_HULAPIAN_COMBINED",
-  "name": "Pag-uulit at Pagbabago ng Huling Pantig ng Salitang-ugat",
+  "id": "ESPANYOL1",
+  "name": "1. Hiram Mula sa Español",
   "pattern": [
-    {
-      "regex": "\\b(\\w*e)\\s*\\1\\b"
-    },
-    {
-      "regex": "\\b(\\w*o)\\s*\\1\\b"
-    },
+    { "token": { "value": "familia" } }
+      ],
+  "message": "Hiram na salita mula sa Español, sa tagalog ay 'pamilya'",
+  "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+  "suggestions": ["pamilya"]
+},
+{
+  "id": "ESPANYOL2",
+  "name": "2. Hiram Mula sa Español",
+  "pattern": [
+    { "token": { "value": "baño" } }
+      ],
+  "message": "Hiram na salita mula sa Español, sa tagalog ay 'banyo'",
+  "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+  "suggestions": ["banyo"]
+},
+{
+  "id": "ESPANYOL3",
+  "name": "1. Hiram Mula sa Español",
+  "pattern": [
+    { "token": { "value": "cheque" } }
+      ],
+  "message": "Hiram na salita mula sa Español, sa tagalog ay 'tseke'",
+  "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+  "suggestions": ["tseke"]
+},
+{
+  "id": "ESPANYOL4",
+  "name": "1. Hiram Mula sa Español",
+  "pattern": [
+    { "token": { "value": "maquina" } }
+      ],
+  "message": "Hiram na salita mula sa Español, sa tagalog ay 'maquina'",
+  "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
+  "suggestions": ["makina"]
+},
+  {
+    "id": "PAGUULIT_O",
+    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
+    "pattern": [
+      {
+        "regex": "\\b(\\w*o)\\s*\\1\\b"
+      }
+    ],
+    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
+    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+    "examples": [
+      "ano - ano-ano",
+      "sino - sino-sino",
+      "pito - pito-pito",
+      "halo - halo-halo (magkakasama ang iba’t ibang bagay)",
+      "buto - buto-buto",
+      "piso - piso-piso"
+    ],
+    "suggestions": [
+      { "text": "$1-$1" }
+    ]
+  },
+  {
+    "id": "PAGUULIT_E",
+    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+    "pattern": [
+      {
+        "regex": "\\b(\\w*e)\\s*\\1\\b"
+      }
+    ],
+    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
+    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+    "examples": [
+      "tseke - tseke-tseke",
+      "bente - bente-bente",
+      "pale - pale-pale"
+    ],
+    "suggestions": [
+      { "text": "$1-ng $1" },
+      { "text": "$1-$1" }
+    ]
+  },
+{
+  "id": "PAGHULAPIAN_COMBINED",
+  "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
+  "pattern": [
     {
       "regex": "\\b(\\w*e)\\b"
     },
@@ -83,51 +119,28 @@ if (!grammarRules.length)  {
       "regex": "\\b(\\w*o)\\b"
     }
   ],
-  "message": "Pag-uulit at pagbabago ng huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o'. Ang tamang hulapi at pag-uulit ay dapat i-apply.",
-  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa 'e' o 'o', i-apply ang tamang hulapi at format. Ang salitang-ugat na nagtatapos sa 'e' o 'o' ay nagbabago ang hulapi at maaaring gamitin ang gitling sa pagitan ng salitang-ugat.",
-  "examples": [
-    "ano - ano-ano",
-    "sino - sino-sino",
-    "pito - pito-pito",
-    "halo - halo-halo",
-    "buto - buto-buto",
-    "piso - piso-piso",
-    "tseke - tseke-tseke",
-    "bente - bente-bente",
-    "pale - pale-pale"
-  ],
+  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. Gayundin, may mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
+  "description": "Kapag ang salitang-ugat na nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-ihan'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian. Gayunman, hindi puwedeng palitan ng 'i' ang 'e' at 'o' sa 'u'. Dapat pa ring gamitin ang baybay na matagal na o lagi nang ginagamit.",
   "suggestions": [
-    {
-      "text": "$1-$1",
-      "condition": "matches(['o'])"
-    },
-    {
-      "text": "$1-ng $1",
-      "condition": "matches(['e'])"
-    },
     {
       "text": "$1ihan",
       "condition": "endsWith('e')",
-      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base", "cheque"]
+      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base","cheque"]
     },
     {
       "text": "$1an",
       "condition": "endsWith('he')",
-      "exceptions": ["bote", "base"]
+ "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base","cheque"]
     },
     {
       "text": "$1han",
-      "condition": "matches(['sine', 'bote', 'onse', 'base', 'sarili', 'kompyuter'])"
+      "condition": "matches(['sine', 'bote', 'onse', 'base'])"
     },
     {
       "text": "$1u-an",
       "condition": "endsWith('o')",
       "exceptions": ["buhos", "sampu", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto"]
     },
-    {
-      "text": "balutin",
-      "condition": "equals('balot')"
-    }
   ]
 },
 {
@@ -576,10 +589,10 @@ const checkTextAgainstRules = (text, rules) => {
     rule.pattern.forEach(patternObj => {
       let regex;
       if (patternObj.token && patternObj.token.value) {
-        // If token value is provided, create a regex to match it exactly
+        // Exact match for tokens
         regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
       } else if (patternObj.regex) {
-        // If regex is provided, use it directly
+        // Regex pattern
         regex = new RegExp(patternObj.regex, 'gi');
       } else {
         console.warn(`Invalid pattern in rule ${rule.id}`);
@@ -603,6 +616,48 @@ const checkTextAgainstRules = (text, rules) => {
             }
           });
         }
+
+        // Check for repeated words without space and handle accordingly
+        if (rule.id === "PAGUULIT_E") {
+          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
+          const textWithoutSpaces = text.replace(/\s+/g, '');
+
+          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
+            // Skip if it involves repeated words without space
+            continue;
+          }
+        }else if (rule.id === "PAGUULIT_O") {
+          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
+          const textWithoutSpaces = text.replace(/\s+/g, '');
+
+          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
+            // Skip if it involves repeated words without space
+            continue;
+          }
+        }
+
+        // Handle Spanish word exceptions
+        if (rule.id.startsWith("ESPANYOL1")) {
+          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+          if (espanyolPattern.test(text)) {
+            suggestions = rule.suggestions; // Use the suggestions from the rule
+          }
+        }else if (rule.id.startsWith("ESPANYOL2")) {
+  const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+  if (espanyolPattern.test(text)) {
+    suggestions = rule.suggestions; // Use the suggestions from the rule
+  }
+} else if (rule.id.startsWith("ESPANYOL3")) {
+          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+          if (espanyolPattern.test(text)) {
+            suggestions = rule.suggestions; // Use the suggestions from the rule
+          }
+        }else if (rule.id.startsWith("ESPANYOL4")) {
+  const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+  if (espanyolPattern.test(text)) {
+    suggestions = rule.suggestions; // Use the suggestions from the rule
+  }
+}
 
         matches.push({
           message: rule.message,
@@ -631,6 +686,8 @@ const checkTextAgainstRules = (text, rules) => {
   return { matches };
 };
 
+
+
 app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
 
@@ -656,14 +713,13 @@ app.post('/api/v2/check', async (req, res) => {
       console.log('Check result:', JSON.stringify(result, null, 2));
       return res.json(result);
     } else {
-      console.log('No matches found. Looking up Language Tool API...');
+      console.log('No matches found. Looking up Language Tool API...')
     }
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
   }
 });
-
 
 
 
