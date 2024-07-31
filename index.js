@@ -10,9 +10,19 @@ app.use(bodyParser.json());
 
 const grammarPath = path.join(__dirname, 'config', 'grammar.json');
 
-let grammarRules;
-
-if (grammarRules.length === 0) {
+let grammarRules = loadGrammarJson();
+const loadGrammarJson = () => {
+  try {
+    const jsonData = fs.readFileSync(grammarPath, 'utf8');
+    const result = JSON.parse(jsonData);
+    console.log('Parsed JSON:', result); // Debugging log
+    return result.rules || [];
+  } catch (error) {
+    console.error('Error reading or parsing grammar.json:', error);
+    return [];
+  }
+};
+if (grammarRules === null) {
   console.log('No rules loaded from file, using hardcoded test rule');
   grammarRules = [{
       "id": "ESPANYOL1",
