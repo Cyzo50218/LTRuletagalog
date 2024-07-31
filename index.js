@@ -66,36 +66,48 @@ if (!grammarRules.length)  {
     "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
     "suggestions": ["makina"]
   },
-  //pag-uulit ng salitang-ugat na nagtatapos sa patinig na “e” hindi ito pinapalitan ng letrang “i”,Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.
-{
-  "id": "PAGUULIT",
-  "name": "1. Pag-uulit ng salitang ugat",
-  "pattern": [
-    {
-      "regex": "\\b(\\w*e)\\s*\\1\\b"
-    }
-  ],
-  "message": "Paguulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
-  "description": "Ito ay ang pag-uulit ng salitang-ugat na nagtatapos sa patinig na “e” hindi ito pinapalitan ng letrang “i”, Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-  "suggestions": [
-    { "text": "$1-ng $1" },
-    { "text": "$1-$1" }
-  ]
-},
-{
-  "id": "PAGUULIT2",
-  "name": "2. Pag-uulit ng salitang ugat na nagtatapos sa patinig na 'o'",
-  "pattern": [
-    {
-      "regex": "\\b(\\w*o)\\s*\\1\\b"
-    }
-  ],
-  "message": "Paguulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
-  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na “o” hindi ito pinapalitan ng letrang “u”. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-  "suggestions": [
-    { "text": "$1-$1" }
-  ]
-},
+  {
+    "id": "PAGUULIT_O",
+    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
+    "pattern": [
+      {
+        "regex": "\\b(\\w*o)\\s*\\1\\b"
+      }
+    ],
+    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
+    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+    "examples": [
+      "ano - ano-ano",
+      "sino - sino-sino",
+      "pito - pito-pito",
+      "halo - halo-halo (magkakasama ang iba’t ibang bagay)",
+      "buto - buto-buto",
+      "piso - piso-piso"
+    ],
+    "suggestions": [
+      { "text": "$1-$1" }
+    ]
+  },
+  {
+    "id": "PAGUULIT_E",
+    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+    "pattern": [
+      {
+        "regex": "\\b(\\w*e)\\s*\\1\\b"
+      }
+    ],
+    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
+    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+    "examples": [
+      "tseke - tseke-tseke",
+      "bente - bente-bente",
+      "pale - pale-pale"
+    ],
+    "suggestions": [
+      { "text": "$1-ng $1" },
+      { "text": "$1-$1" }
+    ]
+  },
 {
   "id": "PAGHULAPIAN_COMBINED",
   "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
@@ -113,7 +125,7 @@ if (!grammarRules.length)  {
     {
       "text": "$1ihan",
       "condition": "endsWith('e')",
-      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base"]
+      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base","cheque"]
     },
     {
       "text": "$1an",
@@ -665,14 +677,13 @@ app.post('/api/v2/check', async (req, res) => {
 
       // Define Language Tool API URL and parameters
       const languageToolUrl = 'https://api.languagetool.org/v2/check';
-      const params = {
-        text,
-        language
-      };
+      const params = new URLSearchParams();
+      params.append('text', text);
+      params.append('language', language);
 
       try {
         // Make a request to Language Tool API
-        const response = await axios.post(languageToolUrl, params, {
+        const response = await axios.post(languageToolUrl, params.toString(), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
@@ -680,8 +691,13 @@ app.post('/api/v2/check', async (req, res) => {
 
         const languageToolResult = response.data;
 
-        console.log('Language Tool API result:', JSON.stringify(languageToolResult, null, 2));
-        return res.json(languageToolResult);
+        // Convert result to JSON string if it's an object
+        const resultString = typeof languageToolResult === 'object' 
+          ? JSON.stringify(languageToolResult, null, 2)
+          : languageToolResult;
+
+        console.log('Language Tool API result:', resultString);
+        return res.send(resultString);
       } catch (apiError) {
         console.error('Error from Language Tool API:', apiError);
         return res.status(500).json({ error: 'Error from Language Tool API' });
@@ -692,6 +708,7 @@ app.post('/api/v2/check', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 
