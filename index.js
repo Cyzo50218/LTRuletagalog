@@ -37,24 +37,24 @@ const checkTextAgainstRules = (text, rules) => {
   let matches = [];
 
   rules.forEach(rule => {
-    let pattern;
-    if (rule.pattern) {
-      if (Array.isArray(rule.pattern)) {
-        pattern = rule.pattern.map(p => p.regex || p.token?.value).filter(Boolean);
-      } else if (typeof rule.pattern === 'object') {
-        pattern = [rule.pattern.regex || rule.pattern.token?.value].filter(Boolean);
-      }
-    } else if (rule.patterns) {
-      pattern = rule.patterns.map(p => p.regex).filter(Boolean);
-    }
-
-    if (!pattern || pattern.length === 0) {
-      console.warn(`No valid pattern found for rule: ${rule.id}`);
+    if (!rule.pattern) {
+      console.warn(`Rule ${rule.id} has no pattern defined.`);
       return;
     }
 
-    pattern.forEach(p => {
-      const regex = new RegExp(p, 'gi');
+    rule.pattern.forEach(patternObj => {
+      let regex;
+      if (patternObj.token && patternObj.token.value) {
+        // If token value is provided, create a regex to match it exactly
+        regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+      } else if (patternObj.regex) {
+        // If regex is provided, use it directly
+        regex = new RegExp(patternObj.regex, 'gi');
+      } else {
+        console.warn(`Invalid pattern in rule ${rule.id}`);
+        return;
+      }
+
       let match;
       while ((match = regex.exec(text)) !== null) {
         let suggestions = [];
@@ -65,7 +65,7 @@ const checkTextAgainstRules = (text, rules) => {
               suggestions.push(suggestion);
             } else if (suggestion.text) {
               let suggestionText = suggestion.text;
-              for (let i = 1; i < match.length; i++) {
+              for (let i = 0; i < match.length; i++) {
                 suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
               }
               suggestions.push(suggestionText);
@@ -84,7 +84,10 @@ const checkTextAgainstRules = (text, rules) => {
             offset: Math.min(20, match.index),
             length: match[0].length
           },
-          sentence: text,
+          sentence: text.slice(
+            Math.max(0, text.lastIndexOf('.', match.index) + 1),
+            text.indexOf('.', match.index + match[0].length) + 1
+          ),
           rule: {
             id: rule.id,
             description: rule.description || rule.name
@@ -96,16 +99,21 @@ const checkTextAgainstRules = (text, rules) => {
 
   return { matches };
 };
-
 app.post('/api/v2/check', (req, res) => {
   const { text, language } = req.body;
+
+  console.log('Received text:', text);
+  console.log('Received language:', language);
 
   if (!text || !language) {
     return res.status(400).json({ error: 'Missing text or language' });
   }
 
   try {
+    console.log('Number of grammar rules:', grammarRules.length);
     const result = checkTextAgainstRules(text, grammarRules);
+    console.log('Number of matches found:', result.matches.length);
+    console.log('Check result:', JSON.stringify(result, null, 2));
     res.json(result);
   } catch (error) {
     console.error('Error processing request:', error);
