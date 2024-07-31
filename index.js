@@ -21,9 +21,9 @@ const loadGrammarJson = () => {
   }
 };
 
-let grammarRules;
+let grammarRules = []; // Initialize as an empty array by default
 
-if(grammarRules === null) {
+if (!grammarRules.length)  {
   console.log('No rules loaded from file, using hardcoded test rule');
   grammarRules = [{
       "id": "ESPANYOL1",
