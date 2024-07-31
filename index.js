@@ -6,13 +6,10 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Resolve the path to grammar.json
 const grammarPath = path.join(__dirname, 'config', 'grammar.json');
 
-// Load and parse grammar.json file
 const loadGrammarJson = () => {
   try {
     const jsonData = fs.readFileSync(grammarPath, 'utf8');
@@ -24,58 +21,73 @@ const loadGrammarJson = () => {
   }
 };
 
-// Load grammar rules
 let grammarRules = loadGrammarJson();
 
-// Enable CORS for all routes (optional, useful for testing)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-// Root route for server status
 app.get('/', (req, res) => {
   res.send('LanguageTool Proxy Server is running.');
 });
 
-// Function to check text against custom rules
 const checkTextAgainstRules = (text, rules) => {
   let matches = [];
 
   rules.forEach(rule => {
-    rule.pattern.forEach(pattern => {
-      const regex = new RegExp(pattern.regex, 'gi');
+    let pattern;
+    if (rule.pattern) {
+      if (Array.isArray(rule.pattern)) {
+        pattern = rule.pattern.map(p => p.regex || p.token?.value).filter(Boolean);
+      } else if (typeof rule.pattern === 'object') {
+        pattern = [rule.pattern.regex || rule.pattern.token?.value].filter(Boolean);
+      }
+    } else if (rule.patterns) {
+      pattern = rule.patterns.map(p => p.regex).filter(Boolean);
+    }
+
+    if (!pattern || pattern.length === 0) {
+      console.warn(`No valid pattern found for rule: ${rule.id}`);
+      return;
+    }
+
+    pattern.forEach(p => {
+      const regex = new RegExp(p, 'gi');
       let match;
       while ((match = regex.exec(text)) !== null) {
         let suggestions = [];
 
-        rule.suggestions.forEach(suggestion => {
-          let suggestionText = suggestion.text;
-          if (match[1]) {
-            suggestionText = suggestionText.replace('$1', match[1]);
-          }
-
-          if (!suggestion.condition || eval(`'${match[1]}'.${suggestion.condition}`)) {
-            suggestions.push(suggestionText);
-          }
-        });
+        if (rule.suggestions) {
+          rule.suggestions.forEach(suggestion => {
+            if (typeof suggestion === 'string') {
+              suggestions.push(suggestion);
+            } else if (suggestion.text) {
+              let suggestionText = suggestion.text;
+              for (let i = 1; i < match.length; i++) {
+                suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+              }
+              suggestions.push(suggestionText);
+            }
+          });
+        }
 
         matches.push({
-          message: match[1] ? rule.message.replace('$1', match[1]) : rule.message,
-          shortMessage: '',
-          replacements: suggestions, // Simplified replacements to suggestions array
+          message: rule.message,
+          shortMessage: rule.name || '',
+          replacements: suggestions,
           offset: match.index,
           length: match[0].length,
           context: {
-            text: text,
-            offset: match.index,
+            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+            offset: Math.min(20, match.index),
             length: match[0].length
           },
           sentence: text,
           rule: {
             id: rule.id,
-            description: rule.name
+            description: rule.description || rule.name
           }
         });
       }
@@ -85,7 +97,6 @@ const checkTextAgainstRules = (text, rules) => {
   return { matches };
 };
 
-// Route for /api/v2/check with POST method
 app.post('/api/v2/check', (req, res) => {
   const { text, language } = req.body;
 
@@ -102,7 +113,6 @@ app.post('/api/v2/check', (req, res) => {
   }
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
