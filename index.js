@@ -555,7 +555,8 @@ if(grammarRules === null) {
     { "text": "tigatlo" },
     { "text": "tig-apat" }
   ]
-}];
+}
+];
 }
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
