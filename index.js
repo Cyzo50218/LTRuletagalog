@@ -21,7 +21,8 @@ const loadGrammarJson = () => {
   }
 };
 
-let grammarRules = loadGrammarJson();
+let grammarRules;
+
 if(grammarRules === null) {
   console.log('No rules loaded from file, using hardcoded test rule');
   grammarRules = [{
