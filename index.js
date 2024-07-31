@@ -9,8 +9,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 const grammarPath = path.join(__dirname, 'config', 'grammar.json');
-
-let grammarRules = loadGrammarJson();
 const loadGrammarJson = () => {
   try {
     const jsonData = fs.readFileSync(grammarPath, 'utf8');
@@ -22,7 +20,9 @@ const loadGrammarJson = () => {
     return [];
   }
 };
-if (grammarRules === null) {
+
+let grammarRules = loadGrammarJson();
+if(grammarRules === null) {
   console.log('No rules loaded from file, using hardcoded test rule');
   grammarRules = [{
       "id": "ESPANYOL1",
