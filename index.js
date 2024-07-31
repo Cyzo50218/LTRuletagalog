@@ -48,23 +48,23 @@ const checkTextAgainstRules = (text, rules) => {
       const regex = new RegExp(pattern.regex, 'gi');
       let match;
       while ((match = regex.exec(text)) !== null) {
-        let replacements = [];
+        let suggestions = [];
 
         rule.suggestions.forEach(suggestion => {
-          const suggestionText = suggestion.text.replace('$1', match[1]);
-          if (suggestion.condition) {
-            if (eval(`'${match[1]}'.${suggestion.condition}`)) {
-              replacements.push({ value: suggestionText });
-            }
-          } else {
-            replacements.push({ value: suggestionText });
+          let suggestionText = suggestion.text;
+          if (match[1]) {
+            suggestionText = suggestionText.replace('$1', match[1]);
+          }
+
+          if (!suggestion.condition || eval(`'${match[1]}'.${suggestion.condition}`)) {
+            suggestions.push(suggestionText);
           }
         });
 
         matches.push({
-          message: rule.message.replace('$1', match[1]),
+          message: match[1] ? rule.message.replace('$1', match[1]) : rule.message,
           shortMessage: '',
-          replacements: replacements,
+          replacements: suggestions, // Simplified replacements to suggestions array
           offset: match.index,
           length: match[0].length,
           context: {
@@ -76,8 +76,7 @@ const checkTextAgainstRules = (text, rules) => {
           rule: {
             id: rule.id,
             description: rule.name
-          },
-          suggestions: replacements.map(replacement => replacement.value) // Add suggestions array
+          }
         });
       }
     });
@@ -109,4 +108,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-                         
