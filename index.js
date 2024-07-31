@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -634,7 +635,8 @@ const checkTextAgainstRules = (text, rules) => {
 
   return { matches };
 };
-app.post('/api/v2/check', (req, res) => {
+
+app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
 
   console.log('Received text:', text);
@@ -653,20 +655,44 @@ app.post('/api/v2/check', (req, res) => {
     console.log('Number of grammar rules:', grammarRules.length);
 
     const result = checkTextAgainstRules(text, grammarRules);
-    
-    if (result.matches) {
-      console.log('Number of matches found:', result.matches.length);
-    } else {
-      console.log('No matches found.');
-    }
 
-    console.log('Check result:', JSON.stringify(result, null, 2));
-    res.json(result);
+    if (result.matches && result.matches.length > 0) {
+      console.log('Number of matches found:', result.matches.length);
+      console.log('Check result:', JSON.stringify(result, null, 2));
+      return res.json(result);
+    } else {
+      console.log('No matches found. Looking up Language Tool API...');
+
+      // Define Language Tool API URL and parameters
+      const languageToolUrl = 'https://api.languagetool.org/v2/check';
+      const params = {
+        text,
+        language
+      };
+
+      try {
+        // Make a request to Language Tool API
+        const response = await axios.post(languageToolUrl, params, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+
+        const languageToolResult = response.data;
+
+        console.log('Language Tool API result:', JSON.stringify(languageToolResult, null, 2));
+        return res.json(languageToolResult);
+      } catch (apiError) {
+        console.error('Error from Language Tool API:', apiError);
+        return res.status(500).json({ error: 'Error from Language Tool API' });
+      }
+    }
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 app.listen(port, () => {
