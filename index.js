@@ -71,7 +71,7 @@ if (!grammarRules.length)  {
     "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
     "pattern": [
       {
-        "regex": "\\b(\\w*o)\\s*\\1\\b"
+      "regex": "\\b(\\w*o)\\1\\b"
       }
     ],
     "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
@@ -93,7 +93,7 @@ if (!grammarRules.length)  {
     "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
     "pattern": [
       {
-        "regex": "\\b(\\w*e)\\s*\\1\\b"
+"regex": "\\b(\\w*e)\\1\\b"
       }
     ],
     "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
