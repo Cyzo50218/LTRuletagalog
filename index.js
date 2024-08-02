@@ -104,6 +104,7 @@ if (!grammarRules.length)  {
     "pale - pale-pale"
   ],
   "suggestions": [
+    { "text": "$1ng-$2" },
     { "text": "$1-$2" }
   ]
 },
