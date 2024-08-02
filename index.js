@@ -89,6 +89,103 @@ if (!grammarRules.length)  {
   ]
 },
 {
+  "id": "TAGALOG_RULES_COMBINED",
+  "name": "Tagalog Grammar and Spelling Rules",
+  "rules": [
+    {
+      "id": "A1",
+      "name": "Proper Nouns with 'pa' Prefix",
+      "description": "Add hyphens to proper nouns when prefixed with 'pa'.",
+      "pattern": [
+        {
+          "regex": "\\b(pa)([A-Z]\\w+)\\b"
+        },
+          {
+          "regex": "\\b(Pa)([A-Z]\\w+)\\b"
+        }
+      ],
+      "message": "Consider using a hyphen with the 'pa' prefix for proper nouns.",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ],
+      "examples": [
+        {
+          "incorrect": "paDavao",
+          "correct": "pa-Davao"
+        },
+        {
+          "incorrect": "paManila",
+          "correct": "pa-Manila"
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "name": "Words with 'maka' Prefix",
+      "description": "Add hyphens to words prefixed with 'maka'.",
+      "pattern": [
+        {
+          "regex": "\\b(maka)(\\w+)\\b"
+        },
+          {
+          "regex": "\\b(Maka)(\\w+)\\b"
+        },
+  {
+    "regex": "\\b(mka)(\\w+)\\b"
+  },
+  {
+    "regex": "\\b(Mka)(\\w+)\\b"
+  }
+      ],
+      "message": "Consider using a hyphen with the 'maka' prefix.",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ],
+      "examples": [
+        {
+          "incorrect": "makabayan",
+          "correct": "maka-bayan"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Attach First KP Sound in Prefixes",
+      "description": "Attach the sound of the first KP (consonant-vowel) to the prefix for borrowed words.",
+      "pattern": [
+        {
+          "regex": "\\b(mag)(\\w+)\\b"
+        },
+        {
+          "regex": "\\b(Mag)(\\w+)\\b"
+        },
+{
+  "regex": "\\b(mg)(\\w+)\\b"
+},
+{
+  "regex": "\\b(Mg)(\\w+)\\b"
+}
+      ],
+      "message": "Ensure proper prefix attachment.",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ],
+      "examples": [
+        {
+          "incorrect": "magcomputer",
+          "correct": "mag-computer"
+        }
+      ]
+    }
+  ]
+},
+{
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
@@ -129,7 +226,7 @@ if (!grammarRules.length)  {
       "condition": "endsWith('e')",
       "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base", "cheque", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra"]
     },
-    { "text": "$1-ng $2" },
+    { "text": "$1ng $2" },
     { "text": "$1-$2" },
     {
       "text": "$1an",
@@ -205,7 +302,7 @@ if (!grammarRules.length)  {
       "description": "Add hyphens to proper nouns and borrowed words when affixed. Repeat the first consonant and vowel (KP) for contemplative aspect.",
       "patterns": [
         {
-          "regex": "\\b(maka-\\w+|pa\\w+)\\b",
+          "regex": "\\b(maka\\w+|pa\\w+)\\b",
           "message": "Consider using a hyphen or proper affix."
         }
       ],
@@ -615,127 +712,112 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
-
 const checkTextAgainstRules = async (text, rules) => {
-      let matches = [];
+  let matches = [];
 
-      for (const rule of rules) {
-        if (!rule.pattern) {
-          console.warn(`Rule ${rule.id} has no pattern defined.`);
+  const applyRules = (text, rules) => {
+    let localMatches = [];
+
+    for (const rule of rules) {
+      if (!rule.pattern) {
+        console.warn(`Rule ${rule.id} has no pattern defined.`);
+        continue;
+      }
+
+      for (const patternObj of rule.pattern) {
+        let regex;
+        if (patternObj.token && patternObj.token.value) {
+          // Exact match for tokens
+          regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+        } else if (patternObj.regex) {
+          // Regex pattern
+          regex = new RegExp(patternObj.regex, 'gi');
+        } else {
+          console.warn(`Invalid pattern in rule ${rule.id}`);
           continue;
         }
 
-        for (const patternObj of rule.pattern) {
-          let regex;
-          if (patternObj.token && patternObj.token.value) {
-            // Exact match for tokens
-            regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
-          } else if (patternObj.regex) {
-            // Regex pattern
-            regex = new RegExp(patternObj.regex, 'gi');
-          } else {
-            console.warn(`Invalid pattern in rule ${rule.id}`);
-            continue;
-          }
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+          let suggestions = [];
 
-          let match;
-          while ((match = regex.exec(text)) !== null) {
-            let suggestions = [];
-
-            if (rule.suggestions) {
-              rule.suggestions.forEach(suggestion => {
-                if (typeof suggestion === 'string') {
-                  suggestions.push(suggestion);
-                } else if (suggestion.text) {
-                  let suggestionText = suggestion.text;
-                  for (let i = 0; i <= match.length; i++) {
-                    suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
-                  }
-                  // Preserve the original capitalization
-                  if (match[0][0] === match[0][0].toUpperCase()) {
-                    suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-                  }
-                  suggestions.push(suggestionText);
+          if (rule.suggestions) {
+            rule.suggestions.forEach(suggestion => {
+              if (typeof suggestion === 'string') {
+                suggestions.push(suggestion);
+              } else if (suggestion.text) {
+                let suggestionText = suggestion.text;
+                for (let i = 0; i <= match.length; i++) {
+                  suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
                 }
-              });
+                // Preserve the original capitalization
+                if (match[0][0] === match[0][0].toUpperCase()) {
+                  suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+                }
+                suggestions.push(suggestionText);
+              }
+            });
+          }
+
+          // Check for repeated words without space and handle accordingly
+          if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
+            const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
+            const textWithoutSpaces = text.replace(/\s+/g, '');
+
+            if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
+              // Skip if it involves repeated words without space
+              continue;
             }
-        // Check for repeated words without space and handle accordingly
-        if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
-          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
-          const textWithoutSpaces = text.replace(/\s+/g, '');
-
-          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
-            // Skip if it involves repeated words without space
-            continue;
           }
+
+          // Handle Spanish word exceptions
+          if (rule.id.startsWith("ESPANYOL")) {
+            const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+            if (espanyolPattern.test(text)) {
+              suggestions = rule.suggestions; // Use the suggestions from the rule
+            }
+          }
+
+          localMatches.push({
+            message: rule.message,
+            shortMessage: rule.name || '',
+            replacements: suggestions,
+            offset: match.index,
+            length: match[0].length,
+            context: {
+              text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+              offset: Math.min(20, match.index),
+              length: match[0].length
+            },
+            sentence: text.slice(
+              Math.max(0, text.lastIndexOf('.', match.index) + 1),
+              text.indexOf('.', match.index + match[0].length) + 1
+            ),
+            rule: {
+              id: rule.id,
+              description: rule.description || rule.name
+            }
+          });
         }
-
-        // Handle Spanish word exceptions
-        if (rule.id.startsWith("ESPANYOL")) {
-          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-          if (espanyolPattern.test(text)) {
-            suggestions = rule.suggestions; // Use the suggestions from the rule
-          }
-        }
-
-        matches.push({
-          message: rule.message,
-          shortMessage: rule.name || '',
-          replacements: suggestions,
-          offset: match.index,
-          length: match[0].length,
-          context: {
-            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-            offset: Math.min(20, match.index),
-            length: match[0].length
-          },
-          sentence: text.slice(
-            Math.max(0, text.lastIndexOf('.', match.index) + 1),
-            text.indexOf('.', match.index + match[0].length) + 1
-          ),
-          rule: {
-            id: rule.id,
-            description: rule.description || rule.name
-          }
-        });
       }
     }
 
-    // Add typo detection logic here
-    if (rule.pattern.some(patternObj => patternObj.token && patternObj.token.value)) {
-      let word = rule.pattern.find(patternObj => patternObj.token && patternObj.token.value).token.value;
-      let typoPatterns = generateTypoPatterns(word);
+    return localMatches;
+  };
 
-      for (const typoPattern of typoPatterns) {
-        let typoRegex = new RegExp(`\\b${typoPattern}\\b`, 'gi');
-        let typoMatch;
-        while ((typoMatch = typoRegex.exec(text)) !== null) {
-          let typoSuggestions = rule.suggestions || [];
+  let newMatches;
+  let textToCheck = text;
+  
+  // Apply rules recursively
+  do {
+    newMatches = applyRules(textToCheck, rules);
+    if (newMatches.length > 0) {
+      matches.push(...newMatches);
+      textToCheck = newMatches.map(m => m.context.text).join(' ');
+    }
+  } while (newMatches.length > 0);
 
-          matches.push({
-  message: rule.message,
-  shortMessage: rule.name || '',
-  replacements: suggestions,
-  offset: match.index,
-  length: match[0].length,
-  context: {
-    text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-    offset: Math.min(20, match.index),
-    length: match[0].length
-  },
-  sentence: text.slice(
-    Math.max(0, text.lastIndexOf('.', match.index) + 1),
-    text.indexOf('.', match.index + match[0].length) + 1
-  ),
-  rule: {
-    id: rule.id,
-    description: rule.description || rule.name
-  }
-});
-}
-}
-  }
-
+  // If no matches found, fallback to LanguageTool API
   if (matches.length === 0) {
     const languageToolResult = await callLanguageToolAPI(text);
     if (languageToolResult && languageToolResult.matches) {
@@ -752,11 +834,8 @@ const checkTextAgainstRules = async (text, rules) => {
           description: match.rule.description
         }
       }));
-    
     }
   }
-      }
-      
 
   return { matches };
 };
