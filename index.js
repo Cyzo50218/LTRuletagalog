@@ -67,47 +67,46 @@ if (!grammarRules.length)  {
   "suggestions": ["makina"]
 },
   {
-    "id": "PAGUULIT_O",
-    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
-    "pattern": [
-      {
-      "regex": "\\b(\\w*o)\\1\\b"
-      }
-    ],
-    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
-    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-    "examples": [
-      "ano - ano-ano",
-      "sino - sino-sino",
-      "pito - pito-pito",
-      "halo - halo-halo (magkakasama ang iba’t ibang bagay)",
-      "buto - buto-buto",
-      "piso - piso-piso"
-    ],
-    "suggestions": [
-      { "text": "{match}-{match}" }
-    ]
-  },
-  {
-    "id": "PAGUULIT_E",
-    "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
-    "pattern": [
-      {
-"regex": "\\b(\\w*e)\\1\\b"
-      }
-    ],
-    "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
-    "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-    "examples": [
-      "tseke - tseke-tseke",
-      "bente - bente-bente",
-      "pale - pale-pale"
-    ],
-    "suggestions": [
-      { "text": "{match}ng {match}" },
-      { "text": "{match}-{match}" }
-    ]
-  },
+  "id": "PAGUULIT_O",
+  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
+  "pattern": [
+    {
+      "regex": "\\b(\\w+o)(\\1)\\b"
+    }
+  ],
+  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
+  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+  "examples": [
+    "ano - ano-ano",
+    "sino - sino-sino",
+    "pito - pito-pito",
+    "halo - halo-halo (magkakasama ang iba't ibang bagay)",
+    "buto - buto-buto",
+    "piso - piso-piso"
+  ],
+  "suggestions": [
+    { "text": "$1-$2" }
+  ]
+},
+{
+  "id": "PAGUULIT_E",
+  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+  "pattern": [
+    {
+      "regex": "\\b(\\w+e)(\\1)\\b"
+    }
+  ],
+  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
+  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+  "examples": [
+    "tseke - tseke-tseke",
+    "bente - bente-bente",
+    "pale - pale-pale"
+  ],
+  "suggestions": [
+    { "text": "$1-$2" }
+  ]
+},
 {
   "id": "PAGHULAPIAN_COMBINED",
   "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
@@ -129,8 +128,8 @@ if (!grammarRules.length)  {
       "condition": "endsWith('e')",
       "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base", "cheque", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra"]
     },
-    { "text": "$1-ng $1" },
-    { "text": "$1-$1" },
+    { "text": "$1-ng $2" },
+    { "text": "$1-$2" },
     {
       "text": "$1an",
       "condition": "endsWith('he')",
@@ -617,46 +616,48 @@ const callLanguageToolAPI = async (text) => {
 };
 
 const checkTextAgainstRules = async (text, rules) => {
-  let matches = [];
+      let matches = [];
 
-  for (const rule of rules) {
-    if (!rule.pattern) {
-      console.warn(`Rule ${rule.id} has no pattern defined.`);
-      continue;
-    }
+      for (const rule of rules) {
+        if (!rule.pattern) {
+          console.warn(`Rule ${rule.id} has no pattern defined.`);
+          continue;
+        }
 
-    for (const patternObj of rule.pattern) {
-      let regex;
-      if (patternObj.token && patternObj.token.value) {
-        // Exact match for tokens
-        regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
-      } else if (patternObj.regex) {
-        // Regex pattern
-        regex = new RegExp(patternObj.regex, 'gi');
-      } else {
-        console.warn(`Invalid pattern in rule ${rule.id}`);
-        continue;
-      }
+        for (const patternObj of rule.pattern) {
+          let regex;
+          if (patternObj.token && patternObj.token.value) {
+            // Exact match for tokens
+            regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+          } else if (patternObj.regex) {
+            // Regex pattern
+            regex = new RegExp(patternObj.regex, 'gi');
+          } else {
+            console.warn(`Invalid pattern in rule ${rule.id}`);
+            continue;
+          }
 
-      let match;
-      while ((match = regex.exec(text)) !== null) {
-        let suggestions = [];
+          let match;
+          while ((match = regex.exec(text)) !== null) {
+            let suggestions = [];
 
-        if (rule.suggestions) {
-  rule.suggestions.forEach(suggestion => {
-    if (typeof suggestion === 'string') {
-      suggestions.push(suggestion);
-    } else if (suggestion.text) {
-      let suggestionText = suggestion.text;
-      // Replace {match} with the actual matched text
-      suggestionText = suggestionText.replace(/\{match\}/g, match[0]);
-      for (let i = 0; i < match.length; i++) {
-        suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
-      }
-      suggestions.push(suggestionText);
-    }
-  });
-}
+            if (rule.suggestions) {
+              rule.suggestions.forEach(suggestion => {
+                if (typeof suggestion === 'string') {
+                  suggestions.push(suggestion);
+                } else if (suggestion.text) {
+                  let suggestionText = suggestion.text;
+                  for (let i = 0; i <= match.length; i++) {
+                    suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+                  }
+                  // Preserve the original capitalization
+                  if (match[0][0] === match[0][0].toUpperCase()) {
+                    suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+                  }
+                  suggestions.push(suggestionText);
+                }
+              });
+            }
         // Check for repeated words without space and handle accordingly
         if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
           const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
@@ -711,28 +712,27 @@ const checkTextAgainstRules = async (text, rules) => {
           let typoSuggestions = rule.suggestions || [];
 
           matches.push({
-            message: `Possible typo detected for '${typoMatch[0]}'. Did you mean '${word}'?`,
-            shortMessage: rule.name || '',
-            replacements: typoSuggestions.length ? typoSuggestions : [`${word}`],
-            offset: typoMatch.index,
-            length: typoMatch[0].length,
-            context: {
-              text: text.slice(Math.max(0, typoMatch.index - 20), typoMatch.index + typoMatch[0].length + 20),
-              offset: Math.min(20, typoMatch.index),
-              length: typoMatch[0].length
-            },
-            sentence: text.slice(
-              Math.max(0, text.lastIndexOf('.', typoMatch.index) + 1),
-              text.indexOf('.', typoMatch.index + typoMatch[0].length) + 1
-            ),
-            rule: {
-              id: rule.id,
-              description: rule.description || rule.name
-            }
-          });
-        }
-      }
-    }
+  message: rule.message,
+  shortMessage: rule.name || '',
+  replacements: suggestions,
+  offset: match.index,
+  length: match[0].length,
+  context: {
+    text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+    offset: Math.min(20, match.index),
+    length: match[0].length
+  },
+  sentence: text.slice(
+    Math.max(0, text.lastIndexOf('.', match.index) + 1),
+    text.indexOf('.', match.index + match[0].length) + 1
+  ),
+  rule: {
+    id: rule.id,
+    description: rule.description || rule.name
+  }
+});
+}
+}
   }
 
   if (matches.length === 0) {
@@ -751,8 +751,11 @@ const checkTextAgainstRules = async (text, rules) => {
           description: match.rule.description
         }
       }));
+    
     }
   }
+      }
+      
 
   return { matches };
 };
