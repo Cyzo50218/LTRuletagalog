@@ -643,19 +643,20 @@ const checkTextAgainstRules = async (text, rules) => {
         let suggestions = [];
 
         if (rule.suggestions) {
-          rule.suggestions.forEach(suggestion => {
-            if (typeof suggestion === 'string') {
-              suggestions.push(suggestion);
-            } else if (suggestion.text) {
-              let suggestionText = suggestion.text;
-              for (let i = 0; i < match.length; i++) {
-                suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
-              }
-              suggestions.push(suggestionText);
-            }
-          });
-        }
-
+  rule.suggestions.forEach(suggestion => {
+    if (typeof suggestion === 'string') {
+      suggestions.push(suggestion);
+    } else if (suggestion.text) {
+      let suggestionText = suggestion.text;
+      // Replace {match} with the actual matched text
+      suggestionText = suggestionText.replace(/\{match\}/g, match[0]);
+      for (let i = 0; i < match.length; i++) {
+        suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+      }
+      suggestions.push(suggestionText);
+    }
+  });
+}
         // Check for repeated words without space and handle accordingly
         if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
           const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
