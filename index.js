@@ -475,112 +475,127 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
+
 const checkTextAgainstRules = async (text, rules) => {
-  let matches = [];
+      let matches = [];
 
-  const applyRules = (text, rules) => {
-    let localMatches = [];
-
-    for (const rule of rules) {
-      if (!rule.pattern) {
-        console.warn(`Rule ${rule.id} has no pattern defined.`);
-        continue;
-      }
-
-      for (const patternObj of rule.pattern) {
-        let regex;
-        if (patternObj.token && patternObj.token.value) {
-          // Exact match for tokens
-          regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
-        } else if (patternObj.regex) {
-          // Regex pattern
-          regex = new RegExp(patternObj.regex, 'gi');
-        } else {
-          console.warn(`Invalid pattern in rule ${rule.id}`);
+      for (const rule of rules) {
+        if (!rule.pattern) {
+          console.warn(`Rule ${rule.id} has no pattern defined.`);
           continue;
         }
 
-        let match;
-        while ((match = regex.exec(text)) !== null) {
-          let suggestions = [];
+        for (const patternObj of rule.pattern) {
+          let regex;
+          if (patternObj.token && patternObj.token.value) {
+            // Exact match for tokens
+            regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+          } else if (patternObj.regex) {
+            // Regex pattern
+            regex = new RegExp(patternObj.regex, 'gi');
+          } else {
+            console.warn(`Invalid pattern in rule ${rule.id}`);
+            continue;
+          }
 
-          if (rule.suggestions) {
-            rule.suggestions.forEach(suggestion => {
-              if (typeof suggestion === 'string') {
-                suggestions.push(suggestion);
-              } else if (suggestion.text) {
-                let suggestionText = suggestion.text;
-                for (let i = 0; i <= match.length; i++) {
-                  suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+          let match;
+          while ((match = regex.exec(text)) !== null) {
+            let suggestions = [];
+
+            if (rule.suggestions) {
+              rule.suggestions.forEach(suggestion => {
+                if (typeof suggestion === 'string') {
+                  suggestions.push(suggestion);
+                } else if (suggestion.text) {
+                  let suggestionText = suggestion.text;
+                  for (let i = 0; i <= match.length; i++) {
+                    suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+                  }
+                  // Preserve the original capitalization
+                  if (match[0][0] === match[0][0].toUpperCase()) {
+                    suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+                  }
+                  suggestions.push(suggestionText);
                 }
-                // Preserve the original capitalization
-                if (match[0][0] === match[0][0].toUpperCase()) {
-                  suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-                }
-                suggestions.push(suggestionText);
-              }
-            });
-          }
-
-          // Check for repeated words without space and handle accordingly
-          if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
-            const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
-            const textWithoutSpaces = text.replace(/\s+/g, '');
-
-            if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
-              // Skip if it involves repeated words without space
-              continue;
+              });
             }
-          }
+        // Check for repeated words without space and handle accordingly
+        if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
+          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
+          const textWithoutSpaces = text.replace(/\s+/g, '');
 
-          // Handle Spanish word exceptions
-          if (rule.id.startsWith("ESPANYOL")) {
-            const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-            if (espanyolPattern.test(text)) {
-              suggestions = rule.suggestions; // Use the suggestions from the rule
-            }
+          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
+            // Skip if it involves repeated words without space
+            continue;
           }
-
-          localMatches.push({
-            message: rule.message,
-            shortMessage: rule.name || '',
-            replacements: suggestions,
-            offset: match.index,
-            length: match[0].length,
-            context: {
-              text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-              offset: Math.min(20, match.index),
-              length: match[0].length
-            },
-            sentence: text.slice(
-              Math.max(0, text.lastIndexOf('.', match.index) + 1),
-              text.indexOf('.', match.index + match[0].length) + 1
-            ),
-            rule: {
-              id: rule.id,
-              description: rule.description || rule.name
-            }
-          });
         }
+
+        // Handle Spanish word exceptions
+        if (rule.id.startsWith("ESPANYOL")) {
+          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
+          if (espanyolPattern.test(text)) {
+            suggestions = rule.suggestions; // Use the suggestions from the rule
+          }
+        }
+
+        matches.push({
+          message: rule.message,
+          shortMessage: rule.name || '',
+          replacements: suggestions,
+          offset: match.index,
+          length: match[0].length,
+          context: {
+            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+            offset: Math.min(20, match.index),
+            length: match[0].length
+          },
+          sentence: text.slice(
+            Math.max(0, text.lastIndexOf('.', match.index) + 1),
+            text.indexOf('.', match.index + match[0].length) + 1
+          ),
+          rule: {
+            id: rule.id,
+            description: rule.description || rule.name
+          }
+        });
       }
     }
 
-    return localMatches;
-  };
+    // Add typo detection logic here
+    if (rule.pattern.some(patternObj => patternObj.token && patternObj.token.value)) {
+      let word = rule.pattern.find(patternObj => patternObj.token && patternObj.token.value).token.value;
+      let typoPatterns = generateTypoPatterns(word);
 
-  let newMatches;
-  let textToCheck = text;
-  
-  // Apply rules recursively
-  do {
-    newMatches = applyRules(textToCheck, rules);
-    if (newMatches.length > 0) {
-      matches.push(...newMatches);
-      textToCheck = newMatches.map(m => m.context.text).join(' ');
-    }
-  } while (newMatches.length > 0);
+      for (const typoPattern of typoPatterns) {
+        let typoRegex = new RegExp(`\\b${typoPattern}\\b`, 'gi');
+        let typoMatch;
+        while ((typoMatch = typoRegex.exec(text)) !== null) {
+          let typoSuggestions = rule.suggestions || [];
 
-  // If no matches found, fallback to LanguageTool API
+          matches.push({
+  message: rule.message,
+  shortMessage: rule.name || '',
+  replacements: suggestions,
+  offset: match.index,
+  length: match[0].length,
+  context: {
+    text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+    offset: Math.min(20, match.index),
+    length: match[0].length
+  },
+  sentence: text.slice(
+    Math.max(0, text.lastIndexOf('.', match.index) + 1),
+    text.indexOf('.', match.index + match[0].length) + 1
+  ),
+  rule: {
+    id: rule.id,
+    description: rule.description || rule.name
+  }
+});
+}
+}
+  }
+
   if (matches.length === 0) {
     const languageToolResult = await callLanguageToolAPI(text);
     if (languageToolResult && languageToolResult.matches) {
@@ -597,8 +612,11 @@ const checkTextAgainstRules = async (text, rules) => {
           description: match.rule.description
         }
       }));
+    
     }
   }
+      }
+      
 
   return { matches };
 };
