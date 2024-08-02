@@ -85,7 +85,7 @@ if (!grammarRules.length)  {
       "piso - piso-piso"
     ],
     "suggestions": [
-      { "text": "$1-$1" }
+      { "text": "$1-$2" }
     ]
   },
   {
@@ -104,8 +104,8 @@ if (!grammarRules.length)  {
       "pale - pale-pale"
     ],
     "suggestions": [
-      { "text": "$1-ng $1" },
-      { "text": "$1-$1" }
+      { "text": "$1ng $2" },
+      { "text": "$1-$2" }
     ]
   },
 {
