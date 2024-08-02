@@ -91,34 +91,23 @@ if (!grammarRules.length)  {
 {
   "id": "TAGALOG_RULES_COMBINED",
   "name": "Tagalog Grammar and Spelling Rules",
+  "pattern": [
+    { "regex": "\\b(pa|Pa|maka|Maka|mag|Mag|mg|Mg)(\\w+)\\b" }
+  ],
   "rules": [
     {
       "id": "A1",
       "name": "Proper Nouns with 'pa' Prefix",
       "description": "Add hyphens to proper nouns when prefixed with 'pa'.",
       "pattern": [
-        {
-          "regex": "\\b(pa)([A-Z]\\w+)\\b"
-        },
-          {
-          "regex": "\\b(Pa)([A-Z]\\w+)\\b"
-        }
+        { "regex": "\\b(pa)([A-Z]\\w+)\\b" },
+        { "regex": "\\b(Pa)([A-Z]\\w+)\\b" }
       ],
       "message": "Consider using a hyphen with the 'pa' prefix for proper nouns.",
-      "suggestions": [
-        {
-          "text": "$1-$2"
-        }
-      ],
+      "suggestions": [ { "text": "$1-$2" } ],
       "examples": [
-        {
-          "incorrect": "paDavao",
-          "correct": "pa-Davao"
-        },
-        {
-          "incorrect": "paManila",
-          "correct": "pa-Manila"
-        }
+        { "incorrect": "paDavao", "correct": "pa-Davao" },
+        { "incorrect": "paManila", "correct": "pa-Manila" }
       ]
     },
     {
@@ -126,30 +115,15 @@ if (!grammarRules.length)  {
       "name": "Words with 'maka' Prefix",
       "description": "Add hyphens to words prefixed with 'maka'.",
       "pattern": [
-        {
-          "regex": "\\b(maka)(\\w+)\\b"
-        },
-          {
-          "regex": "\\b(Maka)(\\w+)\\b"
-        },
-  {
-    "regex": "\\b(mka)(\\w+)\\b"
-  },
-  {
-    "regex": "\\b(Mka)(\\w+)\\b"
-  }
+        { "regex": "\\b(maka)(\\w+)\\b" },
+        { "regex": "\\b(Maka)(\\w+)\\b" },
+        { "regex": "\\b(mka)(\\w+)\\b" },
+        { "regex": "\\b(Mka)(\\w+)\\b" }
       ],
       "message": "Consider using a hyphen with the 'maka' prefix.",
-      "suggestions": [
-        {
-          "text": "$1-$2"
-        }
-      ],
+      "suggestions": [ { "text": "$1-$2" } ],
       "examples": [
-        {
-          "incorrect": "makabayan",
-          "correct": "maka-bayan"
-        }
+        { "incorrect": "makabayan", "correct": "maka-bayan" }
       ]
     },
     {
@@ -157,34 +131,20 @@ if (!grammarRules.length)  {
       "name": "Attach First KP Sound in Prefixes",
       "description": "Attach the sound of the first KP (consonant-vowel) to the prefix for borrowed words.",
       "pattern": [
-        {
-          "regex": "\\b(mag)(\\w+)\\b"
-        },
-        {
-          "regex": "\\b(Mag)(\\w+)\\b"
-        },
-{
-  "regex": "\\b(mg)(\\w+)\\b"
-},
-{
-  "regex": "\\b(Mg)(\\w+)\\b"
-}
+        { "regex": "\\b(mag)(\\w+)\\b" },
+        { "regex": "\\b(Mag)(\\w+)\\b" },
+        { "regex": "\\b(mg)(\\w+)\\b" },
+        { "regex": "\\b(Mg)(\\w+)\\b" }
       ],
       "message": "Ensure proper prefix attachment.",
-      "suggestions": [
-        {
-          "text": "$1-$2"
-        }
-      ],
+      "suggestions": [ { "text": "$1-$2" } ],
       "examples": [
-        {
-          "incorrect": "magcomputer",
-          "correct": "mag-computer"
-        }
+        { "incorrect": "magcomputer", "correct": "mag-computer" }
       ]
     }
   ]
-},
+}
+,
 {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
