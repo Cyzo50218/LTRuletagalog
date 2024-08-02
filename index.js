@@ -89,62 +89,54 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "TAGALOG_RULES_COMBINED",
-  "name": "Tagalog Grammar and Spelling Rules",
+  "id": "A1",
+  "name": "Proper Nouns with 'pa' Prefix",
+  "description": "Add hyphens to proper nouns when prefixed with 'pa'.",
   "pattern": [
-    { "regex": "\\b(pa|Pa|maka|Maka|mag|Mag|mg|Mg)(\\w+)\\b" }
+    { "regex": "\\b(pa)([A-Z]\\w+)\\b" },
+    { "regex": "\\b(Pa)([A-Z]\\w+)\\b" }
   ],
-  "rules": [
-    {
-      "id": "A1",
-      "name": "Proper Nouns with 'pa' Prefix",
-      "description": "Add hyphens to proper nouns when prefixed with 'pa'.",
-      "pattern": [
-        { "regex": "\\b(pa)([A-Z]\\w+)\\b" },
-        { "regex": "\\b(Pa)([A-Z]\\w+)\\b" }
-      ],
-      "message": "Consider using a hyphen with the 'pa' prefix for proper nouns.",
-      "suggestions": [ { "text": "$1-$2" } ],
-      "examples": [
-        { "incorrect": "paDavao", "correct": "pa-Davao" },
-        { "incorrect": "paManila", "correct": "pa-Manila" }
-      ]
-    },
-    {
-      "id": "A2",
-      "name": "Words with 'maka' Prefix",
-      "description": "Add hyphens to words prefixed with 'maka'.",
-      "pattern": [
-        { "regex": "\\b(maka)(\\w+)\\b" },
-        { "regex": "\\b(Maka)(\\w+)\\b" },
-        { "regex": "\\b(mka)(\\w+)\\b" },
-        { "regex": "\\b(Mka)(\\w+)\\b" }
-      ],
-      "message": "Consider using a hyphen with the 'maka' prefix.",
-      "suggestions": [ { "text": "$1-$2" } ],
-      "examples": [
-        { "incorrect": "makabayan", "correct": "maka-bayan" }
-      ]
-    },
-    {
-      "id": "B",
-      "name": "Attach First KP Sound in Prefixes",
-      "description": "Attach the sound of the first KP (consonant-vowel) to the prefix for borrowed words.",
-      "pattern": [
-        { "regex": "\\b(mag)(\\w+)\\b" },
-        { "regex": "\\b(Mag)(\\w+)\\b" },
-        { "regex": "\\b(mg)(\\w+)\\b" },
-        { "regex": "\\b(Mg)(\\w+)\\b" }
-      ],
-      "message": "Ensure proper prefix attachment.",
-      "suggestions": [ { "text": "$1-$2" } ],
-      "examples": [
-        { "incorrect": "magcomputer", "correct": "mag-computer" }
-      ]
-    }
+  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuunlapian.",
+  "suggestions": [ { "text": "$1-$2" } ],
+  "examples": [
+    { "incorrect": "paDavao", "correct": "pa-Davao" },
+    { "incorrect": "paManila", "correct": "pa-Manila" }
   ]
-}
-,
+},
+{
+  "id": "A2",
+  "name": "Words with 'maka' Prefix",
+  "description": "Add hyphens to words prefixed with 'maka'.",
+  "pattern": [
+    { "regex": "\\b(maka)(\\w+)\\b" },
+    { "regex": "\\b(Maka)(\\w+)\\b" },
+    { "regex": "\\b(mka)(\\w+)\\b" },
+    { "regex": "\\b(Mka)(\\w+)\\b" }
+  ],
+  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuunlapian.",
+  "suggestions": [ { "text": "$1-$2" } ],
+  "examples": [
+    { "incorrect": "makabayan", "correct": "maka-bayan" }
+  ]
+},{
+  "id": "B",
+  "name": "Attach First KP Sound in Prefixes",
+  "description": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
+  "pattern": [
+    { "regex": "\\b(mag)([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(Mag)([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(mg)([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(Mg)([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
+  ],
+  "message": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
+  "suggestions": [
+    { "text": "$1$2-$2" }
+  ],
+  "examples": [
+    { "incorrect": "magcomputer", "correct": "magco-computer" },
+    { "incorrect": "magphotocopy", "correct": "magpo-photocopy" }
+  ]
+},
 {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
