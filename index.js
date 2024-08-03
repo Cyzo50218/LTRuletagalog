@@ -166,9 +166,10 @@ if (!grammarRules.length)  {
     "exceptions": ["\\b(\\w*e\\1)\\b"]
 },
     {
-      "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso)(\\w*o)\\b",
-      "exceptions": ["\\b(\\w+\\1)\\b"]
-    }
+  "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso)(\\w*o)\\b",
+  "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
+}
+
   ],
   "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. Gayundin, may mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
   "description": "Kapag ang salitang-ugat na nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-ihan'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian. Gayunman, hindi puwedeng palitan ng 'i' ang 'e' at 'o' sa 'u'. Dapat pa ring gamitin ang baybay na matagal na o lagi nang ginagamit.",
