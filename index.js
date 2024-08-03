@@ -123,22 +123,21 @@ if (!grammarRules.length)  {
   "name": "Attach First KP Sound in Prefixes",
   "description": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
   "pattern": [
-    { "regex": "\\b(mag)\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(Mag)\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(magpo|Magpo|mgpo|Mgpo)\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
+    { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(mag|Mag|mg|Mg)(po)?(photo\\w*)\\b" }
   ],
   "message": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
   "suggestions": [
-    { "text": "mag$2{0,2}-$2" },
-    { "text": "mag-$2" }
+    { "text": "$1$2-$2$3" },
+    { "text": "$1po-$3" }
   ],
   "examples": [
     { "incorrect": "magcomputer", "correct": "magco-computer" },
-    { "incorrect": "magphotocopy", "correct": "magpo-photocopy" },
-    { "incorrect": "mag photocopy", "correct": "magpo-photocopy" },
-    { "incorrect": "magpophotocopy", "correct": "magpo-photocopy" }
+    { "incorrect": "magcocomputer", "correct": "magco-computer" },
+    { "incorrect": "Magphotocopy", "correct": "Magpo-photocopy" },
+    { "incorrect": "magpophotocopy", "correct": "magpo-photocopy" },
+    { "incorrect": "magphotocopy", "correct": "magpo-photocopy" }
   ]
 },
 {
