@@ -129,8 +129,8 @@ if (!grammarRules.length)  {
   ],
   "message": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
   "suggestions": [
-    { "text": "$1$2-$2$3" },
-    { "text": "$1po-$3" }
+    { "text": "$1$2-$3" },
+    { "text": "$1-$3" }
   ],
   "examples": [
     { "incorrect": "magcomputer", "correct": "magco-computer" },
