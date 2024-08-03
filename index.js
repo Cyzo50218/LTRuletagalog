@@ -165,8 +165,8 @@ if (!grammarRules.length)  {
       "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|sinosino|tseke|bente|pale|)(\\w*e)\\b",
     "exceptions": ["\\b(\\w*e\\1)\\b"]
 },
-    {
-  "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso)(\\w*o)\\b",
+{
+  "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o)(\\w*o)\\b",
   "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
 }
 
