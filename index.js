@@ -125,7 +125,7 @@ if (!grammarRules.length)  {
   "pattern": [
     { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
     { "regex": "\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mag|Mag|mg|Mg)(po)?(photo\\w*)\\b" }
+    { "regex": "\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
   ],
   "message": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
   "suggestions": [
@@ -137,7 +137,11 @@ if (!grammarRules.length)  {
     { "incorrect": "magcocomputer", "correct": "magco-computer" },
     { "incorrect": "Magphotocopy", "correct": "Magpo-photocopy" },
     { "incorrect": "magpophotocopy", "correct": "magpo-photocopy" },
-    { "incorrect": "magphotocopy", "correct": "magpo-photocopy" }
+    { "incorrect": "magphotocopy", "correct": "magpo-photocopy" },
+    { "incorrect": "magpakain", "correct": "magpa-kain" },
+    { "incorrect": "magpapakain", "correct": "magpa-kain" },
+    { "incorrect": "magfokus", "correct": "magfo-kus" },
+    { "incorrect": "magfokus", "correct": "magfo-kus" }
   ]
 },
 {
@@ -165,11 +169,11 @@ if (!grammarRules.length)  {
   "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
   "pattern": [
     {
-      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|sinosino|tseke|bente|pale|ate|ideya|karte|lente|note|poste|suwerte|tigre|jefe|chicle|suerte|bueno|grande|puente)(\\w*e)\\b",
+      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|sinosino|tseke|bente|pale|ate|karte|lente|note|jefe|chicle)(\\w*e)\\b",
       "exceptions": ["\\b(\\w*e\\1)\\b"]
     },
     {
-      "regex": "\\b(?!buhos|sampu|tao|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
