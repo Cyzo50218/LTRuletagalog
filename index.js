@@ -91,16 +91,18 @@ if (!grammarRules.length)  {
 {
   "id": "A1",
   "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Add hyphens to proper nouns when prefixed with 'pa'.",
+  "description": "Add hyphens to proper nouns when prefixed with 'pa', except those starting with 'pag'.",
   "pattern": [
-    { "regex": "\\b(pa)([A-Z]\\w+)\\b" },
-    { "regex": "\\b(Pa)([A-Z]\\w+)\\b" }
+    { "regex": "\\bpa(?!g)([A-Z]\\w+)\\b" },
+    { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuunlapian.",
   "suggestions": [ { "text": "$1-$2" } ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
-    { "incorrect": "paManila", "correct": "pa-Manila" }
+    { "incorrect": "paManila", "correct": "pa-Manila" },
+    { "incorrect": "pagDavao", "correct": "pagDavao" },
+    { "incorrect": "pagManila", "correct": "pagManila" }
   ]
 },
 {
