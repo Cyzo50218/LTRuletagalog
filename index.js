@@ -91,18 +91,25 @@ if (!grammarRules.length)  {
 {
   "id": "A1",
   "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Add hyphens to proper nouns when prefixed with 'pa', except those starting with 'pag'.",
+  "description": "Add hyphens to proper nouns when prefixed with 'pa','pag'.",
   "pattern": [
     { "regex": "\\bpa(?!g)([A-Z]\\w+)\\b" },
-    { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" }
+    { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" },
+    { "regex": "\\bpag([A-Z]\\w+)\\b" },
+    { "regex": "\\bPag([A-Z]\\w+)\\b" }
   ],
-  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuunlapian.",
-  "suggestions": [ { "text": "$1-$2" } ],
+  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuusapan ang panuntunan.",
+  "suggestions": [
+    { "text": "$1-$2" },  
+    { "text": "pag-$1" },
+    { "text": "pag $1" },  
+    { "text": "pag$1" }   
+  ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
     { "incorrect": "paManila", "correct": "pa-Manila" },
-    { "incorrect": "pagDavao", "correct": "pagDavao" },
-    { "incorrect": "pagManila", "correct": "pagManila" }
+    { "incorrect": "pagDavao", "correct": "pag-Davao" },
+    { "incorrect": "pagManila", "correct": "pag-Manila" }
   ]
 },
 {
