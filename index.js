@@ -91,55 +91,65 @@ if (!grammarRules.length)  {
 {
   "id": "A1",
   "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Add hyphens to proper nouns when prefixed with 'pa','pag'.",
+  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag'.",
   "pattern": [
     { "regex": "\\bpa(?!g)([A-Z]\\w+)\\b" },
     { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" },
     { "regex": "\\bpag([A-Z]\\w+)\\b" },
     { "regex": "\\bPag([A-Z]\\w+)\\b" }
   ],
-  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuusapan ang panuntunan.",
+  "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
-    { "text": "$1-$2" },  
-    { "text": "pag-$1" },
-    { "text": "pag $1" },  
-    { "text": "pag$1" }   
+    { "text": "$1-$2", "description": "Maglagay ng gitling sa pagitan ng panlapi at ng pangngalan." },
+    { "text": "pa-$1", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
+    { "text": "pag $1", "description": "Maglagay ng espasyo pagkatapos ng 'pag' bago ang pangngalan." },
+    { "text": "pag$1", "description": "Tanggalin ang espasyo sa pagitan ng 'pag' at ng pangngalan." }
   ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
     { "incorrect": "paManila", "correct": "pa-Manila" },
     { "incorrect": "pagDavao", "correct": "pag-Davao" },
     { "incorrect": "pagManila", "correct": "pag-Manila" }
+  ],
+  "exceptions": [
+    "paa", "paano", "paanong", "paaralan", "pababa", "pabango", "pabaya", "pabor", "paborita", "paborito",
+    "pabrika", "padala", "pader", "padre", "padrino", "padyak", "padyama", "pagal", "pagano", "pagasa",
+    "pagbabago", "pagbasa", "pagbati", "pagbili", "pagbuo", "pagdaan", "pagdaka", "pagdating", "pagdiriwang",
+    "paggalang", "paggawa", "paghinga", "pagi", "pagibig", "pagitan", "pagka", "pagkain", "pagkakaisa",
+    "pagkakataon", "pagkanta", "pag-asa", "pag-ibig", "pag-iisa", "pag-unlad"
   ]
 },
 {
   "id": "A2",
   "name": "Words with 'maka' Prefix",
-  "description": "Add hyphens to words prefixed with 'maka'.",
+  "description": "Magdagdag ng gitling sa mga salitang may panlaping 'maka'.",
   "pattern": [
     { "regex": "\\b(maka)(\\w+)\\b" },
     { "regex": "\\b(Maka)(\\w+)\\b" },
     { "regex": "\\b(mka)(\\w+)\\b" },
     { "regex": "\\b(Mka)(\\w+)\\b" }
   ],
-  "message": "Ginigitlingan ang pangngalang pantangi at salitanghiram kapag inuunlapian.",
-  "suggestions": [ { "text": "$1-$2" } ],
+  "message": "Ginigitlingan ang mga salitang may panlaping 'maka'.",
+  "suggestions": [ 
+    { "text": "$1-$2", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." }
+  ],
   "examples": [
     { "incorrect": "makabayan", "correct": "maka-bayan" }
   ]
-},{
+},
+{
   "id": "B",
   "name": "Attach First KP Sound in Prefixes",
-  "description": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
+  "description": "Ulitin ang unang katinig at patinig ng salita sa mga panlapi.",
   "pattern": [
     { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
     { "regex": "\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
     { "regex": "\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
   ],
-  "message": "Ito ay inuulitang unang katinig at patinig (KP) ng salita.",
+  "message": "Ulitin ang unang katinig at patinig ng salita kapag gumagamit ng panlapi.",
   "suggestions": [
-    { "text": "$1$2-$3" },
-    { "text": "$1-$3" }
+    { "text": "$1$2-$3", "description": "Maglagay ng gitling sa pagitan ng panlapi at ng ugat na salita, na inuulit ang unang tunog." },
+    { "text": "$1-$3", "description": "Maglagay ng gitling sa pagitan ng panlapi at ng ugat na salita kapag hindi na kailangan ang pag-uulit ng tunog." }
   ],
   "examples": [
     { "incorrect": "magcomputer", "correct": "magco-computer" },
@@ -157,37 +167,35 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    {
-      "regex": "\\b(\\w+e)(\\1)\\b"
-    }
+    { "regex": "\\b(\\w+e)(\\1)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
   "examples": [
-    "tseke - tseke-tseke",
-    "bente - bente-bente",
-    "pale - pale-pale"
+    { "incorrect": "tseke", "correct": "tseke-tseke" },
+    { "incorrect": "bente", "correct": "bente-bente" },
+    { "incorrect": "pale", "correct": "pale-pale" }
   ],
   "suggestions": [
-    { "text": "$1ng-$2" },
-    { "text": "$1-$2" }
+    { "text": "$1ng-$2", "description": "Magdagdag ng '-ng' linker sa pagitan ng salitang-ugat na nagtatapos sa 'e' at ang inuulit na salita." },
+    { "text": "$1-$2", "description": "Magdagdag ng gitling sa pagitan ng salitang-ugat na nagtatapos sa 'e' at ang inuulit na salita." }
   ]
 },
 {
   "id": "PAGHULAPIAN_COMBINED",
-  "name": "4. Pagbabago ng huling pantig ng salitang-ugat",
+  "name": "Pagbabago ng huling pantig ng salitang-ugat",
   "pattern": [
     {
-      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|sinosino|tseke|bente|pale|ate|karte|lente|note|jefe|chicle)(\\w*e)\\b",
+      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|sinosino|tseke|bente|pale|ate|karte|lente|note|jefe|chicle)(\\w*e)\\b",
       "exceptions": ["\\b(\\w*e\\1)\\b"]
     },
     {
-      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|calle|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
-  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. Gayundin, may mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
-  "description": "Kapag ang salitang-ugat na nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-ihan'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian. Gayunman, hindi puwedeng palitan ng 'i' ang 'e' at 'o' sa 'u'. Dapat pa ring gamitin ang baybay na matagal na o lagi nang ginagamit.",
+  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'e' o 'o', dapat itong i-apply ang tamang hulapi. May mga salitang nagtatapos sa 'e' na nananatili ang 'e' kahit hinuhulapian.",
+  "description": "Kapag ang salitang-ugat ay nagtatapos sa 'e', ang huling pantig ay nagiging 'i' at ang hulapi ay '-ihan'. Kapag nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'e' kahit hinuhulapian, at hindi puwedeng palitan ng 'i' ang 'e' at 'o' sa 'u'.",
   "suggestions": [
     {
       "text": "$1ihan",
@@ -198,15 +206,6 @@ if (!grammarRules.length)  {
     { "text": "$1-$2" },
     {
       "text": "$1an",
-      "condition": "endsWith('he')",
-      "exceptions": ["babae", "tao", "telebisyon", "komersyo", "kompyuter", "kape", "puno", "taho", "pili", "sine", "bote", "onse", "base", "cheque", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra"]
-    },
-    {
-      "text": "$1han",
-      "condition": "matches(['sine', 'bote', 'onse', 'base'])"
-    },
-    {
-      "text": "$1u-an",
       "condition": "endsWith('o')",
       "exceptions": [
         "buhos", "sampu", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
@@ -219,10 +218,49 @@ if (!grammarRules.length)  {
 },
 {
   "id": "PAGTUNOG_E_O",
-  "name": "6. Pagbabago ng tunog na 'e' at 'o' sa mga hiram na salita",
+  "name": "Pagbabago ng tunog na 'e' at 'o' sa mga hiram na salita",
   "pattern": [
     {
-      "regex": "\\b(mesa|uso|tela|selo|bote|babay|sabi|sino|bango|sisi|binti|tanggap|pinta|mango)\\b"
+      "regex": "\\bmesa\\b"
+    },
+    {
+      "regex": "\\buso\\b"
+    },
+    {
+      "regex": "\\btela\\b"
+    },
+    {
+      "regex": "\\bselo\\b"
+    },
+    {
+      "regex": "\\bbote\\b"
+    },
+    {
+      "regex": "\\bbabay\\b"
+    },
+    {
+      "regex": "\\bsabi\\b"
+    },
+    {
+      "regex": "\\bsino\\b"
+    },
+    {
+      "regex": "\\bbango\\b"
+    },
+    {
+      "regex": "\\bsisi\\b"
+    },
+    {
+      "regex": "\\bbinti\\b"
+    },
+    {
+      "regex": "\\btanggap\\b"
+    },
+    {
+      "regex": "\\bpinta\\b"
+    },
+    {
+      "regex": "\\bmango\\b"
     }
   ],
   "message": "Makabuluhan ang tunog na 'e' at 'o' kapag inihahambing ang mga hiram na salita sa mga katutubo o hiram na salita.",
@@ -230,56 +268,75 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "misa",
-      "condition": "matches('mesa')"
+      "condition": "matches('mesa')",
+      "description": "Palitan ang 'mesa' ng 'misa' na katutubong tunog."
     },
     {
       "text": "oso",
-      "condition": "matches('uso')"
+      "condition": "matches('uso')",
+      "description": "Palitan ang 'uso' ng 'oso' na katutubong tunog."
     },
     {
       "text": "tila",
-      "condition": "matches('tela')"
+      "condition": "matches('tela')",
+      "description": "Palitan ang 'tela' ng 'tila' na katutubong tunog."
     },
     {
       "text": "babae",
-      "condition": "matches('babay')"
+      "condition": "matches('babay')",
+      "description": "Palitan ang 'babay' ng 'babae' na katutubong tunog."
     },
     {
       "text": "sabihin",
-      "condition": "matches('sabi')"
+      "condition": "matches('sabi')",
+      "description": "Palitan ang 'sabi' ng 'sabihin' na katutubong tunog."
     },
     {
       "text": "sinu",
-      "condition": "matches('sino')"
+      "condition": "matches('sino')",
+      "description": "Palitan ang 'sino' ng 'sinu' na katutubong tunog."
     },
     {
       "text": "bangong",
-      "condition": "matches('bango')"
+      "condition": "matches('bango')",
+      "description": "Palitan ang 'bango' ng 'bangong' na katutubong tunog."
     },
     {
       "text": "sising",
-      "condition": "matches('sisi')"
+      "condition": "matches('sisi')",
+      "description": "Palitan ang 'sisi' ng 'sising' na katutubong tunog."
     },
     {
       "text": "mangga",
-      "condition": "matches('mango')"
+      "condition": "matches('mango')",
+      "description": "Palitan ang 'mango' ng 'mangga' na katutubong tunog."
     }
   ]
-},
-{
+},{
   "id": "1.KAPAG_KUNG",
   "name": "KAPAG at KUNG",
   "pattern": [
     {
-      "regex": "\\b(kapag|kung)\\b"
+      "regex": "\\b(kpg|kapg|kpag)\\b"
+    },
+    {
+      "regex": "\\b(kng|kugn|kug)\\b"
     }
   ],
   "message": "Gamitin ang 'kung' para sa di-katiyakan at 'kapag' para sa kalagayang tiyak.",
   "description": "Ipinakikilala ng 'kung' ang di-katiyakan ng isang kalagayan; ipinakikilala ng 'kapag' ang isang kalagayang tiyak.",
   "example": "Umuuwi siya sa probinsiya kapag araw ng Sabado. Mag-ingat ka naman kapag nagmamaneho ka. Hindi niya masabi kung Sabado o Linggo ang pag-uwi niya sa probinsiya. Mag-ingat ka kung ikaw ang magmamaneho ng kotse.",
   "suggestions": [
-    { "text": "kapag" },
-    { "text": "kung" }
+    {
+      "text": "kapag",
+      "condition": "matches(kpg|kapg|kpag)",
+      "description": "'Kapag' ang tamang gamitin kapag tinutukoy ang isang kalagayan na tiyak."
+    },
+    {
+      "text": "kung",
+      "condition": "matches(kng|kugn|kug)",
+      "description": "'Kung' ang tamang gamitin kapag tinutukoy ang isang di-katiyakan."
+    }
   ]
 },
 {
@@ -294,30 +351,73 @@ if (!grammarRules.length)  {
   "description": "Pagkilos ang tinutukoy ng 'kibo'; pangungusap ang tinutukoy ng 'imik'.",
   "example": "Wala siyang kakibu-kibo kung matulog. Hindi lamang sa tao nagagamit ang kibo. Kumikibo nang bahagya ang apoy ng kandila. Huwag ninyong kibuin ang mga bulaklak na iniayos ko sa plorera. Hindi siya nakaimik nang tanungin ko.",
   "suggestions": [
-    { "text": "kibo" },
-    { "text": "imik" },
-    { "text": "kakibu-kibo" },
-    { "text": "kumikibo" },
-    { "text": "kibuin" },
-    { "text": "nakaimik" }
+    {
+      "text": "kibo",
+      "description": "'Kibo' ang tamang gamitin kapag tinutukoy ang pagkilos."
+    },
+    {
+      "text": "imik",
+      "description": "'Imik' ang tamang gamitin kapag tinutukoy ang pangungusap."
+    },
+    {
+      "text": "kakibu-kibo",
+      "description": "'Kakibu-kibo' ang tamang gamitin para sa pagkilos na nagmumula sa pagkatao."
+    },
+    {
+      "text": "kumikibo",
+      "description": "'Kumikibo' ang tamang gamitin para sa pagkilos na bahagya."
+    },
+    {
+      "text": "kibuin",
+      "description": "'Kibuin' ang tamang gamitin para sa paggawa ng aksyon sa bagay."
+    },
+    {
+      "text": "nakaimik",
+      "description": "'Nakaimik' ang tamang gamitin para sa pangungusap na hindi nagsasalita."
+    }
   ]
 },
 {
   "id": "3.DAHIL_DAHILAN",
   "name": "DAHIL at DAHILAN",
   "pattern": [
-    {
-      "regex": "\\b(dahil|dahilan|dahil sa|dahil kay)\\b"
-    }
+     {
+   "regex": "\\b(dahl|dhil|dahl)\\b"
+ },
+  {
+   "regex": "\\b(dahlan|dhilan|dahiln)\\b"
+ },
+  {
+   "regex": "\\b(dhil sa|dahl sa|dahlsa|dhilsa|dahilsa|dahil sa)\\b"
+ },
+  {
+   "regex": "\\b(dhil kay|dahl ky|dahlky|dhilkay|dahlkay|dhilky|dahilkay)\\b"
+ }
   ],
   "message": "Pangatnig ang 'dahil', pangngalan ang 'dahilan'; pang-ukol naman ang 'dahil sa' o 'dahil kay'.",
   "description": "Pangatnig ang 'dahil', pangngalan ang 'dahilan'; pang-ukol naman ang 'dahil sa' o 'dahil kay'.",
   "example": "Hindi siya nakapasok kahapon dahil sumakit ang ulo niya. Hindi ko alam kung ano ang dahilan ng kanyang pagkakasakit.",
   "suggestions": [
-    { "text": "dahil" },
-    { "text": "dahilan" },
-    { "text": "dahil sa" },
-    { "text": "dahil kay" }
+    {
+      "text": "dahil",
+      "condition": "matches(dahl|dhil|dahl)",
+      "description": "'Dahil' ang tamang gamitin kapag pangatnig."
+    },
+    {
+      "text": "dahilan",
+      "condition": "matches(dahlan|dhilan|dahiln)",
+      "description": "'Dahilan' ang tamang gamitin kapag pangngalan."
+    },
+    {
+      "text": "dahil sa",
+      "condition": "matches(dhil sa|dahl sa|dahlsa|dhilsa|dahilsa|dahil sa)",
+      "description": "'Dahil sa' ang tamang gamitin kapag pang-ukol."
+    },
+    {
+      "text": "dahil kay",
+      "condition": "matches(dhil kay|dahl ky|dahlky|dhilkay|dahlkay|dhilky|dahilkay)",
+      "description": "'Dahil kay' ang tamang gamitin kapag pang-ukol na tinutukoy ang tao."
+    }
   ]
 },
 {
@@ -325,15 +425,28 @@ if (!grammarRules.length)  {
   "name": "HABANG at SAMANTALANG",
   "pattern": [
     {
-      "regex": "\\b(habang|samantalang)\\b"
+      "regex": "\\b(hbang|habng|hbng)\\b",
+      "description": "'Habang' Ginagamit ang 'Habang' para sa kalagayang walang tiyak na hangganan"
+    },
+    {
+      "regex": "\\b(smantalang|samantlng|samntlng|samantalng)\\b",
+      "description": "'Samantalang' Ginagamit ang 'Samantalang' para sa kalagayang may taning."
     }
   ],
   "message": "Gamitin ang 'habang' para sa kalagayang walang tiyak na hangganan, at 'samantalang' para sa kalagayang may taning.",
   "description": "Gamitin ang 'habang' para sa kalagayang walang tiyak na hangganan, at 'samantalang' para sa kalagayang may taning.",
   "example": "Kailangang matutong umasa habang nabubuhay. Nakikitira muna kami sa kanyang mga magulang samantalang wala pa akong trabaho.",
   "suggestions": [
-    { "text": "habang" },
-    { "text": "samantalang" }
+    {
+      "text": "habang",
+      "condition": "matches(hbang|habng|hbng)",
+      "description": "'Habang' ang tamang gamitin para sa kalagayang walang tiyak na hangganan."
+    },
+    {
+      "text": "samantalang",
+      "condition": "matches(smantalang|samantlng|samntlng|samantalng)",
+      "description": "'Samantalang' ang tamang gamitin para sa kalagayang may taning."
+    }
   ]
 },
 {
@@ -341,15 +454,28 @@ if (!grammarRules.length)  {
   "name": "BAYAD at IPAGBAYAD",
   "pattern": [
     {
-      "regex": "\\b(ibayad|ipagbayad)\\b"
-    }
+   "regex": "\\b(ibyad|ibayd)\\b",
+   "description": "'Ibayad' ito ay para sa pagbibigay ng bagay bilang."
+ },
+ {
+  "regex": "\\b(ipgbayad|ipagbyad|ipgbyad)\\b",
+  "description": "'Ipagbayad' ito ay para sa pagbabayad para sa ibang tao."
+}
   ],
   "message": "'Ibayad' para sa pagbibigay ng bagay bilang kabayaran; 'ipagbayad' para sa pagbabayad para sa ibang tao.",
   "description": "'Ibayad' para sa pagbibigay ng bagay bilang kabayaran; 'ipagbayad' para sa pagbabayad para sa ibang tao.",
   "example": "Tatlong dosenang itlog na lamang ang ibabayad ko sa iyo sa halip na pera. Ipagbabayad muna kita sa sine.",
   "suggestions": [
-    { "text": "ibayad" },
-    { "text": "ipagbayad" }
+    {
+      "text": "ibayad",
+      "condition": "matches(ibyad|ibayd)",
+      "description": "'Ibayad' ang tamang gamitin kapag ang tinutukoy ay pagbibigay ng bagay bilang kabayaran."
+    },
+    {
+      "text": "ipagbayad",
+      "condition": "matches(ipgbayad|ipagbyad|ipgbyad)",
+      "description": "'Ipagbayad' ang tamang gamitin kapag ang tinutukoy ay pagbabayad para sa ibang tao."
+    }
   ]
 },
 {
@@ -357,78 +483,135 @@ if (!grammarRules.length)  {
   "name": "MAY at MAYROON",
   "pattern": [
     {
-      "regex": "\\b(may|mayroon)\\b"
-    }
+   "regex": "\\b(mayro|myro|mayn|mayron)\\b",
+   "description": "'May' ito ay tumutukoy sa pagkakaroon ng bagay."
+ },
+ {
+  "regex": "\\b(mayon|mayr|myro|mayron|mayroon)\\b",
+  "description": "'Mayroon' ito ay tumutukoy sa pagkakaroon ng bagay."
+}
   ],
-  "message": "Gamitin ang 'may' kapag susundan ng pangngalan, pandiwa, pang-uri o pang-abay; 'mayroon' kapag susundan ng kataga, panghalip na panao o pamatlig o pang-abay na panlunan.",
-  "description": "Gamitin ang 'may' kapag susundan ng pangngalan, pandiwa, pang-uri o pang-abay; 'mayroon' kapag susundan ng kataga, panghalip na panao o pamatlig o pang-abay na panlunan.",
-  "example": "May anay sa dingding na ito. May kumakatok sa pinto. Mayroon kaming binabalak sa sayawan. Mayroon iyang malaking suliranin.",
+  "message": "Gamitin ang 'may' para sa pagkakaroon ng bagay, at 'mayroon' para sa pagkakaroon ng isang bagay na may malinaw na tinutukoy.",
+  "description": "Gamitin ang 'may' para sa pagkakaroon ng bagay, at 'mayroon' para sa pagkakaroon ng isang bagay na may malinaw na tinutukoy.",
+  "example": "May mga pakpak ang ibon. Mayroon akong tatlong libro sa bag ko.",
   "suggestions": [
-    { "text": "may" },
-    { "text": "mayroon" }
+    {
+      "text": "may",
+      "condition": "matches(mayro|myro|mayn|mayron)",
+      "description": "'May' ang tamang gamitin kapag tinutukoy ang pagkakaroon ng bagay."
+    },
+    {
+      "text": "mayroon",
+      "condition": "matches(mayon|mayr|myro|mayron|mayroon)",
+      "description": "'Mayroon' ang tamang gamitin kapag tinutukoy ang pagkakaroon ng isang bagay na may malinaw na tinutukoy."
+    }
   ]
 },
 {
-  "id": "7.PAHIRAN_PAHIRIN",
-  "name": "PAHIRAN at PAHIRIN",
+  "id": "7.MAASAHAN_MAAASAHAN",
+  "name": "MAASAHAN at MAAASAHAN",
   "pattern": [
     {
-      "regex": "\\b(pahiran|pahirin)\\b"
+      "regex": "\\b(maasahan|maaasahan|maasahan|maasahan)\\b",
+      "description": "'Maaasahan' para sa pwedeng pagkatiwalaan."
     }
   ],
-  "message": "'Pahiran' para sa paglalagay; 'pahirin' para sa pag-aalis.",
-  "description": "'Pahiran' para sa paglalagay; 'pahirin' para sa pag-aalis.",
-  "example": "Pahiran mo ng sukang iloko ang noo niya. Pahirin mo ang pawis sa likod ng bata.",
+  "message": "'Maaasahan' ang tamang gamitin para sa mga bagay o tao na pwedeng pagkatiwalaan.",
+  "description": "'Maaasahan' ang tamang gamitin para sa mga bagay o tao na pwedeng pagkatiwalaan.",
+  "example": "Ang kanyang mga kaibigan ay maa-asahan sa panahon ng pangangailangan.",
   "suggestions": [
-    { "text": "pahiran" },
-    { "text": "pahirin" }
+    {
+      "text": "maaasahan",
+      "condition": "matches(maasahan|maaasahan|maasahan|maasahan)",
+      "description": "'Maaasahan' ang tamang gamitin kapag tinutukoy ang pagiging mapagkakatiwalaan."
+    }
   ]
 },
 {
-  "id": "8.PINTO_PINTUAN",
-  "name": "PINTO at PINTUAN",
+  "id": "8.HIGIT_HIGIT_PA",
+  "name": "HIGIT at HIGIT PA",
   "pattern": [
     {
-      "regex": "\\b(pinto|pintuan|hagdan|hagdanan)\\b"
-    }
+   "regex": "\\b(higit|hgt|hgtpa)\\b",
+   "description": "'Higit' ito ay ginagamit para sa comparative na pang-uri."
+ },
+ {
+  "regex": "\\b(higitpa|hgtpa)\\b",
+  "description": "'Higit pa' ito ay ginagamit para sa pagdaragdag o pagpapalakas ng kaalaman."
+}
   ],
-  "message": "'Pinto' para sa inilalapat sa puwang; 'pintuan' para sa puwang na pinagdaraanan. 'Hagdan' para sa inaakyatan at binababaan; 'hagdanan' para sa kinalalagyan ng hagdan.",
-  "description": "'Pinto' para sa inilalapat sa puwang; 'pintuan' para sa puwang na pinagdaraanan. 'Hagdan' para sa inaakyatan at binababaan; 'hagdanan' para sa kinalalagyan ng hagdan.",
-  "example": "Huwag kang humara sa pintuan at nang maipinid na ang pinto. Akoy palaging nag-aayos ng hagdanan sa aming bahay.",
+  "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+  "description": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+  "example": "Ang kanyang pagsusulit ay higit sa pamantayan. Ang kanyang mga marka ay higit pa sa average.",
   "suggestions": [
-    { "text": "pinto" },
-    { "text": "pintuan" },
-    { "text": "hagdan" },
-    { "text": "hagdanan" }
+    {
+      "text": "higit",
+      "condition": "matches(higit|hgt|hgtpa)",
+      "description": "'Higit' ang tamang gamitin para sa comparative na pang-uri."
+    },
+    {
+      "text": "higit pa",
+      "condition": "matches(higitpa|hgtpa)",
+      "description": "'Higit pa' ang tamang gamitin para sa pagdaragdag o pagpapalakas ng kaalaman."
+    }
   ]
-},
+}
+,
 {
   "id": "9.SUBUKAN_SUBUKIN",
   "name": "SUBUKAN at SUBUKIN",
   "pattern": [
     {
-      "regex": "\\b(subukan|subukin)\\b",
-      "description": "'Subukan' para sa pagtingin nang palihim; 'subukin' para sa pagtikim at pagkilatis."
+      "regex": "\\b(subukam|subukn|subuka|subukn|subukin|sbukan)\\b",
+      "description": "'Subukan' ito ay sa pagtingin nang palihim."
     },
     {
-      "regex": "\\b(sinusubok|sinubok)\\b",
-      "description": "Iisa ang anyo ng mga pandiwang ito sa pangkasalukuyan at pangnakaraan."
+      "regex": "\\b(subukn|subuka|subukan|subukam|sbukin)\\b",
+      "description": "'Subukin' ito ay sa pagtikim at pagkilatis."
     },
     {
-      "regex": "\\b(susubukan|sususbukin)\\b",
-      "description": "Magkaiba ang anyo sa panghinaharap."
+      "regex": "\\b(sinubuk|sinubok|sinusbok|sinusbok|snusubok|sinusubok|sinubok|sinusbok|sinusbok|snubok)\\b",
+      "description": "Iisa ang anyo ng mga pandiwang ito sa pangkasalukuyan at pangnakaraan: 'sinusubok, sinubok'. "
+    },
+    {
+      "regex": "\\b(susubukn|susubkin|susubkan|ssbukan|susubikan|susubukan|susubok|susubkin|ssbukin)\\b",
+      "description": "Magkaiba nag anyo sa panghinaharap: 'susubukan, sususbukin'. "
     }
   ],
-  "message": "'Subukan' para sa pagtingin nang palihim; 'subukin' para sa pagtikim at pagkilatis.",
-  "description": "'Subukan'ay ginagamit para sa pagtingin nang palihim, samantalang 'subukin' ang ginagamit para sa pagtikim at pagkilatis. Iisa ang anyo ng mga pandiwang ito sa pangkasalukuyan at pangnakaraan: sinusubok, sinubok. Magkaiba ang anyo sa panghinaharap: susubukan, sususbukin.",
+  "message": "'Subukan' para sa pagtingin nang palihim at 'subukin' para sa pagtikim at pagkilatis.",
+  "description": "'Subukan' ay ginagamit para sa pagtingin nang palihim, samantalang 'subukin' ang ginagamit para sa pagtikim at pagkilatis. Iisa ang anyo ng mga pandiwang ito sa pangkasalukuyan at pangnakaraan: sinusubok, sinubok. Magkaiba ang anyo sa panghinaharap: susubukan, susubukin.",
   "example": "Ibig kong subukan kung ano ang ginagawa nila tuwing umaalis ako sa bahay. Subukin mo ang bagong labas na mantikilyang ito. Subukin mo kung gaano kabilis siyang magmakinlya.",
   "suggestions": [
-    { "text": "subukan" },
-    { "text": "subukin" },
-    { "text": "sinusubok" },
-    { "text": "sinubok" },
-    { "text": "susubukan" },
-    { "text": "sususbukin" }
+    {
+      "text": "subukan",
+      "condition": "matches(subukam|subukn|subuka|subukn|subukin|sbukan)",
+      "description": "'Subukan' ang tamang anyo para sa paggamit sa sitwasyon ng pagtingin nang palihim o pagsubok."
+    },
+    {
+      "text": "subukin",
+      "condition": "matches(subukn|subuka|subukan|subukam|sbukin)",
+      "description": "'Subukin' ang tamang anyo para sa paggamit sa sitwasyon ng pagtikim at pagkilatis."
+    },
+    {
+      "text": "sinusubok",
+      "condition": "matches(sinubuk|sinubok|sinusbok|sinusbok|snusubok)",
+      "description": "'Sinusubok' ang tamang anyo para sa pangkasalukuyan at pangnakaraan."
+    },
+    {
+      "text": "sinubok",
+      "condition": "matches(sinusubok|sinubok|sinusbok|sinusbok|snubok)",
+      "description": "'Sinubok' ang tamang anyo para sa pangnakaraan."
+    },
+    {
+      "text": "susubukan",
+      "condition": "matches(susubukn|susubkin|susubkan|ssbukan)",
+      "description": "'Susubukan' ang tamang anyo para sa panghinaharap kapag tinutukoy ang pagtikim o pagsusuri."
+    },
+    {
+      "text": "susubukin",
+      "condition": "matches(susubikan|susubukan|susubok|susubkin|ssbukin)",
+      "description": "'Susubukin' ang tamang anyo para sa panghinaharap kapag tinutukoy ang pagtikim o pagsusuri."
+    }
   ]
 },
 {
@@ -436,20 +619,637 @@ if (!grammarRules.length)  {
   "name": "TAGA- at TIGA",
   "pattern": [
     {
-      "regex": "\\b(tiga-|taga-\\w+|tig-isa|tigalawa|tigatlo|tig-apat)\\b"
+      "regex": "\\b(tga-|tgia-|tgua-|tgai-|tgaa-|tga-|tiga-|tig-|tga-anim|tgia-anim|tgai-anim|tgau-anim|tga-anim|tga-anim|tiganim|tiga-anim|tiganim)\\b"
     }
   ],
   "message": "Walang unlaping 'tiga-'. 'Taga-' ang dapat gamitin. Gumagamit lamang ng gitling kapag sinusundan ito ng pangngalang pantangi. 'Tig-' ay ginagamit kasama ng mga pambilang.",
-  "description": "Walang unlaping 'tiga-'. 'Taga-' ang dapat gamitin. Gumagamit lamang ng gitling kapag sinusundan ito ng pangngalang pantangi. Naiiba ang unlaping 'tig-' na ginagamit kasama ng mga pambilang: tig-isa, tigalawa, tigatlo, tig-apat, atbp.",
+  "description": "Walang unlaping 'tiga-'. 'Taga-' ang dapat gamitin. Gumagamit lamang ng gitling kapag sinusundan ito ng pangngalang pantangi. Naiiba ang unlaping 'tig-' na ginagamit kasama ng mga pambilang: tig-isa, tigalawa, tigatlo, tig-apat, tig-lima, atbp.",
   "example": "Taga-Negros ang napangasawa ni Norma. Ako ang palaging tagahugas ng pinggan sa gabi. Tig-isa kami ng pagkain.",
   "suggestions": [
-    { "text": "taga-" },
-    { "text": "tig-isa" },
-    { "text": "tigalawa" },
-    { "text": "tigatlo" },
-    { "text": "tig-apat" }
+    {
+      "text": "taga-$2",
+      "condition": "matches(tga-|tgau-|tgua-|tgaa-|taga)",
+      "description": "'Taga-' ang tamang unlapi kapag tinutukoy ang pinagmulan o lugar."
+    },
+    {
+      "text": "tiga-$2",
+      "condition": "matches(tgia-|tgai-|tagi-|tiga)",
+      "description": "'Tiga-' ang tamang unlapi kapag tinutukoy ang bilang o dami ng isang bagay."
+    },
+    {
+      "text": "tig-isa",
+      "condition": "matches(tigaisa)",
+      "description": "'Tig-isa' ang tamang anyo para sa bilang na isa."
+    },
+    {
+      "text": "tigalawa",
+      "condition": "matches(tigadalawa)",
+      "description": "'Tigalawa' ang tamang anyo para sa bilang na dalawa."
+    },
+    {
+      "text": "tigatlo",
+      "condition": "matches(tigatatlo)",
+      "description": "'Tigatlo' ang tamang anyo para sa bilang na tatlo."
+    },
+    {
+      "text": "tig-apat",
+      "condition": "matches(tigaapat)",
+      "description": "'Tig-apat' ang tamang anyo para sa bilang na apat."
+    },
+    {
+      "text": "tig-lima",
+      "condition": "matches(tigalima)",
+      "description": "'Tig-lima' ang tamang anyo para sa bilang na lima."
+    },
+    {
+      "text": "tiganim",
+      "condition": "matches(tiga-anim)",
+      "description": "'Tiganim' ang tamang anyo para sa bilang na anim."
+    },
+    {
+      "text": "tigapito",
+      "condition": "matches(tiga-pito)",
+      "description": "'Tigapito' ang tamang anyo para sa bilang na pito."
+    },
+    {
+      "text": "tigawalo",
+      "condition": "matches(tiga-walo)",
+      "description": "'Tigawalo' ang tamang anyo para sa bilang na walo."
+    },
+    {
+      "text": "tigasyam",
+      "condition": "matches(tiga-syam)",
+      "description": "'Tigasyam' ang tamang anyo para sa bilang na siyam."
+    },
+    {
+      "text": "tigasampu",
+      "condition": "matches(tiga-sampu)",
+      "description": "'Tigasampu' ang tamang anyo para sa bilang na sampu."
+    }
   ]
+},
+{
+  "id": "11.AGAWIN_AGAWAN",
+  "name": "AGAWIN at AGAWAN",
+  "pattern": [
+    {
+      "regex": "\\b(agwin|agwain|agawni)\\b"
+    },
+    {
+      "regex": "\\b(agwan|agawn|agwna)\\b"
+    }
+  ],
+  "message": "'Agawin' para sa pagkakaroon ng isang bagay mula sa iba; 'agawan' para sa pagkakaroon ng isang bagay mula sa isang tao o hayop.",
+  "description": "'Agawin' ang ginagamit kapag ang isang bagay ay kinuha mula sa iba. 'Agawan' ang ginagamit kapag ang isang tao o hayop ay nagiging sanhi ng pagkawala ng isang bagay mula sa isa pa.",
+  "example": "Ibig agawin ng bata ang laruan ni Jess. Ibig agawan ng laruan ni Boy si Jess.",
+  "suggestions": [
+    {
+      "text": "agawin",
+      "condition": "matches(agwin|agwain|agawni)",
+      "description": "'Agawin' ang tamang anyo kapag ang isang bagay ay kinukuha mula sa iba."
+    },
+    {
+      "text": "agawan",
+      "condition": "matches(agwan|agawn|agwna)",
+      "description": "'Agawan' ang tamang anyo kapag ang isang bagay ay kinukuha mula sa isang tao o hayop."
+    }
+  ]
+},
+{
+  "id": "12.HINAGIS_INIHAGIS",
+  "name": "HINAGIS at INIHAGIS",
+  "pattern": [
+    {
+      "regex": "\\b(hnagis|hinags|hnagis|hinagisan|hingis)\\b"
+    },
+    {
+      "regex": "\\b(inhagis|inihags|inihagis ang|ihagis ang|inihgis)\\b"
+    }
+  ],
+  "message": "'Hinagis' para sa pagkilos ng isang bagay na ginawa gamit ang ibang bagay; 'inihagis' para sa pagkilos ng paghagis ng isang bagay patungo sa iba.",
+  "description": "'Hinagis' ang ginagamit kapag ang isang bagay ay tinapon gamit ang iba pang bagay. 'Inihagis' ang ginagamit kapag tinapon ang isang bagay patungo sa iba.",
+  "example": "Hinagis niya ng bato ang ibon. Inihagis niya ang bola sa kalaro.",
+  "suggestions": [
+    {
+      "text": "hinagis",
+      "condition": "matches(hnagis|hinags|hnagis|hinagisan|hingis)",
+      "description": "'Hinagis' ang tamang anyo kapag ang isang bagay ay tinapon gamit ang ibang bagay."
+    },
+    {
+      "text": "inihagis",
+      "condition": "matches(inhagis|inihags|inihagis ang|ihagis ang|inihgis)",
+      "description": "'Inihagis' ang tamang anyo kapag tinapon ang isang bagay patungo sa iba."
+    }
+  ]
+},
+  {
+  "id": "13.ABUTAN_ABUTIN",
+  "name": "ABUTAN at ABUTIN",
+  "pattern": [
+    {
+      "regex": "\\b(abtan|abutn|abtna|abutan)\\b",
+      "description": "Maling anyo o variant ng 'abutan'"
+    },
+    {
+      "regex": "\\b(abutni|abutni ng|abtuni|abutnni|abutnii|abutin)\\b",
+      "description": "Maling anyo o variant ng 'abutin'"
+    }
+  ],
+  "message": "'Abutin' ang ginagamit kapag isang bagay ang inaabot; 'abutan' ang ginagamit kapag isang bagay ang ibinibigay o dinadagdagan.",
+  "description": "'Abutin' ang ginagamit kapag inaabot ang isang bagay. 'Abutan' ang ginagamit kapag isang bagay ang ibinibigay o dinadagdagan.",
+  "example": {
+    "incorrect": "Abtan mo ang bayabas sa puno. Abutni mo ng pera ang Nanay.",
+    "correct": "Abutin mo ang bayabas sa puno. Abutan mo ng pera ang Nanay."
+  },
+  "suggestions": [
+    {
+      "text": "abutin",
+      "condition": "matches(abtan|abutn|abtna|abutan)",
+      "description": "Inirerekomenda ang 'abutin' kapag ang konteksto ay tungkol sa pag-abot ng isang bagay."
+    },
+    {
+      "text": "abutan",
+      "condition": "matches(abutni|abutni ng|abtuni|abutnni|abutnii|abutin)",
+      "description": "Inirerekomenda ang 'abutan' kapag ang konteksto ay tungkol sa pagbibigay o pagdadagdag ng isang bagay."
+    }
+  ]
+},
+  {
+    "id": "14.BILHIN_BILHAN",
+    "name": "BILHIN at BILHAN",
+    "pattern": [
+      {
+        "regex": "\\b(blhin|bihiln|bhlni)\\b"
+      },
+      {
+        "regex": "\\b(blhan|blhan|balhin|blahin)\\b"
+      }
+    ],
+    "message": "'Bilhin' para sa pagkuha ng isang bagay; 'bilhan' para sa pagbibigay ng isang bagay sa iba.",
+    "description": "'Bilhin' ang ginagamit para sa pagkuha ng isang bagay. 'Bilhan' ang ginagamit para sa pagbibigay ng isang bagay sa iba.",
+    "example": "Bilhin natin ang sapatos na iyon para sa iyo. Bilhan natin ng sapatos ang ate.",
+    "suggestions": [
+      {
+        "text": "bilhin",
+        "condition": "matches(blhin|bihiln|bhlni)"
+      },
+      {
+        "text": "bilhan",
+        "condition": "matches(blhan|blhan|balhin|blahin)"
+      },
+       {
+   "text": "bilhin",
+   "condition": "matches(blhan|blhan|balhin|blahin)"
+ },
+ {
+  "text": "bilhan",
+  "condition": "matches(blhin|bihiln|bhlni)"
 }
+    ]
+  },
+  {
+    "id": "15.WALISAN_WALISIN",
+    "name": "WALISAN at WALISIN",
+    "pattern": [
+      {
+        "regex": "\\b(walisin|walisin ang|walisin ng)\\b"
+      },
+      {
+        "regex": "\\b(walisan|walisan ang|walisan ng)\\b"
+      }
+    ],
+    "message": "'Walisin' para sa pag-aalis ng kalat; 'walisan' para sa paglilinis ng isang lugar o pook.",
+    "description": "'Walisin' ang ginagamit para sa pagtanggal ng kalat. 'Walisan' ang ginagamit para sa paglilinis ng isang lugar.",
+    "example": "Nais kong walisan ang aklatan. Nais kong walisin ang nagkalat na papel sa aklatan.",
+    "suggestions": [
+      {
+        "text": "walisin",
+        "condition": "matches(walisin|walisin ang|walisin ng)"
+      },
+      {
+        "text": "walisan",
+        "condition": "matches(walisan|walisan ang|walisan ng)"
+      }
+    ]
+  },
+  {
+    "id": "16.SUKLAYIN_SUKLAYAN",
+    "name": "SUKLAYIN at SUKLAYAN",
+    "pattern": [
+      {
+        "regex": "\\b(suklayin|suklayin ang buhok|suklayan ang buhok)\\b"
+      },
+      {
+        "regex": "\\b(suklayan|suklayan ng buhok|suklayin)\\b"
+      }
+    ],
+    "message": "'Suklayin' para sa pagsusuklay ng buhok; 'suklayan' para sa pagsusuklay sa iba.",
+    "description": "'Suklayin' ang ginagamit para sa pagsusuklay ng sariling buhok. 'Suklayan' ang ginagamit para sa pagsusuklay sa buhok ng iba.",
+    "example": "Suklayin mo ang buhok ko, Luz. Suklayan mo ako ng buhok, Alana.",
+    "suggestions": [
+      {
+        "text": "suklayin",
+        "condition": "matches(suklayin|suklayin ang buhok|suklayan ang buhok)"
+      },
+      {
+        "text": "suklayan",
+        "condition": "matches(suklayan|suklayan ng buhok|suklayin)"
+      }
+    ]
+  },
+  {
+    "id": "17.NAMATAY_NAPATAY",
+    "name": "NAMATAY at NAPATAY",
+    "pattern": [
+      {
+        "regex": "\\b(namatay|namatay sa|namatay ng)\\b"
+      },
+      {
+        "regex": "\\b(napatay|napatay ng|napatay sa)\\b"
+      }
+    ],
+    "message": "'Namatay' para sa hindi sinasadyang pagkamatay; 'napatay' para sa sinadyang pagkamatay.",
+    "description": "'Namatay' ang ginagamit para sa mga pagkamatay na sanhi ng sakit o katandaan. 'Napatay' ang ginagamit para sa mga pagkamatay na sanhi ng pumaslang sa isang tao o hayop.",
+    "example": "Namatay ang kanyang lolo dahil sa sakit sa atay. Napatay ang aking alagang aso.",
+    "suggestions": [
+      {
+        "text": "namatay",
+        "condition": "matches(namatay|namatay sa|namatay ng)"
+      },
+      {
+        "text": "napatay",
+        "condition": "matches(napatay|napatay ng|napatay sa)"
+      }
+    ]
+  },
+  {
+    "id": "18.MAGSAKAY_SUMAKAY",
+    "name": "MAGSAKAY at SUMAKAY",
+    "pattern": [
+      {
+        "regex": "\\b(magsakay|magsakay ng|magsakay ng sampung)\\b"
+      },
+      {
+        "regex": "\\b(sumakay|sumakay sa|sumakay ng)\\b"
+      }
+    ],
+    "message": "'Magsakay' para sa pagkakarga; 'sumakay' para sa pagsakay.",
+    "description": "'Magsakay' ang ginagamit para sa pagkakarga o paglalagay ng tao o bagay sa sasakyan. 'Sumakay' ang ginagamit para sa pagpasok sa sasakyan o pagsakay dito.",
+    "example": "Magsakay tayo ng pasahero. Sumakay kami sa bus papunta sa Maynila.",
+    "suggestions": [
+      {
+        "text": "magsakay",
+        "condition": "matches(magsakay|magsakay ng|magsakay ng sampung)"
+      },
+      {
+        "text": "sumakay",
+        "condition": "matches(sumakay|sumakay sa|sumakay ng)"
+      }
+    ]
+  },
+  {
+    "id": "21.NG_NANG_DAW_RAW_DIN_RIN",
+    "name": "NG, NANG, DAW/RAW, DIN/RIN",
+    "pattern": [
+      {
+        "regex": "\\b(dinn|rin|raww)\\b"
+      }
+    ],
+    "message": "'Din/rin' ay nagbabago mula sa D tungo sa R depende sa patinig o malapatinig ng sinusundang salita. 'Daw/raw' ay ginagamit batay sa sinusundan na salita.",
+    "description": "'Din' ay ginagamit kapag ang sinusundan ay nagtatapos sa katinig maliban sa w at y. 'Rin' ang ginagamit kung ang sinusundan ay nagtatapos sa patinig o malapatinig na w at y. 'Daw' ay ginagamit kung ang sinusundan ay nagtatapos sa katinig maliban sa w at y, samantalang 'raw' ay ginagamit kung nagtatapos sa patinig o w/y.",
+    "example": "Malaya rin siya. Mababaw raw ang tubig dito.",
+    "suggestions": [
+      {
+        "text": "din",
+        "condition": "matches(din)"
+      },
+      {
+        "text": "rin",
+        "condition": "matches(rin)"
+      },
+      {
+        "text": "daw",
+        "condition": "matches(daw)"
+      },
+      {
+        "text": "raw",
+        "condition": "matches(raw)"
+      }
+    ]
+  },
+  {
+    "id": "21.NG_NANG",
+    "name": "NG at NANG",
+    "pattern": [
+      {
+        "regex": "\\b(nng|nang)\\b"
+      }
+    ],
+    "message": "'Ng' ay ginagamit sa pangngalan at pang-uri, samantalang 'nang' ay ginagamit para sa pang-abay, dahilan, at iba pang pagsasama ng mga salita.",
+    "description": "'Ng' ay ginagamit kasunod ng mga pangngalan at pang-uri, samantalang 'nang' ay para sa pang-abay at iba pang gamit sa pangungusap.",
+    "example": "Nagbigay ng libro si Ana. Nagtago siya nang hindi makita.",
+    "suggestions": [
+      {
+        "text": "ng",
+        "condition": "matches(ng)"
+      },
+      {
+        "text": "nang",
+        "condition": "matches(nang)"
+      }
+    ]
+  },
+  {
+    "id": "23.SILA_SINA",
+    "name": "SILA at SINA",
+    "pattern": [
+      {
+        "regex": "\\b(sila|sinaa)\\b"
+      }
+    ],
+    "message": "'Sila' ay ginagamit para sa ilang bilang ng tao, habang 'Sina' ay ginagamit para sa maraming tao na sinusundan ng pangalan.",
+    "description": "'Sila' ay panghalip na tumutukoy sa ilang tao. 'Sina' ay tumutukoy sa maraming tao at laging sinusundan ng pangalan.",
+    "example": "Sina John at Luis ang matalik kong mga kaibigan.",
+    "suggestions": [
+      {
+        "text": "sila",
+        "condition": "matches(sila)"
+      },
+      {
+        "text": "sina",
+        "condition": "matches(sina)"
+      }
+    ]
+  },
+  {
+    "id": "24.KUNG_KONG",
+    "name": "KUNG at KONG",
+    "pattern": [
+      {
+        "regex": "\\b(kung|kongg)\\b"
+      }
+    ],
+    "message": "'Kung' ay pangatnig na ginagamit sa hugnayang pangungusap, samantalang 'Kong' ay mula sa panghalip na 'ko' na inangkupan ng 'ng'.",
+    "description": "'Kung' ay ginagamit sa mga pangungusap na naglalaman ng kondisyon. 'Kong' ay ginagamit sa pangungusap bilang panghalip.",
+    "example": "Kung wala kang magandang sasabihin sa kapwa, huwag ka na lamang magsalita.",
+    "suggestions": [
+      {
+        "text": "kung",
+        "condition": "matches(kung)"
+      },
+      {
+        "text": "kong",
+        "condition": "matches(kong)"
+      }
+    ]
+  },
+  {
+    "id": "25.IWAN_IWANAN",
+    "name": "IWAN at IWANAN",
+    "pattern": [
+      {
+        "regex": "\\b(iwan|iwanann)\\b"
+      }
+    ],
+    "message": "'Iwan' ay nangangahulugang paglayo o paglipat, samantalang 'Iwanan' ay nangangahulugang bibigyan ng kung ano ang isang tao.",
+    "description": "'Iwan' ay nangangahulugang iwan o paglayo. 'Iwanan' ay nangangahulugang magbigay ng isang bagay.",
+    "example": "Iwanan mo ang iyong mga gamit dito.",
+    "suggestions": [
+      {
+        "text": "iwan",
+        "condition": "matches(iwan)"
+      },
+      {
+        "text": "iwanan",
+        "condition": "matches(iwanan)"
+      }
+    ]
+  },
+  {
+    "id": "26.BITIW_BITAW",
+    "name": "BITIW at BITAW",
+    "pattern": [
+      {
+        "regex": "\\b(bitiw|bitaw)\\b"
+      }
+    ],
+    "message": "'Bitiw' ay pagkawala ng pagkakahawak, samantalang 'Bitaw' ay nauukol sa lugar ng pagdarausan ng salpukan ng manok.",
+    "description": "'Bitiw' ay nangangahulugang pag-alis sa pagkakahawak, samantalang 'Bitaw' ay tumutukoy sa lugar ng salpukan ng manok.",
+    "example": "Ayokong bitiwan ang iyong kamay.",
+    "suggestions": [
+      {
+        "text": "bitiw",
+        "condition": "matches(bitiw)"
+      },
+      {
+        "text": "bitaw",
+        "condition": "matches(bitaw)"
+      }
+    ]
+  },
+  {
+    "id": "27.SUNDIN_SUNDAN",
+    "name": "SUNDIN at SUNDAN",
+    "pattern": [
+      {
+        "regex": "\\b(sundin|sundan)\\b"
+      }
+    ],
+    "message": "'Sundin' ay nangangahulugang sumunod sa payo, samantalang 'Sundan' ay nangangahulugang tularan o pumunta sa pinuntahan ng iba.",
+    "description": "'Sundin' ay nangangahulugang sumunod sa payo, samantalang 'Sundan' ay tularan o pumunta sa pinuntahan ng iba.",
+    "example": "Sundin mo ang mga tagubilin ng iyong guro.",
+    "suggestions": [
+      {
+        "text": "sundin",
+        "condition": "matches(sundin)"
+      },
+      {
+        "text": "sundan",
+        "condition": "matches(sundan)"
+      }
+    ]
+  },
+  {
+    "id": "28.TUNGTONG_TUNTONG_TUNTON",
+    "name": "TUNGTONG, TUNTONG, at TUNTON",
+    "pattern": [
+      {
+        "regex": "\\b(tungtong|tuntong|tuntonn)\\b"
+      }
+    ],
+    "message": "'Tungtong' ay panakip sa palayok, 'Tuntong' ay pagyapak sa anumang bagay, at 'Tunton' ay pagbakas o paghanap sa bakas.",
+    "description": "'Tungtong' ay panakip sa palayok. 'Tuntong' ay pagyapak sa bagay, at 'Tunton' ay pagbakas sa bakas.",
+    "example": "Ang tuntong ng mga bata sa hagdang-bato ay malakas.",
+    "suggestions": [
+      {
+        "text": "tungtong",
+        "condition": "matches(tungtong)"
+      },
+      {
+        "text": "tuntong",
+        "condition": "matches(tuntong)"
+      },
+      {
+        "text": "tunton",
+        "condition": "matches(tunton)"
+      }
+    ]
+  },
+  {
+    "id": "29.SUBUKIN_SUBUKAN",
+    "name": "SUBUKIN at SUBUKAN",
+    "pattern": [
+      {
+        "regex": "\\b(subukin|subukan)\\b"
+      }
+    ],
+    "message": "'Subukin' ay pagsubok sa bisa ng isang bagay, samantalang 'Subukan' ay pagtingin upang malaman ang ginagawa ng iba.",
+    "description": "'Subukin' ay nangangahulugang pagsubok sa bisa. 'Subukan' ay nangangahulugang tingnan ang ginagawa ng iba.",
+    "example": "Subukan mo ang bagong resipe na ito.",
+    "suggestions": [
+      {
+        "text": "subukin",
+        "condition": "matches(subukin)"
+      },
+      {
+        "text": "subukan",
+        "condition": "matches(subukan)"
+      }
+    ]
+  },
+  {
+    "id": "30.IKIT_IKOT",
+    "name": "IKIT at IKOT",
+    "pattern": [
+      {
+        "regex": "\\b(ikit|ikot)\\b"
+      }
+    ],
+    "message": "'Ikit' ay paggilid mula sa labas patungo sa loob, samantalang 'Ikot' ay mula sa loob patungo sa labas.",
+    "description": "'Ikit' ay ginagamit para sa paggalaw mula sa labas patungo sa loob. 'Ikot' ay mula sa loob patungo sa labas.",
+    "example": "Nakatatlong ikit sila bago nila natunton ang daan palabas.",
+    "suggestions": [
+      {
+        "text": "ikit",
+        "condition": "matches(ikit)"
+      },
+      {
+        "text": "ikot",
+        "condition": "matches(ikot)"
+      }
+    ]
+  },
+  {
+    "id": "31.SUNDIN_SUBUKAN",
+    "name": "SUNDIN at SUBUKAN",
+    "pattern": [
+      {
+        "regex": "\\b(sundin|subukan)\\b"
+      }
+    ],
+    "message": "'Sundin' ay sumunod sa payo, samantalang 'Subukan' ay tingnan kung paano ginagawa ng iba.",
+    "description": "'Sundin' ay sumunod sa payo. 'Subukan' ay tingnan ang ginagawa ng iba.",
+    "example": "Sundin ang mga tagubilin ng iyong guro. Subukan mo ang bagong metodo.",
+    "suggestions": [
+      {
+        "text": "sundin",
+        "condition": "matches(sundin)"
+      },
+      {
+        "text": "subukan",
+        "condition": "matches(subukan)"
+      }
+    ]
+  },
+  {
+    "id": "32.NABASAG_BINASAG",
+    "name": "NABASAG at BINASAG",
+    "pattern": [
+      {
+        "regex": "\\b(nabasag|binasag)\\b"
+      }
+    ],
+    "message": "'Nabasag' ay di sinasadyang pagkabasag, samantalang 'Binasag' ay sinadyang pagkabasag.",
+    "description": "'Nabasag' ay nangyari dahil sa aksidente, habang 'Binasag' ay sinadyang pagkabasag.",
+    "example": "Nabasag ko ang plato dahil sa pagmamadali. Binasag niya ang salamin dahil sa galit.",
+    "suggestions": [
+      {
+        "text": "nabasag",
+        "condition": "matches(nabasag)"
+      },
+      {
+        "text": "binasag",
+        "condition": "matches(binasag)"
+      }
+    ]
+  },
+  {
+    "id": "33.BUMILI_MAGBILI",
+    "name": "BUMILI at MAGBILI",
+    "pattern": [
+      {
+        "regex": "\\b(bumili|magbili)\\b"
+      }
+    ],
+    "message": "'Bumili' ay nangangahulugang pagbili, samantalang 'Magbili' ay nangangahulugang pagbebenta.",
+    "description": "'Bumili' ay pagbili, samantalang 'Magbili' ay pagbebenta.",
+    "example": "Pumunta siya sa palengke upang bumili ng prutas. Ang kanyang negosyo ay magbili ng mga lumang kasangkapan.",
+    "suggestions": [
+      {
+        "text": "bumili",
+        "condition": "matches(bumili)"
+      },
+      {
+        "text": "magbili",
+        "condition": "matches(magbili)"
+      }
+    ]
+  },
+  {
+    "id": "34.KUMUHA_MANGUHA",
+    "name": "KUMUHA at MANGUHA",
+    "pattern": [
+      {
+        "regex": "\\b(kumuha|manguha)\\b"
+      }
+    ],
+    "message": "'Kumuha' ay nangangahulugang pagkuha, samantalang 'Manguha' ay nangangahulugang pagtipon o pagkolekta.",
+    "description": "'Kumuha' ay pagkuha ng isang bagay. 'Manguha' ay pagtipon o pagkolekta ng mga bagay.",
+    "example": "Kumuha siya ng tubig mula sa gripo. Nanguha sila ng kabibe sa dalampasigan.",
+    "suggestions": [
+      {
+        "text": "kumuha",
+        "condition": "matches(kumuha)"
+      },
+      {
+        "text": "manguha",
+        "condition": "matches(manguha)"
+      }
+    ]
+  },
+  {
+    "id": "35.PUTULIN_PUTULAN",
+    "name": "PUTULIN at PUTULAN",
+    "pattern": [
+      {
+        "regex": "\\b(putulin|putulan)\\b"
+      }
+    ],
+    "message": "'Putulin' ay paghinto sa isang bagay, samantalang 'Putulan' ay pagputol ng bagay gamit ang instrumento.",
+    "description": "'Putulin' ay pag-tigil sa isang bagay na ginagawa, samantalang 'Putulan' ay pagputol gamit ang instrumento.",
+    "example": "Putulin mo ang iyong bisyo. Putulan mo ang mahahabang buhok.",
+    "suggestions": [
+      {
+        "text": "putulin",
+        "condition": "matches(putulin)"
+      },
+      {
+        "text": "putulan",
+        "condition": "matches(putulan)"
+      }
+    ]
+  }
+
 ];
 }
 
