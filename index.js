@@ -812,10 +812,10 @@ if (!grammarRules.length)  {
     "name": "WALISAN at WALISIN",
     "pattern": [
       {
-        "regex": "\\b(walisin|walisin ang|walisin ng)\\b"
+        "regex": "\\b(wlaisin|walisni|wlasini|walsni)\\b"
       },
       {
-        "regex": "\\b(walisan|walisan ang|walisan ng)\\b"
+        "regex": "\\b(walisna|wlaisan|wlasina|walsan)\\b"
       }
     ],
     "message": "'Walisin' para sa pag-aalis ng kalat; 'walisan' para sa paglilinis ng isang lugar o pook.",
@@ -824,11 +824,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "walisin",
-        "condition": "matches(walisin|walisin ang|walisin ng)"
+        "condition": "matches(wlaisin|walisni|wlasini|walsni)"
       },
       {
         "text": "walisan",
-        "condition": "matches(walisan|walisan ang|walisan ng)"
+        "condition": "matches(walisna|wlaisan|wlasina|walsan)"
       }
     ]
   },
@@ -1248,7 +1248,40 @@ if (!grammarRules.length)  {
         "condition": "matches(putulan)"
       }
     ]
-  }
+  },
+  {
+  "id": "DITO_RITO",
+  "name": "DITO at RITO",
+  "pattern": [
+    {
+      "regex": "\\b(\\w+[bdfghjklmnpqrstvz]* dito)\\b"
+    },
+    {
+      "regex": "\\b(\\w+[yw|ra|re|ri|ro|ru] dito)\\b"
+    }
+  ],
+  "message": "'Rito' ang tamang gamitin kung hindi nagtatapos sa 'y' o 'w' ang unang salita; 'dito' kung nagtatapos sa 'y' o 'w'.",
+  "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
+  "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
+  "suggestions": [
+    {
+      "text": "rito",
+      "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
+    },
+    {
+  "text": "rin",
+  "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
+},
+    {
+      "text": "dito",
+      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+    },
+    {
+      "text": "din",
+      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+    }
+  ]
+}
 
 ];
 }
