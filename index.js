@@ -190,7 +190,7 @@ if (!grammarRules.length)  {
       "exceptions": ["\\b(\\w*e\\1)\\b"]
     },
     {
-      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|ulo|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|dito|rito|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
@@ -208,7 +208,7 @@ if (!grammarRules.length)  {
       "text": "$1an",
       "condition": "endsWith('o')",
       "exceptions": [
-        "buhos", "sampu", "tao", "dito", "rito", "ulo","telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
+        "buhos", "sampu", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
         "hello", "ako", "mo", "bago", "barko", "baso", "buko", "damo", "ginto", "hilo", "kanto", "kubo", "lako", "lobo", "pako", "plato", "puto", "sako", "sulo", "tabo", "talo", "tubo", "ulo",
         "zero", "hero", "piano", "photo", "mango", "potato", "avocado", "echo", "bingo", "logo", "memo", "silo", "soprano", "tornado", "volcano",
         "arroz", "codo", "dedo", "fuego", "gusto", "hilo", "palo", "queso", "rato", "santo", "sombrero", "vino", "zapato"
@@ -837,10 +837,10 @@ if (!grammarRules.length)  {
     "name": "SUKLAYIN at SUKLAYAN",
     "pattern": [
       {
-        "regex": "\\b(suklayin|suklayin ang buhok|suklayan ang buhok)\\b"
+        "regex": "\\b(sklayan|suklyan|suklaynna|suklaynna)\\b"
       },
       {
-        "regex": "\\b(suklayan|suklayan ng buhok|suklayin)\\b"
+        "regex": "\\b(sklayin|suklyina|suklayni|sklyani)\\b"
       }
     ],
     "message": "'Suklayin' para sa pagsusuklay ng buhok; 'suklayan' para sa pagsusuklay sa iba.",
@@ -849,11 +849,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "suklayin",
-        "condition": "matches(suklayin|suklayin ang buhok|suklayan ang buhok)"
+        "condition": "matches(sklayin|suklyina|suklayni|sklyani)"
       },
       {
         "text": "suklayan",
-        "condition": "matches(suklayan|suklayan ng buhok|suklayin)"
+        "condition": "matches(sklayan|suklyan|suklaynna|suklaynna)"
       }
     ]
   },
@@ -862,10 +862,10 @@ if (!grammarRules.length)  {
     "name": "NAMATAY at NAPATAY",
     "pattern": [
       {
-        "regex": "\\b(namatay|namatay sa|namatay ng)\\b"
+        "regex": "\\b(nmatay|namaty|nmatayy)\\b"
       },
       {
-        "regex": "\\b(napatay|napatay ng|napatay sa)\\b"
+        "regex": "\\b(nptay|napaty|napatyyy|napatayy|npatya)\\b"
       }
     ],
     "message": "'Namatay' para sa hindi sinasadyang pagkamatay; 'napatay' para sa sinadyang pagkamatay.",
@@ -874,23 +874,70 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "namatay",
-        "condition": "matches(namatay|namatay sa|namatay ng)"
+        "condition": "matches(nmatay|namaty|nmatayy)"
       },
       {
         "text": "napatay",
-        "condition": "matches(napatay|napatay ng|napatay sa)"
+        "condition": "matches(nptay|napaty|napatyyy|napatayy|npatya)"
       }
     ]
   },
+  {
+  "id": "19.OPERAHAN at OPERAHIN",
+  "name": "NAMATAY at NAPATAY",
+  "pattern": [
+    {
+      "regex": "\\b(w+[ay]* operahan)\\b"
+      },
+      {
+      "regex": "\\b(w+[ay]* operahin)\\b"
+      },
+    {
+      "regex": "\\b(operahin|oprahin|operhin|operahni)\\b"
+      },
+      {
+  "regex": "\\b(operahann|ophrahan|operhana|operahna)\\b"
+}
+    ],
+  "message": "'Operahin' tiyak na bahagi ng katawan na titistisin, at ang 'OPERAHAN' naman ay tumutukoy sa tao",
+  "description": "'Operahin' tiyak na bahagi ng katawan na titistisin, at ang 'OPERAHAN' naman ay tumutukoy sa tao.",
+  "example": "Namatay ang kanyang lolo dahil sa sakit sa atay. Napatay ang aking alagang aso.",
+  "suggestions": [
+    {
+      "text": "ooperahin",
+      "condition": "matches(\\w+[ay]* operahan)"
+      },
+      {
+  "text": "ooperahan",
+  "condition": "matches(\\w+[ay]* operahin)"
+},
+    {
+      "text": "ooperahin",
+      "condition": "matches(operahin|oprahin|operhin|operahni)"
+      },
+      {
+  "text": "operahin",
+  "condition": "matches(operahin|oprahin|operhin|operahni)"
+},
+{
+  "text": "ooperahan",
+  "condition": "matches(operahann|ophrahan|operhana|operahna)"
+},
+{
+  "text": "operahan",
+  "condition": "matches(operahann|ophrahan|operhana|operahna)"
+}
+    ]
+},
   {
     "id": "18.MAGSAKAY_SUMAKAY",
     "name": "MAGSAKAY at SUMAKAY",
     "pattern": [
       {
-        "regex": "\\b(magsakay|magsakay ng|magsakay ng sampung)\\b"
+        "regex": "\\b(mgsakay|magsakya|magsakyy|magskay|magsakayyy|mgkarga|magkrga|magkargga|magkraga|nagsakyya|nagskya|ngsakay|nagskay)\\b"
       },
       {
-        "regex": "\\b(sumakay|sumakay sa|sumakay ng)\\b"
+        "regex": "\\b(smkay|sumaky|sumakyy|sumakayyy|smukaya)\\b"
       }
     ],
     "message": "'Magsakay' para sa pagkakarga; 'sumakay' para sa pagsakay.",
@@ -899,63 +946,69 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "magsakay",
-        "condition": "matches(magsakay|magsakay ng|magsakay ng sampung)"
+        "condition": "matches(mgsakay|magsakya|magsakyy|magskay|magsakayyy)"
+      },
+      {
+        "text": "magkarga",
+        "condition": "matches(mgsakay|magsakya|magsakyy|magskay|magsakayyy|mgkarga|magkrga|magkargga|magkraga)"
+      },
+      {
+        "text": "nagsakay",
+        "condition": "matches(mgsakay|magsakya|magsakyy|magskay|magsakayyy|mgkarga|magkrga|magkargga|magkraga|nagsakyya|nagskya|ngsakay|nagskay)"
       },
       {
         "text": "sumakay",
-        "condition": "matches(sumakay|sumakay sa|sumakay ng)"
+        "condition": "matches(smkay|sumaky|sumakyy|sumakayyy|smukaya)"
       }
     ]
   },
   {
-    "id": "21.NG_NANG_DAW_RAW_DIN_RIN",
-    "name": "NG, NANG, DAW/RAW, DIN/RIN",
-    "pattern": [
-      {
-        "regex": "\\b(dinn|rin|raww)\\b"
+  "id": "20.KATA at KITA",
+  "name": "NAMATAY at NAPATAY",
+  "pattern": [
+    {
+      "regex": "\\b(ikaw at ako|kta|ktaa)\\b"
+      },
+    {
+      "regex": "\\b(ikaw|ktai|kitta|ktia)\\b"
       }
     ],
-    "message": "'Din/rin' ay nagbabago mula sa D tungo sa R depende sa patinig o malapatinig ng sinusundang salita. 'Daw/raw' ay ginagamit batay sa sinusundan na salita.",
-    "description": "'Din' ay ginagamit kapag ang sinusundan ay nagtatapos sa katinig maliban sa w at y. 'Rin' ang ginagamit kung ang sinusundan ay nagtatapos sa patinig o malapatinig na w at y. 'Daw' ay ginagamit kung ang sinusundan ay nagtatapos sa katinig maliban sa w at y, samantalang 'raw' ay ginagamit kung nagtatapos sa patinig o w/y.",
-    "example": "Malaya rin siya. Mababaw raw ang tubig dito.",
-    "suggestions": [
-      {
-        "text": "din",
-        "condition": "matches(din)"
+  "message": "'Kata' ay ang pinagsama na salitang ikaw at ako, samantang ang 'kita' ay salitang ikaw.",
+  "description": "'Kata' ay ang pinagsama na salitang ikaw at ako, samantang ang 'kita' ay salitang ikaw.",
+  "example": "Namatay ang kanyang lolo dahil sa sakit sa atay. Napatay ang aking alagang aso.",
+  "suggestions": [
+    {
+      "text": "kata",
+      "condition": "matches(ikaw at ako|kta|ktaa)"
       },
-      {
-        "text": "rin",
-        "condition": "matches(rin)"
-      },
-      {
-        "text": "daw",
-        "condition": "matches(daw)"
-      },
-      {
-        "text": "raw",
-        "condition": "matches(raw)"
+    {
+      "text": "kita",
+      "condition": "matches(ikaw|ktai|kitta|ktia)"
       }
     ]
-  },
+},
   {
-    "id": "21.NG_NANG",
+    "id": "21.NG AT NANG",
     "name": "NG at NANG",
     "pattern": [
       {
-        "regex": "\\b(nng|nang)\\b"
+        "regex": "\\b(na ang|na ng|na na)\\b"
+      },
+      {
+              "regex": "\\b(nnga|naggn|nnag)\\b"
       }
     ],
-    "message": "'Ng' ay ginagamit sa pangngalan at pang-uri, samantalang 'nang' ay ginagamit para sa pang-abay, dahilan, at iba pang pagsasama ng mga salita.",
+    "message": "'Nang' ay ginagamit kung may katumbas ng pinagsamang “na  at  ang”, “na at ng”, at “na at na” sapangungusap.",
     "description": "'Ng' ay ginagamit kasunod ng mga pangngalan at pang-uri, samantalang 'nang' ay para sa pang-abay at iba pang gamit sa pangungusap.",
     "example": "Nagbigay ng libro si Ana. Nagtago siya nang hindi makita.",
     "suggestions": [
       {
-        "text": "ng",
-        "condition": "matches(ng)"
+        "text": "nang",
+        "condition": "matches(nnga|naggn|nnag)"
       },
       {
         "text": "nang",
-        "condition": "matches(nang)"
+        "condition": "matches(na ang|na ng|na na)"
       }
     ]
   },
@@ -964,8 +1017,11 @@ if (!grammarRules.length)  {
     "name": "SILA at SINA",
     "pattern": [
       {
-        "regex": "\\b(sila|sinaa)\\b"
-      }
+        "regex": "\\b(sla|slai|sial)\\b"
+      },
+      {
+  "regex": "\\b(snai|sian|snia|sinaa)\\b"
+}
     ],
     "message": "'Sila' ay ginagamit para sa ilang bilang ng tao, habang 'Sina' ay ginagamit para sa maraming tao na sinusundan ng pangalan.",
     "description": "'Sila' ay panghalip na tumutukoy sa ilang tao. 'Sina' ay tumutukoy sa maraming tao at laging sinusundan ng pangalan.",
@@ -973,11 +1029,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "sila",
-        "condition": "matches(sila)"
+        "condition": "matches(sla|slai|sial)"
       },
       {
         "text": "sina",
-        "condition": "matches(sina)"
+        "condition": "matches(snai|sian|snia|sinaa)"
       }
     ]
   },
@@ -986,8 +1042,11 @@ if (!grammarRules.length)  {
     "name": "KUNG at KONG",
     "pattern": [
       {
-        "regex": "\\b(kung|kongg)\\b"
-      }
+        "regex": "\\b(kng|kngu)\\b"
+      },
+      {
+  "regex": "\\b(ko ng|kngo|kogn)\\b"
+}
     ],
     "message": "'Kung' ay pangatnig na ginagamit sa hugnayang pangungusap, samantalang 'Kong' ay mula sa panghalip na 'ko' na inangkupan ng 'ng'.",
     "description": "'Kung' ay ginagamit sa mga pangungusap na naglalaman ng kondisyon. 'Kong' ay ginagamit sa pangungusap bilang panghalip.",
@@ -995,11 +1054,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "kung",
-        "condition": "matches(kung)"
+        "condition": "matches(kng|kngu)"
       },
       {
         "text": "kong",
-        "condition": "matches(kong)"
+        "condition": "matches(ko ng|kngo|kogn)"
       }
     ]
   },
@@ -1008,8 +1067,11 @@ if (!grammarRules.length)  {
     "name": "IWAN at IWANAN",
     "pattern": [
       {
-        "regex": "\\b(iwan|iwanann)\\b"
-      }
+        "regex": "\\b(iwnann|iwannan|iwanann)\\b"
+      },
+      {
+  "regex": "\\b(iwna|iwna)\\b"
+}
     ],
     "message": "'Iwan' ay nangangahulugang paglayo o paglipat, samantalang 'Iwanan' ay nangangahulugang bibigyan ng kung ano ang isang tao.",
     "description": "'Iwan' ay nangangahulugang iwan o paglayo. 'Iwanan' ay nangangahulugang magbigay ng isang bagay.",
@@ -1017,11 +1079,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "iwan",
-        "condition": "matches(iwan)"
+        "condition": "matches(iwna|iwna)"
       },
       {
         "text": "iwanan",
-        "condition": "matches(iwanan)"
+        "condition": "matches(iwnann|iwannan|iwanann)"
       }
     ]
   },
@@ -1030,7 +1092,10 @@ if (!grammarRules.length)  {
     "name": "BITIW at BITAW",
     "pattern": [
       {
-        "regex": "\\b(bitiw|bitaw)\\b"
+        "regex": "\\b(btiw|bitwi|bitw|bitiww|btwi)\\b"
+      },
+            {
+        "regex": "\\b(bitwa|btaw|bitaww|btiaw)\\b"
       }
     ],
     "message": "'Bitiw' ay pagkawala ng pagkakahawak, samantalang 'Bitaw' ay nauukol sa lugar ng pagdarausan ng salpukan ng manok.",
@@ -1039,11 +1104,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "bitiw",
-        "condition": "matches(bitiw)"
+        "condition": "matches(btiw|bitwi|bitw|bitiww|btwi)"
       },
       {
         "text": "bitaw",
-        "condition": "matches(bitaw)"
+        "condition": "matches(bitwa|btaw|bitaww|btiaw)"
       }
     ]
   },
@@ -1052,8 +1117,11 @@ if (!grammarRules.length)  {
     "name": "SUNDIN at SUNDAN",
     "pattern": [
       {
-        "regex": "\\b(sundin|sundan)\\b"
-      }
+        "regex": "\\b(sndin|sundni|sudni)\\b"
+      },
+      {
+  "regex": "\\b(sundna|sndan|sndna)\\b"
+}
     ],
     "message": "'Sundin' ay nangangahulugang sumunod sa payo, samantalang 'Sundan' ay nangangahulugang tularan o pumunta sa pinuntahan ng iba.",
     "description": "'Sundin' ay nangangahulugang sumunod sa payo, samantalang 'Sundan' ay tularan o pumunta sa pinuntahan ng iba.",
@@ -1061,11 +1129,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "sundin",
-        "condition": "matches(sundin)"
+        "condition": "matches(sndin|sundni|sudni)"
       },
       {
         "text": "sundan",
-        "condition": "matches(sundan)"
+        "condition": "matches(sundna|sndan|sndna)"
       }
     ]
   },
@@ -1074,8 +1142,14 @@ if (!grammarRules.length)  {
     "name": "TUNGTONG, TUNTONG, at TUNTON",
     "pattern": [
       {
-        "regex": "\\b(tungtong|tuntong|tuntonn)\\b"
-      }
+        "regex": "\\b(tngtong|tungtngo|tungtongg)\\b"
+      },
+      {
+  "regex": "\\b(tuntngo|tntong|tnutong|tuntng)\\b"
+},
+{
+  "regex": "\\b(tnton|tnuton|tuntno|tnutno|tuntn)\\b"
+}
     ],
     "message": "'Tungtong' ay panakip sa palayok, 'Tuntong' ay pagyapak sa anumang bagay, at 'Tunton' ay pagbakas o paghanap sa bakas.",
     "description": "'Tungtong' ay panakip sa palayok. 'Tuntong' ay pagyapak sa bagay, at 'Tunton' ay pagbakas sa bakas.",
@@ -1083,15 +1157,15 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "tungtong",
-        "condition": "matches(tungtong)"
+        "condition": "matches(tngtong|tungtngo|tungtongg)"
       },
       {
         "text": "tuntong",
-        "condition": "matches(tuntong)"
+        "condition": "matches(tuntngo|tntong|tnutong|tuntng)"
       },
       {
         "text": "tunton",
-        "condition": "matches(tunton)"
+        "condition": "matches(tnton|tnuton|tuntno|tnutno|tuntn)"
       }
     ]
   },
@@ -1099,9 +1173,14 @@ if (!grammarRules.length)  {
     "id": "29.SUBUKIN_SUBUKAN",
     "name": "SUBUKIN at SUBUKAN",
     "pattern": [
-      {
-        "regex": "\\b(subukin|subukan)\\b"
-      }
+    {
+      "regex": "\\b(subukam|subukn|subuka|subukn|subukin|sbukan)\\b",
+      "description": "'Subukan' ito ay sa pagtingin nang palihim."
+    },
+    {
+      "regex": "\\b(subukn|subuka|subukan|subukam|sbukin)\\b",
+      "description": "'Subukin' ito ay sa pagtikim at pagkilatis."
+    },
     ],
     "message": "'Subukin' ay pagsubok sa bisa ng isang bagay, samantalang 'Subukan' ay pagtingin upang malaman ang ginagawa ng iba.",
     "description": "'Subukin' ay nangangahulugang pagsubok sa bisa. 'Subukan' ay nangangahulugang tingnan ang ginagawa ng iba.",
@@ -1109,11 +1188,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "subukin",
-        "condition": "matches(subukin)"
+        "condition": "matches(subukn|subuka|subukan|subukam|sbukin)"
       },
       {
         "text": "subukan",
-        "condition": "matches(subukan)"
+        "condition": "matches(subukam|subukn|subuka|subukn|subukin|sbukan)"
       }
     ]
   },
@@ -1122,8 +1201,11 @@ if (!grammarRules.length)  {
     "name": "IKIT at IKOT",
     "pattern": [
       {
-        "regex": "\\b(ikit|ikot)\\b"
-      }
+        "regex": "\\b(ikt|ikkit)\\b"
+      },
+      {
+  "regex": "\\b(ikto|ikt|iktto|ikoot)\\b"
+}
     ],
     "message": "'Ikit' ay paggilid mula sa labas patungo sa loob, samantalang 'Ikot' ay mula sa loob patungo sa labas.",
     "description": "'Ikit' ay ginagamit para sa paggalaw mula sa labas patungo sa loob. 'Ikot' ay mula sa loob patungo sa labas.",
@@ -1131,11 +1213,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "ikit",
-        "condition": "matches(ikit)"
+        "condition": "matches(ikt|ikkit)"
       },
       {
         "text": "ikot",
-        "condition": "matches(ikot)"
+        "condition": "matches(ikto|ikt|iktto|ikoot)"
       }
     ]
   },
@@ -1144,8 +1226,11 @@ if (!grammarRules.length)  {
     "name": "SUNDIN at SUBUKAN",
     "pattern": [
       {
-        "regex": "\\b(sundin|subukan)\\b"
-      }
+        "regex": "\\b(sndin|sundni|sundn|sundnni)\\b"
+      },
+      {
+  "regex": "\\b(sbukan|subukn|sbukan)\\b"
+}
     ],
     "message": "'Sundin' ay sumunod sa payo, samantalang 'Subukan' ay tingnan kung paano ginagawa ng iba.",
     "description": "'Sundin' ay sumunod sa payo. 'Subukan' ay tingnan ang ginagawa ng iba.",
@@ -1153,11 +1238,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "sundin",
-        "condition": "matches(sundin)"
+        "condition": "matches(sndin|sundni|sundn|sundnni)"
       },
       {
         "text": "subukan",
-        "condition": "matches(subukan)"
+        "condition": "matches(sbukan|subukn|sbukan)"
       }
     ]
   },
@@ -1165,8 +1250,11 @@ if (!grammarRules.length)  {
     "id": "32.NABASAG_BINASAG",
     "name": "NABASAG at BINASAG",
     "pattern": [
+            {
+        "regex": "\\b(nbasag|nabasg|nabasga|nbasagg)\\b"
+      },
       {
-        "regex": "\\b(nabasag|binasag)\\b"
+        "regex": "\\b(bnasag|binasg|bniasag|bnasagi)\\b"
       }
     ],
     "message": "'Nabasag' ay di sinasadyang pagkabasag, samantalang 'Binasag' ay sinadyang pagkabasag.",
@@ -1175,11 +1263,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "nabasag",
-        "condition": "matches(nabasag)"
+        "condition": "matches(nbasag|nabasg|nabasga|nbasagg)"
       },
       {
         "text": "binasag",
-        "condition": "matches(binasag)"
+        "condition": "matches(bnasag|binasg|bniasag|bnasagi)"
       }
     ]
   },
@@ -1188,8 +1276,11 @@ if (!grammarRules.length)  {
     "name": "BUMILI at MAGBILI",
     "pattern": [
       {
-        "regex": "\\b(bumili|magbili)\\b"
-      }
+        "regex": "\\b(bmuli|bumli|bumil|bmuuli)\\b"
+      },
+      {
+  "regex": "\\b(magbli|mgbili|mgblii|magblii)\\b"
+}
     ],
     "message": "'Bumili' ay nangangahulugang pagbili, samantalang 'Magbili' ay nangangahulugang pagbebenta.",
     "description": "'Bumili' ay pagbili, samantalang 'Magbili' ay pagbebenta.",
@@ -1197,11 +1288,11 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "bumili",
-        "condition": "matches(bumili)"
+        "condition": "matches(bmuli|bumli|bumil|bmuuli)"
       },
       {
         "text": "magbili",
-        "condition": "matches(magbili)"
+        "condition": "matches(magbli|mgbili|mgblii|magblii)"
       }
     ]
   },
@@ -1210,8 +1301,11 @@ if (!grammarRules.length)  {
     "name": "KUMUHA at MANGUHA",
     "pattern": [
       {
-        "regex": "\\b(kumuha|manguha)\\b"
-      }
+        "regex": "\\b(kmuha|kmuuha|kumhua|kumuah)\\b"
+      },
+      {
+  "regex": "\\b(mnguha|mangha|mnghau)\\b"
+}
     ],
     "message": "'Kumuha' ay nangangahulugang pagkuha, samantalang 'Manguha' ay nangangahulugang pagtipon o pagkolekta.",
     "description": "'Kumuha' ay pagkuha ng isang bagay. 'Manguha' ay pagtipon o pagkolekta ng mga bagay.",
@@ -1219,11 +1313,13 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "kumuha",
-        "condition": "matches(kumuha)"
+        "condition": "matches(kmuha|kmuuha|kumhua|kumuah)",
+"description": "'Kumuha' ay nangangahulugang pagkuha."
       },
       {
         "text": "manguha",
-        "condition": "matches(manguha)"
+        "condition": "matches(mnguha|mangha|mnghau)",
+                "description": "'Manguha' ay nangangahulugang pagtipon o pagkolekta."
       }
     ]
   },
@@ -1232,8 +1328,11 @@ if (!grammarRules.length)  {
     "name": "PUTULIN at PUTULAN",
     "pattern": [
       {
-        "regex": "\\b(putulin|putulan)\\b"
-      }
+        "regex": "\\b(ptulin|putulni|ptuulin|ptulna)\\b"
+      },
+      {
+  "regex": "\\b(ptulan|putulna|ptuulan|ptulna)\\b"
+}
     ],
     "message": "'Putulin' ay paghinto sa isang bagay, samantalang 'Putulan' ay pagputol ng bagay gamit ang instrumento.",
     "description": "'Putulin' ay pag-tigil sa isang bagay na ginagawa, samantalang 'Putulan' ay pagputol gamit ang instrumento.",
@@ -1241,11 +1340,13 @@ if (!grammarRules.length)  {
     "suggestions": [
       {
         "text": "putulin",
-        "condition": "matches(putulin)"
+        "condition": "matches(ptulin|putulni|ptuulin|ptulna)",
+        "description": "'Putulin' ito ay paghinto sa isang bagay."
       },
       {
         "text": "putulan",
-        "condition": "matches(putulan)"
+        "condition": "matches(ptulan|putulna|ptuulan|ptulna)",
+        "description": "'Putulan' ay pagputol gamit ang instrumento."
       }
     ]
   },
@@ -1274,12 +1375,45 @@ if (!grammarRules.length)  {
 },
     {
       "text": "dito",
-      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+      "condition": "matches(\\w+[?!yw|ra|re|ri|ro|ru] dito)"
     },
     {
       "text": "din",
-      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+      "condition": "matches(\\w+[?!yw|ra|re|ri|ro|ru] dito)"
     }
+  ]
+},
+{
+  "id": "DAW_RAW",
+  "name": "DAW at RAW",
+  "pattern": [
+    {
+      "regex": "\\b(\\w+[wy|yw|ya|wa]* daw)\\b"
+    },
+    {
+      "regex": "\\b(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)\\b"
+    }
+  ],
+  "message": "'Din/Daw'Ang Mananatili kung ang sinusundannitong salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w' gayundin, nananatili ang D kung ang sinusundang salita ay nagtatapos sa –ra,-ri, -raw, o –ray, samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay D at ito ay napapalitan ng R kung ang sinusundannitong salita ay nagtatapos sa patinig o sa malapatinig na W at Y",
+  "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
+  "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
+  "suggestions": [
+    {
+      "text": "raw",
+      "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
+    },
+    {
+      "text": "daw",
+      "condition": "matches(\\w+[ra|ri|ro|ruraw|ray|is|im|aeiou] raw)"
+},
+    {
+  "text": "rin",
+  "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
+},
+{
+  "text": "din",
+  "condition": "matches(\\w+[ra|ri|ro|ru|raw|ray|is|im|aeiou] raw)"
+}
   ]
 }
 
