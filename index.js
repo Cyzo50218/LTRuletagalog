@@ -206,25 +206,7 @@ if (!grammarRules.length)  {
     }
   ]
 },
-{
-  "id": "PAGUULIT",
-  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
-  "pattern": [
-{ "regex": "\\b(\\w+)\\1\\b" }, 
-{ "regex": "\\b(\\w+)\\s+(\\w+)\\b" }
-  ],
-  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
-  "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
-  "examples": [
-    { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
-    { "incorrect": "bente bente", "correct": "bente-bente" },
-    { "incorrect": "pale pale", "correct": "pale-pale" },
-    { "incorrect": "tseketseke", "correct": "tseke-tseke" }
-  ],
-  "suggestions": [
-    { "text": "$1-$1" }
-  ]
-},
+
 {
   "id": "PAGHULAPIAN_COMBINED",
   "name": "Pagbabago ng huling pantig ng salitang-ugat",
@@ -1534,39 +1516,35 @@ const checkTextAgainstRules = async (text, rules) => {
           while ((match = regex.exec(text)) !== null) {
             let suggestions = [];
 
-            if (rule.suggestions) {
+           if (rule.suggestions) {
   rule.suggestions.forEach(suggestion => {
     if (typeof suggestion === 'string') {
       suggestions.push(suggestion);
     } else if (suggestion.text) {
       let suggestionText = suggestion.text;
 
-      // Replace capturing groups with the matched content
-      for (let i = 1; i < match.length; i++) {  // Start from 1 because $0 is the whole match
-        if (match[i]) {
-          suggestionText = suggestionText.replace(`$${i}`, match[i]);
+      // Process each match separately
+      match.forEach(m => {
+        // Handle repeated words without spaces
+        if (/(\w+e)\1/.test(m)) {
+          suggestionText = m.replace(/(\w+e)\1/, '$1-$1');
         }
-      }
+        // Handle repeated words with spaces
+        else if (/(\w+e)\s+(\w+e)/.test(m)) {
+          suggestionText = m.replace(/(\w+e)\s+(\w+e)/, '$1-$2');
+        }
 
-      // Check if the repeated words are concatenated (no space)
-      if (/(\w+)\1/.test(match[0])) {
-        suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
-      }
-      
-      // Check if the repeated words have a space between them
-      else if (/(\w+)\s+(\w+)/.test(match[0])) {
-        suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
-      }
-
-      // Preserve original capitalization
-      if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
-        suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-      }
+        // Preserve capitalization
+        if (m && m[0] === m[0].toUpperCase()) {
+          suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+        }
+      });
 
       suggestions.push(suggestionText);
     }
   });
 }
+
 
 
 // Check for repeated words without space and handle accordingly
