@@ -179,7 +179,8 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "\\b([A-Za-z]+e)\\s+\\1\\b|\\b([A-Za-z]+e)\\1\\b" }
+    { "regex": "\\b(\\w+e)\\1\\b" }, { "regex": "\\b(\\w+e)\\s+(\\w+e)\\b" },
+    { "regex": "\\b(\\w+)(?:\\s+\\1|\\1)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -197,7 +198,7 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-{ "regex": "\\b([A-Za-z]+)\\s+\\1\\b|\\b([A-Za-z]+)\\1\\b" }
+{ "regex": "\\b(\\w+)\\1\\b" }, { "regex": "\\b(\\w+)\\s+(\\w+)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
@@ -1556,6 +1557,18 @@ if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" || rule.id === "PAGUULI
   if (repeatedWithoutSpacePattern.test(text)) {
     continue;
   }
+  
+  const comprehensivePattern = /\b(\w+)(?:\s+\1|\1)\b/g;
+
+if (comprehensivePattern.test(text)) {
+  const matches = text.match(comprehensivePattern);
+  if (matches) {
+    matches.forEach(match => {
+      const suggestionText = match.replace(/\s+/, '-');
+      suggestions.push(suggestionText);
+    });
+  }
+}
 
   // Check for repeated words with spaces
   if (repeatedWithSpacePattern.test(text)) {
