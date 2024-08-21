@@ -1511,86 +1511,48 @@ const checkTextAgainstRules = async (text, rules) => {
           continue;
         }
 
-        for (const patternObj of rule.pattern) {
-          let regex;
-          if (patternObj.token && patternObj.token.value) {
-            // Exact match for tokens
-            regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
-          } else if (patternObj.regex) {
-            // Regex pattern
-            regex = new RegExp(patternObj.regex, 'gi');
-          } else {
-            console.warn(`Invalid pattern in rule ${rule.id}`);
-            continue;
-          }
+      for (const patternObj of rule.pattern) {
+  let regex;
+  if (patternObj.token && patternObj.token.value) {
+    // Exact match for tokens
+    regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+  } else if (patternObj.regex) {
+    // Regex pattern
+    regex = new RegExp(patternObj.regex, 'gi');
+  } else {
+    console.warn(`Invalid pattern in rule ${rule.id}`);
+    continue;
+  }
 
-          let match;
-          while ((match = regex.exec(text)) !== null) {
-            let suggestions = [];
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    let suggestions = [];
 
-    if (rule.suggestions) {
-  rule.suggestions.forEach(suggestion => {
-    if (typeof suggestion === 'string') {
-      suggestions.push(suggestion);
-    } else if (suggestion.text) {
-      let suggestionText = suggestion.text;
-
-      // Replace capturing groups with the matched content
-      for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
-        if (match[i]) {
-          // Replace $i with the match[i] value
-          const regex = new RegExp(`\\$${i}`, 'g');
-          suggestionText = suggestionText.replace(regex, match[i]);
-        }
-      }
-
-      // Apply capitalization preservation for the first occurrence only
-      // We first split the suggestion into parts around `$1` to preserve the initial capitalization
-      const parts = suggestionText.split('$1');
-      if (parts.length > 1) {
-        const capitalizedFirstPart = parts[0];
-        const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
+    // Handle suggestions based on rule.id
+    if (rule.id === 'PAGUULIT'|| rule.id === 'PAGUULIT_E' || rule.id === 'PAGUULIT_O') { // Replace '1' with your specific rule ID for repeated words with whitespace
+      // Handling repeated words with whitespace
+      const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
+      let repeatedMatch;
+      while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
+        // Adjust suggestions for repeated words
+        const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
+        suggestions.push(...repeatedSuggestions);
         
-        // Capitalize the first part if the original match was capitalized
-        const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
-        const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
-
-        suggestions.push(finalSuggestion);
-      } else {
-        suggestions.push(suggestionText);
-      }
-    }
-  });
-}
-
-
-
-
-
-
-
-        // Handle Spanish word exceptions
-        if (rule.id.startsWith("ESPANYOL")) {
-          const espanyolPattern = new RegExp(`\\b${match[0]}\\b`, 'i');
-          if (espanyolPattern.test(text)) {
-            suggestions = rule.suggestions; // Use the suggestions from the rule
-          }
-        }
-
+        // Add repeated word match to results
         matches.push({
-          message: rule.message,
+          message: 'Repeated word detected.',
           shortMessage: rule.name || '',
-          replacements: suggestions,
-          offset: match.index,
-          length: match[0].length,
+          replacements: repeatedSuggestions,
+          offset: repeatedMatch.index,
+          length: repeatedMatch[0].length,
           context: {
-            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-            offset: Math.min(20, match.index),
-            length: match[0].length
+            text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
+            offset: Math.min(20, repeatedMatch.index),
+            length: repeatedMatch[0].length
           },
           sentence: text.slice(
-            Math.max(0, text.lastIndexOf('.', match.index) + 1),
-            text.indexOf('.', match.index + match[0].length) + 1
+            Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
+            text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
           ),
           rule: {
             id: rule.id,
@@ -1599,6 +1561,66 @@ const checkTextAgainstRules = async (text, rules) => {
         });
       }
     }
+
+    // Existing suggestion logic
+    if (rule.suggestions) {
+      rule.suggestions.forEach(suggestion => {
+        if (typeof suggestion === 'string') {
+          suggestions.push(suggestion);
+        } else if (suggestion.text) {
+          let suggestionText = suggestion.text;
+
+          // Replace capturing groups with the matched content
+          for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
+            if (match[i]) {
+              // Replace $i with the match[i] value
+              const groupRegex = new RegExp(`\\$${i}`, 'g');
+              suggestionText = suggestionText.replace(groupRegex, match[i]);
+            }
+          }
+
+          // Apply capitalization preservation for the first occurrence only
+          const parts = suggestionText.split('$1');
+          if (parts.length > 1) {
+            const capitalizedFirstPart = parts[0];
+            const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
+            
+            // Capitalize the first part if the original match was capitalized
+            const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
+            const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
+
+            suggestions.push(finalSuggestion);
+          } else {
+            suggestions.push(suggestionText);
+          }
+        }
+      });
+    }
+
+    // Add match to results
+    matches.push({
+      message: rule.message,
+      shortMessage: rule.name || '',
+      replacements: suggestions,
+      offset: match.index,
+      length: match[0].length,
+      context: {
+        text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+        offset: Math.min(20, match.index),
+        length: match[0].length
+      },
+      sentence: text.slice(
+        Math.max(0, text.lastIndexOf('.', match.index) + 1),
+        text.indexOf('.', match.index + match[0].length) + 1
+      ),
+      rule: {
+        id: rule.id,
+        description: rule.description || rule.name
+      }
+    });
+  }
+}
+
 
     // Add typo detection logic here
     if (rule.pattern.some(patternObj => patternObj.token && patternObj.token.value)) {
