@@ -1501,123 +1501,123 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
-
 const checkTextAgainstRules = async (text, rules) => {
-      let matches = [];
+  let matches = [];
 
-      for (const rule of rules) // Regex to detect repeated words with varying whitespace
-for (const patternObj of rule.pattern) {
-  let regex;
-  if (patternObj.token && patternObj.token.value) {
-    // Exact match for tokens
-    regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
-  } else if (patternObj.regex) {
-    // Regex pattern
-    regex = new RegExp(patternObj.regex, 'gi');
-  } else {
-    console.warn(`Invalid pattern in rule ${rule.id}`);
-    continue;
-  }
-
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    let suggestions = [];
-
-    // Handle repeated words with whitespace
-    const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
-    let repeatedMatch;
-    while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
-      // Adjust suggestions for repeated words
-      const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
-      suggestions.push(...repeatedSuggestions);
-      
-      // Add repeated word match to results
-      matches.push({
-        message: 'Repeated word detected.',
-        shortMessage: rule.name || '',
-        replacements: repeatedSuggestions,
-        offset: repeatedMatch.index,
-        length: repeatedMatch[0].length,
-        context: {
-          text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
-          offset: Math.min(20, repeatedMatch.index),
-          length: repeatedMatch[0].length
-        },
-        sentence: text.slice(
-          Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
-          text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
-        ),
-        rule: {
-          id: rule.id,
-          description: rule.description || rule.name
-        }
-      });
-    }
-
-    // Existing suggestion logic
-    if (rule.suggestions) {
-      rule.suggestions.forEach(suggestion => {
-        if (typeof suggestion === 'string') {
-          suggestions.push(suggestion);
-        } else if (suggestion.text) {
-          let suggestionText = suggestion.text;
-
-          // Replace capturing groups with the matched content
-          for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
-            if (match[i]) {
-              // Replace $i with the match[i] value
-              const groupRegex = new RegExp(`\\$${i}`, 'g');
-              suggestionText = suggestionText.replace(groupRegex, match[i]);
-            }
-          }
-
-          // Apply capitalization preservation for the first occurrence only
-          const parts = suggestionText.split('$1');
-          if (parts.length > 1) {
-            const capitalizedFirstPart = parts[0];
-            const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
-            
-            // Capitalize the first part if the original match was capitalized
-            const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
-            const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
-
-            suggestions.push(finalSuggestion);
-          } else {
-            suggestions.push(suggestionText);
-          }
-        }
-      });
-    }
-
-    // Add match to results
-    matches.push({
-      message: rule.message,
-      shortMessage: rule.name || '',
-      replacements: suggestions,
-      offset: match.index,
-      length: match[0].length,
-      context: {
-        text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-        offset: Math.min(20, match.index),
-        length: match[0].length
-      },
-      sentence: text.slice(
-        Math.max(0, text.lastIndexOf('.', match.index) + 1),
-        text.indexOf('.', match.index + match[0].length) + 1
-      ),
-      rule: {
-        id: rule.id,
-        description: rule.description || rule.name
+  for (const rule of rules) {
+    for (const patternObj of rule.pattern) {
+      let regex;
+      if (patternObj.token && patternObj.token.value) {
+        // Exact match for tokens
+        regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
+      } else if (patternObj.regex) {
+        // Regex pattern
+        regex = new RegExp(patternObj.regex, 'gi');
+      } else {
+        console.warn(`Invalid pattern in rule ${rule.id}`);
+        continue;
       }
-    });
+
+      let match;
+      while ((match = regex.exec(text)) !== null) {
+        let suggestions = [];
+
+        // Handle repeated words with whitespace
+        const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
+        let repeatedMatch;
+        while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
+          if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
+            // Adjust suggestions for repeated words
+            const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
+            suggestions.push(...repeatedSuggestions);
+            
+            // Add repeated word match to results
+            matches.push({
+              message: 'Repeated word detected.',
+              shortMessage: rule.name || '',
+              replacements: repeatedSuggestions,
+              offset: repeatedMatch.index,
+              length: repeatedMatch[0].length,
+              context: {
+                text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
+                offset: Math.min(20, repeatedMatch.index),
+                length: repeatedMatch[0].length
+              },
+              sentence: text.slice(
+                Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
+                text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
+              ),
+              rule: {
+                id: rule.id,
+                description: rule.description || rule.name
+              }
+            });
+          }
+        }
+
+        // Existing suggestion logic
+        if (rule.suggestions) {
+          rule.suggestions.forEach(suggestion => {
+            if (typeof suggestion === 'string') {
+              suggestions.push(suggestion);
+            } else if (suggestion.text) {
+              let suggestionText = suggestion.text;
+
+              // Replace capturing groups with the matched content
+              for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
+                if (match[i]) {
+                  // Replace $i with the match[i] value
+                  const groupRegex = new RegExp(`\\$${i}`, 'g');
+                  suggestionText = suggestionText.replace(groupRegex, match[i]);
+                }
+              }
+
+              // Apply capitalization preservation for the first occurrence only
+              const parts = suggestionText.split('$1');
+              if (parts.length > 1) {
+                const capitalizedFirstPart = parts[0];
+                const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
+                
+                // Capitalize the first part if the original match was capitalized
+                const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
+                const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
+
+                suggestions.push(finalSuggestion);
+              } else {
+                suggestions.push(suggestionText);
+              }
+            }
+          });
+        }
+
+        // Add match to results with suggestions
+        matches.push({
+          message: rule.message,
+          shortMessage: rule.name || '',
+          replacements: suggestions,
+          offset: match.index,
+          length: match[0].length,
+          context: {
+            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+            offset: Math.min(20, match.index),
+            length: match[0].length
+          },
+          sentence: text.slice(
+            Math.max(0, text.lastIndexOf('.', match.index) + 1),
+            text.indexOf('.', match.index + match[0].length) + 1
+          ),
+          rule: {
+            id: rule.id,
+            description: rule.description || rule.name
+          }
+        });
+      }
+    }
   }
-}
-
-
-      
 
   return { matches };
 };
+
 
 app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
