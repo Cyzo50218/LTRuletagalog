@@ -1505,13 +1505,8 @@ const callLanguageToolAPI = async (text) => {
 const checkTextAgainstRules = async (text, rules) => {
       let matches = [];
 
-      for (const rule of rules) {
-        if (!rule.pattern) {
-          console.warn(`Rule ${rule.id} has no pattern defined.`);
-          continue;
-        }
-
-      for (const patternObj of rule.pattern) {
+      for (const rule of rules) // Regex to detect repeated words with varying whitespace
+for (const patternObj of rule.pattern) {
   let regex;
   if (patternObj.token && patternObj.token.value) {
     // Exact match for tokens
@@ -1528,38 +1523,35 @@ const checkTextAgainstRules = async (text, rules) => {
   while ((match = regex.exec(text)) !== null) {
     let suggestions = [];
 
-    // Handle suggestions based on rule.id
-    if (rule.id === 'PAGUULIT'|| rule.id === 'PAGUULIT_E' || rule.id === 'PAGUULIT_O') { // Replace '1' with your specific rule ID for repeated words with whitespace
-      // Handling repeated words with whitespace
-      const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
-      let repeatedMatch;
-      while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
-        // Adjust suggestions for repeated words
-        const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
-        suggestions.push(...repeatedSuggestions);
-        
-        // Add repeated word match to results
-        matches.push({
-          message: 'Repeated word detected.',
-          shortMessage: rule.name || '',
-          replacements: repeatedSuggestions,
-          offset: repeatedMatch.index,
-          length: repeatedMatch[0].length,
-          context: {
-            text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
-            offset: Math.min(20, repeatedMatch.index),
-            length: repeatedMatch[0].length
-          },
-          sentence: text.slice(
-            Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
-            text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
-          ),
-          rule: {
-            id: rule.id,
-            description: rule.description || rule.name
-          }
-        });
-      }
+    // Handle repeated words with whitespace
+    const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
+    let repeatedMatch;
+    while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
+      // Adjust suggestions for repeated words
+      const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
+      suggestions.push(...repeatedSuggestions);
+      
+      // Add repeated word match to results
+      matches.push({
+        message: 'Repeated word detected.',
+        shortMessage: rule.name || '',
+        replacements: repeatedSuggestions,
+        offset: repeatedMatch.index,
+        length: repeatedMatch[0].length,
+        context: {
+          text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
+          offset: Math.min(20, repeatedMatch.index),
+          length: repeatedMatch[0].length
+        },
+        sentence: text.slice(
+          Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
+          text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
+        ),
+        rule: {
+          id: rule.id,
+          description: rule.description || rule.name
+        }
+      });
     }
 
     // Existing suggestion logic
@@ -1622,43 +1614,6 @@ const checkTextAgainstRules = async (text, rules) => {
 }
 
 
-    // Add typo detection logic here
-    if (rule.pattern.some(patternObj => patternObj.token && patternObj.token.value)) {
-      let word = rule.pattern.find(patternObj => patternObj.token && patternObj.token.value).token.value;
-      let typoPatterns = generateTypoPatterns(word);
-
-      for (const typoPattern of typoPatterns) {
-        let typoRegex = new RegExp(`\\b${typoPattern}\\b`, 'gi');
-        let typoMatch;
-        while ((typoMatch = typoRegex.exec(text)) !== null) {
-          let typoSuggestions = rule.suggestions || [];
-
-          matches.push({
-  message: rule.message,
-  shortMessage: rule.name || '',
-  replacements: suggestions,
-  offset: match.index,
-  length: match[0].length,
-  context: {
-    text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-    offset: Math.min(20, match.index),
-    length: match[0].length
-  },
-  sentence: text.slice(
-    Math.max(0, text.lastIndexOf('.', match.index) + 1),
-    text.indexOf('.', match.index + match[0].length) + 1
-  ),
-  rule: {
-    id: rule.id,
-    description: rule.description || rule.name
-  }
-});
-}
-}
-  }
-
-  
-      }
       
 
   return { matches };
