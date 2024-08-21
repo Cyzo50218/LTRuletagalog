@@ -180,7 +180,8 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     { "regex": "\\b(\\w+e)\\s+(\\w+e)\\b" },
-    { "regex": "\\b(\\w+e)(\\1)\\b" }
+    { "regex": "\\b(\\w+e)(\\1)\\b" },
+    { "regex": "\\b(\\w+e)\\s*\\1\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
