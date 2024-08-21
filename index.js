@@ -180,8 +180,10 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     { "regex": "\\b(\\w+e)\\1\\b" }, 
-    { "regex":"(\\w+e)[\\s-]+(\\w+e)"}
-
+    {
+  "regex": "(\\w+e)[\\s-]*(\\1)",
+  "flags": "gi"
+}
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -192,8 +194,11 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$1",
-      "condition": "matches('\\b(\\w+e)\\1\\b')"
+    { "text": "$1-$1"
+},
+{
+  "text": "$1-$1",
+  "condition": "matches('(\\w+e)[\\s-]*(\\1)', 'gi')"
 }
   ]
 },
@@ -202,7 +207,10 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
 { "regex": "\\b(\\w+)\\1\\b" }, 
-{ "regex":"(\\w+e)[\\s-]+(\\w+e)"}
+{
+  "regex": "(\\w+)[\\s-]*(\\1)",
+  "flags": "gi"
+}
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
@@ -213,7 +221,11 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$1" }
+    { "text": "$1-$1" },
+    {
+  "text": "$1-$1",
+  "condition": "matches('(\\w+)[\\s-]*(\\1)', 'gi')"
+}
   ]
 },
 {
@@ -1526,97 +1538,45 @@ const checkTextAgainstRules = async (text, rules) => {
             let suggestions = [];
 
           if (rule.suggestions) {
-  rule.suggestions.forEach(suggestion => {
-    if (typeof suggestion === 'string') {
-      suggestions.push(suggestion);
-    } else if (suggestion.text) {
-      let suggestionText = suggestion.text;
+    rule.suggestions.forEach(suggestion => {
+      if (typeof suggestion === 'string') {
+        suggestions.push(suggestion);
+      } else if (suggestion.text) {
+        let suggestionText = suggestion.text;
 
-      // Replace capturing groups with the matched content
-      for (let i = 1; i < match.length; i++) {  // Start from 1 because $0 is the whole match
-        if (match[i]) {
-          suggestionText = suggestionText.replace(`$${i}`, match[i]);
+        // Replace capturing groups with the matched content
+        for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
+          if (match[i]) {
+            suggestionText = suggestionText.replace(`$${i}`, match[i]);
+          }
         }
-      }
 
-      // Check if the repeated words are concatenated (no space or hyphen)
-      if (/(\w+e)\1/.test(match[0])) {
-        suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
-      }
+        // Check if the repeated words are concatenated (no space or hyphen)
+        if (/(\w+e)\1/.test(match[0])) {
+          suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
+        }
 
-      // Check if the repeated words have a space between them
-      else if (/(\w+e)\s+(\w+e)/.test(match[0])) {
-        suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
-      }
+        // Check if the repeated words have a space between them
+        else if (/(\w+e)\s+(\w+e)/.test(match[0])) {
+          suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
+        }
 
-      // Check if the repeated words have a hyphen between them
-      else if (/(\w+e)-(\w+e)/.test(match[0])) {
-        suggestionText = match[0].replace(/(\w+e)-(\w+e)/, '$1-$2');
-      }
+        // Check if the repeated words have a hyphen between them
+        else if (/(\w+e)-(\w+e)/.test(match[0])) {
+          suggestionText = match[0].replace(/(\w+e)-(\w+e)/, '$1-$2');
+        }
 
-      // Preserve original capitalization
-      if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
-        suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-      }
+        // Preserve original capitalization
+        if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
+          suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+        }
 
-      suggestions.push(suggestionText);
-    }
-  });
-}
-
-
-// Check for repeated words without space and handle accordingly
-if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" ) {
-  // Patterns for repeated words
-  const repeatedWithoutSpacePattern = /\b(\w+e)\1\b/;
-  const repeatedWithSpacePattern = /\b(\w+e)\s+(\w+e)\b/;
-  const repeatedWithEndingOPattern = /\b(\w+o)\1\b/;
-  const repeatedWithSpaceEndingOPattern = /\b(\w+o)\s+(\w+o)\b/;
-
-  // Check for repeated words with no spaces (ending in "e")
-  if (repeatedWithoutSpacePattern.test(text)) {
-    const matches = text.match(repeatedWithoutSpacePattern);
-    if (matches) {
-      matches.forEach(match => {
-        const suggestionText = match.replace(/(\w+e)\1/, '$1-$1');
         suggestions.push(suggestionText);
-      });
-    }
+      }
+    });
   }
 
-  // Check for repeated words with spaces (ending in "e")
-  if (repeatedWithSpacePattern.test(text)) {
-    const matches = text.match(repeatedWithSpacePattern);
-    if (matches) {
-      matches.forEach(match => {
-        const suggestionText = match.replace(/(\w+e)\s+(\w+e)/, '$1-$2');
-        suggestions.push(suggestionText);
-      });
-    }
-  }
 
-  // Check for repeated words ending in "o" with no spaces
-  if (repeatedWithEndingOPattern.test(text)) {
-    const matches = text.match(repeatedWithEndingOPattern);
-    if (matches) {
-      matches.forEach(match => {
-        const suggestionText = match.replace(/(\w+o)\1/, '$1-$1');
-        suggestions.push(suggestionText);
-      });
-    }
-  }
-
-  // Check for repeated words ending in "o" with spaces
-  if (repeatedWithSpaceEndingOPattern.test(text)) {
-    const matches = text.match(repeatedWithSpaceEndingOPattern);
-    if (matches) {
-      matches.forEach(match => {
-        const suggestionText = match.replace(/(\w+o)\s+(\w+o)/, '$1-$2');
-        suggestions.push(suggestionText);
-      });
-    }
-  }
-}
 
 
 
@@ -1732,3 +1692,5 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
+
