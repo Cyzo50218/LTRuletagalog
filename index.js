@@ -1528,7 +1528,7 @@ const checkTextAgainstRules = async (text, rules) => {
         while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
           if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
             // Add repeated word suggestion to the suggestions array
-            suggestions.push(repeatedMatch[0]);
+            
           }
         }
 
