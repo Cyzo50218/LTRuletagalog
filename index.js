@@ -181,7 +181,7 @@ if (!grammarRules.length)  {
   "pattern": [
     { "regex": "\\b(\\w+e)\\1\\b" }, 
     {
-  "regex":"\\b(\\w+e)[\\s\\p{P}]*\\1\\b"
+  "regex":"\\b(\\w+e)\\s+\\1\\b"
 }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
@@ -202,7 +202,7 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
 {
-  "regex": "\\b(\\w+)[\\s\\p{P}]*\\1\\b"
+  "regex": "\\b(\\w+)\\s+\\1\\b"
 }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
@@ -1528,7 +1528,7 @@ const checkTextAgainstRules = async (text, rules) => {
           while ((match = regex.exec(text)) !== null) {
             let suggestions = [];
 
-       if (rule.suggestions) {
+    if (rule.suggestions) {
   rule.suggestions.forEach(suggestion => {
     if (typeof suggestion === 'string') {
       suggestions.push(suggestion);
@@ -1538,20 +1538,31 @@ const checkTextAgainstRules = async (text, rules) => {
       // Replace capturing groups with the matched content
       for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
         if (match[i]) {
-          const regex = new RegExp(`\\$${i}`, 'g'); // Create a regex to replace all instances of $i
+          // Replace $i with the match[i] value
+          const regex = new RegExp(`\\$${i}`, 'g');
           suggestionText = suggestionText.replace(regex, match[i]);
         }
       }
 
-      // Preserve original capitalization
-      if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
-        suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-      }
+      // Apply capitalization preservation for the first occurrence only
+      // We first split the suggestion into parts around `$1` to preserve the initial capitalization
+      const parts = suggestionText.split('$1');
+      if (parts.length > 1) {
+        const capitalizedFirstPart = parts[0];
+        const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
+        
+        // Capitalize the first part if the original match was capitalized
+        const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
+        const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
 
-      suggestions.push(suggestionText);
+        suggestions.push(finalSuggestion);
+      } else {
+        suggestions.push(suggestionText);
+      }
     }
   });
 }
+
 
 
 
