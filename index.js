@@ -88,7 +88,7 @@ if (!grammarRules.length)  {
     "piso - piso-piso"
   ],
   "suggestions": [
-    { "text": "$1-$2" }
+    { "text": "$1-$1" }
   ]
 },
 {
@@ -192,7 +192,18 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$2" }
+    { "text": "$1-$1",
+      "condition": "matches('\\b(\\w+e)\\1\\b')"
+    },
+    { "text": "$1-$2",
+      "condition": "matches('\\b(\\w+e)\\s+(\\w+e)\\b')"
+    },
+    { "text": "$1-$2",
+      "condition": "matches('\\b(\\w+e)\\1\\b')"
+    },
+    { "text": "$1-$1",
+      "condition": "matches('\\b(\\w+e)\\s+(\\w+e)\\b')"
+    }
   ]
 },
 {
@@ -1529,20 +1540,24 @@ const checkTextAgainstRules = async (text, rules) => {
     } else if (suggestion.text) {
       let suggestionText = suggestion.text;
 
-      // Ensure `match` contains the necessary groups for replacement
+      // Replace capturing groups with the matched content
       for (let i = 1; i < match.length; i++) {  // Start from 1 because $0 is the whole match
         if (match[i]) {
           suggestionText = suggestionText.replace(`$${i}`, match[i]);
         }
       }
 
-      // For repeated words without spaces, insert a hyphen
-      suggestionText = suggestionText.replace(/(\w+)(\1)/, '$1-$2');
+      // Check if the repeated words are concatenated (no space)
+      if (/(\w+e)\1/.test(match[0])) {
+        suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
+      }
+      
+      // Check if the repeated words have a space between them
+      else if (/(\w+e)\s+(\w+e)/.test(match[0])) {
+        suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
+      }
 
-      // For repeated words with spaces, replace spaces with a hyphen
-      suggestionText = suggestionText.replace(/\s+/, '-');
-
-      // Preserve the original capitalization
+      // Preserve original capitalization
       if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
         suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
       }
@@ -1551,6 +1566,7 @@ const checkTextAgainstRules = async (text, rules) => {
     }
   });
 }
+
 
 // Check for repeated words without space and handle accordingly
 if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" || rule.id === "PAGUULIT") {
