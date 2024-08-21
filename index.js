@@ -72,7 +72,10 @@ if (!grammarRules.length)  {
   "pattern": [
     {
       "regex": "\\b(\\w+o)(\\1)\\b"
-    }
+    },
+    {
+  "regex": "\\b(\\w+o)\\s+\\1\\b"
+}
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -96,7 +99,11 @@ if (!grammarRules.length)  {
     { "regex": "\\bpa(?!g)([A-Z]\\w+)\\b" },
     { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" },
     { "regex": "\\bpag([A-Z]\\w+)\\b" },
-    { "regex": "\\bPag([A-Z]\\w+)\\b" }
+    { "regex": "\\bPag([A-Z]\\w+)\\b" },
+    { "regex": "\\bpa(?!g)\\s*([A-Z]\\w+)\\b" },
+    { "regex": "\\bPa(?!g)\\s*([A-Z]\\w+)\\b" },
+    { "regex": "\\bpag\\s*([A-Z]\\w+)\\b" },
+    { "regex": "\\bPag\\s*([A-Z]\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
@@ -127,7 +134,11 @@ if (!grammarRules.length)  {
     { "regex": "\\b(maka)(\\w+)\\b" },
     { "regex": "\\b(Maka)(\\w+)\\b" },
     { "regex": "\\b(mka)(\\w+)\\b" },
-    { "regex": "\\b(Mka)(\\w+)\\b" }
+    { "regex": "\\b(Mka)(\\w+)\\b" },
+    { "regex": "\\b(maka)\\s*(\\w+)\\b" },
+    { "regex": "\\b(Maka)\\s*(\\w+)\\b" },
+    { "regex": "\\b(mka)\\s*(\\w+)\\b" },
+    { "regex": "\\b(Mka)\\s*(\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang mga salitang may panlaping 'maka'.",
   "suggestions": [ 
@@ -144,7 +155,8 @@ if (!grammarRules.length)  {
   "pattern": [
     { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
     { "regex": "\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
+    { "regex": "\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
+    { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }, { "regex": "\\b(mag|Mag|mg|Mg)\\s*(po|co|pa|fo)?\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
   ],
   "message": "Ulitin ang unang katinig at patinig ng salita kapag gumagamit ng panlapi.",
   "suggestions": [
@@ -167,7 +179,8 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "\\b(\\w+e)(\\1)\\b" }
+    { "regex": "\\b(\\w+e)(\\1)\\b" },
+    { "regex": "\\b(\\w+e)\\s*(\\1)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -190,7 +203,7 @@ if (!grammarRules.length)  {
       "exceptions": ["\\b(\\w*e\\1)\\b"]
     },
     {
-      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sampu|tao|to|telepono|nilo|kilo|po|opo|Opo|Po|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
