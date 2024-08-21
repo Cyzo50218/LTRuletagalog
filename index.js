@@ -181,8 +181,7 @@ if (!grammarRules.length)  {
   "pattern": [
     { "regex": "\\b(\\w+e)\\1\\b" }, 
     {
-  "regex": "(\\w+e)[\\s-]*(\\1)",
-  "flags": "gi"
+  "regex":"\\b(\\w+e)[\\s\\p{P}]*\\1\\b"
 }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
@@ -195,10 +194,6 @@ if (!grammarRules.length)  {
   ],
   "suggestions": [
     { "text": "$1-$1"
-},
-{
-  "text": "$1-$1",
-  "condition": "matches('(\\w+e)[\\s-]*(\\1)', 'gi')"
 }
   ]
 },
@@ -207,8 +202,7 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
 {
-  "regex": "(\\w+)[\\s-]*(\\1)",
-  "flags": "gi"
+  "regex": "\\b(\\w+)[\\s\\p{P}]*\\1\\b"
 }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
@@ -221,8 +215,7 @@ if (!grammarRules.length)  {
   ],
   "suggestions": [
     {
-  "text": "$1-$1",
-  "condition": "matches('(\\w+)[\\s-]*(\\1)', 'gi')"
+  "text": "$1-$1"
 }
   ]
 },
@@ -1535,29 +1528,31 @@ const checkTextAgainstRules = async (text, rules) => {
           while ((match = regex.exec(text)) !== null) {
             let suggestions = [];
 
-          if (rule.suggestions) {
-    rule.suggestions.forEach(suggestion => {
-      if (typeof suggestion === 'string') {
-        suggestions.push(suggestion);
-      } else if (suggestion.text) {
-        let suggestionText = suggestion.text;
+       if (rule.suggestions) {
+  rule.suggestions.forEach(suggestion => {
+    if (typeof suggestion === 'string') {
+      suggestions.push(suggestion);
+    } else if (suggestion.text) {
+      let suggestionText = suggestion.text;
 
-        // Replace capturing groups with the matched content
-        for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
-          if (match[i]) {
-            suggestionText = suggestionText.replace(`$${i}`, match[i]);
-          }
+      // Replace capturing groups with the matched content
+      for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
+        if (match[i]) {
+          const regex = new RegExp(`\\$${i}`, 'g'); // Create a regex to replace all instances of $i
+          suggestionText = suggestionText.replace(regex, match[i]);
         }
-
-        // Preserve original capitalization
-        if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
-          suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-        }
-
-        suggestions.push(suggestionText);
       }
-    });
-  }
+
+      // Preserve original capitalization
+      if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
+        suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+      }
+
+      suggestions.push(suggestionText);
+    }
+  });
+}
+
 
 
 
