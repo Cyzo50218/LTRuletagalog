@@ -180,8 +180,7 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     { "regex": "\\b(\\w+e)\\s+(\\w+e)\\b" },
-    { "regex": "\\b(\\w+e)(\\1)\\b" },
-    { "regex": "\\b(\\w+e)\\s*\\1\\b" }
+    { "regex": "\\b(\\w+e)(\\1)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -193,6 +192,24 @@ if (!grammarRules.length)  {
   "suggestions": [
     { "text": "$1ng-$2", "description": "Magdagdag ng '-ng' linker sa pagitan ng salitang-ugat na nagtatapos sa 'e' at ang inuulit na salita." },
     { "text": "$1-$2", "description": "Magdagdag ng gitling sa pagitan ng salitang-ugat na nagtatapos sa 'e' at ang inuulit na salita." }
+  ]
+},
+{
+  "id": "PAGUULIT",
+  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+  "pattern": [
+    { "regex": "\\b(\\w+)\\s+(\\w+)\\b" },
+    { "regex": "\\b(\\w+)(\\1)\\b" }
+  ],
+  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
+  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
+  "examples": [
+    { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
+    { "incorrect": "bente bente", "correct": "bente-bente" },
+    { "incorrect": "pale pale", "correct": "pale-pale" }
+  ],
+  "suggestions": [
+    { "text": "$1-$2" }
   ]
 },
 {
@@ -1505,32 +1522,76 @@ const checkTextAgainstRules = async (text, rules) => {
             let suggestions = [];
 
             if (rule.suggestions) {
-              rule.suggestions.forEach(suggestion => {
-                if (typeof suggestion === 'string') {
-                  suggestions.push(suggestion);
-                } else if (suggestion.text) {
-                  let suggestionText = suggestion.text;
-                  for (let i = 0; i <= match.length; i++) {
-                    suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
-                  }
-                  // Preserve the original capitalization
-                  if (match[0][0] === match[0][0].toUpperCase()) {
-                    suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
-                  }
-                  suggestions.push(suggestionText);
-                }
-              });
-            }
-        // Check for repeated words without space and handle accordingly
-        if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O") {
-          const repeatedWithoutSpacePattern = /\b(\w+)\1\b/;
-          const textWithoutSpaces = text.replace(/\s+/g, '');
+  rule.suggestions.forEach(suggestion => {
+    if (typeof suggestion === 'string') {
+      suggestions.push(suggestion);
+    } else if (suggestion.text) {
+      let suggestionText = suggestion.text;
+      for (let i = 0; i <= match.length; i++) {
+        suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+      }
+      // Preserve the original capitalization
+      if (match[0][0] === match[0][0].toUpperCase()) {
+        suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
+      }
+      suggestions.push(suggestionText);
+    }
+  });
+}
 
-          if (repeatedWithoutSpacePattern.test(textWithoutSpaces)) {
-            // Skip if it involves repeated words without space
-            continue;
-          }
-        }
+// Check for repeated words without space and handle accordingly
+if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" || rule.id === "PAGUULIT") {
+  // Pattern for repeated words with no spaces
+  const repeatedWithoutSpacePattern = /\b(\w+e)\1\b/;
+
+  // Pattern for repeated words with spaces
+  const repeatedWithSpacePattern = /\b(\w+e)\s+(\w+e)\b/;
+
+  // Pattern for repeated words ending with "o" with no spaces
+  const repeatedWithEndingOPattern = /\b(\w+o)\1\b/;
+
+  // Pattern for repeated words ending with "o" with spaces
+  const repeatedWithSpaceEndingOPattern = /\b(\w+o)\s+(\w+o)\b/;
+
+  // Check for repeated words with no spaces
+  if (repeatedWithoutSpacePattern.test(text)) {
+    continue;
+  }
+
+  // Check for repeated words with spaces
+  if (repeatedWithSpacePattern.test(text)) {
+    const matches = text.match(repeatedWithSpacePattern);
+    if (matches) {
+      matches.forEach(match => {
+        const suggestionText = match.replace(/\s+/, '-');
+        suggestions.push(suggestionText);
+      });
+    }
+  }
+
+  // Check for repeated words ending with "o" with no spaces
+  if (repeatedWithEndingOPattern.test(text)) {
+    const matches = text.match(repeatedWithEndingOPattern);
+    if (matches) {
+      matches.forEach(match => {
+        const suggestionText = match.replace(/(\w+o)\1/, '$1-$1');
+        suggestions.push(suggestionText);
+      });
+    }
+  }
+
+  // Check for repeated words ending with "o" with spaces
+  if (repeatedWithSpaceEndingOPattern.test(text)) {
+    const matches = text.match(repeatedWithSpaceEndingOPattern);
+    if (matches) {
+      matches.forEach(match => {
+        const suggestionText = match.replace(/\s+/, '-');
+        suggestions.push(suggestionText);
+      });
+    }
+  }
+}
+
 
         // Handle Spanish word exceptions
         if (rule.id.startsWith("ESPANYOL")) {
