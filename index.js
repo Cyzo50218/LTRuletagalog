@@ -179,31 +179,19 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "\\b(\\w+e)\\1\\b" }, 
-    { "regex":"\\b(\\w+e)\\s+(\\w+e)\\b"}
-
+    { "regex": "\\b(\\w+e)\\s+\\1\\b" },  // Repeated with spaces
+    { "regex": "\\b(\\w+e)\\1\\b" }      // Repeated without spaces
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
   "examples": [
-    { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
-    { "incorrect": "bente bente", "correct": "bente-bente" },
-    { "incorrect": "pale pale", "correct": "pale-pale" },
-    { "incorrect": "tseketseke", "correct": "tseke-tseke" }
+    { "incorrect": "Bente bente", "correct": "Bente-Bente" },
+    { "incorrect": "Kaway kaway", "correct": "Kaway-Kaway" },
+    { "incorrect": "bentebente", "correct": "bente-bente" },
+    { "incorrect": "pale pale", "correct": "pale-pale" }
   ],
   "suggestions": [
-    { "text": "$1-$1",
-      "condition": "matches('\\b(\\w+e)\\1\\b')"
-    },
-    { "text": "$1-$2",
-      "condition": "matches('\\b(\\w+e)\\s+(\\w+e)\\b')"
-    },
-    { "text": "$1-$2",
-      "condition": "matches('\\b(\\w+e)\\1\\b')"
-    },
-    { "text": "$1-$1",
-      "condition": "matches('\\b(\\w+e)\\s+(\\w+e)\\b')"
-    }
+    { "text": "$1-$1" }
   ]
 },
 
