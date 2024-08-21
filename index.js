@@ -179,15 +179,15 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "\\b(\\w+e)(\\1)\\b" },
-    { "regex": "\\b(\\w+e)\\s*(\\1)\\b" }
+    { "regex": "\\b(\\w+e)\\s+(\\w+e)\\b" },
+    { "regex": "\\b(\\w+e)(\\1)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
   "examples": [
-    { "incorrect": "tseke", "correct": "tseke-tseke" },
-    { "incorrect": "bente", "correct": "bente-bente" },
-    { "incorrect": "pale", "correct": "pale-pale" }
+    { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
+    { "incorrect": "bente bente", "correct": "bente-bente" },
+    { "incorrect": "pale pale", "correct": "pale-pale" }
   ],
   "suggestions": [
     { "text": "$1ng-$2", "description": "Magdagdag ng '-ng' linker sa pagitan ng salitang-ugat na nagtatapos sa 'e' at ang inuulit na salita." },
