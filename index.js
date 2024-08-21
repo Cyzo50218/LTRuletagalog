@@ -1584,25 +1584,7 @@ const checkTextAgainstRules = async (text, rules) => {
 }
   }
 
-  if (matches.length === 0) {
-    const languageToolResult = await callLanguageToolAPI(text);
-    if (languageToolResult && languageToolResult.matches) {
-      matches = languageToolResult.matches.map(match => ({
-        message: match.message,
-        shortMessage: match.rule.id || '',
-        replacements: match.replacements.map(replacement => replacement.value),
-        offset: match.offset,
-        length: match.length,
-        context: match.context,
-        sentence: match.sentence,
-        rule: {
-          id: match.rule.id,
-          description: match.rule.description
-        }
-      }));
-    
-    }
-  }
+  
       }
       
 
