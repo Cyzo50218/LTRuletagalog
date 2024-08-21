@@ -179,8 +179,9 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "\\b(\\w+e)\\1\\b" }, { "regex": "\\b(\\w+e)\\s+(\\w+e)\\b" },
-    { "regex": "\\b(\\w+)(?:\\s+\\1|\\1)\\b" }
+    { "regex": "\\b(\\w+e)\\1\\b" }, 
+    { "regex":"\\b(\\w+e)\\s+(\\w+e)\\b"}
+
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -191,7 +192,7 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$2" }
+    { "text": "$1-$1" }
   ]
 },
 {
@@ -209,7 +210,7 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$2" }
+    { "text": "$1-$1" }
   ]
 },
 {
@@ -1541,47 +1542,35 @@ const checkTextAgainstRules = async (text, rules) => {
 
 // Check for repeated words without space and handle accordingly
 if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" || rule.id === "PAGUULIT") {
-  // Pattern for repeated words with no spaces
+  // Patterns for repeated words
   const repeatedWithoutSpacePattern = /\b(\w+e)\1\b/;
-
-  // Pattern for repeated words with spaces
   const repeatedWithSpacePattern = /\b(\w+e)\s+(\w+e)\b/;
-
-  // Pattern for repeated words ending with "o" with no spaces
   const repeatedWithEndingOPattern = /\b(\w+o)\1\b/;
-
-  // Pattern for repeated words ending with "o" with spaces
   const repeatedWithSpaceEndingOPattern = /\b(\w+o)\s+(\w+o)\b/;
 
-  // Check for repeated words with no spaces
+  // Check for repeated words with no spaces (ending in "e")
   if (repeatedWithoutSpacePattern.test(text)) {
-    continue;
-  }
-  
-  const comprehensivePattern = /\b(\w+)(?:\s+\1|\1)\b/g;
-
-if (comprehensivePattern.test(text)) {
-  const matches = text.match(comprehensivePattern);
-  if (matches) {
-    matches.forEach(match => {
-      const suggestionText = match.replace(/\s+/, '-');
-      suggestions.push(suggestionText);
-    });
-  }
-}
-
-  // Check for repeated words with spaces
-  if (repeatedWithSpacePattern.test(text)) {
-    const matches = text.match(repeatedWithSpacePattern);
+    const matches = text.match(repeatedWithoutSpacePattern);
     if (matches) {
       matches.forEach(match => {
-        const suggestionText = match.replace(/\s+/, '-');
+        const suggestionText = match.replace(/(\w+e)\1/, '$1-$1');
         suggestions.push(suggestionText);
       });
     }
   }
 
-  // Check for repeated words ending with "o" with no spaces
+  // Check for repeated words with spaces (ending in "e")
+  if (repeatedWithSpacePattern.test(text)) {
+    const matches = text.match(repeatedWithSpacePattern);
+    if (matches) {
+      matches.forEach(match => {
+        const suggestionText = match.replace(/(\w+e)\s+(\w+e)/, '$1-$2');
+        suggestions.push(suggestionText);
+      });
+    }
+  }
+
+  // Check for repeated words ending in "o" with no spaces
   if (repeatedWithEndingOPattern.test(text)) {
     const matches = text.match(repeatedWithEndingOPattern);
     if (matches) {
@@ -1592,17 +1581,18 @@ if (comprehensivePattern.test(text)) {
     }
   }
 
-  // Check for repeated words ending with "o" with spaces
+  // Check for repeated words ending in "o" with spaces
   if (repeatedWithSpaceEndingOPattern.test(text)) {
     const matches = text.match(repeatedWithSpaceEndingOPattern);
     if (matches) {
       matches.forEach(match => {
-        const suggestionText = match.replace(/\s+/, '-');
+        const suggestionText = match.replace(/(\w+o)\s+(\w+o)/, '$1-$2');
         suggestions.push(suggestionText);
       });
     }
   }
 }
+
 
 
         // Handle Spanish word exceptions
