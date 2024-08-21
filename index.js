@@ -210,7 +210,8 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-{ "regex": "\\b(\\w+)\\1\\b" }, { "regex": "\\b(\\w+)\\s+(\\w+)\\b" }
+{ "regex": "\\b(\\w+)\\1\\b" }, 
+{ "regex": "\\b(\\w+)\\s+(\\w+)\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
@@ -221,7 +222,7 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$2" }
+    { "text": "$1-$1" }
   ]
 },
 {
@@ -1548,12 +1549,12 @@ const checkTextAgainstRules = async (text, rules) => {
       }
 
       // Check if the repeated words are concatenated (no space)
-      if (/(\w+e)\1/.test(match[0])) {
+      if (/(\w+)\1/.test(match[0])) {
         suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
       }
       
       // Check if the repeated words have a space between them
-      else if (/(\w+e)\s+(\w+e)/.test(match[0])) {
+      else if (/(\w+)\s+(\w+)/.test(match[0])) {
         suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
       }
 
@@ -1569,7 +1570,7 @@ const checkTextAgainstRules = async (text, rules) => {
 
 
 // Check for repeated words without space and handle accordingly
-if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" || rule.id === "PAGUULIT") {
+if (rule.id === "PAGUULIT_E" || rule.id === "PAGUULIT_O" ) {
   // Patterns for repeated words
   const repeatedWithoutSpacePattern = /\b(\w+e)\1\b/;
   const repeatedWithSpacePattern = /\b(\w+e)\s+(\w+e)\b/;
