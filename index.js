@@ -179,7 +179,7 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT_E",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "(?i)\\b(\\w+e)(?:\\s+|)(\\1)\\b" }
+    { "regex": "\\b([A-Za-z]+e)\\s+\\1\\b|\\b([A-Za-z]+e)\\1\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e', hindi ito pinapalitan ng letrang 'i'. Kinakabitan ng pang-ugnay/linker (-ng) at ginagamitan ng gitling sa pagitan ng salitang-ugat.",
@@ -197,7 +197,7 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-    { "regex": "(?i)\\b(\\w+)(?:\\s+|)(\\1)\\b" }
+{ "regex": "\\b([A-Za-z]+)\\s+\\1\\b|\\b([A-Za-z]+)\\1\\b" }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
