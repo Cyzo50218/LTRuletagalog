@@ -192,7 +192,7 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$1" }
+    { "text": "$1-$2" }
   ]
 },
 {
@@ -210,7 +210,7 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$1" }
+    { "text": "$1-$2" }
   ]
 },
 {
