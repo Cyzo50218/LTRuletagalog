@@ -1527,29 +1527,8 @@ const checkTextAgainstRules = async (text, rules) => {
         let repeatedMatch;
         while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
           if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
-            // Adjust suggestions for repeated words
-            const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
-            
-            matches.push({
-              message: 'Repeated word detected.',
-              shortMessage: rule.name || '',
-              replacements: repeatedSuggestions,
-              offset: repeatedMatch.index,
-              length: repeatedMatch[0].length,
-              context: {
-                text: text.slice(Math.max(0, repeatedMatch.index - 20), repeatedMatch.index + repeatedMatch[0].length + 20),
-                offset: Math.min(20, repeatedMatch.index),
-                length: repeatedMatch[0].length
-              },
-              sentence: text.slice(
-                Math.max(0, text.lastIndexOf('.', repeatedMatch.index) + 1),
-                text.indexOf('.', repeatedMatch.index + repeatedMatch[0].length) + 1
-              ),
-              rule: {
-                id: rule.id,
-                description: rule.description || rule.name
-              }
-            });
+            // Add repeated word suggestion to the suggestions array
+            suggestions.push(repeatedMatch[0]);
           }
         }
 
@@ -1615,6 +1594,7 @@ const checkTextAgainstRules = async (text, rules) => {
 
   return { matches };
 };
+
 
 
 app.post('/api/v2/check', async (req, res) => {
