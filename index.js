@@ -1530,7 +1530,6 @@ const checkTextAgainstRules = async (text, rules) => {
             // Adjust suggestions for repeated words
             const repeatedSuggestions = [`Consider removing the repeated word: "${repeatedMatch[0]}"`];
             
-            // Add repeated word match to results
             matches.push({
               message: 'Repeated word detected.',
               shortMessage: rule.name || '',
