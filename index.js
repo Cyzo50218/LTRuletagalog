@@ -1528,13 +1528,25 @@ const checkTextAgainstRules = async (text, rules) => {
       suggestions.push(suggestion);
     } else if (suggestion.text) {
       let suggestionText = suggestion.text;
-      for (let i = 0; i <= match.length; i++) {
-        suggestionText = suggestionText.replace(`$${i}`, match[i] || '');
+
+      // Ensure `match` contains the necessary groups for replacement
+      for (let i = 1; i < match.length; i++) {  // Start from 1 because $0 is the whole match
+        if (match[i]) {
+          suggestionText = suggestionText.replace(`$${i}`, match[i]);
+        }
       }
+
+      // For repeated words without spaces, insert a hyphen
+      suggestionText = suggestionText.replace(/(\w+)(\1)/, '$1-$2');
+
+      // For repeated words with spaces, replace spaces with a hyphen
+      suggestionText = suggestionText.replace(/\s+/, '-');
+
       // Preserve the original capitalization
-      if (match[0][0] === match[0][0].toUpperCase()) {
+      if (match[0] && match[0][0] === match[0][0].toUpperCase()) {
         suggestionText = suggestionText.charAt(0).toUpperCase() + suggestionText.slice(1);
       }
+
       suggestions.push(suggestionText);
     }
   });
