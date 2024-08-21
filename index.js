@@ -221,7 +221,6 @@ if (!grammarRules.length)  {
     { "incorrect": "tseketseke", "correct": "tseke-tseke" }
   ],
   "suggestions": [
-    { "text": "$1-$1" },
     {
   "text": "$1-$1",
   "condition": "matches('(\\w+)[\\s-]*(\\1)', 'gi')"
@@ -1549,21 +1548,6 @@ const checkTextAgainstRules = async (text, rules) => {
           if (match[i]) {
             suggestionText = suggestionText.replace(`$${i}`, match[i]);
           }
-        }
-
-        // Check if the repeated words are concatenated (no space or hyphen)
-        if (/(\w+e)\1/.test(match[0])) {
-          suggestionText = match[0].replace(/(\w+e)\1/, '$1-$1');
-        }
-
-        // Check if the repeated words have a space between them
-        else if (/(\w+e)\s+(\w+e)/.test(match[0])) {
-          suggestionText = match[0].replace(/(\w+e)\s+(\w+e)/, '$1-$2');
-        }
-
-        // Check if the repeated words have a hyphen between them
-        else if (/(\w+e)-(\w+e)/.test(match[0])) {
-          suggestionText = match[0].replace(/(\w+e)-(\w+e)/, '$1-$2');
         }
 
         // Preserve original capitalization
