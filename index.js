@@ -1386,23 +1386,24 @@ if (!grammarRules.length)  {
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "rito",
+      "text": "$1 rito",
       "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
     },
     {
-  "text": "rin",
-  "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
-},
-    {
-      "text": "dito",
-      "condition": "matches(\\w+[?!yw|ra|re|ri|ro|ru] dito)"
+      "text": "$1 rin",
+      "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
     },
     {
-      "text": "din",
-      "condition": "matches(\\w+[?!yw|ra|re|ri|ro|ru] dito)"
+      "text": "$1 dito",
+      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+    },
+    {
+      "text": "$1 din",
+      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
     }
   ]
-},
+}
+,
 {
   "id": "DAW_RAW",
   "name": "DAW at RAW",
@@ -1414,26 +1415,26 @@ if (!grammarRules.length)  {
       "regex": "\\b(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)\\b"
     }
   ],
-  "message": "'Din/Daw'Ang Mananatili kung ang sinusundannitong salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w' gayundin, nananatili ang D kung ang sinusundang salita ay nagtatapos sa –ra,-ri, -raw, o –ray, samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay D at ito ay napapalitan ng R kung ang sinusundannitong salita ay nagtatapos sa patinig o sa malapatinig na W at Y",
+  "message": "'Din/Daw' Ang Mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w' gayundin, nananatili ang D kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray, samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay D at ito ay napapalitan ng R kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na W at Y",
   "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "raw",
+      "text": "$1 raw",
       "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
     },
     {
-      "text": "daw",
-      "condition": "matches(\\w+[ra|ri|ro|ruraw|ray|is|im|aeiou] raw)"
-},
+      "text": "$1 daw",
+      "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
+    },
     {
-  "text": "rin",
-  "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
-},
-{
-  "text": "din",
-  "condition": "matches(\\w+[ra|ri|ro|ru|raw|ray|is|im|aeiou] raw)"
-}
+      "text": "$1 rin",
+      "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
+    },
+    {
+      "text": "$1 din",
+      "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
+    }
   ]
 }
 
