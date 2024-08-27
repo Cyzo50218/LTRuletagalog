@@ -1511,7 +1511,6 @@ const checkTextAgainstRules = async (text, rules) => {
         let repeatedMatch;
         while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
           if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
-            // Add repeated word suggestion to the suggestions array
             suggestions.push(`"${repeatedMatch[0]}" might be a repeated word.`);
           }
         }
@@ -1584,48 +1583,42 @@ app.post('/api/v2/check', async (req, res) => {
 
     console.log('Number of grammar rules:', grammarRules.length);
 
-    // First check the text against your custom rules
-    let result = await checkTextAgainstRules(text, grammarRules);
+    // Run custom rule checking and the LanguageTool API concurrently
+    const [customRulesResult, fallbackResult] = await Promise.all([
+      checkTextAgainstRules(text, grammarRules),
+      callLanguageToolAPI(text)
+    ]);
 
-    // If no matches are found, call the fallback LanguageTool API
-    if (!result.matches || result.matches.length === 0) {
-      console.log('No matches found. Falling back to LanguageTool API.');
-      const fallbackResult = await callLanguageToolAPI(text);
+    // Merge matches from both custom rules and LanguageTool API
+    let combinedMatches = [...customRulesResult.matches];
 
-      if (fallbackResult && fallbackResult.matches && fallbackResult.matches.length > 0) {
-        console.log('Matches found by LanguageTool API:', fallbackResult.matches.length);
-        result = {
-          matches: fallbackResult.matches.map(match => ({
-            message: match.message,
-            shortMessage: match.rule.issueType || '',
-            replacements: match.replacements.map(replacement => replacement.value),
-            offset: match.offset,
-            length: match.length,
-            context: {
-              text: text.slice(Math.max(0, match.offset - 20), match.offset + match.length + 20),
-              offset: Math.min(20, match.offset),
-              length: match.length
-            },
-            sentence: text.slice(
-              Math.max(0, text.lastIndexOf('.', match.offset) + 1),
-              text.indexOf('.', match.offset + match.length) + 1
-            ),
-            rule: {
-              id: match.rule.id,
-              description: match.rule.description
-            }
-          }))
-        }; // Use the result from the fallback API
-      } else {
-        console.log('No matches found by LanguageTool API.');
-        result = { matches: [] }; // Return empty matches if no suggestions are found
-      }
-    } else {
-      console.log('Number of matches found:', result.matches.length);
-      console.log('Check result:', JSON.stringify(result, null, 2));
+    if (fallbackResult && fallbackResult.matches) {
+      const languageToolMatches = fallbackResult.matches.map(match => ({
+        message: match.message,
+        shortMessage: match.rule.issueType || '',
+        replacements: match.replacements.map(replacement => replacement.value),
+        offset: match.offset,
+        length: match.length,
+        context: {
+          text: text.slice(Math.max(0, match.offset - 20), match.offset + match.length + 20),
+          offset: Math.min(20, match.offset),
+          length: match.length
+        },
+        sentence: text.slice(
+          Math.max(0, text.lastIndexOf('.', match.offset) + 1),
+          text.indexOf('.', match.offset + match.length) + 1
+        ),
+        rule: {
+          id: match.rule.id,
+          description: match.rule.description
+        }
+      }));
+
+      combinedMatches = combinedMatches.concat(languageToolMatches);
     }
 
-    return res.json(result);
+    console.log('Number of combined matches:', combinedMatches.length);
+    return res.json({ matches: combinedMatches });
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
