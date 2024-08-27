@@ -100,8 +100,8 @@ if (!grammarRules.length)  {
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
-    { "text": "pa-$1", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
-    { "text": "pag-$1", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
+    { "text": "pa-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
+    { "text": "pag-$2", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
   ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
