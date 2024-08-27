@@ -100,8 +100,8 @@ if (!grammarRules.length)  {
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
-    { "text": "pa-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
-    { "text": "pag-$2", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
+    { "text": "pa-$3", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
+    { "text": "pag-$5", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
   ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
@@ -122,18 +122,12 @@ if (!grammarRules.length)  {
   "name": "Words with 'maka' Prefix",
   "description": "Magdagdag ng gitling sa mga salitang may panlaping 'maka'.",
   "pattern": [
-    { "regex": "\\b(maka)(\\w+)\\b" },
-    { "regex": "\\b(Maka)(\\w+)\\b" },
-    { "regex": "\\b(mka)(\\w+)\\b" },
-    { "regex": "\\b(Mka)(\\w+)\\b" },
-    { "regex": "\\b(maka)\\s*(\\w+)\\b" },
-    { "regex": "\\b(Maka)\\s*(\\w+)\\b" },
-    { "regex": "\\b(mka)\\s*(\\w+)\\b" },
-    { "regex": "\\b(Mka)\\s*(\\w+)\\b" }
+    { "regex": "\\b(maka|Maka|mka|Mka)(\\s*\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang mga salitang may panlaping 'maka'.",
-  "suggestions": [ 
-    { "text": "maka-$1", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." }
+  "suggestions": [
+    { "text": "maka-$2", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." },
+    { "text": "Maka-$2", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." }
   ],
   "examples": [
     { "incorrect": "makabayan", "correct": "maka-bayan" }
@@ -144,10 +138,7 @@ if (!grammarRules.length)  {
   "name": "Attach First KP Sound in Prefixes",
   "description": "Ulitin ang unang katinig at patinig ng salita sa mga panlapi.",
   "pattern": [
-    { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" },
-    { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }, { "regex": "\\b(mag|Mag|mg|Mg)\\s*(po|co|pa|fo)?\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
+    { "regex": "\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b|\\b(mag|Mag|mg|Mg)\\s*([bcdfghjklmnpqrstvwxyz][aeiou])([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b|\\b(mag|Mag|mg|Mg)(po|co|pa|fo)?([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b|\\b(mag|Mag|mg|Mg)([bcdfghjklmnpqrstvwxyz][aeiou])\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b|\\b(mag|Mag|mg|Mg)\\s*(po|co|pa|fo)?\\s*([bcdfghjklmnpqrstvwxyz][aeiou]\\w*)\\b" }
   ],
   "message": "Ulitin ang unang katinig at patinig ng salita kapag gumagamit ng panlapi.",
   "suggestions": [
@@ -561,7 +552,7 @@ if (!grammarRules.length)  {
   "name": "HIGIT at HIGIT PA",
   "pattern": [
     {
-   "regex": "\\b(higit|hgt|hgtpa)\\b",
+   "regex": "\\b(hgiit|hgt|hgtpa)\\b",
    "description": "'Higit' ito ay ginagamit para sa comparative na pang-uri."
  },
  {
@@ -1492,6 +1483,7 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
+
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
 
@@ -1519,7 +1511,6 @@ const checkTextAgainstRules = async (text, rules) => {
         while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
           if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
             // Add repeated word suggestion to the suggestions array
-            
           }
         }
 
@@ -1545,7 +1536,7 @@ const checkTextAgainstRules = async (text, rules) => {
               if (parts.length > 1) {
                 const capitalizedFirstPart = parts[0];
                 const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
-                
+
                 // Capitalize the first part if the original match was capitalized
                 const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
                 const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
@@ -1586,8 +1577,6 @@ const checkTextAgainstRules = async (text, rules) => {
   return { matches };
 };
 
-
-
 app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
 
@@ -1606,16 +1595,27 @@ app.post('/api/v2/check', async (req, res) => {
 
     console.log('Number of grammar rules:', grammarRules.length);
 
-    const result = await checkTextAgainstRules(text, grammarRules);
+    // First check the text against your custom rules
+    let result = await checkTextAgainstRules(text, grammarRules);
 
-    if (result.matches && result.matches.length > 0) {
+    // If no matches are found, call the fallback LanguageTool API
+    if (!result.matches || result.matches.length === 0) {
+      console.log('No matches found. Falling back to LanguageTool API.');
+      const fallbackResult = await callLanguageToolAPI(text);
+
+      if (fallbackResult && fallbackResult.matches && fallbackResult.matches.length > 0) {
+        console.log('Matches found by LanguageTool API:', fallbackResult.matches.length);
+        result = fallbackResult; // Use the result from the fallback API
+      } else {
+        console.log('No matches found by LanguageTool API.');
+        result = { matches: [] }; // Return empty matches if no suggestions are found
+      }
+    } else {
       console.log('Number of matches found:', result.matches.length);
       console.log('Check result:', JSON.stringify(result, null, 2));
-      return res.json(result);
-    } else {
-      console.log('No matches found. LanguageTool API returned no matches.');
-      return res.json({ matches: [] });
     }
+
+    return res.json(result);
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
