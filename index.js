@@ -1583,17 +1583,17 @@ app.post('/api/v2/check', async (req, res) => {
 
     console.log('Number of grammar rules:', grammarRules.length);
 
-    // Run custom rule checking and the LanguageTool API concurrently
-    const [customRulesResult, fallbackResult] = await Promise.all([
-      checkTextAgainstRules(text, grammarRules),
-      callLanguageToolAPI(text)
-    ]);
+    // Run custom rule checking first
+    const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    // Merge matches from both custom rules and LanguageTool API
+    // Then call the LanguageTool API
+    const languageToolResult = await callLanguageToolAPI(text);
+
+    // Combine matches from both custom rules and LanguageTool API
     let combinedMatches = [...customRulesResult.matches];
 
-    if (fallbackResult && fallbackResult.matches) {
-      const languageToolMatches = fallbackResult.matches.map(match => ({
+    if (languageToolResult && languageToolResult.matches) {
+      const languageToolMatches = languageToolResult.matches.map(match => ({
         message: match.message,
         shortMessage: match.rule.issueType || '',
         replacements: match.replacements.map(replacement => replacement.value),
