@@ -96,21 +96,12 @@ if (!grammarRules.length)  {
   "name": "Proper Nouns with 'pa' Prefix",
   "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag'.",
   "pattern": [
-    { "regex": "\\bpa(?!g)([A-Z]\\w+)\\b" },
-    { "regex": "\\bPa(?!g)([A-Z]\\w+)\\b" },
-    { "regex": "\\bpag([A-Z]\\w+)\\b" },
-    { "regex": "\\bPag([A-Z]\\w+)\\b" },
-    { "regex": "\\bpa(?!g)\\s*([A-Z]\\w+)\\b" },
-    { "regex": "\\bPa(?!g)\\s*([A-Z]\\w+)\\b" },
-    { "regex": "\\bpag\\s*([A-Z]\\w+)\\b" },
-    { "regex": "\\bPag\\s*([A-Z]\\w+)\\b" }
+    { "regex": "\\b(Pa(?!g)|pa(?!g))\\s*([A-Z]\\w+)\\b|\\b(Pag|pag)\\s*([A-Z]\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
-    { "text": "$1-$2", "description": "Maglagay ng gitling sa pagitan ng panlapi at ng pangngalan." },
-    { "text": "pa-$1", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
-    { "text": "pag $1", "description": "Maglagay ng espasyo pagkatapos ng 'pag' bago ang pangngalan." },
-    { "text": "pag$1", "description": "Tanggalin ang espasyo sa pagitan ng 'pag' at ng pangngalan." }
+    { "text": "pa-$3", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
+    { "text": "pag-$5", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
   ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
@@ -142,7 +133,7 @@ if (!grammarRules.length)  {
   ],
   "message": "Ginigitlingan ang mga salitang may panlaping 'maka'.",
   "suggestions": [ 
-    { "text": "$1-$2", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." }
+    { "text": "maka-$1", "description": "Maglagay ng gitling sa pagitan ng panlaping 'maka' at ng ugat na salita." }
   ],
   "examples": [
     { "incorrect": "makabayan", "correct": "maka-bayan" }
