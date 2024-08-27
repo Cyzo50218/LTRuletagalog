@@ -1512,6 +1512,7 @@ const checkTextAgainstRules = async (text, rules) => {
         while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
           if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
             // Add repeated word suggestion to the suggestions array
+            suggestions.push(`"${repeatedMatch[0]}" might be a repeated word.`);
           }
         }
 
@@ -1532,20 +1533,7 @@ const checkTextAgainstRules = async (text, rules) => {
                 }
               }
 
-              // Apply capitalization preservation for the first occurrence only
-              const parts = suggestionText.split('$1');
-              if (parts.length > 1) {
-                const capitalizedFirstPart = parts[0];
-                const lowercasedSecondPart = parts.slice(1).join('$1').toLowerCase();
-
-                // Capitalize the first part if the original match was capitalized
-                const isFirstPartCapitalized = match[1] && match[1][0] === match[1][0].toUpperCase();
-                const finalSuggestion = (isFirstPartCapitalized ? capitalizedFirstPart.charAt(0).toUpperCase() + capitalizedFirstPart.slice(1) : capitalizedFirstPart) + lowercasedSecondPart;
-
-                suggestions.push(finalSuggestion);
-              } else {
-                suggestions.push(suggestionText);
-              }
+              suggestions.push(suggestionText);
             }
           });
         }
@@ -1606,7 +1594,28 @@ app.post('/api/v2/check', async (req, res) => {
 
       if (fallbackResult && fallbackResult.matches && fallbackResult.matches.length > 0) {
         console.log('Matches found by LanguageTool API:', fallbackResult.matches.length);
-        result = fallbackResult; // Use the result from the fallback API
+        result = {
+          matches: fallbackResult.matches.map(match => ({
+            message: match.message,
+            shortMessage: match.rule.issueType || '',
+            replacements: match.replacements.map(replacement => replacement.value),
+            offset: match.offset,
+            length: match.length,
+            context: {
+              text: text.slice(Math.max(0, match.offset - 20), match.offset + match.length + 20),
+              offset: Math.min(20, match.offset),
+              length: match.length
+            },
+            sentence: text.slice(
+              Math.max(0, text.lastIndexOf('.', match.offset) + 1),
+              text.indexOf('.', match.offset + match.length) + 1
+            ),
+            rule: {
+              id: match.rule.id,
+              description: match.rule.description
+            }
+          }))
+        }; // Use the result from the fallback API
       } else {
         console.log('No matches found by LanguageTool API.');
         result = { matches: [] }; // Return empty matches if no suggestions are found
