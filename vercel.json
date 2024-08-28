@@ -1,9 +1,18 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.js", "use": "@vercel/node" }
+    { "src": "index.js", "use": "@vercel/node" },
+    {
+  "src": "api/geminiapi/generatesuggestions.js",
+  "use": "@vercel/node"
+}
   ],
   "routes": [
-    { "src": "/api/v2/check", "dest": "/index.js" }
+    { "src": "/api/v2/check", "dest": "/index.js" },
+    {
+"src": "/api/geminiapi/generatesuggestions.js",
+  "methods": ["POST"],
+  "dest": "/api/call/geminiai"
+}
   ]
 }
