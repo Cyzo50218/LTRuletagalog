@@ -1509,12 +1509,7 @@ const checkTextAgainstRules = async (text, rules) => {
         // Handle repeated words with whitespace
         const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
         let repeatedMatch;
-        while ((repeatedMatch = repeatedWordRegex.exec(text)) !== null) {
-          if (repeatedMatch.index >= match.index && repeatedMatch.index < (match.index + match[0].length)) {
-            suggestions.push(`"${repeatedMatch[0]}" might be a repeated word.`);
-          }
-        }
-
+     
         // Existing suggestion logic
         if (rule.suggestions) {
           rule.suggestions.forEach(suggestion => {
