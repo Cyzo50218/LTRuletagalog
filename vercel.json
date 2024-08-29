@@ -3,16 +3,15 @@
   "builds": [
     { "src": "index.js", "use": "@vercel/node" },
     {
-      "src": "api/geminiapi/generatesuggestions.js",
+      "src": "api/geminiapi/*.js",
       "use": "@vercel/node"
 }
   ],
   "routes": [
     { "src": "/api/v2/check", "dest": "/index.js" },
     {
-      "src": "/api/v2/geminiai",
-      "methods": ["POST"],
-      "dest": "/api/geminiapi/generatesuggestions.js"
+      "src": "/api/v2/geminiapi",
+      "dest": "/api/geminiapi/$1.js"
 }
   ]
 }
