@@ -1469,7 +1469,7 @@ const generateTypoPatterns = (word) => {
 const preprocessText = (text, excludedWords = []) => {
   let processedText = text;
   excludedWords.forEach(word => {
-    const regex = new RegExp(`\\b${Kendi|kendi|sinosino|anoano}\\b`, 'gi'); // Create regex for word
+    const regex = new RegExp(`\\b${word}\\b`, 'gi'); // Create regex for word (case-insensitive)
     processedText = processedText.replace(regex, ''); // Remove the word
   });
   return processedText;
@@ -1496,6 +1496,7 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
     return null;
   }
 };
+
 
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
@@ -1593,8 +1594,10 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
+    const excludedWords = ["kundi","Kundi"]; // Add "kundi" to excluded words
+    
     // Then call the LanguageTool API
-    const languageToolResult = await callLanguageToolAPI(text);
+    const languageToolResult = await callLanguageToolAPI(text,excludedWords);
 
     // Combine matches from both custom rules and LanguageTool API
     let combinedMatches = [...customRulesResult.matches];
