@@ -1470,7 +1470,10 @@ const callLanguageToolAPI = async (text) => {
   const apiUrl = 'https://api.languagetool.org/v2/check';
   const params = new URLSearchParams();
   params.append('text', text);
-  params.append('language', 'tl-PH');  // Adjust the language as needed
+  params.append('language', 'tl-PH');
+  
+  // Ignore specific words using regex
+  params.append('ignore', 'kendi|sinosino|anoano'); // Replace with the words you want to ignore
 
   try {
     const response = await axios.post(apiUrl, params, {
@@ -1484,6 +1487,7 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
+
 
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
