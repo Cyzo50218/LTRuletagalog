@@ -1466,14 +1466,23 @@ const generateTypoPatterns = (word) => {
   return patterns;
 };
 
-const callLanguageToolAPI = async (text) => {
+const preprocessText = (text, excludedWords = []) => {
+  let processedText = text;
+  excludedWords.forEach(word => {
+    const regex = new RegExp(`\\b${Kendi|kendi|sinosino|anoano}\\b`, 'gi'); // Create regex for word
+    processedText = processedText.replace(regex, ''); // Remove the word
+  });
+  return processedText;
+};
+
+const callLanguageToolAPI = async (text, excludedWords = []) => {
+  const preprocessedText = preprocessText(text, excludedWords);
+
+  // Make the API call with the preprocessed text
   const apiUrl = 'https://api.languagetool.org/v2/check';
   const params = new URLSearchParams();
-  params.append('text', text);
+  params.append('text', preprocessedText);
   params.append('language', 'tl-PH');
-  
-  // Ignore specific words using regex
-  params.append('ignore', 'kendi|sinosino|anoano'); // Replace with the words you want to ignore
 
   try {
     const response = await axios.post(apiUrl, params, {
@@ -1487,7 +1496,6 @@ const callLanguageToolAPI = async (text) => {
     return null;
   }
 };
-
 
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
