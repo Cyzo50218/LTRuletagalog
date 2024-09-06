@@ -1386,19 +1386,19 @@ if (!grammarRules.length)  {
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "$1 rito",
+      "text": "rito",
       "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
     },
     {
-      "text": "$1 rin",
+      "text": "rin",
       "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
     },
     {
-      "text": "$1 dito",
+      "text": "dito",
       "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
     },
     {
-      "text": "$1 din",
+      "text": "din",
       "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
     }
   ]
@@ -1420,19 +1420,19 @@ if (!grammarRules.length)  {
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "$1 raw",
+      "text": "raw",
       "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
     },
     {
-      "text": "$1 daw",
+      "text": "daw",
       "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
     },
     {
-      "text": "$1 rin",
+      "text": "rin",
       "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
     },
     {
-      "text": "$1 din",
+      "text": "din",
       "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
     }
   ]
@@ -1594,7 +1594,7 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi"]; // Add "kundi" to excluded words
+    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college"]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
     const languageToolResult = await callLanguageToolAPI(text,excludedWords);
@@ -1640,5 +1640,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
 
