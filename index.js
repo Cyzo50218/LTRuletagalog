@@ -1434,7 +1434,7 @@ if (!grammarRules.length)  {
   "name": "Hyphen Usage for Combined Words",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)"
+      "regex": "\\b(lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s(ng|sa|at|na|ay)\\s(takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b"
     }
   ],
   "message": "Gumamit ng gitling (-) kapag may katagang kinaltas sa pagitan ng dalawang salitang pinagsama. Halimbawa: 'pamatay-insekto' mula sa 'pamatay ng insekto'.",
@@ -1442,8 +1442,8 @@ if (!grammarRules.length)  {
   "example": "pamatay-insekto, kahoy-gubat, humigit-kumulang, dalagang-bukid",
   "suggestions": [
     {
-      "text": "$1-$2",
-      "condition": "matches('(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)')"
+      "text": "$1-$3",
+      "condition": "matches('\\b(lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s(ng|sa|at|na|ay)\\s(takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b')"
     }
   ],
   "exceptions": [
@@ -1453,6 +1453,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
+
 
 
 
