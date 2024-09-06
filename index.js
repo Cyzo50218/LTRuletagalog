@@ -1430,36 +1430,11 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "KUDLIT_REPLACEMENT",
-  "name": "Kudlit Replacement",
-  "pattern": [
-    {
-      "regex": "(\\b\\w+\\s)at\\s(\\w+\\b)"
-    },
-    {
-      "regex": "(\\b\\w+\\s)ay\\s(\\w+\\b)"
-    }
-  ],
-  "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
-  "description": "Ginagamit ang kudlit (’) bilang kapalit ng nawawalang letra/letra sa pagitan ng dalawang salita kapag ang pang-ugnay o pananda ('at' o 'ay') ay ikinakabit sa unang salita.",
-  "example": "tuwa’t hapis, kaliwa’t kanan, tayo’y aalis, tahana’y maligaya",
-  "suggestions": [
-    {
-      "text": "$1’t $2",
-      "condition": "matches('\\b\\w+\\s+at\\s+\\w+\\b')"
-    },
-    {
-      "text": "$1’y $2",
-      "condition": "matches('\\b\\w+\\s+ay\\s+\\w+\\b')"
-    }
-  ]
-},
-{
   "id": "HYPHEN_USAGE",
   "name": "Hyphen Usage for Combined Words",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(?:ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)"
+      "regex": "(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)"
     }
   ],
   "message": "Gumamit ng gitling (-) kapag may katagang kinaltas sa pagitan ng dalawang salitang pinagsama. Halimbawa: 'pamatay-insekto' mula sa 'pamatay ng insekto'.",
@@ -1468,17 +1443,16 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1-$2",
-      "condition": "matches('(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(?:ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)')"
+      "condition": "matches('(?<=\\b(?:lakad|pamatay|kaliwa|humigit|tahanan|dalaga|bahay)\\s)(ng|sa|at|na|ay)\\s(?=\\b(?:takbo|insekto|kanan|kumulang|maligaya|bukid|aliwan)\\b)')"
     }
   ],
   "exceptions": [
     {
-      "regex": "(\\bdalagangbukid|buntunghininga\\b)",
+      "regex": "\\b(?:dalagangbukid|buntunghininga)\\b",
       "message": "Huwag gumamit ng gitling kung ang dalawang pinagsamang salita ay nagbago ng kahulugan (e.g., 'dalagangbukid' na isda o 'buntunghininga')."
     }
   ]
 }
-
 
 
 
