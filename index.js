@@ -1409,10 +1409,10 @@ if (!grammarRules.length)  {
   "name": "DAW at RAW",
   "pattern": [
     {
-      "regex": "\\b(?:\\w+[wy|yw|ya|wa]*)\\s(daw)\\b"
+      "regex": "(?<=\\b\\w+[wy|yw|ya|wa]*\\s)daw\\b"
     },
     {
-      "regex": "\\b(?:\\w+[ra|ri|raw|ray|is|im|aeiou])\\s(raw)\\b"
+      "regex": "(?<=\\b\\w+[ra|ri|raw|ray|is|im|aeiou]\\s)raw\\b"
     }
   ],
   "message": "'Din/Daw' ang mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
@@ -1421,23 +1421,22 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "raw",
-      "condition": "matches('\\bdaw\\b')"
+      "condition": "matches('daw')"
     },
     {
       "text": "daw",
-      "condition": "matches('\\braw\\b')"
+      "condition": "matches('raw')"
     },
     {
       "text": "rin",
-      "condition": "matches('\\bdaw\\b')"
+      "condition": "matches('daw')"
     },
     {
       "text": "din",
-      "condition": "matches('\\braw\\b')"
+      "condition": "matches('raw')"
     }
   ]
 }
-
 
 
 ];
