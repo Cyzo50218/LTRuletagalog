@@ -1409,34 +1409,35 @@ if (!grammarRules.length)  {
   "name": "DAW at RAW",
   "pattern": [
     {
-      "regex": "\\b(\\w+[wy|yw|ya|wa]* daw)\\b"
+      "regex": "\\b(\\w+[wy|yw|ya|wa]*)\\s(daw)\\b"
     },
     {
-      "regex": "\\b(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)\\b"
+      "regex": "\\b(\\w+[ra|ri|raw|ray|is|im|aeiou])\\s(raw)\\b"
     }
   ],
-  "message": "'Din/Daw' Ang Mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w' gayundin, nananatili ang D kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray, samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay D at ito ay napapalitan ng R kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na W at Y",
+  "message": "'Din/Daw' Ang Mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
   "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "$2 raw",
-      "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
+      "text": "$1 raw",
+      "condition": "matches('\\b(\\w+[wy|yw|ya|wa]*)\\s(daw)\\b')"
     },
     {
-      "text": "$2 daw",
-      "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
+      "text": "$1 daw",
+      "condition": "matches('\\b(\\w+[ra|ri|raw|ray|is|im|aeiou])\\s(raw)\\b')"
     },
     {
-      "text": "$2 rin",
-      "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
+      "text": "$1 rin",
+      "condition": "matches('\\b(\\w+[wy|yw|ya|wa]*)\\s(daw)\\b')"
     },
     {
-      "text": "$2 din",
-      "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
+      "text": "$1 din",
+      "condition": "matches('\\b(\\w+[ra|ri|raw|ray|is|im|aeiou])\\s(raw)\\b')"
     }
   ]
 }
+
 
 ];
 }
