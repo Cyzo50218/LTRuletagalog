@@ -1375,10 +1375,10 @@ if (!grammarRules.length)  {
   "name": "DITO at RITO",
   "pattern": [
     {
-      "regex": "\\b(\\w+[bdfghjklmnpqrstvz]* dito)\\b"
-    },
+  "regex": "(?<=\\b\\w*(ra|ri|raw|ray|is|im|ro|ru) )rito\\b|(?<!\\b\\w*(o|aw|oy|y|ya|w|wa|yw|wy|ya|wa) )rito\\b"
+},
     {
-      "regex": "\\b(\\w+[yw|ra|re|ri|ro|ru] dito)\\b"
+      "regex": "(?<=\\b\\w*(o|aw|oy|y|ya|w|wa|yw|wy|ya|wa) )dito\\b|(?<!\\b\\w*(ra|ri|raw|ray|is|im|ro|ru) )dito\\b"
     }
   ],
   "message": "'Rito' ang tamang gamitin kung hindi nagtatapos sa 'y' o 'w' ang unang salita; 'dito' kung nagtatapos sa 'y' o 'w'.",
@@ -1387,19 +1387,11 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "rito",
-      "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
-    },
-    {
-      "text": "rin",
-      "condition": "matches(\\w+[bdfghjklmnpqrstvz]* dito)"
+      "condition": "matches((?<=\\b\\w*[ra|ri|raw|ray|is|im|ro|ru])rito\\b)"
     },
     {
       "text": "dito",
-      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
-    },
-    {
-      "text": "din",
-      "condition": "matches(\\w+[yw|ra|re|ri|ro|ru] dito)"
+      "condition": "matches((?<=\\b\\w*[o|aw|oy|y|ya|w|wa|yw|wy|ya|wa])dito\\b)"
     }
   ]
 }
@@ -1409,10 +1401,10 @@ if (!grammarRules.length)  {
   "name": "DAW at RAW",
   "pattern": [
     {
-  "regex": "(?<=\\b\\w*(?:wy|yw|ya|wa)\\s)daw\\b|(?<!\\b\\w*(ra|ri|raw|ray)\\s)daw\\b"
+  "regex": "(?<=\\b\\w*(?:wy|yw|ya|wa)\\s)daw\\b|(?<!\\b\\w*(ra|ri|raw|ray|is|im|ro|ru)\\s)daw\\b"
 },
 {
-  "regex": "(?<=\\b\\w*(?:ra|ri|raw|ray|is|im|aeiou)\\s)raw\\b|(?<!\\b\\w*(wy|yw|ya|wa)\\s)raw\\b"
+  "regex": "(?<=\\b\\w*(?:ra|ri|raw|ray|is|im|ro|ru)\\s)raw\\b|(?<!\\b\\w*(wy|yw|ya|wa)\\s)raw\\b"
 }
   ],
   "message": "'Din/Daw' ang mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
