@@ -1415,25 +1415,25 @@ if (!grammarRules.length)  {
       "regex": "\\b(?:\\w+[ra|ri|raw|ray|is|im|aeiou])\\s(raw)\\b"
     }
   ],
-  "message": "'Din/Daw' Ang Mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
+  "message": "'Din/Daw' ang mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
   "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
       "text": "raw",
-      "condition": "matches('daw')"
+      "condition": "matches('\\bdaw\\b')"
     },
     {
       "text": "daw",
-      "condition": "matches('raw')"
+      "condition": "matches('\\braw\\b')"
     },
     {
       "text": "rin",
-      "condition": "matches('daw')"
+      "condition": "matches('\\bdaw\\b')"
     },
     {
       "text": "din",
-      "condition": "matches('raw')"
+      "condition": "matches('\\braw\\b')"
     }
   ]
 }
