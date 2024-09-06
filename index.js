@@ -1420,19 +1420,19 @@ if (!grammarRules.length)  {
   "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
   "suggestions": [
     {
-      "text": "raw",
+      "text": "$2 raw",
       "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
     },
     {
-      "text": "daw",
+      "text": "$2 daw",
       "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
     },
     {
-      "text": "rin",
+      "text": "$2 rin",
       "condition": "matches(\\w+[wy|yw|ya|wa]* daw)"
     },
     {
-      "text": "din",
+      "text": "$2 din",
       "condition": "matches(\\w+[ra|ri|raw|ray|is|im|aeiou] raw)"
     }
   ]
