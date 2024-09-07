@@ -2251,7 +2251,7 @@ const preprocessText = (text, excludedWords = []) => {
 
   // Regex to remove patterns like ( G... ) or any other words inside parentheses
   const namePatternRegex = /\(\s?[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s?\)/g;
-  processedText = processedText.replace(namePatternRegex, ''); // Remove patterns matching the regex
+  processedText = text.replace(namePatternRegex, ''); // Remove patterns matching the regex
 
   return processedText.trim(); // Trim any leading/trailing whitespace
 };
