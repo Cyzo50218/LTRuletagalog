@@ -1483,9 +1483,285 @@ if (!grammarRules.length)  {
   "name": "Usage of 'Ika-' Prefix with Numbers and Words",
   "pattern": [
     {
-      "regex": "\\b(ika)-?(isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam|sampu|labing(?:-)?isa|labing(?:-)?dalawa|labing(?:-)?tatlo|labing(?:-)?apat|labing(?:-)?lima|labing(?:-)?anim|labing(?:-)?pito|labing(?:-)?walo|labing(?:-)?siyam|dalawampu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|tatlumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|apatnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|limampu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|animnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|pitumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|walumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|siyamnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|isandaan|\\d+)\\b"
+        "regex": "\\b(ika)-?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?sampu\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?labing(?:-)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?dalawampu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?tatlumpu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?apatnapu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?limampu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?animnapu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?pitumpu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?walumpu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?isa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?dalawa\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?tatlo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?apat\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?lima\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?anim\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?pito\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?walo\\b"
+    },
+    {
+        "regex": "\\b(ika)-?siyamnapu(?:'t)?siyam\\b"
+    },
+    {
+        "regex": "\\b(ika)-?isandaan\\b"
+    },
+    {
+        "regex": "\\b(ika)-?\\d+\\b"
     }
-  ],
+],
   "message": "Gumamit ng tamang gitling (-) at numero pagkatapos ng 'ika-' kapag iniunlapi ito sa mga numero o salitang pamilang. Halimbawa: 'ika-1', 'ika-10'.",
   "description": "Ginagamit ang gitling (-) at ang tamang numero pagkatapos ng 'ika-' kapag iniunlapi ito sa numero o salitang pamilang.",
   "example": "ika-1, ika-2, ika-3, ika-4, ika-5, ika-6, ika-7, ika-8, ika-9, ika-10, ika-11, ika-12, ika-13, ... ika-100",
@@ -1897,14 +2173,14 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)"
+      "regex": "(?<!\\w)([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)(?!\\w)"
     },
     {
-      "regex": "([A-Z][a-z]+)([A-Z][a-z]+)"
+      "regex": "(?<!\\w)([A-Z][a-z]+)([A-Z][a-z]+)(?!\\w)"
     }
   ],
   "exceptions": {
-    "regex": "\\b[a-z]+\\b"
+    "regex": "[^A-Z]"
   },
   "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
   "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
@@ -1920,6 +2196,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
+
 
 
 
