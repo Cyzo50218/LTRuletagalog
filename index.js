@@ -1897,18 +1897,15 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b",
-      "exceptions": {
-        "regex": "\\b[a-z]+\\b"
-      }
+      "regex": "([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)"
     },
     {
-      "regex": "\\b([A-Z][a-z]+)([A-Z][a-z]+)\\b",
-      "exceptions": {
-        "regex": "\\b[a-z]+\\b"
-      }
+      "regex": "([A-Z][a-z]+)([A-Z][a-z]+)"
     }
   ],
+  "exceptions": {
+    "regex": "\\b[a-z]+\\b"
+  },
   "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
   "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
   "example": "Gloria Macapagal Arroyo, Gloria MacapagalArroyo",
@@ -1918,11 +1915,12 @@ if (!grammarRules.length)  {
       "condition": "matches('^([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)$')"
     },
     {
-      "text": "$1 $2-$3",
+      "text": "$1-$2",
       "condition": "matches('^([A-Z][a-z]+)([A-Z][a-z]+)$')"
     }
   ]
 }
+
 
 
 
