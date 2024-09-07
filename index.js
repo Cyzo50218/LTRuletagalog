@@ -2368,7 +2368,7 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo","( "," )"]; // Add "kundi" to excluded words
+    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
     const languageToolResult = await callLanguageToolAPI(text,excludedWords);
