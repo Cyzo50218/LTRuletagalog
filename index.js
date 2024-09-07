@@ -2169,30 +2169,34 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "HYPHENATED_LAST_NAMES",
-  "name": "Hyphenated Last Names for Married Women",
+  "id": "CAPITALIZED_CONCATENATED_AND_SEPARATED_WORDS",
+  "name": "Capitalized Words Separated or Concatenated",
   "pattern": [
     {
-      "regex": "\\b[A-Z][a-z]*\\s[A-Z][a-z]*\\s[A-Z][a-z]*\\b"
+      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b"
     },
     {
       "regex": "\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b"
     }
   ],
-  "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
-  "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
-  "example": "Gloria Macapagal Arroyo, Gloria MacapagalArroyo",
+  "exceptions": {
+    "regex": "[^A-Z]"
+  },
+  "message": "Siguraduhing tama ang paggamit ng whitespace at pag-uugnay ng mga capitalized na salita. Halimbawa: 'Macapagal-Arroyo' o 'Macapagal Arroyo'.",
+  "description": "Ang rule na ito ay para sa pagtukoy ng capitalized na mga salita na pinagsama-sama nang walang whitespace at ng tatlong capitalized na salita na pinaghihiwalay ng spaces.",
+  "example": "Gloria MacapagalArroyo, Gloria Macapagal Arroyo",
   "suggestions": [
     {
       "text": "$1 $2-$3",
-      "condition": "matches('\\b[A-Z][a-z]*\\s[A-Z][a-z]*\\s[A-Z][a-z]*\\b')"
+      "condition": "matches('\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b')"
     },
     {
-      "text": "$1-$2",
+      "text": "$1 $2-$3",
       "condition": "matches('\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b')"
     }
   ]
 }
+
 
 
 
