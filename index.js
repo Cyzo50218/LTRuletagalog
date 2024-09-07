@@ -1897,7 +1897,7 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s?([A-Z][a-z]+)\\b"
+      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b"
     },
     {
       "regex": "\\b([A-Z][a-z]+)([A-Z][a-z]+)\\b"
@@ -1917,6 +1917,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
+
 
 
 
