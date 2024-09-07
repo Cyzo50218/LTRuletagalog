@@ -1909,14 +1909,15 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1 $2-$3",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b')"
+      "condition": "matches('^([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)$')"
     },
     {
       "text": "$1 $2-$3",
-      "condition": "matches('\\b([A-Z][a-z]+)([A-Z][a-z]+)\\b')"
+      "condition": "matches('^([A-Z][a-z]+)([A-Z][a-z]+)$')"
     }
   ]
 }
+
 
 
 
