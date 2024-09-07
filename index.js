@@ -2173,26 +2173,23 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "(?<!\\w)([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)(?!\\w)"
+      "regex": "\\b[A-Z][a-z]*\\s[A-Z][a-z]*\\s[A-Z][a-z]*\\b"
     },
     {
-      "regex": "(?<!\\w)([A-Z][a-z]+)([A-Z][a-z]+)(?!\\w)"
+      "regex": "\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b"
     }
   ],
-  "exceptions": {
-    "regex": "[^A-Z]"
-  },
   "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
   "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
   "example": "Gloria Macapagal Arroyo, Gloria MacapagalArroyo",
   "suggestions": [
     {
       "text": "$1 $2-$3",
-      "condition": "matches('^([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)$')"
+      "condition": "matches('\\b[A-Z][a-z]*\\s[A-Z][a-z]*\\s[A-Z][a-z]*\\b')"
     },
     {
       "text": "$1-$2",
-      "condition": "matches('^([A-Z][a-z]+)([A-Z][a-z]+)$')"
+      "condition": "matches('\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b')"
     }
   ]
 }
@@ -2366,7 +2363,7 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college"]; // Add "kundi" to excluded words
+    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
     const languageToolResult = await callLanguageToolAPI(text,excludedWords);
