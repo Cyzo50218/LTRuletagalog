@@ -1477,7 +1477,446 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b\\w+\\s+ay\\s+\\w+\\b')"
     }
   ]
+},
+{
+  "id": "IKA_PREFIX_USAGE",
+  "name": "Usage of 'Ika-' Prefix with Numbers and Words",
+  "pattern": [
+    {
+      "regex": "\\b(ika)-?(isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam|sampu|labing(?:-)?isa|labing(?:-)?dalawa|labing(?:-)?tatlo|labing(?:-)?apat|labing(?:-)?lima|labing(?:-)?anim|labing(?:-)?pito|labing(?:-)?walo|labing(?:-)?siyam|dalawampu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|tatlumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|apatnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|limampu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|animnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|pitumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|walumpu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|siyamnapu(?:'t)?(?:isa|dalawa|tatlo|apat|lima|anim|pito|walo|siyam)?|isandaan|\\d+)\\b"
+    }
+  ],
+  "message": "Gumamit ng tamang gitling (-) at numero pagkatapos ng 'ika-' kapag iniunlapi ito sa mga numero o salitang pamilang. Halimbawa: 'ika-1', 'ika-10'.",
+  "description": "Ginagamit ang gitling (-) at ang tamang numero pagkatapos ng 'ika-' kapag iniunlapi ito sa numero o salitang pamilang.",
+  "example": "ika-1, ika-2, ika-3, ika-4, ika-5, ika-6, ika-7, ika-8, ika-9, ika-10, ika-11, ika-12, ika-13, ... ika-100",
+  "suggestions": [
+    {
+      "text": "ika-1",
+      "condition": "matches('\\b(ika)-?isa\\b')"
+    },
+    {
+      "text": "ika-2",
+      "condition": "matches('\\b(ika)-?dalawa\\b')"
+    },
+    {
+      "text": "ika-3",
+      "condition": "matches('\\b(ika)-?tatlo\\b')"
+    },
+    {
+      "text": "ika-4",
+      "condition": "matches('\\b(ika)-?apat\\b')"
+    },
+    {
+      "text": "ika-5",
+      "condition": "matches('\\b(ika)-?lima\\b')"
+    },
+    {
+      "text": "ika-6",
+      "condition": "matches('\\b(ika)-?anim\\b')"
+    },
+    {
+      "text": "ika-7",
+      "condition": "matches('\\b(ika)-?pito\\b')"
+    },
+    {
+      "text": "ika-8",
+      "condition": "matches('\\b(ika)-?walo\\b')"
+    },
+    {
+      "text": "ika-9",
+      "condition": "matches('\\b(ika)-?siyam\\b')"
+    },
+    {
+      "text": "ika-10",
+      "condition": "matches('\\b(ika)-?sampu\\b')"
+    },
+    {
+      "text": "ika-11",
+      "condition": "matches('\\b(ika)-?labing(?:-)?isa\\b')"
+    },
+    {
+      "text": "ika-12",
+      "condition": "matches('\\b(ika)-?labing(?:-)?dalawa\\b')"
+    },
+    {
+      "text": "ika-13",
+      "condition": "matches('\\b(ika)-?labing(?:-)?tatlo\\b')"
+    },
+    {
+      "text": "ika-14",
+      "condition": "matches('\\b(ika)-?labing(?:-)?apat\\b')"
+    },
+    {
+      "text": "ika-15",
+      "condition": "matches('\\b(ika)-?labing(?:-)?lima\\b')"
+    },
+    {
+      "text": "ika-16",
+      "condition": "matches('\\b(ika)-?labing(?:-)?anim\\b')"
+    },
+    {
+      "text": "ika-17",
+      "condition": "matches('\\b(ika)-?labing(?:-)?pito\\b')"
+    },
+    {
+      "text": "ika-18",
+      "condition": "matches('\\b(ika)-?labing(?:-)?walo\\b')"
+    },
+    {
+      "text": "ika-19",
+      "condition": "matches('\\b(ika)-?labing(?:-)?siyam\\b')"
+    },
+    {
+      "text": "ika-20",
+      "condition": "matches('\\b(ika)-?dalawampu\\b')"
+    },
+    {
+      "text": "ika-21",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-22",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-23",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-24",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-25",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-26",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-27",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-28",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-29",
+      "condition": "matches('\\b(ika)-?dalawampu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-30",
+      "condition": "matches('\\b(ika)-?tatlumpu\\b')"
+    },
+    {
+      "text": "ika-31",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-32",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-33",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-34",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-35",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-36",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-37",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-38",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-39",
+      "condition": "matches('\\b(ika)-?tatlumpu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-40",
+      "condition": "matches('\\b(ika)-?apatnapu\\b')"
+    },
+    {
+      "text": "ika-41",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-42",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-43",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-44",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-45",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-46",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-47",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-48",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-49",
+      "condition": "matches('\\b(ika)-?apatnapu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-50",
+      "condition": "matches('\\b(ika)-?limampu\\b')"
+    },
+    {
+      "text": "ika-51",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-52",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-53",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-54",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-55",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-56",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-57",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-58",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-59",
+      "condition": "matches('\\b(ika)-?limampu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-60",
+      "condition": "matches('\\b(ika)-?animnapu\\b')"
+    },
+    {
+      "text": "ika-61",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-62",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-63",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-64",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-65",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-66",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-67",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-68",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-69",
+      "condition": "matches('\\b(ika)-?animnapu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-70",
+      "condition": "matches('\\b(ika)-?pitumpu\\b')"
+    },
+    {
+      "text": "ika-71",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-72",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-73",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-74",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-75",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-76",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-77",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-78",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-79",
+      "condition": "matches('\\b(ika)-?pitumpu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-80",
+      "condition": "matches('\\b(ika)-?walumpu\\b')"
+    },
+    {
+      "text": "ika-81",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-82",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-83",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-84",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-85",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-86",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-87",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-88",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-89",
+      "condition": "matches('\\b(ika)-?walumpu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-90",
+      "condition": "matches('\\b(ika)-?siyamnapu\\b')"
+    },
+    {
+      "text": "ika-91",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?isa\\b')"
+    },
+    {
+      "text": "ika-92",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?dalawa\\b')"
+    },
+    {
+      "text": "ika-93",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?tatlo\\b')"
+    },
+    {
+      "text": "ika-94",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?apat\\b')"
+    },
+    {
+      "text": "ika-95",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?lima\\b')"
+    },
+    {
+      "text": "ika-96",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?anim\\b')"
+    },
+    {
+      "text": "ika-97",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?pito\\b')"
+    },
+    {
+      "text": "ika-98",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?walo\\b')"
+    },
+    {
+      "text": "ika-99",
+      "condition": "matches('\\b(ika)-?siyamnapu(?:'t)?siyam\\b')"
+    },
+    {
+      "text": "ika-100",
+      "condition": "matches('\\b(ika)-?isandaan\\b')"
+    }
+  ]
+},
+{
+  "id": "HYPHENATED_LAST_NAMES",
+  "name": "Hyphenated Last Names for Married Women",
+  "pattern": [
+    {
+      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s?([A-Z][a-z]+)\\b"
+    }
+  ],
+  "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
+  "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
+  "example": "Gloria Macapagal Arroyo, Gloria MacapagalArroyo",
+  "suggestions": [
+    {
+      "text": "$1 $2-$3",
+      "condition": "matches('\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b')"
+    },
+    {
+      "text": "$1 $2-$3",
+      "condition": "matches('\\b([A-Z][a-z]+)([A-Z][a-z]+)\\b')"
+    }
+  ]
 }
+
+
+
 
 
 
@@ -1486,7 +1925,7 @@ if (!grammarRules.length)  {
 ];
 }
 
-app.use((req, res, next) => {
+app.use((req, res, next) =>  {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
