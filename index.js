@@ -2173,10 +2173,10 @@ if (!grammarRules.length)  {
   "name": "Capitalized Words Separated or Concatenated",
   "pattern": [
     {
-      "regex": "\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b"
+      "regex": "^[A-Z][a-z]+(?:\\s[A-Z][a-z]+)+$"
     },
     {
-      "regex": "\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b"
+      "regex": "^[A-Z][a-z]+(?:[A-Z][a-z]+)+$"
     }
   ],
   "exceptions": {
@@ -2188,14 +2188,15 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1 $2-$3",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s([A-Z][a-z]+)\\s([A-Z][a-z]+)\\b')"
+      "condition": "matches('^[A-Z][a-z]+(?:\\s[A-Z][a-z]+)+$')"
     },
     {
       "text": "$1 $2-$3",
-      "condition": "matches('\\b[A-Z][a-z]*[A-Z][a-z]*[A-Z][a-z]*\\b')"
+      "condition": "matches('^[A-Z][a-z]+(?:[A-Z][a-z]+)+$')"
     }
   ]
 }
+
 
 
 
