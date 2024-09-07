@@ -2242,11 +2242,18 @@ const generateTypoPatterns = (word) => {
 
 const preprocessText = (text, excludedWords = []) => {
   let processedText = text;
+
+  // Remove exact matches of excluded words
   excludedWords.forEach(word => {
     const regex = new RegExp(`\\b${word}\\b`, 'gi'); // Create regex for word (case-insensitive)
     processedText = processedText.replace(regex, ''); // Remove the word
   });
-  return processedText;
+
+  // Regex to remove patterns like ( G... ) or any other words inside parentheses
+  const namePatternRegex = /\(\s?[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s?\)/g;
+  processedText = processedText.replace(namePatternRegex, ''); // Remove patterns matching the regex
+
+  return processedText.trim(); // Trim any leading/trailing whitespace
 };
 
 const callLanguageToolAPI = async (text, excludedWords = []) => {
@@ -2368,7 +2375,7 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo","( G"]; // Add "kundi" to excluded words
+    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
     const languageToolResult = await callLanguageToolAPI(text,excludedWords);
