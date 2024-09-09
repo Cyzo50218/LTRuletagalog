@@ -2222,7 +2222,7 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng paggamit ng tutuldok pagkatapos ng bating panimula sa pormal na liham o liham-pangangalakal.",
   "pattern": [
     {
-      "regex": "\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)(\\s+[A-Z][a-zA-Z]*)?(?!:)"
+      "regex": "\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)?(?!:)"
     }
   ],
   "message": "Gumamit ng tutuldok (:) pagkatapos ng bating panimula sa pormal na liham.",
@@ -2231,11 +2231,6 @@ if (!grammarRules.length)  {
       "text": "$1. $2:",
       "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung isang salita lamang.",
       "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)?(?!:)')"
-    },
-    {
-      "text": "$1. $2$3:",
-      "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung may dalawa o higit pang mga salita.",
-      "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)(\\s+[A-Z][a-zA-Z]*)?(?!:)')"
     }
   ],
   "examples": [
@@ -2260,7 +2255,147 @@ if (!grammarRules.length)  {
       "correct": "Bb. Gloria:"
     }
   ]
+},
+{
+  "id": "A5",
+  "name": "Pagwawasto ng Pagkakalagay ng Tutuldok sa Oras at Mga Mali sa Oras",
+  "description": "Pagwawasto ng mga maling format ng oras sa pamamagitan ng tamang paggamit ng tutuldok (:) at mga wastong halaga para sa oras at minuto.",
+  "pattern": [
+    {
+      "regex": "\\b(0?[2-9]|1[0-2])([6-9]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b(0?[1-9]|1[0-2])([0-5]?\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?"
+    }
+  ],
+  "message": "Gumamit ng tutuldok (:) at tiyaking tama ang oras (1-12) at minuto (00-59) sa format na oras.",
+  "suggestions": [
+    {
+      "text": "$1:$2 $3",
+      "description": "Ilapat ang tamang format sa oras (ex. 6:30 a.m.).",
+      "condition": "matches('\\b(0?[1-9]|1[0-2])([0-5]?\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?')"
+    }
+  ],
+  "examples": [
+    {
+      "incorrect": "290",
+      "correct": "2:30 a.m."
+    },
+    {
+      "incorrect": "1225 pm",
+      "correct": "12:25 p.m."
+    },
+    {
+      "incorrect": "845 am",
+      "correct": "8:45 a.m."
+    },
+    {
+      "incorrect": "150 pm",
+      "correct": "1:50 p.m."
+    }
+  ]
+},
+{
+  "id": "A6",
+  "name": "Pagwawasto ng Format ng Bible Verse",
+  "description": "Pagwawasto ng mga maling format ng Bible verse sa pamamagitan ng paglalagay ng tamang tutuldok (:) sa pagitan ng kabanata at taludtod, pati na rin ang mga saklaw ng taludtod.",
+  "pattern": [
+    {
+      "regex": "\\b([A-Z][a-z]+)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b"
+    }
+  ],
+  "message": "Gumamit ng tutuldok (:) sa pagitan ng kabanata at taludtod, at tiyaking tama ang format ng saklaw ng taludtod.",
+  "suggestions": [
+    {
+      "text": "$1 $2:$3",
+      "description": "Ilapat ang tamang format bilang kabanata:taludtod (ex. Matthew 3:10).",
+      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b')"
+    },
+    {
+      "text": "$1 $2:$4",
+      "description": "Ilapat ang format ng kabanata at saklaw ng taludtod (ex. Matthew 3:10-12).",
+      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})[-\\s](\\d{1,4})\\b')"
+    },
+    {
+      "text": "$1 $2:$3-$4",
+      "description": "Ilapat ang format ng kabanata at saklaw ng taludtod (ex. Matthew 3:10-15).",
+      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})[-\\s](\\d{1,4})\\b')"
+    },
+    {
+      "text": "$1 $2:$3",
+      "description": "I-reformat ang extended na taludtod upang matugunan ang tamang format (ex. Matthew 23:89).",
+      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})(\\d{1,3})\\b')"
+    }
+  ],
+  "examples": [
+    {
+      "incorrect": "Matthew 310",
+      "correct": [
+        "Matthew 3:10",
+        "Matthew 31:0"
+      ]
+    },
+    {
+      "incorrect": "John 113",
+      "correct": [
+        "John 11:3",
+        "John 1:13"
+      ]
+    },
+    {
+      "incorrect": "John 129",
+      "correct": [
+        "John 1:29",
+        "John 12:9"
+      ]
+    },
+    {
+      "incorrect": "John 428",
+      "correct": [
+        "John 4:28",
+        "John 42:8" // Example only, depending on book and chapter validity
+      ]
+    },
+    {
+      "incorrect": "John 3572-10",
+      "correct": [
+        "John 35:72-10",
+        "John 3:572-10",
+        "John 3:57-10"
+      ]
+    },
+    {
+      "incorrect": "John 2389",
+      "correct": [
+        "John 23:89",
+        "John 2:38",
+        "John 3:89"
+      ]
+    },
+    {
+      "incorrect": "John 2197-2",
+      "correct": [
+        "John 21:97-2",
+        "John 2:19-7",
+        "John 21:9-2"
+      ]
+    },
+    {
+      "incorrect": "John 187-3",
+      "correct": [
+        "John 18:7-3",
+        "John 1:87-3",
+        "John 18:73"
+      ]
+    },
+    {
+      "incorrect": "John 33",
+      "correct": [
+        "John 3:3",
+        "John 33:0" // Example only, depending on book and chapter validity
+      ]
+    }
+  ]
 }
+
+
 
 
 
