@@ -2228,8 +2228,14 @@ if (!grammarRules.length)  {
   "message": "Gumamit ng tutuldok (:) pagkatapos ng bating panimula sa pormal na liham.",
   "suggestions": [
     {
+      "text": "$1. $2:",
+      "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung isang salita lamang.",
+      "condition": "matches($3, '')"
+    },
+    {
       "text": "$1. $2$3:",
-      "description": "Maglagay ng tutuldok pagkatapos ng pangalan, kahit isang salita o dalawa."
+      "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung may dalawa o higit pang mga salita.",
+      "condition": "matches($3, '\\s+[A-Z][a-zA-Z]*')"
     }
   ],
   "examples": [
@@ -2248,6 +2254,10 @@ if (!grammarRules.length)  {
     {
       "incorrect": "Bb. Marley",
       "correct": "Bb. Marley:"
+    },
+    {
+      "incorrect": "Bb. Gloria",
+      "correct": "Bb. Gloria:"
     }
   ]
 }
