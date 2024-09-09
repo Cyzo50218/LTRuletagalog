@@ -100,8 +100,8 @@ if (!grammarRules.length)  {
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
   "suggestions": [
-    { "text": "pa-$3", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
-    { "text": "pag-$5", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
+    { "text": "pa-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
+    { "text": "pag-$2", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
   ],
   "examples": [
     { "incorrect": "paDavao", "correct": "pa-Davao" },
@@ -2192,7 +2192,67 @@ if (!grammarRules.length)  {
       "condition": "matches('\\(\\s*([A-Z][a-z]+)([A-Z][a-z]+)\\s*\\)')"
     }
   ]
+},
+{
+  "id": "A3",
+  "name": "Gamit ng Tutuldok",
+  "description": "Pagwawasto ng paggamit ng tutuldok matapos ang mga salitang tulad ng 'tulad ng'.",
+  "pattern": [
+    {
+      "regex": "(tulad ng)\\s+(\\w+)"
+    }
+  ],
+  "message": "Gumamit ng tutuldok (:) matapos ang mga salitang 'tulad ng'.",
+  "suggestions": [
+    {
+      "text": "$1: $2",
+      "description": "Maglagay ng tutuldok pagkatapos ng 'tulad ng'."
+    }
+  ],
+  "examples": [
+    { 
+      "incorrect": "Maraming halaman ang namumulaklak sa hardin tulad ng Rosal, Rosas, Orchids, Sampaguita, Santan at iba pa.", 
+      "correct": "Maraming halaman ang namumulaklak sa hardin tulad ng: Rosal, Rosas, Orchids, Sampaguita, Santan at iba pa."
+    }
+  ]
+},
+{
+  "id": "A4",
+  "name": "Gamit ng Tutuldok sa Bating Panimula",
+  "description": "Pagwawasto ng paggamit ng tutuldok pagkatapos ng bating panimula sa pormal na liham o liham-pangangalakal.",
+  "pattern": [
+    {
+      "regex": "\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)(\\s+[A-Z][a-zA-Z]*)?(?!:)"
+    }
+  ],
+  "message": "Gumamit ng tutuldok (:) pagkatapos ng bating panimula sa pormal na liham.",
+  "suggestions": [
+    {
+      "text": "$1. $2$3:",
+      "description": "Maglagay ng tutuldok pagkatapos ng pangalan, kahit isang salita o dalawa."
+    }
+  ],
+  "examples": [
+    { 
+      "incorrect": "Dr. Garcia", 
+      "correct": "Dr. Garcia:" 
+    },
+    { 
+      "incorrect": "Bb. Zorilla", 
+      "correct": "Bb. Zorilla:" 
+    },
+    { 
+      "incorrect": "Dr. Jose Rizal", 
+      "correct": "Dr. Jose Rizal:" 
+    },
+    {
+      "incorrect": "Bb. Marley",
+      "correct": "Bb. Marley:"
+    }
+  ]
 }
+
+
 
 
 
