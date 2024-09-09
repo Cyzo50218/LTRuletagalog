@@ -2230,12 +2230,12 @@ if (!grammarRules.length)  {
     {
       "text": "$1. $2:",
       "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung isang salita lamang.",
-      "condition": "matches($3, '')"
+      "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)?(?!:)')"
     },
     {
       "text": "$1. $2$3:",
       "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung may dalawa o higit pang mga salita.",
-      "condition": "matches($3, '\\s+[A-Z][a-zA-Z]*')"
+      "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)(\\s+[A-Z][a-zA-Z]*)?(?!:)')"
     }
   ],
   "examples": [
