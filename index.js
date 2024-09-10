@@ -2454,12 +2454,28 @@ const preprocessText = (text, excludedWords = []) => {
     processedText = processedText.replace(regex, ''); // Remove the word
   });
 
-  // Regex to remove patterns like ( G... ) or any other words inside parentheses
+  // Regex to identify and preserve patterns like "( anytypeofwords )"
+  const preservePatternRegex = /\(\s?[a-zA-Z]+\s?\)/g;
+
+  // Preserve patterns inside parentheses by temporarily replacing them with placeholders
+  const placeholders = [];
+  processedText = processedText.replace(preservePatternRegex, match => {
+    placeholders.push(match);
+    return `__PLACEHOLDER_${placeholders.length - 1}__`;
+  });
+
+  // Regex to remove unwanted patterns like ( G... ) or any other words inside parentheses
   const namePatternRegex = /\(\s?[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s?\)/g;
-  processedText = text.replace(namePatternRegex, ''); // Remove patterns matching the regex
+  processedText = processedText.replace(namePatternRegex, ''); // Remove patterns matching the regex
+
+  // Restore the preserved patterns back to their original form
+  placeholders.forEach((placeholder, index) => {
+    processedText = processedText.replace(`__PLACEHOLDER_${index}__`, placeholder);
+  });
 
   return processedText.trim(); // Trim any leading/trailing whitespace
 };
+
 
 const callLanguageToolAPI = async (text, excludedWords = []) => {
   const preprocessedText = preprocessText(text, excludedWords);
