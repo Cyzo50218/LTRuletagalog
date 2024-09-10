@@ -2262,15 +2262,15 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng mga maling format ng oras sa pamamagitan ng tamang paggamit ng tutuldok (:) at mga wastong halaga para sa oras at minuto.",
   "pattern": [
     {
-      "regex": "\\b(0?[2-9]|1[0-2])([6-9]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b(0?[1-9]|1[0-2])([0-5]?\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?"
+      "regex": "\\b(0?[1-9]|1[0-2])([0-5]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b([01]?\\d|2[0-3])([0-5]\\d)"
     }
   ],
-  "message": "Gumamit ng tutuldok (:) at tiyaking tama ang oras (1-12) at minuto (00-59) sa format na oras.",
+  "message": "Gumamit ng tutuldok (:) at tiyaking tama ang oras sa format na oras o military time (00:00-23:59).",
   "suggestions": [
     {
       "text": "$1:$2 $3",
-      "description": "Ilapat ang tamang format sa oras (ex. 6:30 a.m.).",
-      "condition": "matches('\\b(0?[1-9]|1[0-2])([0-5]?\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?')"
+      "description": "Ilapat ang tamang format sa oras (ex. 6:30 a.m. o 14:30).",
+      "condition": "matches('\\b(0?[1-9]|1[0-2])([0-5]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b([01]?\\d|2[0-3])([0-5]\\d)')"
     }
   ],
   "examples": [
@@ -2289,16 +2289,21 @@ if (!grammarRules.length)  {
     {
       "incorrect": "150 pm",
       "correct": "1:50 p.m."
+    },
+    {
+      "incorrect": "1430",
+      "correct": "14:30"
     }
   ]
-},
+}
+,
 {
   "id": "A6",
   "name": "Pagwawasto ng Format ng Bible Verse",
   "description": "Pagwawasto ng mga maling format ng Bible verse sa pamamagitan ng paglalagay ng tamang tutuldok (:) sa pagitan ng kabanata at taludtod, pati na rin ang mga saklaw ng taludtod.",
   "pattern": [
     {
-      "regex": "\\b([A-Z][a-z]+)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b"
+      "regex": "\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1\\sSamuel|2\\sSamuel|1\\sKings|2\\sKings|1\\sChronicles|2\\sChronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song\\sof\\sSolomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1\\sCorinthians|2\\sCorinthians|Galatians|Ephesians|Philippians|Colossians|1\\sThessalonians|2\\sThessalonians|1\\sTimothy|2\\sTimothy|Titus|Philemon|Hebrews|James|1\\sPeter|2\\sPeter|1\\sJohn|2\\sJohn|3\\sJohn|Jude|Revelation)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b"
     }
   ],
   "message": "Gumamit ng tutuldok (:) sa pagitan ng kabanata at taludtod, at tiyaking tama ang format ng saklaw ng taludtod.",
@@ -2306,22 +2311,7 @@ if (!grammarRules.length)  {
     {
       "text": "$1 $2:$3",
       "description": "Ilapat ang tamang format bilang kabanata:taludtod (ex. Matthew 3:10).",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b')"
-    },
-    {
-      "text": "$1 $2:$4",
-      "description": "Ilapat ang format ng kabanata at saklaw ng taludtod (ex. Matthew 3:10-12).",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})[-\\s](\\d{1,4})\\b')"
-    },
-    {
-      "text": "$1 $2:$3-$4",
-      "description": "Ilapat ang format ng kabanata at saklaw ng taludtod (ex. Matthew 3:10-15).",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})[-\\s](\\d{1,4})\\b')"
-    },
-    {
-      "text": "$1 $2:$3",
-      "description": "I-reformat ang extended na taludtod upang matugunan ang tamang format (ex. Matthew 23:89).",
-      "condition": "matches('\\b([A-Z][a-z]+)\\s*(\\d{1,3})(\\d{1,3})\\b')"
+      "condition": "matches('\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1\\sSamuel|2\\sSamuel|1\\sKings|2\\sKings|1\\sChronicles|2\\sChronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song\\sof\\sSolomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1\\sCorinthians|2\\sCorinthians|Galatians|Ephesians|Philippians|Colossians|1\\sThessalonians|2\\sThessalonians|1\\sTimothy|2\\sTimothy|Titus|Philemon|Hebrews|James|1\\sPeter|2\\sPeter|1\\sJohn|2\\sJohn|3\\sJohn|Jude|Revelation)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b')"
     }
   ],
   "examples": [
@@ -2350,50 +2340,12 @@ if (!grammarRules.length)  {
       "incorrect": "John 428",
       "correct": [
         "John 4:28",
-        "John 42:8" // Example only, depending on book and chapter validity
-      ]
-    },
-    {
-      "incorrect": "John 3572-10",
-      "correct": [
-        "John 35:72-10",
-        "John 3:572-10",
-        "John 3:57-10"
-      ]
-    },
-    {
-      "incorrect": "John 2389",
-      "correct": [
-        "John 23:89",
-        "John 2:38",
-        "John 3:89"
-      ]
-    },
-    {
-      "incorrect": "John 2197-2",
-      "correct": [
-        "John 21:97-2",
-        "John 2:19-7",
-        "John 21:9-2"
-      ]
-    },
-    {
-      "incorrect": "John 187-3",
-      "correct": [
-        "John 18:7-3",
-        "John 1:87-3",
-        "John 18:73"
-      ]
-    },
-    {
-      "incorrect": "John 33",
-      "correct": [
-        "John 3:3",
-        "John 33:0" // Example only, depending on book and chapter validity
+        "John 42:8"
       ]
     }
   ]
 }
+
 
 
 
