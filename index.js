@@ -2306,7 +2306,7 @@ if (!grammarRules.length)  {
     {
       "text": "$1:$2 $3",
       "description": "Ilapat ang tamang format sa oras (ex. 6:30 a.m. o 14:30).",
-      "condition": "matches('\\b(0?[1-9]|1[0-2])([0-5]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b([01]?\\d|2[0-3])([0-5]\\d)')"
+      "condition": "matches('\\b(1[0-2]|0?[1-9])[0-5][1-9]\\s*(?:[Aa][Mm]|[Pp][Mm]|[Aa]\\.[Mm]\\.|[Pp]\\.[Mm]\\.)\\b')"
     }
   ],
   "examples": [
