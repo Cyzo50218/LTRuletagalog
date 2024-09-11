@@ -2174,14 +2174,12 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si'.",
   "pattern": [
     {
-      "regex": "(?<!na si\\s)(Jose Rizal|Andres Bonifacio|Manuel Quezon|Emilio Aguinaldo|Lapu Lapu|Antonio Luna|Melchora Aquino|Gabriela Silang|Apolinario Mabini|Juan Luna|Pedro Paterno|Felipe Agoncillo|Julian Felipe|Carlos Romulo|Diosdado Macapagal|Ferdinand Marcos|Corazon Aquino|Ramon Magsaysay|Elpidio Quirino|Sergio Osmeña|Jose Laurel|Manuel Roxas|Benigno Aquino|Leandro Locsin|Juan Nakpil|Francisco Balagtas|Fernando Amorsolo|Lucio San Pedro|Francisco Santiago|Lorenzo Ruiz|Claro Recto|Teodoro Agoncillo|Ninoy Aquino|Manny Pacquiao|Risa Hontiveros|Grace Poe|Bam Aquino|Lito Atienza|Isko Moreno|Sara Duterte|Ping Lacson|Leni Robredo|Chiz Escudero|Erap Estrada|Mar Roxas|Jejomar Binay|Gloria Macapagal|Alan Cayetano|Vicente Sotto|Imee Marcos|Ramon Mitra|Koko Pimentel|Cesar Virata|Jojo Binay|Nene Pimentel|Sonny Angara|Ralph Recto|Jun Evasco|Tony Tan|Alfredo Lim|Tommy Osmeña|Cory Aquino|Pepe Diokno|Lito Lapid|Roilo Golez|Jun Abaya|Jess Dureza|Nikki Coseteng|Rodolfo Biazon|Joey Lina|Jinggoy Estrada|Kris Aquino|Fidel Ramos|Marcial Lichauco|Raul Roco|Butch Abad|Manuel Villar|Rene Saguisag|Jesse Robredo|Miro Quimbo|Erwin Tulfo|Sonny Belmonte|Gary Alejano|Mark Villar|Dick Gordon|Ping Lacson|Lito Banayo|Mike Defensor|Vicente Sotto|Enrile Reyes|Ramon Ang|Luis Singson|Erin Tañada|Frank Drilon|Diosdado Cabangon|Joey Salceda|Rodante Marcoleta|Miriam Defensor|Aimee Marcos|Paolo Duterte|Harry Roque|Nancy Binay|Bong Go|Grace Padaca|Rene Cayetano|Feliciano Belmonte|Orly Mercado|Dante Fascinillo|Gina Lopez|Benhur Abalos|Loren Legarda|Teddy Baguilat|Alan Peter|Francis Tolentino|Mark Cojuangco|Manny Villar|Imee Marcos|Imelda Marcos|Ferdinand Marcos|Bongbong Marcos|Gloria Arroyo|Juan Ponce|Bam Aquino|Noynoy Aquino|Bong Revilla|Lani Mercado|JV Ejercito|Jinggoy Estrada|Joseph Estrada|Sarah Duterte|Rodrigo Duterte|Gwen Garcia|Pablo Garcia|Jack Enrile|Juan Enrile)\\s*\\(([^)]+)\\)"
-    },
-    {
       "regex": "\\(\\s*([A-Z][a-z]+(?:\\s[A-Z][a-z]+){1,2})\\s*\\)"
     },
     {
-      "regex": "(Manila Times|Philippine Star|Inquirer.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
-    },
+  "regex": "\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
+}
+,
     {
       "regex": "\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b"
     }
@@ -2189,25 +2187,22 @@ if (!grammarRules.length)  {
   "message": "Gumamit ng panaklong () upang kulungin ang paglilinaw sa pangungusap. Halimbawa: Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere.",
   "suggestions": [
     {
-      "text": "$1 ($2)",
-      "description": "Ilagay ang paglilinaw sa loob ng panaklong (ex. Ang pambansang pangulo (Bong Bong Marcos)).",
-      "condition": "matches('(?<!na si\\s)(Jose Rizal|Andres Bonifacio|Manuel Quezon|Emilio Aguinaldo|Lapu Lapu|Antonio Luna|Melchora Aquino|Gabriela Silang|Apolinario Mabini|Juan Luna|Pedro Paterno|Felipe Agoncillo|Julian Felipe|Carlos Romulo|Diosdado Macapagal|Ferdinand Marcos|Corazon Aquino|Ramon Magsaysay|Elpidio Quirino|Sergio Osmeña|Jose Laurel|Manuel Roxas|Benigno Aquino|Leandro Locsin|Juan Nakpil|Francisco Balagtas|Fernando Amorsolo|Lucio San Pedro|Francisco Santiago|Lorenzo Ruiz|Claro Recto|Teodoro Agoncillo|Ninoy Aquino|Manny Pacquiao|Risa Hontiveros|Grace Poe|Bam Aquino|Lito Atienza|Isko Moreno|Sara Duterte|Ping Lacson|Leni Robredo|Chiz Escudero|Erap Estrada|Mar Roxas|Jejomar Binay|Gloria Macapagal|Alan Cayetano|Vicente Sotto|Imee Marcos|Ramon Mitra|Koko Pimentel|Cesar Virata|Jojo Binay|Nene Pimentel|Sonny Angara|Ralph Recto|Jun Evasco|Tony Tan|Alfredo Lim|Tommy Osmeña|Cory Aquino|Pepe Diokno|Lito Lapid|Roilo Golez|Jun Abaya|Jess Dureza|Nikki Coseteng|Rodolfo Biazon|Joey Lina|Jinggoy Estrada|Kris Aquino|Fidel Ramos|Marcial Lichauco|Raul Roco|Butch Abad|Manuel Villar|Rene Saguisag|Jesse Robredo|Miro Quimbo|Erwin Tulfo|Sonny Belmonte|Gary Alejano|Mark Villar|Dick Gordon|Ping Lacson|Lito Banayo|Mike Defensor|Vicente Sotto|Enrile Reyes|Ramon Ang|Luis Singson|Erin Tañada|Frank Drilon|Diosdado Cabangon|Joey Salceda|Rodante Marcoleta|Miriam Defensor|Aimee Marcos|Paolo Duterte|Harry Roque|Nancy Binay|Bong Go|Grace Padaca|Rene Cayetano|Feliciano Belmonte|Orly Mercado|Dante Fascinillo|Gina Lopez|Benhur Abalos|Loren Legarda|Teddy Baguilat|Alan Peter|Francis Tolentino|Mark Cojuangco|Manny Villar|Imee Marcos|Imelda Marcos|Ferdinand Marcos|Bongbong Marcos|Gloria Arroyo|Juan Ponce|Bam Aquino|Noynoy Aquino|Bong Revilla|Lani Mercado|JV Ejercito|Jinggoy Estrada|Joseph Estrada|Sarah Duterte|Rodrigo Duterte|Gwen Garcia|Pablo Garcia|Jack Enrile|Juan Enrile)\\s*\\(([^)]+)\\)'"
-    },
-    {
-      "text": "$1",
+      "text": "($1)",
       "description": "Remove existing parentheses around the phrase.",
       "condition": "matches('\\(\\s*([A-Za-z]+(?:\\s[A-Za-z]+){1,2})\\s*\\)')"
     },
     {
-      "text": "$1",
-      "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
-      "condition": "matches('\\(\\s*(Manila Times|Philippine Star|Inquirer.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\s*\\)')"
-    },
+  "text": "($1)",
+  "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
+  "condition": "matches('\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b')"
+}
+,
     {
-      "text": "$1",
-      "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
-      "condition": "matches('\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b')"
-    }
+  "text": "($1)",
+  "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
+  "condition": "matches('\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b')"
+}
+
   ],
   "examples": [
     {
@@ -2344,8 +2339,8 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng mga maling format ng Bible verse sa pamamagitan ng paglalagay ng tamang tutuldok (:) sa pagitan ng kabanata at taludtod, pati na rin ang mga saklaw ng taludtod.",
   "pattern": [
     {
-      "regex": "\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1\\sSamuel|2\\sSamuel|1\\sKings|2\\sKings|1\\sChronicles|2\\sChronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song\\sof\\sSolomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1\\sCorinthians|2\\sCorinthians|Galatians|Ephesians|Philippians|Colossians|1\\sThessalonians|2\\sThessalonians|1\\sTimothy|2\\sTimothy|Titus|Philemon|Hebrews|James|1\\sPeter|2\\sPeter|1\\sJohn|2\\sJohn|3\\sJohn|Jude|Revelation)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b"
-    }
+  "regex": "(?i)\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1\\sSamuel|2\\sSamuel|1\\sKings|2\\sKings|1\\sChronicles|2\\sChronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song\\sof\\sSolomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1\\sCorinthians|2\\sCorinthians|Galatians|Ephesians|Philippians|Colossians|1\\sThessalonians|2\\sThessalonians|1\\sTimothy|2\\sTimothy|Titus|Philemon|Hebrews|James|1\\sPeter|2\\sPeter|1\\sJohn|2\\sJohn|3\\sJohn|Jude|Revelation)\\s*(\\d{1,3})([-\\s]?\\d{0,4})\\b"
+}
   ],
   "message": "Gumamit ng tutuldok (:) sa pagitan ng kabanata at taludtod, at tiyaking tama ang format ng saklaw ng taludtod.",
   "suggestions": [
@@ -2387,70 +2382,6 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "PANIPI_DIRECT_SPEECH_CAPITAL",
-  "name": "Paggamit ng Panipi para sa Direktang Sipi na Nagsisimula sa Malaking Titik",
-  "description": "Gumamit ng panipi (\" \") upang ipakita ang buong sinasabi ng isang nagsasalita kapag ang pangungusap ay nagsisimula sa malaking titik, nagtatapos sa tuldok, at ang huling bahagi ay naglalaman ng 'sabi ng'.",
-  "pattern": [
-    {
-      "regex": "^(\\b[A-Z][^\\n]*?)(?=\\s+sabi ng\\b)"
-    }
-  ],
-  "message": "Gumamit ng panipi (\" \") upang ipakita ang buong sinasabi ng isang nagsasalita. Halimbawa: “Hindi kinukupkop ang criminal, pinarurusahan,” sabi ng Pangulo.",
-  "suggestions": [
-    {
-      "text": '"$1." sabi ng',
-      "description": "Palibutan ng panipi (\" \") ang buong sinabi na nagsisimula sa malaking titik at nagtatapos sa tuldok (ex. “Hindi kinukupkop ang criminal, pinarurusahan.” sabi ng Pangulo).",
-      "condition": "matches('^[A-Z].*sabi ng.*\\.$')"
-    }
-  ],
-  "examples": [
-    {
-      "incorrect": "Hindi kinukupkop ang criminal, pinarurusahan. sabi ng Pangulo.",
-      "correct": "“Hindi kinukupkop ang criminal, pinarurusahan.” sabi ng Pangulo."
-    },
-    {
-      "incorrect": "Ang kalayaan ay hindi dapat isuko. sabi ng bayani.",
-      "correct": "“Ang kalayaan ay hindi dapat isuko.” sabi ng bayani."
-    }
-  ]
-},
-{
-  "id": "PANIPI_FAMOUS_NAMES",
-  "name": "Paggamit ng Panipi para sa Pamagat ng Pahayagan, Aklat, at Ekspertong Larangan",
-  "description": "Gumamit ng panipi (\" \") upang ipakita ang pamagat ng pahayagan, magasin, aklat, o mga salita ng banyaga na kilala sa Pilipinas.",
-  "pattern": [
-    {
-      "regex": "\\b(Manila Times|Liwayway|Anak Dalita|Computer Programming|[A-Z][a-z]+)\\b"
-    }
-  ],
-  "message": "Gumamit ng panipi (\" \") sa paligid ng mga pamagat ng pahayagan, aklat, at mga salita ng banyaga. Halimbawa: “Manila Times”, “Liwayway”, “Computer Programming”.",
-  "suggestions": [
-    {
-      "text": "“$0”",
-      "description": "Palibutan ng panipi (\" \") ang pangalan ng pahayagan, aklat, o salita ng banyaga (ex. “Manila Times”, “Liwayway”, “Computer Programming”).",
-      "condition": "matches('\\b(Manila Times|Liwayway|Anak Dalita|Computer Programming|[A-Z][a-z]+)\\b')"
-    }
-  ],
-  "examples": [
-    {
-      "incorrect": "Nagbukas na muli ang Manila Times.",
-      "correct": "Nagbukas na muli ang “Manila Times.”"
-    },
-    {
-      "incorrect": "Isang lingguhang babasahin ang Liwayway.",
-      "correct": "Isang lingguhang babasahin ang “Liwayway.”"
-    },
-    {
-      "incorrect": "Napaluha ang marami nang mapanood ang dulang Anak Dalita.",
-      "correct": "Napaluha ang marami nang mapanood ang dulang “Anak Dalita.”"
-    },
-    {
-      "incorrect": "Ang binasa niyang aklat ay hinggil sa bagong Computer Programming.",
-      "correct": "Ang binasa niyang aklat ay hinggil sa bagong “Computer Programming.”"
-    }
-  ]
-},
-{
   "id": "PANAKLONG_CLARIFICATION",
   "name": "Gumamit ng Panaklong para sa Paglilinaw",
   "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si'.",
@@ -2462,7 +2393,7 @@ if (!grammarRules.length)  {
   "message": "Gumamit ng panaklong () upang kulungin ang paglilinaw sa pangungusap. Halimbawa: Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere.",
   "suggestions": [
     {
-      "text": "$1 ($2)",
+      "text": "($1)",
       "description": "Ilagay ang paglilinaw sa loob ng panaklong (ex. Ang pambansang pangulo (Bong Bong Marcos)).",
       "condition": "matches('(?<!na si\\s)(\\b[A-Z][a-z]+(?:\\s[A-Z][a-z]+){1,2})\\s*\\(([^)]+)\\)')"
     }
@@ -2488,8 +2419,8 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga pamilang na nagpapahayag ng taon, at tiyaking tama ang spacing sa pagitan ng mga taon at dash para sa mga saklaw ng taon.",
   "pattern": [
     {
-      "regex": "\\b(\\d{4})\\s*–\\s*(\\d{4})\\b"
-    },
+  "regex": "\\s(\\d{4})\\s*[-–]\\s*(\\d{4})\\b"
+},
     {
       "regex": "\\b(\\d{4})\\b"
     }
