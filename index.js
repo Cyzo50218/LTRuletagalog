@@ -2298,16 +2298,18 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng mga maling format ng oras sa pamamagitan ng tamang paggamit ng tutuldok (:) at mga wastong halaga para sa oras at minuto.",
   "pattern": [
     {
-  "regex": "\\b(1[0-2]|0?[1-9])[0-5][1-9]\\s*(?:[Aa][Mm]|[Pp][Mm]|[Aa]\\.[Mm]\\.|[Pp]\\.[Mm]\\.)\\b"
+  "regex": "\\b(0?[1-9]|1[0-2])(\\d{2})\\s*(am|pm|a\\.m\\.|p\\.m\\.)\\b"
 }
+
   ],
   "message": "Gumamit ng tutuldok (:) at tiyaking tama ang oras sa format na oras o military time (00:00-23:59).",
   "suggestions": [
     {
-      "text": "$1:$2 $3",
-      "description": "Ilapat ang tamang format sa oras (ex. 6:30 a.m. o 14:30).",
-      "condition": "matches('\\b(1[0-2]|0?[1-9])[0-5][1-9]\\s*(?:[Aa][Mm]|[Pp][Mm]|[Aa]\\.[Mm]\\.|[Pp]\\.[Mm]\\.)\\b')"
-    }
+  "text": "$1:$2 $3",
+  "description": "Format the time correctly with a colon separator and include AM/PM.",
+  "condition": "matches('\\b(0?[1-9]|1[0-2])(\\d{2})\\s*(am|pm|a\\.m\\.|p\\.m\\.)\\b')"
+}
+
   ],
   "examples": [
     {
