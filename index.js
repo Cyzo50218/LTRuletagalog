@@ -2419,8 +2419,8 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga pamilang na nagpapahayag ng taon, at tiyaking tama ang spacing sa pagitan ng mga taon at dash para sa mga saklaw ng taon.",
   "pattern": [
     {
-  "regex": "\\s(\\d{4})\\s*[-–]\\s*(\\d{4})\\b"
-},
+      "regex": "\\b(\\d{4})\\s*–\\s*(\\d{4})\\b"
+    },
     {
       "regex": "\\b(\\d{4})\\b"
     }
