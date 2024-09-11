@@ -2341,20 +2341,20 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng mga maling format ng Bible verse sa pamamagitan ng paglalagay ng tamang tutuldok (:) sa pagitan ng kabanata at taludtod, pati na rin ang mga saklaw ng taludtod.",
   "pattern": [
     {
-      "regex": "\\b([Gg]enesis|[Ee]xodus|[Ll]eviticus|[Nn]umbers|[Dd]euteronomy|[Jj]oshua|[Jj]udges|[Rr]uth|[1Ii]?[Ss]amuel|[2Ii]?[Ss]amuel|[1Ii]?[Kk]ings|[2Ii]?[Kk]ings|[1Ii]?[Cc]hronicles|[2Ii]?[Cc]hronicles|[Ee]zra|[Nn]ehemiah|[Ee]sther|[Jj]ob|[Pp]salms|[Pp]roverbs|[Ee]cclesiastes|[Ss]ong\\s[Oo]f\\s[Ss]olomon|[Ii]saiah|[Jj]eremiah|[Ll]amentations|[Ee]zekiel|[Dd]aniel|[Hh]osea|[Jj]oel|[Aa]mos|[Oo]badiah|[Jj]onah|[Mm]icah|[Nn]ahum|[Hh]abakkuk|[Zz]ephaniah|[Hh]aggai|[Zz]echariah|[Mm]alachi|[Mm]atthew|[Mm]ark|[Ll]uke|[Jj]ohn|[Aa]cts|[Rr]omans|[1Ii]?[Cc]orinthians|[2Ii]?[Cc]orinthians|[Gg]alatians|[Ee]phesians|[Pp]hilippians|[Cc]olossians|[1Ii]?[Tt]hessalonians|[2Ii]?[Tt]hessalonians|[1Ii]?[Tt]imothy|[2Ii]?[Tt]imothy|[Tt]itus|[Pp]hilemon|[Hh]ebrews|[Jj]ames|[1Ii]?[Pp]eter|[2Ii]?[Pp]eter|[1Ii]?[Jj]ohn|[2Ii]?[Jj]ohn|[3Ii]?[Jj]ohn|[Jj]ude|[Rr]evelation)\\s*(\\d{1,2})(\\d{1,2})\\b"
+      "regex": "\\b([Gg]enesis|[Ee]xodus|[Ll]eviticus|[Nn]umbers|[Dd]euteronomy|[Jj]oshua|[Jj]udges|[Rr]uth|[1Ii]?[Ss]amuel|[2Ii]?[Ss]amuel|[1Ii]?[Kk]ings|[2Ii]?[Kk]ings|[1Ii]?[Cc]hronicles|[2Ii]?[Cc]hronicles|[Ee]zra|[Nn]ehemiah|[Ee]sther|[Jj]ob|[Pp]salms|[Pp]roverbs|[Ee]cclesiastes|[Ss]ong\\s[Oo]f\\s[Ss]olomon|[Ii]saiah|[Jj]eremiah|[Ll]amentations|[Ee]zekiel|[Dd]aniel|[Hh]osea|[Jj]oel|[Aa]mos|[Oo]badiah|[Jj]onah|[Mm]icah|[Nn]ahum|[Hh]abakkuk|[Zz]ephaniah|[Hh]aggai|[Zz]echariah|[Mm]alachi|[Mm]atthew|[Mm]ark|[Ll]uke|[Jj]ohn|[Aa]cts|[Rr]omans|[1Ii]?[Cc]orinthians|[2Ii]?[Cc]orinthians|[Gg]alatians|[Ee]phesians|[Pp]hilippians|[Cc]olossians|[1Ii]?[Tt]hessalonians|[2Ii]?[Tt]hessalonians|[1Ii]?[Tt]imothy|[2Ii]?[Tt]imothy|[Tt]itus|[Pp]hilemon|[Hh]ebrews|[Jj]ames|[1Ii]?[Pp]eter|[2Ii]?[Pp]eter|[1Ii]?[Jj]ohn|[2Ii]?[Jj]ohn|[3Ii]?[Jj]ohn|[Jj]ude|[Rr]evelation)\\s*(\\d{1,2})(\\d{2,3})\\b"
     }
   ],
   "message": "Gumamit ng tutuldok (:) sa pagitan ng kabanata at taludtod, at tiyaking tama ang format ng saklaw ng taludtod.",
   "suggestions": [
     {
       "text": "$1 $2:$3",
-      "description": "Ilapat ang tamang format bilang kabanata:taludtod (ex. Matthew 3:10).",
-      "condition": "matches('\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1 Samuel|2 Samuel|1 Kings|2 Kings|1 Chronicles|2 Chronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song of Solomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1 Corinthians|2 Corinthians|Galatians|Ephesians|Philippians|Colossians|1 Thessalonians|2 Thessalonians|1 Timothy|2 Timothy|Titus|Philemon|Hebrews|James|1 Peter|2 Peter|1 John|2 John|3 John|Jude|Revelation)\\s*(\\d{1,2})(\\d{1,2})\\b')"
+      "description": "Ilapat ang tamang format bilang kabanata:taludtod (ex. Genesis 31:2).",
+      "condition": "matches('\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1 Samuel|2 Samuel|1 Kings|2 Kings|1 Chronicles|2 Chronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song of Solomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1 Corinthians|2 Corinthians|Galatians|Ephesians|Philippians|Colossians|1 Thessalonians|2 Thessalonians|1 Timothy|2 Timothy|Titus|Philemon|Hebrews|James|1 Peter|2 Peter|1 John|2 John|3 John|Jude|Revelation)\\s*(\\d{1,2})(\\d{2})\\b')"
     },
     {
-      "text": "$1 ${2}:${3}",
-      "description": "Kapag ang numero ay binubuo ng dalawang bahagi, hatiin bilang kabanata at taludtod (ex. John 316 -> John 3:16).",
-      "condition": "matches('\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1 Samuel|2 Samuel|1 Kings|2 Kings|1 Chronicles|2 Chronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song of Solomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1 Corinthians|2 Corinthians|Galatians|Ephesians|Philippians|Colossians|1 Thessalonians|2 Thessalonians|1 Timothy|2 Timothy|Titus|Philemon|Hebrews|James|1 Peter|2 Peter|1 John|2 John|3 John|Jude|Revelation)\\s*(\\d{1,3})\\b')"
+      "text": "$1 $2:$3",
+      "description": "Kapag ang numero ay binubuo ng tatlong bahagi, hatiin bilang kabanata at taludtod (ex. Genesis 3:12).",
+      "condition": "matches('\\b(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1 Samuel|2 Samuel|1 Kings|2 Kings|1 Chronicles|2 Chronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Song of Solomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1 Corinthians|2 Corinthians|Galatians|Ephesians|Philippians|Colossians|1 Thessalonians|2 Thessalonians|1 Timothy|2 Timothy|Titus|Philemon|Hebrews|James|1 Peter|2 Peter|1 John|2 John|3 John|Jude|Revelation)\\s*(\\d{1})(\\d{2,3})\\b')"
     }
   ],
   "examples": [
@@ -2383,21 +2383,19 @@ if (!grammarRules.length)  {
       ]
     },
     {
-      "incorrect": "Genesis 344",
+      "incorrect": "Genesis 312",
       "correct": [
-        "Genesis 3:44",
-        "Genesis 34:4"
+        "Genesis 3:12"
       ]
     },
     {
-      "incorrect": "John 3611",
+      "incorrect": "Genesis 3112",
       "correct": [
-        "John 36:11"
+        "Genesis 31:12"
       ]
     }
   ]
 }
-
 ,
 {
   "id": "PANAKLONG_YEARS",
