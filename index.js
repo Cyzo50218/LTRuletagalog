@@ -2403,7 +2403,7 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga pamilang na nagpapahayag ng taon, at tiyaking tama ang spacing sa pagitan ng mga taon at dash para sa mga saklaw ng taon.",
   "pattern": [
     {
-      "regex": "\\b(\\d{4})\\s*–\\s*(\\d{4})\\b"
+      "regex": "\\b(\\d{4}\\s*-\\s*\\d{4})\\b"
     },
     {
       "regex": "\\b(\\d{4})\\b"
@@ -2412,9 +2412,9 @@ if (!grammarRules.length)  {
   "message": "Ilagay ang mga taon sa loob ng panaklong, at tiyaking tama ang spacing sa pagitan ng mga taon at dash para sa mga saklaw. Halimbawa: Jose P. Rizal (1861 – 1896).",
   "suggestions": [
     {
-      "text": "($1 – $2)",
+      "text": "($1)",
       "description": "Ilagay ang mga taon sa loob ng panaklong na may tamang spacing (ex. (1861 – 1896)).",
-      "condition": "matches('\\b(\\d{4})\\s*–\\s*(\\d{4})\\b')"
+      "condition": "matches('\\b(\\d{4}\\s*-\\s*\\d{4})\\b')"
     },
     {
       "text": "($1)",
@@ -2434,9 +2434,14 @@ if (!grammarRules.length)  {
     {
       "incorrect": "Kilala siya mula 1861 to 1896",
       "correct": "Kilala siya mula (1861 – 1896)"
+    },
+    {
+      "incorrect": "Ito ay naganap noong 1880 - 1890",
+      "correct": "Ito ay naganap noong (1880 – 1890)"
     }
   ]
-},
+}
+,
 {
   "id": "PREFIX_HYPHENATION",
   "name": "Gumamit ng Gitling para sa Mga Prefix na 'de' at 'di'",
