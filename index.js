@@ -2298,8 +2298,8 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng mga maling format ng oras sa pamamagitan ng tamang paggamit ng tutuldok (:) at mga wastong halaga para sa oras at minuto.",
   "pattern": [
     {
-      "regex": "\\b(0?[1-9]|1[0-2])([0-5]\\d)\\s*(am|pm|a\\.m\\.|p\\.m\\.)?|\\b([01]?\\d|2[0-3])([0-5]\\d)"
-    }
+  "regex": "\\b(1[0-2]|0?[1-9])[0-5][1-9]\\s*(?:[Aa][Mm]|[Pp][Mm]|[Aa]\\.[Mm]\\.|[Pp]\\.[Mm]\\.)\\b"
+}
   ],
   "message": "Gumamit ng tutuldok (:) at tiyaking tama ang oras sa format na oras o military time (00:00-23:59).",
   "suggestions": [
@@ -2378,38 +2378,6 @@ if (!grammarRules.length)  {
         "John 4:28",
         "John 42:8"
       ]
-    }
-  ]
-},
-{
-  "id": "PANAKLONG_CLARIFICATION",
-  "name": "Gumamit ng Panaklong para sa Paglilinaw",
-  "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si'.",
-  "pattern": [
-    {
-      "regex": "(?<!na si\\s)(\\b[A-Z][a-z]+(?:\\s[A-Z][a-z]+){1,2})\\s*\\(([^)]+)\\)"
-    }
-  ],
-  "message": "Gumamit ng panaklong () upang kulungin ang paglilinaw sa pangungusap. Halimbawa: Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere.",
-  "suggestions": [
-    {
-      "text": "($1)",
-      "description": "Ilagay ang paglilinaw sa loob ng panaklong (ex. Ang pambansang pangulo (Bong Bong Marcos)).",
-      "condition": "matches('(?<!na si\\s)(\\b[A-Z][a-z]+(?:\\s[A-Z][a-z]+){1,2})\\s*\\(([^)]+)\\)')"
-    }
-  ],
-  "examples": [
-    {
-      "incorrect": "Ang pambansang pangulo Bong Bong Marcos ang may-akda ng Noli Me Tangere.",
-      "correct": "Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere."
-    },
-    {
-      "incorrect": "Ang pahayagan Manila Times ay kilala.",
-      "correct": "Ang pahayagan (Manila Times) ay kilala."
-    },
-    {
-      "incorrect": "Ang aklat Computer Programming ay mahalaga.",
-      "correct": "Ang aklat (Computer Programming) ay mahalaga."
     }
   ]
 },
