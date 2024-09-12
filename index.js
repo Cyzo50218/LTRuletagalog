@@ -1371,6 +1371,168 @@ if (!grammarRules.length)  {
     ]
   },
   {
+  "id": "36.opo_oho",
+  "name": "OPO at OHO (PO, HO)",
+  "pattern": [
+    {
+      "regex": "\\b(ppoo|oopo|opp|upu)\\b"
+    },
+    {
+      "regex": "\\b(ohu|uhu|uho|ohu)\\b"
+    }
+  ],
+  "message": "'Opo' ay mas pormal at ginagamit kapag ang kausap ay propesyunal o may mataas na katungkulan, samantalang 'Oho' ay di gaanong pormal at pangmasa ang gamit.",
+  "description": "'Opo' ay ginagamit sa mas pormal na sitwasyon at sa mga taong may mataas na katungkulan, samantalang 'Oho' ay ginagamit sa mga di gaanong pormal na sitwasyon.",
+  "example": "\"Magandang umaga po Gng. Tan,\" magalang na bati ng kanyang mga mag-aaral. \"Bili na ho kayo ng isda ko! Sariwa ho ito,\" panawagan ng tindera sa palengke.",
+  "suggestions": [
+    {
+      "text": "opo",
+      "condition": "matches(ppoo|oopo|opp|upu)",
+      "description": "'Opo' ay mas pormal na paraan ng pagsang-ayon."
+    },
+    {
+      "text": "oho",
+      "condition": "matches(ohu|uhu|uho|ohu)",
+      "description": "'Oho' ay mas di pormal na paraan ng pagsang-ayon."
+    }
+  ]
+},
+{
+  "id": "37.tawagin_tawagan",
+  "name": "TAWAGIN at TAWAGAN",
+  "pattern": [
+    {
+      "regex": "\\b([Tt]wagin|[Tt]wgni|[Tt]awgni|[Tt]wagn)\\b"
+    },
+    {
+      "regex": "(?<=,\\s?)\\b([Tt]wagan|[Tt]wgna|[Tt]awgn|[Tt]wgana)\\b"
+    }
+  ],
+  "message": "'Tawagin' ay ginagamit para palapitin ang isang tao o hayop, samantalang 'Tawagan' ay ginagamit para kausapin o bigyan-pansin ang isang tao.",
+  "description": "'Tawagin' ay para sa pagpapalapit ng isang tao o hayop, samantalang 'Tawagan' ay ginagamit kapag gusto mong makausap o bigyan ng atensyon ang isang tao.",
+  "example": "Tawagin mo na si Connie, kakain na. Nilo, tawagan mo si Dan para malaman natin kung sasama siya.",
+  "suggestions": [
+    {
+      "text": "Tawagin",
+      "condition": "matches(Twagin|Twgni|Tawgni|Twagn)",
+      "description": "'Tawagin' ay ginagamit para palapitin ang isang tao o hayop."
+    },
+    {
+      "text": "tawagin",
+      "condition": "matches(twagin|twgni|tawgni|twagn)",
+      "description": "'tawagin' ay ginagamit para palapitin ang isang tao o hayop."
+    },
+    {
+      "text": "Tawagan",
+      "condition": "matches(Twagan|Twgna|Tawgn|Twgana)",
+      "description": "'Tawagan' ay ginagamit para kausapin o bigyan-pansin ang isang tao."
+    },
+    {
+      "text": "tawagan",
+      "condition": "matches(twagan|twgna|tawgn|twgana)",
+      "description": "'tawagan' ay ginagamit para kausapin o bigyan-pansin ang isang tao."
+    },
+    {
+      "text": "Tawagan",
+      "condition": "matches(?<=,\\s?Twagan|Twgna|Tawgn|Twgana)",
+      "description": "'Tawagan' ay ginagamit lalo na pagkatapos ng isang listahan o pahabol na pahayag, upang bigyan ng atensyon ang isang tao."
+    },
+    {
+      "text": "tawagan",
+      "condition": "matches(?<=,\\s?twagan|twgna|tawgn|twgana)",
+      "description": "'tawagan' ay ginagamit lalo na pagkatapos ng isang listahan o pahabol na pahayag, upang bigyan ng atensyon ang isang tao."
+    }
+  ]
+}
+,
+{
+  "id": "38.punasin_punasan",
+  "name": "PUNASIN at PUNASAN",
+  "pattern": [
+    {
+      "regex": "\\b([Pp]unsin|[Pp]unsan|[Pp]unasn|[Pp]nasi)\\b"
+    },
+    {
+      "regex": "\\b([Pp]unsan|[Pp]unasn|[Pp]unasa)\\b"
+    }
+  ],
+  "message": "'Punasin' ay ginagamit kapag binabanggit ang bagay na tinatanggal, samantalang 'Punasan' ay ginagamit kapag binabanggit ang bagay na pinagtatanggalan.",
+  "description": "'Punasin' ay ginagamit para sa pag-aalis ng isang bagay na tinatanggal, samantalang 'Punasan' ay ginagamit kapag binabanggit ang bagay na pinagtatanggalan ng kung ano man.",
+  "example": "Punasin mo ang alikabok sa mesa. Punasan mo ang mesa.",
+  "suggestions": [
+    {
+      "text": "Punasin",
+      "condition": "matches([Pp]unsin|[Pp]unsan|[Pp]unasn|[Pp]nasi)",
+      "description": "'Punasin' ay ginagamit kapag binabanggit ang bagay na tinatanggal."
+    },
+    {
+      "text": "Punasan",
+      "condition": "matches([Pp]unsan|[Pp]unasn|[Pp]unasa)",
+      "description": "'Punasan' ay ginagamit kapag binabanggit ang bagay na pinagtatanggalan."
+    },
+    {
+      "text": "Punasin",
+      "condition": "matches([Pp]unsin|[Pp]unsan|[Pp]unasn|[Pp]nasi) && matches([Pp]unsan|[Pp]unasn|[Pp]unasa)",
+      "description": "'Punasin' ay ginagamit kapag binabanggit ang bagay na tinatanggal, at 'Punasan' ay ginagamit kapag binabanggit ang bagay na pinagtatanggalan."
+    },
+    {
+  "text": "Punasan",
+  "condition": "matches([Pp]unsin|[Pp]unsan|[Pp]unasn|[Pp]nasi) && matches([Pp]unsan|[Pp]unasn|[Pp]unasa)",
+  "description": "'Punasin' ay ginagamit kapag binabanggit ang bagay na tinatanggal, at 'Punasan' ay ginagamit kapag binabanggit ang bagay na pinagtatanggalan."
+}
+  ]
+}
+,
+{
+  "id": "39.hatiin_hatian",
+  "name": "HATIIN at HATIAN",
+  "pattern": [
+    {
+      "regex": "\\b([Hh]ati|[Hh]atini|[Hh]tiin|[Hh]atnii)\\b"
+    },
+    {
+      "regex": "\\b([Hh]natian|[Hh]ntaian|[Hh]inatina|[Hh]inatain|[Hh]atnai|[Hh]tian|[Hh]atiian)(?=\\s+niya)\\b"
+    }
+  ],
+  "message": "'Hatiin' ay ginagamit kapag pinag-uusapan ang paghahati ng isang bagay, samantalang 'Hatian' ay ginagamit kapag pinag-uusapan ang pagbabahagi ng isang bagay.",
+  "description": "'Hatiin' ay nangangahulugang pag-divide ng isang bagay, samantalang 'Hatian' ay nangangahulugang pag-share o pagbibigay ng bahagi ng isang bagay sa iba.",
+  "example": "Hatiin mo sa amin ang pakwan. Hinatian niya ng kanyang hamburger ang namamalimos na bata.",
+  "suggestions": [
+    {
+      "text": "hatiin",
+      "condition": "matches(hati|hatini|htiin|hatnii)",
+      "description": "'Hatiin' ay ginagamit kapag pinag-uusapan ang paghahati ng isang bagay."
+    },
+    {
+      "text": "hatian",
+      "condition": "matches(hatnai|htian|hatiian)",
+      "description": "'Hatian' ay ginagamit kapag pinag-uusapan ang pagbabahagi ng isang bagay."
+    },
+    {
+      "text": "hinatian",
+      "condition": "matches(hnatian|hntaian|hinatina|hinatain)",
+      "description": "'Hinatian' ay isang anyo ng 'Hatian' na nangangahulugang pagbibigay ng bahagi ng isang bagay sa iba, lalo na kapag may kasamang 'niya' na tumutukoy sa pagbibigay."
+    },
+    {
+  "text": "Hatiin",
+  "condition": "matches(Hati|Hatini|Htiin|Hatnii)",
+  "description": "'Hatiin' ay ginagamit kapag pinag-uusapan ang paghahati ng isang bagay."
+},
+{
+  "text": "Hatian",
+  "condition": "matches(Hatnai|Htian|Htiian)",
+  "description": "'Hatian' ay ginagamit kapag pinag-uusapan ang pagbabahagi ng isang bagay."
+},
+{
+  "text": "hinatian",
+  "condition": "matches(Hnatian|Hntaian|Hinatina|Hinatain)",
+  "description": "'Hinatian' ay isang anyo ng 'Hatian' na nangangahulugang pagbibigay ng bahagi ng isang bagay sa iba, lalo na kapag may kasamang 'niya' na tumutukoy sa pagbibigay."
+}
+  ]
+}
+
+,
+  {
   "id": "DITO_RITO",
   "name": "DITO at RITO",
   "pattern": [
@@ -2560,7 +2722,236 @@ if (!grammarRules.length)  {
       "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
     }
   ]
+},
+{
+  "id": "40.et_to_k",
+  "name": "ET to K Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z]+)et\\b"
+    }
+  ],
+  "message": "'et' sa mga salitang Ingles ay nagiging 'k' kapag binaybay sa Filipino.",
+  "description": "Ang 'et' sa dulo ng mga salitang Ingles ay nagiging 'k' kapag isinalin sa Filipino.",
+  "example": "abstract -> abstrak, contract -> kontrak",
+  "suggestions": [
+    {
+      "text": "$1k",
+      "condition": "matches([a-zA-Z]+et)",
+      "description": "Palitan ang 'et' ng 'k' sa salitang Filipino."
+    }
+  ]
+},
+{
+  "id": "41.ch_to_ts",
+  "name": "CH to TS Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z]*)ch([a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "'ch' sa mga salitang hiram ay maaaring palitan ng 'ts' kapag binaybay sa Filipino.",
+  "description": "Ang 'ch' sa mga salitang hiram ay maaaring maging 'ts' kapag isinalin sa Filipino.",
+  "example": "chinelas -> tsinelas, chocolate -> tsokolate",
+  "suggestions": [
+    {
+      "text": "$1ts$2",
+      "condition": "matches([a-zA-Z]*)ch([a-zA-Z]*)",
+      "description": "Palitan ang 'ch' ng 'ts' sa salitang Filipino."
+    }
+  ]
+},
+{
+  "id": "42.ch_to_k",
+  "name": "CH to K Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z]*)ch([a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "'ch' sa mga salitang hiram ay maaaring palitan ng 'k' kapag binaybay sa Filipino.",
+  "description": "Ang 'ch' sa mga salitang hiram ay maaaring maging 'k' kapag isinalin sa Filipino.",
+  "example": "machine -> makina, scholar -> iskolar",
+  "suggestions": [
+    {
+      "text": "$1k$2",
+      "condition": "matches([a-zA-Z]*)ch([a-zA-Z]*)",
+      "description": "Palitan ang 'ch' ng 'k' sa salitang Filipino."
+    }
+  ]
+},
+{
+  "id": "43.sh_to_sy",
+  "name": "SH to SY Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z]*)sh([a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "'sh' sa mga salitang hiram ay maaaring palitan ng 'sy' kapag binaybay sa Filipino.",
+  "description": "Ang 'sh' sa mga salitang hiram ay maaaring maging 'sy' kapag isinalin sa Filipino.",
+  "example": "workshop -> worksyap, shooting -> syuting",
+  "suggestions": [
+    {
+      "text": "$1sy$2",
+      "condition": "matches([a-zA-Z]*)sh([a-zA-Z]*)",
+      "description": "Palitan ang 'sh' ng 'sy' sa salitang Filipino."
+    }
+  ]
+},
+{
+  "id": "44.s_to_is",
+  "name": "S to IS Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([sS][a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "Ang 'S' sa simula ng mga salitang hiram ay maaaring lagyan ng 'I' kapag binaybay sa Filipino.",
+  "description": "Ang 'S' sa simula ng mga salitang hiram ay maaaring maging 'Is' kapag isinalin sa Filipino.",
+  "example": "schedule -> iskedyul, scout -> iskawt",
+  "suggestions": [
+    {
+      "text": "I$1",
+      "condition": "matches([sS][a-zA-Z]*)",
+      "description": "Lagyan ng 'I' sa unahan ng salitang hiram."
+    }
+  ]
+},
+{
+  "id": "45.remove_repeated_letters",
+  "name": "Remove Repeated Letters",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z])\\1([a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "Tanggalin ang isa sa mga magkasunod na parehong katinig sa mga salitang hiram.",
+  "description": "Ang mga salitang hiram na may dalawang magkasunod na parehong katinig ay kinakaltas ang isa.",
+  "example": "bulletin -> buletin, grammar -> gramar",
+  "suggestions": [
+    {
+      "text": "$1$2",
+      "condition": "matches([a-zA-Z])\\1([a-zA-Z]*)",
+      "description": "Tanggalin ang isa sa mga magkasunod na parehong katinig."
+    }
+  ]
+},
+{
+  "id": "49.add_period_single_letters",
+  "name": "Add Period After Single Letters or Roman Numerals",
+  "pattern": [
+    {
+      "regex": "(\\b[A-Z]{1,4}|[1-9]\\b)(?=\\s)"
+    }
+  ],
+  "message": "Ang tuldok ay ginagamit pagkatapos ng mga tambilang at titik.",
+  "description": "Magdagdag ng tuldok pagkatapos ng mga solong titik o tambilang.",
+  "example": "A -> A., II -> II., 4 -> 4.",
+  "suggestions": [
+    {
+      "text": "$1.",
+      "condition": "matches([A-Z]{1,4}|[1-9])",
+      "description": "Maglagay ng tuldok pagkatapos ng mga solong titik o tambilang."
+    }
+  ]
+},
+{
+  "id": "48.add_period_titles",
+  "name": "Add Period in Titles or Abbreviations",
+  "pattern": [
+    {
+      "regex": "(\\b(?:Gng|Jr|Dr|G.|Mrs|Ms)\\b)(?!\\.)"
+    }
+  ],
+  "message": "Ang tuldok ay ginagamit sa mga salitang dinaglat gaya ng ngalan ng tao, titulo, o ranggo.",
+  "description": "Magdagdag ng tuldok pagkatapos ng mga dinaglat na titulo o ranggo.",
+  "example": "Gng -> Gng., Jr -> Jr.",
+  "suggestions": [
+    {
+      "text": "$1.",
+      "condition": "matches(Gng|Jr|Dr|G.|Mrs|Ms)",
+      "description": "Maglagay ng tuldok pagkatapos ng mga dinaglat na titulo o ranggo."
+    }
+  ]
+},
+{
+  "id": "47.add_period_abbreviations",
+  "name": "Add Period in Abbreviations",
+  "pattern": [
+    {
+      "regex": "(\\b[A-Z]{2,}\\b)(?![\\.])"
+    }
+  ],
+  "message": "Ang tuldok ay ginagamit pagkatapos ng bawat titik sa pinaikling salita.",
+  "description": "Magdagdag ng tuldok sa bawat titik ng pinaikling salita.",
+  "example": "ABSD -> A.B.S.D.",
+  "suggestions": [
+    {
+      "text": "$1.",
+      "condition": "matches([A-Z]{2,})",
+      "description": "Maglagay ng tuldok sa pagitan ng bawat titik."
+    }
+  ]
+},
+{
+  "id": "46.add_period_paturol_pautos",
+  "name": "Add Period for Paturol or Pautos",
+  "pattern": [
+    {
+      "regex": "(?<=\\b(?:mag-aral|kumain|matulog|gumawa|umuwi)\\b)\\s+([a-zA-Z]+)(?!\\.)"
+    }
+  ],
+  "message": "Ang tuldok ay ginagamit sa katapusan ng pangungusap na paturol at pautos.",
+  "description": "Magdagdag ng tuldok sa katapusan ng pangungusap kung hindi pa ito nagtatapos sa tuldok.",
+  "example": "Mag-aral kayong mabuti -> Mag-aral kayong mabuti.",
+  "suggestions": [
+    {
+      "text": "$1.",
+      "description": "Magdagdag ng tuldok sa katapusan ng pangungusap."
+    }
+  ]
+},
+{
+  "id": "47.add_question_mark_pananong",
+  "name": "Add Question Mark for Pananong",
+  "pattern": [
+    {
+      "regex": "(?<=\\b(?:ano|sino|bakit|paano|kailan|saan|alin|ilan|magkano|kung)\\b.*?)(\\b(?:mo|ba|kaya|daw|naman)\\b)(?!\\?)"
+    }
+  ],
+  "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
+  "description": "Magdagdag ng tandang pananong sa katapusan ng mga salitang patanong kung hindi pa ito nagtatapos sa tandang pananong.",
+  "example": "Ano ang pangalan mo -> Ano ang pangalan mo?",
+  "suggestions": [
+    {
+      "text": "$1?",
+      "description": "Magdagdag ng tandang pananong sa salitang '$1' sa katapusan ng pangungusap."
+    }
+  ]
+},
+{
+  "id": "48.add_exclamation_padamdam",
+  "name": "Add Exclamation Mark for Padamdam",
+  "pattern": [
+    {
+      "regex": "(?<=\\b(?:Mabuhay ang|\\b)(?!\\s))\\b(?:Uy|Aray|Wow|Hala|Ay)\\b(?!\\!)"
+    }
+  ],
+  "message": "Ang bantas na padamdam ay ginagamit sa hulihan ng isang kataga, parirala o masidhing damdamin.",
+  "description": "Magdagdag ng tuldok na padamdam sa katapusan ng mga salita o parirala na may masidhing damdamin kung hindi pa ito nagtatapos sa tuldok na padamdam.",
+  "example": "Uy ang ganda ng bago mong sapatos -> Uy! ang ganda ng bago mong sapatos",
+  "suggestions": [
+    {
+      "text": "$1!",
+      "description": "Magdagdag ng tandang padamdam sa salitang '$0' sa katapusan ng pangungusap."
+    }
+  ]
 }
+
+
+
+
 
 
 
