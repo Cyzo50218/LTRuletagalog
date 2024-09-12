@@ -2243,17 +2243,17 @@ if (!grammarRules.length)  {
 {
   "id": "A3",
   "name": "Gamit ng Tutuldok",
-  "description": "Pagwawasto ng paggamit ng tutuldok matapos ang mga salitang 'tulad,' 'halimbawa,' 'gaya,' 'saka,' 'paris,' kapag sinusundan ng 'ng.'",
+  "description": "Pagwawasto ng paggamit ng tutuldok matapos ang mga salitang tulad ng 'tulad ng', 'halimbawa ng', 'gaya ng', 'saka ng', 'paris ng'.",
   "pattern": [
     {
-      "regex": "(?<=\\b(tulad|halimbawa|gaya|saka|paris)\\s)ng\\b"
+      "regex": "(tulad|halimbawa|gaya|saka|paris)\\s+(ng)\\b"
     }
   ],
-  "message": "Gumamit ng tutuldok (:) pagkatapos ng mga salitang 'tulad,' 'halimbawa,' 'gaya,' 'saka,' 'paris,' kapag sinusundan ng 'ng.'",
+  "message": "Gumamit ng tutuldok (:) pagkatapos ng mga salitang 'tulad ng', 'halimbawa ng', 'gaya ng', 'saka ng', 'paris ng'.",
   "suggestions": [
     {
-      "text": "$1 $2:",
-      "description": "Maglagay ng tutuldok pagkatapos ng 'tulad,' 'halimbawa,' 'gaya,' 'saka,' 'paris,' kapag sinusundan ng 'ng.'"
+      "text": "$1: $2",
+      "description": "Maglagay ng tutuldok pagkatapos ng 'tulad', 'halimbawa', 'gaya', 'saka', 'paris' kapag sinusundan ng 'ng'."
     }
   ],
   "examples": [
@@ -2263,6 +2263,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
+
 ,
 {
   "id": "A4",
