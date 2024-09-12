@@ -2269,7 +2269,7 @@ if (!grammarRules.length)  {
   "description": "Pagwawasto ng paggamit ng tutuldok pagkatapos ng bating panimula sa pormal na liham o liham-pangangalakal.",
   "pattern": [
     {
-      "regex": "\\b(Dr.|Bb.|G\\.|Gng.|Mr.|Mrs.|Ms.|Engr.|Atty.)\\.\\s+([A-Z][a-zA-Z]*)?(?!:)"
+      "regex": "\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)"
     }
   ],
   "message": "Gumamit ng tutuldok (:) pagkatapos ng bating panimula sa pormal na liham.",
@@ -2277,7 +2277,7 @@ if (!grammarRules.length)  {
     {
       "text": "$1. $2:",
       "description": "Maglagay ng tutuldok pagkatapos ng pangalan kung isang salita lamang.",
-      "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)?(?!:)')"
+      "condition": "matches('\\b(Dr|Bb|G\\.|Gng|Mr|Mrs|Ms|Engr|Atty)\\.\\s+([A-Z][a-zA-Z]*)')"
     }
   ],
   "examples": [
@@ -2511,7 +2511,7 @@ if (!grammarRules.length)  {
   "description": "Ginagamit ang tutuldok-kuwit (;) sa katapusan ng bating panimula ng liham pangalakal, tulad ng 'Ginoo;' o 'Bb;'. Siguraduhing gumagamit ng tamang bantas sa pagtatapos ng mga bating panimula.",
   "pattern": [
     {
-      "regex": "\\b(Ginoo|Bb|Gng|Dr|Pang|Sen|Hon)\\b(?!;)"
+      "regex": "\\b(Ginoo|Bb|Gng|Dr|Pang|Sen|Hon)\\b(?!\\.)"
     }
   ],
   "message": "Ang bating panimula ay dapat nagtatapos sa tutuldok-kuwit (;). Halimbawa: 'Ginoo;'",
@@ -2519,36 +2519,47 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1;",
-      "condition": "matches('\\b(Ginoo|Bb|Gng|Dr|Pang|Sen|Hon)\\b(?!;)')"
+      "condition": "matches('\\b(Ginoo|Bb|Gng|Dr|Pang|Sen|Hon)\\b(?!\\.)')"
     }
   ]
-},
+}
+,
 {
   "id": "SEMICOLON_BEFORE_PHRASES",
   "name": "Tutuldok-Kuwit Bago ang Mga Salita o Parirala",
-  "description": "Ginagamit ang tutuldok-kuwit (;) sa unahan ng mga salita at parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kung nangunguna sa isang paliwanag o halimbawa.",
+  "description": "Ginagamit ang tutuldok-kuwit (;) sa unahan ng mga salita at parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa.",
   "pattern": [
     {
-      "regex": "\\b([a-zA-Z]*)(?=\\s*(halimbawa|gaya ng|tulad ng|paris ng))"
+      "regex": "([\\w\\s]+)\\s*(halimbawa|gaya ng|tulad ng|paris ng)"
     }
   ],
   "message": "Siguraduhing gumagamit ng tutuldok-kuwit (;) bago ang mga salita o parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa. Halimbawa: 'Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin; gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.'",
   "example": "Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.",
   "suggestions": [
     {
-      "text": "$1;",
-      "condition": "matches('\\b([a-zA-Z]*)(?=\\s*(halimbawa|gaya ng|tulad ng|paris ng))')"
+      "text": "$1; $2",
+      "condition": "matches('([\\w\\s]+)\\s*(halimbawa|gaya ng|tulad ng|paris ng)')"
+    }
+  ]
+},
+{
+  "id": "ELLIPSIS_ENDING",
+  "name": "Ellipsis for Paragraph/Sentence Ending",
+  "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
+  "pattern": [
+    {
+      "regex": "\\b[^.,!?\\s]+$"
+    }
+  ],
+  "message": "Siguraduhing ang talata o pangungusap ay nagtatapos sa tamang bantas. Kung sadyang binibitin ang pahayag, idagdag ang tatlong tuldok (...).",
+  "example": "Pinagtibay ng Pangulong Arroyo",
+  "suggestions": [
+    {
+      "text": "$0...",
+      "condition": "matches('\\b[^.,!?\\s]+$')"
     }
   ]
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -2777,3 +2788,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
