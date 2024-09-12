@@ -2549,7 +2549,7 @@ if (!grammarRules.length)  {
   "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
   "pattern": [
     {
-      "regex": "\\b[^.,!?\\s]+$"
+      "regex": "([\\w\\s]+[^.,!?])\\s*$"
     }
   ],
   "message": "Siguraduhing ang talata o pangungusap ay nagtatapos sa tamang bantas. Kung sadyang binibitin ang pahayag, idagdag ang tatlong tuldok (...).",
@@ -2557,10 +2557,11 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1...",
-      "condition": "matches('\\b[^.,!?\\s]+$')"
+      "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na walang tamang bantas."
     }
   ]
 }
+
 
 
 
