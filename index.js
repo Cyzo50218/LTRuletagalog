@@ -2173,7 +2173,7 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)"
+      "regex": "\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B"
     }
   ],
   "message": "Ang mga pangalan ay may mga panaklong. Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: '(Gloria Macapagal-Arroyo)'.",
@@ -2182,11 +2182,11 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "($1 $2-$3)",
-      "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
+      "condition": "matches('^\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B')"
     },
     {
   "text": "$1 $2-$3",
-  "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
+  "condition": "matches('^\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B')"
 }
   ]
 }
@@ -2198,7 +2198,7 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si' o 'si'.",
   "pattern": [
     {
-  "regex": "\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)"
+  "regex": "\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B"
 },
     {
       "regex": "\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
@@ -2215,7 +2215,7 @@ if (!grammarRules.length)  {
     {
       "text": "($1)",
       "description": "Remove existing parentheses around the phrase.",
-      "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
+      "condition": "matches('^\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B')"
       },
     {
       "text": "($1)",
