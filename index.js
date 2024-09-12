@@ -2252,7 +2252,7 @@ if (!grammarRules.length)  {
   "message": "Gumamit ng tutuldok (:) pagkatapos ng mga salitang 'tulad,' 'halimbawa,' 'gaya,' 'saka,' 'paris,' kapag sinusundan ng 'ng.'",
   "suggestions": [
     {
-      "text": "$1:",
+      "text": "$1 $2:",
       "description": "Maglagay ng tutuldok pagkatapos ng 'tulad,' 'halimbawa,' 'gaya,' 'saka,' 'paris,' kapag sinusundan ng 'ng.'"
     }
   ],
