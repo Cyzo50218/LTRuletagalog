@@ -2171,6 +2171,7 @@ if (!grammarRules.length)  {
 {
   "id": "HYPHENATED_LAST_NAMES",
   "name": "Hyphenated Last Names for Married Women",
+  "description": "Ginagamit ang gitling '-' kapag pinagkakabit o pinagsasama ang apelyido ng babae at ng kanyang bana o asawa",
   "pattern": [
     {
       "regex": "\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B"
@@ -2195,17 +2196,11 @@ if (!grammarRules.length)  {
 {
   "id": "PANAKLONG_CLARIFICATION",
   "name": "Gumamit ng Panaklong para sa Paglilinaw",
-  "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si' o 'si'.",
+  "description": "Ginagamit ang panaklong () na pambukod sa salita o mga salitang hindi direktang kaugnay ng diwa ng pangungusap, o mga pamuno",
   "pattern": [
     {
   "regex": "\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B"
 },
-    {
-      "regex": "\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
-    },
-    {
-      "regex": "\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b"
-    },
     {
   "regex": "(?<!\\b(?:na\\s+si|si)\\s)\\s*(Jose Rizal|Andres Bonifacio|Manuel Quezon|Emilio Aguinaldo|Lapu Lapu|Antonio Luna|Melchora Aquino|Gabriela Silang|Apolinario Mabini|Juan Luna|Pedro Paterno|Felipe Agoncillo|Julian Felipe|Carlos Romulo|Diosdado Macapagal|Ferdinand Marcos|Corazon Aquino|Ramon Magsaysay|Elpidio Quirino|Sergio Osmeña|Jose Laurel|Manuel Roxas|Benigno Aquino|Leandro Locsin|Juan Nakpil|Francisco Balagtas|Fernando Amorsolo|Lucio San Pedro|Francisco Santiago|Lorenzo Ruiz|Claro Recto|Teodoro Agoncillo|Ninoy Aquino|Manny Pacquiao|Risa Hontiveros|Grace Poe|Bam Aquino|Lito Atienza|Isko Moreno|Sara Duterte|Ping Lacson|Leni Robredo|Chiz Escudero|Erap Estrada|Mar Roxas|Jejomar Binay|Gloria Macapagal|Alan Cayetano|Vicente Sotto|Imee Marcos|Ramon Mitra|Koko Pimentel|Cesar Virata|Jojo Binay|Nene Pimentel|Sonny Angara|Ralph Recto|Jun Evasco|Tony Tan|Alfredo Lim|Tommy Osmeña|Cory Aquino|Pepe Diokno|Lito Lapid|Roilo Golez|Jun Abaya|Jess Dureza|Nikki Coseteng|Rodolfo Biazon|Joey Lina|Jinggoy Estrada|Kris Aquino|Fidel Ramos|Marcial Lichauco|Raul Roco|Butch Abad|Manuel Villar|Rene Saguisag|Jesse Robredo|Miro Quimbo|Erwin Tulfo|Sonny Belmonte|Gary Alejano|Mark Villar|Dick Gordon|Ping Lacson|Lito Banayo|Mike Defensor|Vicente Sotto|Enrile Reyes|Ramon Ang|Luis Singson|Erin Tañada|Frank Drilon|Diosdado Cabangon|Joey Salceda|Rodante Marcoleta|Miriam Defensor|Aimee Marcos|Paolo Duterte|Harry Roque|Nancy Binay|Bong Go|Grace Padaca|Rene Cayetano|Feliciano Belmonte|Orly Mercado|Dante Fascinillo|Gina Lopez|Benhur Abalos|Loren Legarda|Teddy Baguilat|Alan Peter|Francis Tolentino|Mark Cojuangco|Manny Villar|Imelda Marcos|Bongbong Marcos|Gloria Arroyo|Juan Ponce|Bam Aquino|Noynoy Aquino|Bong Revilla|Lani Mercado|JV Ejercito|Jinggoy Estrada|Joseph Estrada|Sarah Duterte|Rodrigo Duterte|Gwen Garcia|Pablo Garcia|Jack Enrile|Juan Enrile|Cynthia Villar|Mark Villar|Nancy Binay|Abby Binay|Toby Tiangco|Ruffy Biazon|Teofisto Guingona|Migz Zubiri|Gibo Teodoro|Neptali Gonzales|Lino Cayetano|Pia Cayetano|Chavit Singson|Danilo Suarez|Prospero Nograles|Pantaleon Alvarez|Martin Romualdez|Jolo Revilla|Ramon Revilla|Rico Puno|Gilbert Teodoro|Alfred Romualdez|Bebot Alvarez|Butz Aquino|Jose Ma\\. Zubiri|Teofisto Guingona|Carlos Padilla|Ronnie Zamora|Del De Guzman|Chiz Escudero|Peping Cojuangco|Gilbert Remulla|Emmanuel Pacquiao|Isidro Ungab|Daisy Avance)\\b"
 }
@@ -2213,24 +2208,41 @@ if (!grammarRules.length)  {
   "message": "Gumamit ng panaklong () upang kulungin ang paglilinaw sa pangungusap. Halimbawa: Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere.",
   "suggestions": [
     {
-      "text": "($1)",
+      "text": "($1 $2)",
       "description": "Remove existing parentheses around the phrase.",
       "condition": "matches('^\\\u200B\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\\u200B')"
       },
     {
       "text": "($1)",
+      "description": "Wrap the matched name in parentheses.",
+      "condition": "matches('(?<!\\b(?:na\\s+si|si)\\s)(Jose Rizal|Andres Bonifacio|Manuel Quezon|Emilio Aguinaldo|Lapu Lapu|Antonio Luna|Melchora Aquino|Gabriela Silang|Apolinario Mabini|Juan Luna|Pedro Paterno|Felipe Agoncillo|Julian Felipe|Carlos Romulo|Diosdado Macapagal|Ferdinand Marcos|Corazon Aquino|Ramon Magsaysay|Elpidio Quirino|Sergio Osmeña|Jose Laurel|Manuel Roxas|Benigno Aquino|Leandro Locsin|Juan Nakpil|Francisco Balagtas|Fernando Amorsolo|Lucio San Pedro|Francisco Santiago|Lorenzo Ruiz|Claro Recto|Teodoro Agoncillo|Ninoy Aquino|Manny Pacquiao|Risa Hontiveros|Grace Poe|Bam Aquino|Lito Atienza|Isko Moreno|Sara Duterte|Ping Lacson|Leni Robredo|Chiz Escudero|Erap Estrada|Mar Roxas|Jejomar Binay|Gloria Macapagal|Alan Cayetano|Vicente Sotto|Imee Marcos|Ramon Mitra|Koko Pimentel|Cesar Virata|Jojo Binay|Nene Pimentel|Sonny Angara|Ralph Recto|Jun Evasco|Tony Tan|Alfredo Lim|Tommy Osmeña|Cory Aquino|Pepe Diokno|Lito Lapid|Roilo Golez|Jun Abaya|Jess Dureza|Nikki Coseteng|Rodolfo Biazon|Joey Lina|Jinggoy Estrada|Kris Aquino|Fidel Ramos|Marcial Lichauco|Raul Roco|Butch Abad|Manuel Villar|Rene Saguisag|Jesse Robredo|Miro Quimbo|Erwin Tulfo|Sonny Belmonte|Gary Alejano|Mark Villar|Dick Gordon|Ping Lacson|Lito Banayo|Mike Defensor|Vicente Sotto|Enrile Reyes|Ramon Ang|Luis Singson|Erin Tañada|Frank Drilon|Diosdado Cabangon|Joey Salceda|Rodante Marcoleta|Miriam Defensor|Aimee Marcos|Paolo Duterte|Harry Roque|Nancy Binay|Bong Go|Grace Padaca|Rene Cayetano|Feliciano Belmonte|Orly Mercado|Dante Fascinillo|Gina Lopez|Benhur Abalos|Loren Legarda|Teddy Baguilat|Alan Peter|Francis Tolentino|Mark Cojuangco|Manny Villar|Imelda Marcos|Bongbong Marcos|Gloria Arroyo|Juan Ponce|Bam Aquino|Noynoy Aquino|Bong Revilla|Lani Mercado|JV Ejercito|Jinggoy Estrada|Joseph Estrada|Sarah Duterte|Rodrigo Duterte|Gwen Garcia|Pablo Garcia|Jack Enrile|Juan Enrile|Cynthia Villar|Mark Villar|Nancy Binay|Abby Binay|Toby Tiangco|Ruffy Biazon|Teofisto Guingona|Migz Zubiri|Gibo Teodoro|Neptali Gonzales|Lino Cayetano|Pia Cayetano|Chavit Singson|Danilo Suarez|Prospero Nograles|Pantaleon Alvarez|Martin Romualdez|Jolo Revilla|Ramon Revilla|Rico Puno|Gilbert Teodoro|Alfred Romualdez|Bebot Alvarez|Butz Aquino|Jose Ma\\. Zubiri|Teofisto Guingona|Carlos Padilla|Ronnie Zamora|Del De Guzman|Chiz Escudero|Peping Cojuangco|Gilbert Remulla|Emmanuel Pacquiao|Isidro Ungab|Daisy Avance)\\b')"
+    }
+  ]
+}
+,
+{
+  "id": "PANAKLONG_CLARIFICATION",
+  "name": "Gumamit ng Panaklong para sa Paglilinaw",
+  "description": 'Ginagamit ang panipi " " upang mabigyan diin ang pamagat ng isang pahayagan, magasin, aklatat iba’t ibang mga akda.',
+  "pattern": [
+    {
+      "regex": "\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
+    },
+    {
+      "regex": "\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b"
+    }
+  ],
+  "message": "Gumamit ng panaklong () upang kulungin ang paglilinaw sa pangungusap. Halimbawa: Ang pambansang pangulo (Bong Bong Marcos) ang may-akda ng Noli Me Tangere.",
+  "suggestions": [
+    {
+      "text": '"$1"',
       "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
       "condition": "matches('\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b')"
     },
     {
-      "text": "($1)",
+      "text": '"$1"',
       "description": "No need to add parentheses as the phrase is already enclosed in parentheses.",
       "condition": "matches('\\b(Computer Programming|Software Development|Information Technology|Data Science|Artificial Intelligence|Machine Learning|Cybersecurity|Web Development|Database Management|System Analysis|Computer Engineering|Networking|Cloud Computing|Software Engineering|Algorithm Design|Programming Languages|Data Structures|Operating Systems|Human-Computer Interaction|Software Testing|Mobile Development|Game Development|Project Management|IT Consulting|Tech Support|UI/UX Design|Computer Graphics|Digital Marketing|E-commerce|Network Administration|IT Infrastructure|DevOps|Business Intelligence|Data Analytics|Blockchain Technology)\\b')"
-    },
-    {
-      "text": "($1)",
-      "description": "Wrap the matched name in parentheses.",
-      "condition": "matches('(?<!\\b(?:na\\s+si|si)\\s)(Jose Rizal|Andres Bonifacio|Manuel Quezon|Emilio Aguinaldo|Lapu Lapu|Antonio Luna|Melchora Aquino|Gabriela Silang|Apolinario Mabini|Juan Luna|Pedro Paterno|Felipe Agoncillo|Julian Felipe|Carlos Romulo|Diosdado Macapagal|Ferdinand Marcos|Corazon Aquino|Ramon Magsaysay|Elpidio Quirino|Sergio Osmeña|Jose Laurel|Manuel Roxas|Benigno Aquino|Leandro Locsin|Juan Nakpil|Francisco Balagtas|Fernando Amorsolo|Lucio San Pedro|Francisco Santiago|Lorenzo Ruiz|Claro Recto|Teodoro Agoncillo|Ninoy Aquino|Manny Pacquiao|Risa Hontiveros|Grace Poe|Bam Aquino|Lito Atienza|Isko Moreno|Sara Duterte|Ping Lacson|Leni Robredo|Chiz Escudero|Erap Estrada|Mar Roxas|Jejomar Binay|Gloria Macapagal|Alan Cayetano|Vicente Sotto|Imee Marcos|Ramon Mitra|Koko Pimentel|Cesar Virata|Jojo Binay|Nene Pimentel|Sonny Angara|Ralph Recto|Jun Evasco|Tony Tan|Alfredo Lim|Tommy Osmeña|Cory Aquino|Pepe Diokno|Lito Lapid|Roilo Golez|Jun Abaya|Jess Dureza|Nikki Coseteng|Rodolfo Biazon|Joey Lina|Jinggoy Estrada|Kris Aquino|Fidel Ramos|Marcial Lichauco|Raul Roco|Butch Abad|Manuel Villar|Rene Saguisag|Jesse Robredo|Miro Quimbo|Erwin Tulfo|Sonny Belmonte|Gary Alejano|Mark Villar|Dick Gordon|Ping Lacson|Lito Banayo|Mike Defensor|Vicente Sotto|Enrile Reyes|Ramon Ang|Luis Singson|Erin Tañada|Frank Drilon|Diosdado Cabangon|Joey Salceda|Rodante Marcoleta|Miriam Defensor|Aimee Marcos|Paolo Duterte|Harry Roque|Nancy Binay|Bong Go|Grace Padaca|Rene Cayetano|Feliciano Belmonte|Orly Mercado|Dante Fascinillo|Gina Lopez|Benhur Abalos|Loren Legarda|Teddy Baguilat|Alan Peter|Francis Tolentino|Mark Cojuangco|Manny Villar|Imelda Marcos|Bongbong Marcos|Gloria Arroyo|Juan Ponce|Bam Aquino|Noynoy Aquino|Bong Revilla|Lani Mercado|JV Ejercito|Jinggoy Estrada|Joseph Estrada|Sarah Duterte|Rodrigo Duterte|Gwen Garcia|Pablo Garcia|Jack Enrile|Juan Enrile|Cynthia Villar|Mark Villar|Nancy Binay|Abby Binay|Toby Tiangco|Ruffy Biazon|Teofisto Guingona|Migz Zubiri|Gibo Teodoro|Neptali Gonzales|Lino Cayetano|Pia Cayetano|Chavit Singson|Danilo Suarez|Prospero Nograles|Pantaleon Alvarez|Martin Romualdez|Jolo Revilla|Ramon Revilla|Rico Puno|Gilbert Teodoro|Alfred Romualdez|Bebot Alvarez|Butz Aquino|Jose Ma\\. Zubiri|Teofisto Guingona|Carlos Padilla|Ronnie Zamora|Del De Guzman|Chiz Escudero|Peping Cojuangco|Gilbert Remulla|Emmanuel Pacquiao|Isidro Ungab|Daisy Avance)\\b')"
     }
   ]
 }
