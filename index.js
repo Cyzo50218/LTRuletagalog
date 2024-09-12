@@ -2546,10 +2546,10 @@ if (!grammarRules.length)  {
 {
   "id": "ELLIPSIS_ENDING",
   "name": "Ellipsis for Paragraph/Sentence Ending",
-  "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
+  "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok, tandang pananong, o tandang padamdam. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
   "pattern": [
     {
-      "regex": "([\\w\\s]+[^.,!?])\\s*$"
+      "regex": "\\b(\\w+)(?![.,!?])\\s*$"
     }
   ],
   "message": "Siguraduhing ang talata o pangungusap ay nagtatapos sa tamang bantas. Kung sadyang binibitin ang pahayag, idagdag ang tatlong tuldok (...).",
@@ -2557,10 +2557,11 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1...",
-      "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na walang tamang bantas."
+      "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
     }
   ]
 }
+
 
 
 
