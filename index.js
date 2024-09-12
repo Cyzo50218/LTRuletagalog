@@ -2506,24 +2506,6 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "ELLIPSIS_ENDING",
-  "name": "Ellipsis for Paragraph/Sentence Ending",
-  "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
-  "pattern": [
-    {
-      "regex": "(?<!\\.)\\s*$"
-    }
-  ],
-  "message": "Siguraduhing ang talata o pangungusap ay nagtatapos sa tamang bantas. Kung sadyang binibitin ang pahayag, idagdag ang tatlong tuldok (...).",
-  "example": "Pinagtibay ng Pangulong Arroyo",
-  "suggestions": [
-    {
-      "text": "$0...",
-      "condition": "matches('(?<!\\.)\\s*$')"
-    }
-  ]
-},
-{
   "id": "BATING_PANIMULA_SEMICOLON",
   "name": "Tutuldok-Kuwit for Bating Panimula ng Liham Pangalakal",
   "description": "Ginagamit ang tutuldok-kuwit (;) sa katapusan ng bating panimula ng liham pangalakal, tulad ng 'Ginoo;' o 'Bb;'. Siguraduhing gumagamit ng tamang bantas sa pagtatapos ng mga bating panimula.",
@@ -2795,4 +2777,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
