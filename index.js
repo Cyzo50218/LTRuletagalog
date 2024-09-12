@@ -2173,19 +2173,24 @@ if (!grammarRules.length)  {
   "name": "Hyphenated Last Names for Married Women",
   "pattern": [
     {
-      "regex": "\\b([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\b"
+      "regex": "\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)"
     }
   ],
-  "message": "Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: 'Gloria Macapagal-Arroyo'.",
-  "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa.",
-  "example": "Gloria Macapagal Arroyo, Gloria Macapagal-Arroyo",
+  "message": "Ang mga pangalan ay may mga panaklong. Siguraduhing tama ang paggamit ng gitling (-) sa pagitan ng mga apelyido kapag pinagsasama ang apelyido ng babae at ng kanyang asawa. Halimbawa: '(Gloria Macapagal-Arroyo)'.",
+  "description": "Ang rule na ito ay para sa tamang paggamit ng gitling sa pagitan ng apelyido ng babae at ng kanyang asawa kung nakapaloob sa panaklong.",
+  "example": "(Gloria Macapagal Arroyo)",
   "suggestions": [
     {
-      "text": "$1 $2-$3",
-      "condition": "matches('^([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\s*([A-Z][a-z]+)$')"
-    }
+      "text": "($1 $2-$3)",
+      "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
+    },
+    {
+  "text": "$1 $2-$3",
+  "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
+}
   ]
 }
+
 ,
 {
   "id": "PANAKLONG_CLARIFICATION",
@@ -2193,7 +2198,7 @@ if (!grammarRules.length)  {
   "description": "Gumamit ng panaklong () upang kulungin ang mga salita o parirala na nagbibigay-linaw sa pangungusap, tulad ng pangalan, pamagat, o iba pang detalye. Huwag gamitin ang panaklong kung ang unang bahagi ay nagsisimula sa 'na si' o 'si'.",
   "pattern": [
     {
-  "regex": "\\b([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\b"
+  "regex": "\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)"
 },
     {
       "regex": "\\b(Manila Times|Philippine Star|Inquirer\\.net|Rappler|ABS-CBN News|GMA News|BusinessMirror|SunStar|Daily Tribune|Tempo|Philippine Daily Inquirer|The Standard|News5|Malaya|BusinessWorld|The Manila Bulletin|Mindanao Times|The Freeman|The Philippine Post|Hataw|The Philippine Star|Philippine News Agency|CNN Philippines)\\b"
@@ -2210,7 +2215,7 @@ if (!grammarRules.length)  {
     {
       "text": "($1)",
       "description": "Remove existing parentheses around the phrase.",
-      "condition": "matches('^([A-Z][a-z]+)\\s*([A-Z][a-z]+)\\s*([A-Z][a-z]+)$')"
+      "condition": "matches('^\\(\\s*([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s+([A-Z][a-z]+)\\s*\\)$')"
       },
     {
       "text": "($1)",
@@ -2682,7 +2687,7 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"]; // Add "kundi" to excluded words
+    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"," Gloria Macapagal Arroyo "]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
     const languageToolResult = await callLanguageToolAPI(text,excludedWords);
