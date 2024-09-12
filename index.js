@@ -2243,22 +2243,22 @@ if (!grammarRules.length)  {
 {
   "id": "A3",
   "name": "Gamit ng Tutuldok",
-  "description": "Pagwawasto ng paggamit ng tutuldok matapos ang mga salitang tulad ng 'tulad ng'.",
+  "description": "Pagwawasto ng paggamit ng tutuldok matapos ang mga salitang tulad ng 'tulad ng', 'halimbawa ng', 'saka ng', 'paris ng'.",
   "pattern": [
     {
-      "regex": "(tulad ng)\\s+(\\w+)"
+      "regex": "(?<=\\b(tulad |halimbawa |saka |paris ))\\s+(ng)"
     }
   ],
-  "message": "Gumamit ng tutuldok (:) matapos ang mga salitang 'tulad ng'.",
+  "message": "Gumamit ng tutuldok (:) matapos ang mga salitang 'tulad ng', 'halimbawa ng', 'saka ng', 'paris ng'.",
   "suggestions": [
     {
-      "text": "$1: $2",
-      "description": "Maglagay ng tutuldok pagkatapos ng 'tulad ng'."
+      "text": "$1:",
+      "description": "Maglagay ng tutuldok pagkatapos ng 'tulad ng', 'halimbawa ng', 'saka ng', 'paris ng'."
     }
   ],
   "examples": [
-    { 
-      "incorrect": "Maraming halaman ang namumulaklak sa hardin tulad ng Rosal, Rosas, Orchids, Sampaguita, Santan at iba pa.", 
+    {
+      "incorrect": "Maraming halaman ang namumulaklak sa hardin tulad ng Rosal, Rosas, Orchids, Sampaguita, Santan at iba pa.",
       "correct": "Maraming halaman ang namumulaklak sa hardin tulad ng: Rosal, Rosas, Orchids, Sampaguita, Santan at iba pa."
     }
   ]
