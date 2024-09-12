@@ -2530,18 +2530,19 @@ if (!grammarRules.length)  {
   "description": "Ginagamit ang tutuldok-kuwit (;) sa unahan ng mga salita at parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa.",
   "pattern": [
     {
-      "regex": "([\\w\\s]+)\\s*(halimbawa|gaya ng|tulad ng|paris ng)"
+      "regex": "\\b(\\w+)\\b(?=\\s+(halimbawa|gaya ng|tulad ng|paris ng))"
     }
   ],
   "message": "Siguraduhing gumagamit ng tutuldok-kuwit (;) bago ang mga salita o parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa. Halimbawa: 'Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin; gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.'",
   "example": "Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.",
   "suggestions": [
     {
-      "text": "$1; $2",
-      "condition": "matches('([\\w\\s]+)\\s*(halimbawa|gaya ng|tulad ng|paris ng)')"
+      "text": "$1;",
+      "condition": "matches('\\b(\\w+)\\b(?=\\s+(halimbawa|gaya ng|tulad ng|paris ng))')"
     }
   ]
-},
+}
+,
 {
   "id": "ELLIPSIS_ENDING",
   "name": "Ellipsis for Paragraph/Sentence Ending",
@@ -2555,7 +2556,7 @@ if (!grammarRules.length)  {
   "example": "Pinagtibay ng Pangulong Arroyo",
   "suggestions": [
     {
-      "text": "$0...",
+      "text": "$1...",
       "condition": "matches('\\b[^.,!?\\s]+$')"
     }
   ]
