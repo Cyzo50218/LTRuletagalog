@@ -2880,15 +2880,15 @@ if (!grammarRules.length)  {
   "name": "Add Period in Abbreviations",
   "pattern": [
     {
-      "regex": "(\\b[A-Z]{2,}\\b)(?![\\.])"
+      "regex": "(\\b[A-Z](?:[A-Z]*)\\b)(?![\\.])"
     }
   ],
   "message": "Ang tuldok ay ginagamit pagkatapos ng bawat titik sa pinaikling salita.",
   "description": "Magdagdag ng tuldok sa bawat titik ng pinaikling salita.",
-  "example": "ABSD -> A.B.S.D.",
+  "example": "USSR -> U.S.S.R.",
   "suggestions": [
     {
-      "text": "$1.",
+      "text": "$1".replace(/([A-Z])/g, "$1."),
       "condition": "matches([A-Z]{2,})",
       "description": "Maglagay ng tuldok sa pagitan ng bawat titik."
     }
@@ -2899,7 +2899,7 @@ if (!grammarRules.length)  {
   "name": "Add Period for Paturol or Pautos",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:mag-aral|kumain|matulog|gumawa|umuwi)\\b)\\s+([a-zA-Z]+)(?!\\.)"
+      "regex": "(?<=\\b(?:mag-aral|kumain|matulog|gumawa|umuwi)\\b)\\s+(mabuti|kayo)(?!\\.)"
     }
   ],
   "message": "Ang tuldok ay ginagamit sa katapusan ng pangungusap na paturol at pautos.",
@@ -2917,7 +2917,7 @@ if (!grammarRules.length)  {
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:ano|sino|bakit|paano|kailan|saan|alin|ilan|magkano|kung)\\b.*?)(\\b(?:mo|ba|kaya|daw|naman)\\b)(?!\\?)"
+      "regex": "(?<=\\b(?:ano|sino|bakit|paano|kailan|saan|alin|ilan|magkano|kung|kana)\\b.*?)(\\b(?:mo|ba|kaya|daw|naman|kanaba)\\b)(?!\\?)"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
