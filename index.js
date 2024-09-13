@@ -2907,7 +2907,7 @@ if (!grammarRules.length)  {
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "\\b(mo|ba|kaya|daw|naman|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|kana)\\b(?!\\!)"
+      "regex": "\\b(mo|ba|kaya|daw|naman|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|kana)\\b(?=(\\s{0,2}\\S|$))(?!\\!)"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
