@@ -2850,7 +2850,7 @@ if (!grammarRules.length)  {
   "name": "Add Period After Single Letters or Roman Numerals",
   "pattern": [
     {
-      "regex": "(\\b[A-Z]{1,4}|[1-9]\\b)(?=\\s)"
+      "regex": "\\b([A-Z]|[IVXLCDM]+|[1-9])\\b(?=\\s)(?![\\.])"
     }
   ],
   "message": "Ang tuldok ay ginagamit pagkatapos ng mga tambilang at titik.",
@@ -2859,7 +2859,7 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1.",
-      "condition": "matches([A-Z]{1,4}|[1-9])",
+      "condition": "matches([A-Z]|[IVXLCDM]+|[1-9])",
       "description": "Maglagay ng tuldok pagkatapos ng mga solong titik o tambilang."
     }
   ]
