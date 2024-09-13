@@ -2903,48 +2903,11 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "47.add_period_abbreviations",
-  "name": "Add Period in Abbreviations",
-  "pattern": [
-    {
-      "regex": "\\b([A-Z]{2,})\\b(?!\\.)"
-    }
-  ],
-  "message": "Ang tuldok ay ginagamit pagkatapos ng bawat titik sa pinaikling salita.",
-  "description": "Magdagdag ng tuldok sa bawat titik ng pinaikling salita.",
-  "example": "USSR -> U.S.S.R.",
-  "suggestions": [
-    {
-      "text": "$1".replace(/([A-Z])/g, "$1."),
-      "condition": "matches([A-Z]{2,})",
-      "description": "Maglagay ng tuldok sa pagitan ng bawat titik."
-    }
-  ]
-},
-{
-  "id": "46.add_period_paturol_pautos",
-  "name": "Add Period for Paturol or Pautos",
-  "pattern": [
-    {
-      "regex": "(?<=\\b(?:mag-aral|kumain|matulog|gumawa|umuwi)\\b)\\s+(mabuti|kayo)(?!\\.)"
-    }
-  ],
-  "message": "Ang tuldok ay ginagamit sa katapusan ng pangungusap na paturol at pautos.",
-  "description": "Magdagdag ng tuldok sa katapusan ng pangungusap kung hindi pa ito nagtatapos sa tuldok.",
-  "example": "Mag-aral kayong mabuti -> Mag-aral kayong mabuti.",
-  "suggestions": [
-    {
-      "text": "$1.",
-      "description": "Magdagdag ng tuldok sa katapusan ng pangungusap."
-    }
-  ]
-},
-{
   "id": "47.add_question_mark_pananong",
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:ano|sino|bakit|paano|kailan|saan|alin|ilan|magkano|kung|kana)\\b.*?)(\\b(?:mo|ba|kaya|daw|naman|kanaba)\\b)(?!\\?)"
+      "regex": "\\b(mo|ba|kaya|daw|naman|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|kana)\\b(?!\\!)"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
@@ -2956,13 +2919,14 @@ if (!grammarRules.length)  {
       "description": "Magdagdag ng tandang pananong sa salitang '$1' sa katapusan ng pangungusap."
     }
   ]
-},
+}
+,
 {
   "id": "48.add_exclamation_padamdam",
   "name": "Add Exclamation Mark for Padamdam",
   "pattern": [
     {
-      "regex": "(?<=\\b(?:Mabuhay ang|\\b)(?!\\s))\\b(?:Uy|Aray|Wow|Hala|Ay)\\b(?!\\!)"
+      "regex": "\\b(Uy|Aray|Wow|Hala|Ay|uyy|Uyy|HALA|ARAYY|ARAY|WOW|AY|AYY)\\b(?!\\!)"
     }
   ],
   "message": "Ang bantas na padamdam ay ginagamit sa hulihan ng isang kataga, parirala o masidhing damdamin.",
