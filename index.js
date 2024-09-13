@@ -2779,7 +2779,7 @@ if (!grammarRules.length)  {
       "description": "Palitan ang 'ch' at 'c' ng 'k' sa salitang Filipino."
     },
     {
-      "text": "$5k$7",
+      "text": "$1k$2",
       "condition": "matches([a-zA-Z]*c[h]?[a-zA-Z]*)",
       "description": "Palitan ang 'ch' o 'c' ng 'k' sa salitang Filipino."
     }
