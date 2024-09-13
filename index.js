@@ -2789,6 +2789,25 @@ if (!grammarRules.length)  {
   ]
 },
 {
+  "id": "42.ch_and_c_to_k",
+  "name": "CH and C to K Conversion",
+  "pattern": [
+    {
+      "regex": "\\b([a-zA-Z]*)ch([a-zA-Z]*)c([a-zA-Z]*)\\b"
+    }
+  ],
+  "message": "'ch' at 'c' sa mga salitang hiram ay maaaring palitan ng 'k' kapag binaybay sa Filipino.",
+  "description": "Ang 'ch' at 'c' sa mga salitang hiram ay maaaring maging 'k' kapag isinalin sa Filipino.",
+  "example": "chemical -> kemikal, machine -> makina, scholar -> iskolar",
+  "suggestions": [
+    {
+      "text": "$1k$3k$4",
+      "condition": "matches([a-zA-Z]*ch[a-zA-Z]*c[a-zA-Z]*)",
+      "description": "Palitan ang 'ch' at 'c' ng 'k' sa salitang Filipino."
+    }
+  ]
+},
+{
   "id": "43.sh_to_sy",
   "name": "SH to SY Conversion",
   "pattern": [
