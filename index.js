@@ -2888,7 +2888,7 @@ if (!grammarRules.length)  {
   "name": "Add Period in Abbreviations",
   "pattern": [
     {
-      "regex": "(\\b[A-Z](?:[A-Z]*)\\b)(?![\\.])"
+      "regex": "\\b([A-Z]{2,})\\b(?!\\.)"
     }
   ],
   "message": "Ang tuldok ay ginagamit pagkatapos ng bawat titik sa pinaikling salita.",
