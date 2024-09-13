@@ -2728,7 +2728,7 @@ if (!grammarRules.length)  {
   "name": "ET to K Conversion",
   "pattern": [
     {
-      "regex": "\\b([a-zA-Z]+)et\\b"
+      "regex": "\\b([A-Za-z]+)ct\\b"
     }
   ],
   "message": "'et' sa mga salitang Ingles ay nagiging 'k' kapag binaybay sa Filipino.",
@@ -2747,7 +2747,7 @@ if (!grammarRules.length)  {
   "name": "CH to TS Conversion",
   "pattern": [
     {
-      "regex": "\\b([a-zA-Z]*)ch([a-zA-Z]*)\\b"
+      "regex": "\\bch([a-zA-Z]*)\\b"
     }
   ],
   "message": "'ch' sa mga salitang hiram ay maaaring palitan ng 'ts' kapag binaybay sa Filipino.",
@@ -2755,7 +2755,7 @@ if (!grammarRules.length)  {
   "example": "chinelas -> tsinelas, chocolate -> tsokolate",
   "suggestions": [
     {
-      "text": "$1ts$2",
+      "text": "ts$2",
       "condition": "matches([a-zA-Z]*)ch([a-zA-Z]*)",
       "description": "Palitan ang 'ch' ng 'ts' sa salitang Filipino."
     }
@@ -2793,7 +2793,7 @@ if (!grammarRules.length)  {
   "example": "workshop -> worksyap, shooting -> syuting",
   "suggestions": [
     {
-      "text": "$1sy$2",
+      "text": "sy$2",
       "condition": "matches([a-zA-Z]*)sh([a-zA-Z]*)",
       "description": "Palitan ang 'sh' ng 'sy' sa salitang Filipino."
     }
