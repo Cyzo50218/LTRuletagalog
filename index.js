@@ -2755,7 +2755,7 @@ if (!grammarRules.length)  {
   "example": "chinelas -> tsinelas, chocolate -> tsokolate",
   "suggestions": [
     {
-      "text": "ts$2",
+      "text": "ts$1",
       "condition": "matches([a-zA-Z]*)ch([a-zA-Z]*)",
       "description": "Palitan ang 'ch' ng 'ts' sa salitang Filipino."
     }
@@ -2766,7 +2766,7 @@ if (!grammarRules.length)  {
   "name": "CH and C to K Conversion",
   "pattern": [
     {
-      "regex": "\\b([a-zA-Z]*)c(h?)([a-zA-Z]*)c([a-zA-Z]*)\\b|\\b([a-zA-Z]*)c(h?)([a-zA-Z]*)\\b"
+      "regex": "\\b([a-zA-Z]*)c(h?)([a-zA-Z]*)c([a-zA-Z]*)\\b|\\b([a-zA-Z]*)ch([a-zA-Z]*)\\b"
     }
   ],
   "message": "'ch' at 'c' sa mga salitang hiram ay maaaring palitan ng 'k' kapag binaybay sa Filipino.",
@@ -2775,7 +2775,7 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1k$3k$4",
-      "condition": "matches([a-zA-Z]*c(h?)[a-zA-Z]*c[a-zA-Z]*)",
+      "condition": "matches([a-zA-Z]*ch[a-zA-Z]*c[a-zA-Z]*)",
       "description": "Palitan ang 'ch' at 'c' ng 'k' sa salitang Filipino."
     },
     {
