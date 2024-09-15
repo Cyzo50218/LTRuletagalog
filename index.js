@@ -1559,35 +1559,58 @@ if (!grammarRules.length)  {
 }
 ,
 {
-  "id": "DAW_RAW",
-  "name": "DAW at RAW",
+  "id": "DIN_DAW_DOON_DITO",
+  "name": "Wastong Gamit ng Din/Daw/Doon/Dito",
   "pattern": [
     {
-  "regex": "(?<=\\b\\w*(?:wy|yw|ya|wa)\\s)daw\\b|(?<!\\b\\w*(ra|ri|raw|ray|is|im|ro|ru)\\s)daw\\b"
-},
-{
-  "regex": "(?<=\\b\\w*(?:ra|ri|raw|ray|is|im|ro|ru)\\s)raw\\b|(?<!\\b\\w*(wy|yw|ya|wa)\\s)raw\\b"
-}
+      "regex": "(?<![aeiouwy]\\b)(din|daw|doon|dito)\\b"
+    }
   ],
-  "message": "'Din/Daw' ang mananatili kung ang sinusundang salita ay hindi nagtatapos sa patinig o sa malapatinig na 'y' o 'w'. Gayundin, nananatili ang 'D' kung ang sinusundang salita ay nagtatapos sa –ra, -ri, -raw, o –ray. Samantalang ang 'Raw/Rin' ang ginagamit kung ang unang salita ay 'D' at ito ay napapalitan ng 'R' kung ang sinusundang salita ay nagtatapos sa patinig o sa malapatinig na 'W' at 'Y'.",
-  "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
-  "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
+  "message": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
   "suggestions": [
     {
-      "text": "raw",
-      "condition": "matches('daw')"
+      "text": "din",
+      "condition": "matches('rin')"
     },
     {
       "text": "daw",
       "condition": "matches('raw')"
     },
     {
+      "text": "doon",
+      "condition": "matches('roon')"
+    },
+    {
+      "text": "dito",
+      "condition": "matches('rito')"
+    }
+  ]
+},
+{
+  "id": "RIN_RAW_ROON_RITO",
+  "name": "Wastong Gamit ng Rin/Raw/Roon/Rito",
+  "pattern": [
+    {
+      "regex": "(?<=\\b\\w*[aeiouwy]\\s)(rin|raw|roon|rito)\\b"
+    }
+  ],
+  "message": "Mas tamang gamitin ang 'rin', 'raw', 'roon', o 'rito' dahil ang sinusundang salita ay nagtatapos sa patinig o malapatinig na 'w' at 'y'.",
+  "suggestions": [
+    {
       "text": "rin",
+      "condition": "matches('din')"
+    },
+    {
+      "text": "raw",
       "condition": "matches('daw')"
     },
     {
-      "text": "din",
-      "condition": "matches('raw')"
+      "text": "roon",
+      "condition": "matches('doon')"
+    },
+    {
+      "text": "rito",
+      "condition": "matches('dito')"
     }
   ]
 },
@@ -2907,7 +2930,7 @@ if (!grammarRules.length)  {
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "\\b(mo|ba|kaya|yun|daw|naman|ako|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|sya)\\b(?=(\\s?(?!\\S)))(?!\\!)"
+      "regex": "\\b(mo|ba|kaya|yun|daw|raw|naman|ako|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|sya)\\b(?=(\\s?(?!\\S)))(?!\\!)"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
