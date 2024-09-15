@@ -2934,7 +2934,24 @@ if (!grammarRules.length)  {
       "description": "Magdagdag ng tandang padamdam sa salitang '$0' sa katapusan ng pangungusap."
     }
   ]
+},
+{
+  "id": "NANG_REPEATED_WORDS",
+  "name": "Wastong Gamit ng Nang para sa Inuulit na Salita",
+  "pattern": [
+    {
+      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+ng\\s+\\1"
+    }
+  ],
+  "message": "Mas tamang gamitin ang 'nang' upang pagdugtungin ang dalawang magkaparehong salita o bahagi ng salita na inuulit.",
+  "suggestions": [
+    {
+      "text": "nang",
+      "condition": "matches('ng')"
+    }
+  ]
 }
+
 
 
 
