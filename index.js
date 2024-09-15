@@ -2938,17 +2938,18 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Nang para sa Inuulit na Salita",
   "pattern": [
     {
-      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+ng\\s+\\1"
+      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+ng\\s+(\\b[Aa-zA-Z]+\\b)"
     }
   ],
   "message": "Mas tamang gamitin ang 'nang' upang pagdugtungin ang dalawang magkaparehong salita o bahagi ng salita na inuulit.",
   "suggestions": [
     {
-      "text": "nang",
+      "text": "$1 nang $2",
       "condition": "matches('ng')"
     }
   ]
 }
+
 
 
 
