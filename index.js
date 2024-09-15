@@ -1536,7 +1536,7 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Din/Daw/Doon/Dito",
   "pattern": [
     {
-      "regex": "(?<![aeiouwy]\\b)(din|daw|doon|dito)\\b"
+      "regex": "(?<![aeiouwr]\\b)(rin|raw|roon|rito)\\b"
     }
   ],
   "description": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
@@ -1564,7 +1564,7 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Rin/Raw/Roon/Rito",
   "pattern": [
     {
-      "regex": "(?<=\\b\\w*[aeiouwy]\\s)(rin|raw|roon|rito)\\b"
+      "regex": "(?<=\\b\\w*[aeiourw]\\s)(din|daw|doon|dito)\\b"
     }
   ],
   "description": "Mas tamang gamitin ang 'rin', 'raw', 'roon', o 'rito' dahil ang sinusundang salita ay nagtatapos sa patinig o malapatinig na 'w' at 'y'.",
