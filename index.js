@@ -1546,8 +1546,7 @@ if (!grammarRules.length)  {
       "condition": "matches('rin')"
     },
     {
-      "text": "daw",
-      "condition": "matches('raw')"
+      "text": "daw"
     },
     {
       "text": "doon",
@@ -1574,8 +1573,7 @@ if (!grammarRules.length)  {
       "condition": "matches('din')"
     },
     {
-      "text": "raw",
-      "condition": "matches('daw')"
+      "text": "raw"
     },
     {
       "text": "roon",
