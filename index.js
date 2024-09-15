@@ -1530,33 +1530,6 @@ if (!grammarRules.length)  {
 }
   ]
 }
-
-,
-  {
-  "id": "DITO_RITO",
-  "name": "DITO at RITO",
-  "pattern": [
-    {
-  "regex": "(?<=\\b\\w*(ra|ri|raw|ray|is|im|ro|ru) )rito\\b|(?<!\\b\\w*(o|aw|oy|y|ya|w|wa|yw|wy|ya|wa) )rito\\b"
-},
-    {
-      "regex": "(?<=\\b\\w*(o|aw|oy|y|ya|w|wa|yw|wy|ya|wa) )dito\\b|(?<!\\b\\w*(ra|ri|raw|ray|is|im|ro|ru) )dito\\b"
-    }
-  ],
-  "message": "'Rito' ang tamang gamitin kung hindi nagtatapos sa 'y' o 'w' ang unang salita; 'dito' kung nagtatapos sa 'y' o 'w'.",
-  "description": "'Dito' ang ginagamit kung ang naunang salita ay nagtatapos sa 'y' o 'w'. 'Rito' ang ginagamit kung hindi nagtatapos sa 'y' o 'w' ang naunang salita.",
-  "example": "Pumunta ka rito. Pumunta ka dito (kung nagtatapos sa 'y' o 'w' ang naunang salita).",
-  "suggestions": [
-    {
-      "text": "rito",
-      "condition": "matches((?<=\\b\\w*[ra|ri|raw|ray|is|im|ro|ru])rito\\b)"
-    },
-    {
-      "text": "dito",
-      "condition": "matches((?<=\\b\\w*[o|aw|oy|y|ya|w|wa|yw|wy|ya|wa])dito\\b)"
-    }
-  ]
-}
 ,
 {
   "id": "DIN_DAW_DOON_DITO",
@@ -1566,7 +1539,7 @@ if (!grammarRules.length)  {
       "regex": "(?<![aeiouwy]\\b)(din|daw|doon|dito)\\b"
     }
   ],
-  "message": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
+  "description": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
   "suggestions": [
     {
       "text": "din",
@@ -1594,7 +1567,7 @@ if (!grammarRules.length)  {
       "regex": "(?<=\\b\\w*[aeiouwy]\\s)(rin|raw|roon|rito)\\b"
     }
   ],
-  "message": "Mas tamang gamitin ang 'rin', 'raw', 'roon', o 'rito' dahil ang sinusundang salita ay nagtatapos sa patinig o malapatinig na 'w' at 'y'.",
+  "description": "Mas tamang gamitin ang 'rin', 'raw', 'roon', o 'rito' dahil ang sinusundang salita ay nagtatapos sa patinig o malapatinig na 'w' at 'y'.",
   "suggestions": [
     {
       "text": "rin",
