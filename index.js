@@ -2942,6 +2942,7 @@ if (!grammarRules.length)  {
     }
   ],
   "message": "Mas tamang gamitin ang 'nang' upang pagdugtungin ang dalawang magkaparehong salita o bahagi ng salita na inuulit.",
+  "description": "Ginagamit ang 'nang' para sa mga inuulit na salita o pandiwa",
   "suggestions": [
     {
       "text": "$1 nang $2",
