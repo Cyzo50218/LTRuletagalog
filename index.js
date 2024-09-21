@@ -94,20 +94,19 @@ if (!grammarRules.length)  {
 {
   "id": "A1",
   "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag'.",
+  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag' at ang pangngalang pantangi ay nagsisimula sa patinig.",
   "pattern": [
-    { "regex": "\\b(Pa(?!g)|pa(?!g))\\s*([A-Z]\\w+)\\b|\\b(Pag|pag)\\s*([A-Z]\\w+)\\b" }
+    { "regex": "\\b(Pag|pag|Pa|pa)\\s*([AEIOUaeiou]\\w+)\\b" }
   ],
-  "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag'.",
+  "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag' at nagsisimula sa patinig.",
   "suggestions": [
-    { "text": "pa-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." },
-    { "text": "pag-$2", "description": "Maglagay ng gitling pagkatapos ng 'pag' bago ang pangngalan." }
+    { "text": "$1-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." }
   ],
   "examples": [
-    { "incorrect": "paDavao", "correct": "pa-Davao" },
-    { "incorrect": "paManila", "correct": "pa-Manila" },
-    { "incorrect": "pagDavao", "correct": "pag-Davao" },
-    { "incorrect": "pagManila", "correct": "pag-Manila" }
+    { "incorrect": "paAteneo", "correct": "pa-Ateneo" },
+    { "incorrect": "paIloilo", "correct": "pa-Iloilo" },
+    { "incorrect": "pagUrbiztondo", "correct": "pag-Urbiztondo" },
+    { "incorrect": "pagAbra", "correct": "pag-Abra" }
   ],
   "exceptions": [
     "paa", "paano", "paanong", "paaralan", "pababa", "pabango", "pabaya", "pabor", "paborita", "paborito",
@@ -2938,18 +2937,19 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Nang para sa Inuulit na Salita",
   "pattern": [
     {
-      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+ng\\s+(\\b[Aa-zA-Z]+\\b)"
+      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+ng\\s+\\1"
     }
   ],
   "message": "Mas tamang gamitin ang 'nang' upang pagdugtungin ang dalawang magkaparehong salita o bahagi ng salita na inuulit.",
   "description": "Ginagamit ang 'nang' para sa mga inuulit na salita o pandiwa",
   "suggestions": [
     {
-      "text": "$1 nang $2",
+      "text": "$1 nang $1",
       "condition": "matches('ng')"
     }
   ]
 }
+
 
 
 
