@@ -2701,7 +2701,7 @@ if (!grammarRules.length)  {
 {
   "id": "ELLIPSIS_ENDING",
   "name": "Ellipsis for Paragraph/Sentence Ending",
-  "description": "Ginagamit ang tatlong tuldok (...) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok, tandang pananong, o tandang padamdam. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
+  "description": "Ginagamit ang tatlong tuldok (...) or isang tuldok (.) kapag ang pangungusap o talata ay walang tamang pagtatapos na tutuldok, tandang pananong, o tandang padamdam. Ang tatlong tuldok ay nagpapahiwatig na kusang ibinitin ang karugtong ng nais sabihin o may nawawalang salita sa siniping pahayag.",
   "pattern": [
     {
       "regex": "\\b(\\w+)(?![.,!?])\\s*$"
@@ -2713,7 +2713,11 @@ if (!grammarRules.length)  {
     {
       "text": "$1...",
       "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
-    }
+    },
+    {
+  "text": "$1.",
+  "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
+}
   ]
 },
 {
@@ -2824,8 +2828,9 @@ if (!grammarRules.length)  {
   "name": "S to IS Conversion",
   "pattern": [
     {
-      "regex": "\\b([sS][a-zA-Z]*)\\b"
-    }
+  "regex": "\\b([sS](?!i\\b|ino\\b|a\\b|aan\\b|an\\b|Is\\b)[a-zA-Z]*)\\b"
+}
+
   ],
   "message": "Ang 'S' sa simula ng mga salitang hiram ay maaaring lagyan ng 'I' kapag binaybay sa Filipino.",
   "description": "Ang 'S' sa simula ng mga salitang hiram ay maaaring maging 'Is' kapag isinalin sa Filipino.",
@@ -2948,7 +2953,25 @@ if (!grammarRules.length)  {
       "condition": "matches('ng')"
     }
   ]
+},
+{
+  "id": "NANG_FIRST_WORD",
+  "name": "Palitan ang 'ng' ng 'Nang' sa Simula ng Pangungusap",
+  "pattern": [
+    {
+      "regex": "(^\\s*)ng\\b"
+    }
+  ],
+  "message": "Mas tamang gamitin ang 'Nang' bilang unang salita sa isang pangungusap kapag walang ibang salita bago ito.",
+  "description": "Pinapalitan ang 'ng' ng 'Nang' kapag ito ang unang salita ng pangungusap o teksto, at walang ibang salita bago ito.",
+  "suggestions": [
+    {
+      "text": "Nang",
+      "condition": "matches('ng')"
+    }
+  ]
 }
+
 
 
 
