@@ -2953,20 +2953,21 @@ if (!grammarRules.length)  {
       "condition": "matches('ng')"
     }
   ]
-},
+}
+,
 {
-  "id": "NANG_INCORRECT_USE",
-  "name": "Pagwawasto ng Maling Gamit ng 'Nang'",
+  "id": "NANG_REPEATED_WORDS",
+  "name": "Wastong Gamit ng Ng para sa Hindi Inuulit na Salita",
   "pattern": [
     {
-      "regex": "(?<!\\b(\\w+)\\b\\s+)nang(?!\\s+\\1\\b)"
+      "regex": "(\\b[Aa-zA-Z]+\\b)\\s+nang\\s+(?!\\1\\b)(\\b[Aa-zA-Z]+\\b)"
     }
   ],
-  "message": "Mas tamang gamitin ang 'ng' kapag hindi inuulit ang mga salita.",
-  "description": "Pinapalitan ang 'nang' ng 'ng' kapag ang mga salita bago at pagkatapos nito ay hindi magkapareho o inuulit.",
+  "message": "Mas tamang gamitin ang 'ng' para sa dalawang magkaibang salita o bahagi ng pangungusap.",
+  "description": "Ginagamit ang 'ng' para sa hindi inuulit na salita o pandiwa",
   "suggestions": [
     {
-      "text": "ng",
+      "text": "$1 ng $2",
       "condition": "matches('nang')"
     }
   ]
