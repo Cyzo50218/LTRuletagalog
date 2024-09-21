@@ -2959,7 +2959,7 @@ if (!grammarRules.length)  {
   "name": "Pagwawasto ng Maling Gamit ng 'Nang'",
   "pattern": [
     {
-      "regex": "(?<!\\b([a-zA-Z]+)\\b\\s+)nang(?!\\s+\\1\\b)"
+      "regex": "(?<!\\b(\\w+)\\b\\s+)nang(?!\\s+\\1\\b)"
     }
   ],
   "message": "Mas tamang gamitin ang 'ng' kapag hindi inuulit ang mga salita.",
@@ -2970,8 +2970,8 @@ if (!grammarRules.length)  {
       "condition": "matches('nang')"
     }
   ]
-},
-
+}
+,
 {
   "id": "NANG_FIRST_WORD",
   "name": "Palitan ang 'ng' ng 'Nang' sa Simula ng Pangungusap",
