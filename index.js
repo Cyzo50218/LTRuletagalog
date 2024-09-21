@@ -96,7 +96,7 @@ if (!grammarRules.length)  {
   "name": "Proper Nouns with 'pa' Prefix",
   "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag' at ang pangngalang pantangi ay nagsisimula sa patinig.",
   "pattern": [
-    { "regex": "\\b(Pag|pag|Pa|pa)\\s*([AEIOUaeiou]\\w+)\\b" }
+    { "regex": "\\b(Pag|pag|Pa|pa|tag|Tag)\\s*([AEIOUaeiou]\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag' at nagsisimula sa patinig.",
   "suggestions": [
