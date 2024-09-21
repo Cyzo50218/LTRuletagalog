@@ -94,9 +94,9 @@ if (!grammarRules.length)  {
 {
   "id": "A1",
   "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag' at ang pangngalang pantangi ay nagsisimula sa patinig.",
+  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag' at 'mag' o 'nag' o 'tag' at ang pangngalang pantangi ay nagsisimula sa patinig.",
   "pattern": [
-    { "regex": "\\b(Pag|pag|Pa|pa|tag|Tag)\\s*([AEIOUaeiou]\\w+)\\b" }
+    { "regex": "\\b(Pag|pag|Pa|pa|tag|Tag|mag|Mag|nag|Nag)\\s*([AEIOUaeiou]\\w+)\\b" }
   ],
   "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag' at nagsisimula sa patinig.",
   "suggestions": [
@@ -2954,6 +2954,24 @@ if (!grammarRules.length)  {
     }
   ]
 },
+{
+  "id": "NANG_INCORRECT_USE",
+  "name": "Pagwawasto ng Maling Gamit ng 'Nang'",
+  "pattern": [
+    {
+      "regex": "(?<!\\b([a-zA-Z]+)\\b\\s+)nang(?!\\s+\\1\\b)"
+    }
+  ],
+  "message": "Mas tamang gamitin ang 'ng' kapag hindi inuulit ang mga salita.",
+  "description": "Pinapalitan ang 'nang' ng 'ng' kapag ang mga salita bago at pagkatapos nito ay hindi magkapareho o inuulit.",
+  "suggestions": [
+    {
+      "text": "ng",
+      "condition": "matches('nang')"
+    }
+  ]
+},
+
 {
   "id": "NANG_FIRST_WORD",
   "name": "Palitan ang 'ng' ng 'Nang' sa Simula ng Pangungusap",
