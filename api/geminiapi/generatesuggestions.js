@@ -1,6 +1,6 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 export default async function handler(req, res) {
+  const { GoogleGenerativeAI } = await import("@google/generative-ai");
   // Log the incoming request for debugging
   console.log("Received request:", req.method, req.body);
 
