@@ -3,7 +3,7 @@
   "builds": [
     { "src": "index.js", "use": "@vercel/node" },
     {
-      "src": "api/geminiapi/generatesuggestions.js",
+      "src": "generatesuggestions.js",
       "use": "@vercel/node"
 }
   ],
@@ -11,7 +11,7 @@
     { "src": "/api/v2/check", "dest": "/index.js" },
     {
       "src": "/api/v2/geminiapi",
-      "dest": "api/geminiapi/generatesuggestions.js"
+      "dest": "/generatesuggestions.js"
 }
   ]
 }
