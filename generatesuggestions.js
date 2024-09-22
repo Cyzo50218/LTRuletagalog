@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
         messages: [
           {
             role: "user",
-            content: `Which of these suggestions is the best for fixing the error in this text using Tagalog Language: "${errorsTextarea}" based on the rule: "${ruleDesc}"? Suggestions: ${suggestionText.join(', ')}`
+            content: `Which is is the best for fixing the error in this text using Tagalog Language and based on its rule: "${errorsTextarea}" and based on the rule: "${ruleDesc}"? `
           }
         ],
       },
