@@ -15,12 +15,15 @@ export default async function handler(req, res) {
   }
 
   try {
+    const googleapikey;
     // Ensure the environment variable is defined
-    if (!process.env.GOOGLE_API_KEY) {
+    if (!process.env.VERCEL_GOOGLE_API_KEY) {
       throw new Error('GOOGLE_API_KEY is not defined');
     }
 
-    const genAI = new GoogleGenerativeAI({ apiKey: process.env.GOOGLE_API_KEY });
+googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
+
+    const genAI = new GoogleGenerativeAI({ apiKey: googleapikey });
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Extract data from the request body
