@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const axios = require("axios");
 
 module.exports = async function handler(req, res) {
   // Log the incoming request for debugging
@@ -15,35 +15,42 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    let googleapikey;
-    // Ensure the environment variable is defined
-    if (!process.env.VERCEL_GOOGLE_API_KEY) {
-      throw new Error('GOOGLE_API_KEY is not defined');
+    const openaiApiKey = process.env.VERCEL_OPENAPI_KEY; // Use your OpenAI API key from environment variables
+    if (!openaiApiKey) {
+      throw new Error('OPENAI_API_KEY is not defined');
     }
-
-    googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
-
-    const genAI = new GoogleGenerativeAI({ apiKey: googleapikey });
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Extract data from the request body
     const { ruleDesc, errorsTextarea, suggestionText } = req.body;
     console.log("Extracted data:", { ruleDesc, errorsTextarea, suggestionText });
+    // Make the request to OpenAI's API
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: "gpt-4o-mini", // Use the appropriate model
+        messages: [
+          {
+            role: "user",
+            content: `Which of these suggestions is the best for fixing the error in this text using Tagalog Language: "${errorsTextarea}" based on the rule: "${ruleDesc}"? Suggestions: ${suggestionText.join(', ')}`
+          }
+        ],
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
-    // Make the request to Gemini AI
-    const result = await model.generateContent([
-      `Which of these suggestions is the best for fixing the error in this text using Tagalog Language: "${errorsTextarea}" based on the rule: "${ruleDesc}"?`,
-      suggestionText.join(', ')
-    ]);
-
-    const bestSuggestion = result.response.text();
+    const bestSuggestion = response.data.choices[0].message.content; // Extract the best suggestion
     console.log("Best suggestion:", bestSuggestion);
 
     // Send the best suggestion as the response
     res.status(200).json({ bestSuggestion });
   } catch (error) {
     // Log any errors and send a 500 response
-    console.error("Error calling Gemini AI:", error);
+    console.error("Error calling OpenAI:", error);
     res.status(500).json({ error: "Failed to generate suggestion" });
   }
 };
