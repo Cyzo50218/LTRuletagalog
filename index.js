@@ -2964,7 +2964,7 @@ if (!grammarRules.length)  {
     }
   ],
   "message": "Mas tamang gamitin ang 'ng' para sa dalawang magkaibang salita o bahagi ng pangungusap.",
-  "description": "Ginagamit ang 'ng' para sa hindi inuulit na salita o pandiwa",
+  "description": "Ginagamit ang 'ng' kapag ang kasunod na sa salita ay pangngalan",
   "suggestions": [
     {
       "text": "$1 ng $2",
