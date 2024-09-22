@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-export default async function handler(req, res) {
-    // Log the incoming request for debugging
+module.exports = async function handler(req, res) {
+  // Log the incoming request for debugging
   console.log("Received request:", req.method, req.body);
 
   // Set CORS headers to allow cross-origin requests
@@ -15,13 +15,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const googleapikey;
+    let googleapikey;
     // Ensure the environment variable is defined
     if (!process.env.VERCEL_GOOGLE_API_KEY) {
       throw new Error('GOOGLE_API_KEY is not defined');
     }
 
-googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
+    googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
 
     const genAI = new GoogleGenerativeAI({ apiKey: googleapikey });
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -32,7 +32,7 @@ googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
 
     // Make the request to Gemini AI
     const result = await model.generateContent([
-      `Which of these suggestions is the best for fixing the error in this text: "${errorsTextarea}" based on the rule: "${ruleDesc}"?`,
+      `Which of these suggestions is the best for fixing the error in this text using Tagalog Language: "${errorsTextarea}" based on the rule: "${ruleDesc}"?`,
       suggestionText.join(', ')
     ]);
 
@@ -46,4 +46,4 @@ googleapikey = "AIzaSyBAkDBEZfYMkZMedcNgWklhAWhEPbDrAbs";
     console.error("Error calling Gemini AI:", error);
     res.status(500).json({ error: "Failed to generate suggestion" });
   }
-}
+};
