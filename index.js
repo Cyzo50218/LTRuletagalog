@@ -1623,7 +1623,7 @@ if (!grammarRules.length)  {
 }
   ],
   "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
-  "description": "Ginagamit ang kudlit (’) bilang kapalit ng nawawalang letra/letra sa pagitan ng dalawang salita kapag ang pang-ugnay o pananda ('at' o 'ay') ay ikinakabit sa unang salita.",
+  "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
   "example": "tuwa’t hapis, kaliwa’t kanan, tayo’y aalis, tahana’y maligaya",
   "suggestions": [
     {
@@ -1635,7 +1635,7 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"
     },
     {
-      "text": "$1't $3",
+      "text": "$1't $2",
       "condition": "matches('\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b')"
     }
   ]
