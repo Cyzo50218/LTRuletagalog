@@ -1619,11 +1619,8 @@ if (!grammarRules.length)  {
       "regex": "(\\b\\w+\\s)ay\\s(?!\\d+)(\\w+\\b)"
     },
     {
-      "regex": "(\\b(pa\\w+t)\\s\\2\\b|\\b(pa\\w+t)-(\\w+)\\b)"  // Matches repeated words with "pa" prefix and "t" at the end
-    },
-    {
-      "regex": "(\\b(\\w+t)\\s+(\\w+)\\b|\\b(\\w+t)-(\\w+)\\b)"  // Matches repeated words with "t" ending and no space or hyphen
-    }
+  "regex": "(\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b)"  // Matches "ibat iba" or "ibat-iba" where the first word ends with "t" and the second word is the same without the "t"
+}
   ],
   "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
   "description": "Ginagamit ang kudlit (’) bilang kapalit ng nawawalang letra/letra sa pagitan ng dalawang salita kapag ang pang-ugnay o pananda ('at' o 'ay') ay ikinakabit sa unang salita.",
@@ -1638,12 +1635,8 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"
     },
     {
-      "text": "$1't $2’t",
-      "condition": "matches('\\b(pa\\w+t)\\s\\2\\b|\\b(pa\\w+t)-(\\w+)\\b')"
-    },
-    {
-      "text": "$1 $3’t",
-      "condition": "matches('\\b(\\w+t)\\s+(\\w+)\\b|\\b(\\w+t)-(\\w+)\\b')"
+      "text": "$1't $3",
+      "condition": "matches('\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b')"
     }
   ]
 }
