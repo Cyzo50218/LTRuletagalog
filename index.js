@@ -1613,10 +1613,16 @@ if (!grammarRules.length)  {
   "name": "Kudlit Replacement",
   "pattern": [
     {
-      "regex": "(\\b\\w+\\s)at\\s(?!\\d+)(\\w+\\b)"  // Avoid matching if a number follows "at"
+      "regex": "(\\b\\w+\\s)at\\s(?!\\d+)(\\w+\\b)"
     },
     {
-      "regex": "(\\b\\w+\\s)ay\\s(?!\\d+)(\\w+\\b)"  // Avoid matching if a number follows "ay"
+      "regex": "(\\b\\w+\\s)ay\\s(?!\\d+)(\\w+\\b)"
+    },
+    {
+      "regex": "(\\b(pa\\w+t)\\s\\2\\b|\\b(pa\\w+t)-(\\w+)\\b)"  // Matches repeated words with "pa" prefix and "t" at the end
+    },
+    {
+      "regex": "(\\b(\\w+t)\\s+(\\w+)\\b|\\b(\\w+t)-(\\w+)\\b)"  // Matches repeated words with "t" ending and no space or hyphen
     }
   ],
   "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
@@ -1625,14 +1631,23 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$1’t $2",
-      "condition": "matches('\\b\\w+\\s+at\\s+(?!\\d+)\\w+\\b')"  // Updated condition for "at"
+      "condition": "matches('\\b\\w+\\s+at\\s+(?!\\d+)\\w+\\b')"
     },
     {
       "text": "$1’y $2",
-      "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"  // Updated condition for "ay"
+      "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"
+    },
+    {
+      "text": "$1't $2’t",
+      "condition": "matches('\\b(pa\\w+t)\\s\\2\\b|\\b(pa\\w+t)-(\\w+)\\b')"
+    },
+    {
+      "text": "$1 $3’t",
+      "condition": "matches('\\b(\\w+t)\\s+(\\w+)\\b|\\b(\\w+t)-(\\w+)\\b')"
     }
   ]
-},
+}
+,
 {
   "id": "IKA_PREFIX_USAGE",
   "name": "Usage of 'Ika-' Prefix with Numbers and Words",
@@ -2824,26 +2839,6 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "44.s_to_is",
-  "name": "S to IS Conversion",
-  "pattern": [
-    {
-  "regex": "\\b([sS](?!i\\b|ino\\b|a\\b|aan\\b|an\\b|Is\\b)[a-zA-Z]*)\\b"
-}
-
-  ],
-  "message": "Ang 'S' sa simula ng mga salitang hiram ay maaaring lagyan ng 'I' kapag binaybay sa Filipino.",
-  "description": "Ang 'S' sa simula ng mga salitang hiram ay maaaring maging 'Is' kapag isinalin sa Filipino.",
-  "example": "schedule -> iskedyul, scout -> iskawt",
-  "suggestions": [
-    {
-      "text": "I$1",
-      "condition": "matches([sS][a-zA-Z]*)",
-      "description": "Lagyan ng 'I' sa unahan ng salitang hiram."
-    }
-  ]
-},
-{
   "id": "45.remove_repeated_letters",
   "name": "Remove Repeated Letters",
   "pattern": [
@@ -2964,7 +2959,7 @@ if (!grammarRules.length)  {
     }
   ],
   "message": "Mas tamang gamitin ang 'ng' para sa dalawang magkaibang salita o bahagi ng pangungusap.",
-  "description": "Ginagamit ang 'ng' kapag ang kasunod na sa salita ay pangngalan",
+  "description": "Ginagamit ang 'ng' para sa hindi inuulit na salita o pandiwa",
   "suggestions": [
     {
       "text": "$1 ng $2",
