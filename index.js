@@ -1647,8 +1647,12 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "$2't $3",
-      "condition": "matches('\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b')"
-    }
+      "condition": "matches('\\b(\\w+)t\\s+(\\2)\\b')"
+    },
+    {
+  "text": "$1't $2",
+  "condition": "matches('\\b(\\w+)t-(\\2)\\b')"
+}
   ]
 }
 ,
