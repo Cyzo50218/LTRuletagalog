@@ -1638,7 +1638,7 @@ if (!grammarRules.length)  {
   "name": "Kudlit Replacement",
   "pattern": [
     {
-  "regex": "(\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b)"  // Matches "ibat iba" or "ibat-iba" where the first word ends with "t" and the second word is the same without the "t"
+  "regex": "(\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t\\-(\\2)\\b)"  // Matches "ibat iba" or "ibat-iba" where the first word ends with "t" and the second word is the same without the "t"
 }
   ],
   "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
@@ -1651,7 +1651,7 @@ if (!grammarRules.length)  {
     },
     {
   "text": "$1't $2",
-  "condition": "matches('\\b(\\w+)t-(\\2)\\b')"
+  "condition": "matches('\\b(\\w+)t\\-(\\2)\\b')"
 }
   ]
 }
