@@ -1635,7 +1635,7 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"
     },
     {
-      "text": "$1't $2",
+      "text": "$2't $3",
       "condition": "matches('\\b(\\w+)t\\s+(\\2)\\b|\\b(\\w+)t-(\\2)\\b')"
     }
   ]
