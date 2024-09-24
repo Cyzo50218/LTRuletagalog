@@ -184,7 +184,24 @@ if (!grammarRules.length)  {
   "pattern": [
     { 
       "regex": "\\b(mag|nag|pa)(\\w+)\\s*\\2\\b" 
-    },
+    }
+  ],
+  "message": "Kapag ang buong salita ay inuulit, ginagamit ang gitling upang pagdugtungin ang dalawang ulit ng salita.",
+  "description": "Kapag ang buong salita ay inuulit, ginagamit ang gitling upang pagdugtungin ang dalawang ulit ng salita.",
+  "examples": [
+    { "incorrect": "maglaba laba", "correct": "maglaba-laba" },
+    { "incorrect": "nagluto luto", "correct": "nagluto-luto" },
+    { "incorrect": "paligo ligo", "correct": "paligo-ligo" }
+  ],
+  "suggestions": [
+    { "text": "$1$2-$2" }
+  ]
+}
+,
+{
+  "id": "PAGUULIT",
+  "name": "Pag-uulit ng buong salita",
+  "pattern": [
     {
       "regex": "\\b(mag|nag|pa)(\\w+)\\s+\\2\\b"
     }
