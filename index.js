@@ -2772,10 +2772,7 @@ if (!grammarRules.length)  {
   "message": "Siguraduhing ang talata o pangungusap ay nagtatapos sa tamang bantas. Kung sadyang binibitin ang pahayag, idagdag ang tatlong tuldok (...).",
   "example": "Pinagtibay ng Pangulong Arroyo",
   "suggestions": [
-    {
-      "text": "$1...",
-      "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
-    },
+   
     {
   "text": "$1.",
   "description": "Idagdag ang tatlong tuldok (...) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
