@@ -225,7 +225,7 @@ if (!grammarRules.length)  {
   "name": "Pagbabago ng huling pantig ng salitang-ugat (e)",
   "pattern": [
     {
-      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|sinosino|tseke|bente|pale|ate|karte|lente|note|jefe|chicle)(\\w*e)\\b",
+      "regex": "\\b(?!babae|tao|telebisyon|komersyo|kompyuter|kape|puno|taho|pili|sine|bote|onse|base|cheque|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|sinosino|tseke|bente|pale|ate|karte|lente|note|jefe|chicle)([A-Za-z]+)(e)\\b",
       "exceptions": ["\\b(\\w*e\\1)\\b"]
     }
   ],
@@ -244,7 +244,7 @@ if (!grammarRules.length)  {
   "name": "Pagbabago ng huling pantig ng salitang-ugat (o)",
   "pattern": [
     {
-      "regex": "\\b(?!buhos|sino|Ano|Sino|rito|dito|sampu|tayo|tao|to|telepono|nilo|kilo|po|opo|Opo|Po|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(.+)(o)\\b",
+      "regex": "\\b(?!buhos|sino|Ano|Sino|rito|dito|sampu|tayo|tao|to|telepono|nilo|kilo|po|opo|Opo|Po|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)([A-Za-z]+)(o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
@@ -252,7 +252,7 @@ if (!grammarRules.length)  {
   "description": "Kapag ang salitang-ugat ay nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'.",
   "suggestions": [
     {
-      "text": "$1u-an",
+      "text": "$2uan",
       "condition": "endsWith('o')",
       "exceptions": [
         "buhos", "sampu", "dito", "Sino", "rito", "Tayo", "tayo", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
@@ -2857,7 +2857,7 @@ if (!grammarRules.length)  {
       "regex": "\\b(\\w+)\\b(?=\\s+(halimbawa|gaya ng|tulad ng|paris ng))"
     }
   ],
-  "message": "Siguraduhing gumagamit ng tutuldok-kuwit (;) bago ang mga salita o parirala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa. Halimbawa: 'Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin; gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.'",
+  "message": "Siguraduhing gumagamit ng tutuldok-kuwit (;) bago ang mga salita o parirlaq1àala tulad ng 'halimbawa,' 'gaya ng,' 'tulad ng,' kapag ito'y nangunguna sa isang paliwanag o halimbawa. Halimbawa: 'Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin; gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.'",
   "example": "Maraming magagandang bulaklak sa Pilipinas na hindi na napag-uukulan ng pansin gaya ng kakwate, kabalyero, banaba, dapdap at iba pa.",
   "suggestions": [
     {
