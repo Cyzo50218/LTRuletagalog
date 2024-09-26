@@ -183,7 +183,7 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng buong salita",
   "pattern": [
     { 
-      "regex": "\\b(mag|nag|pa)(\\w+)\\s*\\2\\b|\\b(mag|nag|pa)(\\w+)\\s+\\2\\b" 
+      "regex": "\\b(mag|nag|pa)(\\w+)\\s+\\2\\b" 
     }
   ],
   "message": "Kapag ang buong salita ay inuulit, ginagamit ang gitling upang pagdugtungin ang dalawang ulit ng salita.",
