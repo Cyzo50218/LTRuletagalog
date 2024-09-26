@@ -248,12 +248,16 @@ if (!grammarRules.length)  {
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
-  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'o', ang pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'o' kahit hinuhulapian.",
-  "description": "Kapag ang salitang-ugat ay nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nananatili ang 'o' kahit hinuhulapian, at hindi puwedeng palitan ng 'o' ang 'u'.",
+  "message": "Kapag hinuhulapian ang huling pantig ng salitang-ugat na nagtatapos sa 'o', ang pantig ay nagiging 'u' at ang hulapi ay '-an'. May mga salitang nagtatapos sa 'o' na nananatili ang 'o' kahit hinuhulapian, at hindi puwedeng palitan ng 'o' ang 'u'.",
+  "description": "Kapag ang salitang-ugat ay nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'.",
   "suggestions": [
     {
       "text": "$1an",
       "condition": "endsWith('o')",
+      "replace": {
+        "pattern": "o$",
+        "replacement": "u"
+      },
       "exceptions": [
         "buhos", "sampu", "dito", "Sino", "rito", "Tayo", "tayo", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
         "hello", "ako", "mo", "bago", "barko", "baso", "buko", "damo", "ginto", "hilo", "kanto", "kubo", "lako", "lobo", "pako", "plato", "puto", "sako", "sulo", "tabo", "talo", "tubo", "ulo",
@@ -263,6 +267,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
+
 
 ,
 {
