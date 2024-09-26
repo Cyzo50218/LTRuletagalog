@@ -1685,6 +1685,128 @@ if (!grammarRules.length)  {
   ]
 }
 ,
+  {
+    "id": "8.IKAWY",
+    "name": "IKAW'Y",
+    "pattern": [
+      {
+        "regex": "\\b[Ii]kawy\\b"
+      }
+    ],
+    "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+    "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
+    "examples": [
+      { "incorrect": "ikaw'y mas mabuti", "correct": "higit ikaw'y mas mabuti" }
+    ],
+    "suggestions": [
+      {
+        "text": "ikaw'y",
+        "condition": "matches(ikawy)"
+      },
+      {
+  "text": "Ikaw'y",
+  "condition": "matches(Ikawy)"
+}
+    ]
+  },
+  {
+    "id": "8.IKAY",
+    "name": "IKAY",
+    "pattern": [
+      {
+        "regex": "\\b[Ii]kay\\b"
+      }
+    ],
+    "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+    "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
+    "examples": [
+      { "incorrect": "ikay mas mabuti", "correct": "higit ikay mas mabuti" }
+    ],
+    "suggestions": [
+      {
+  "text": "ika'y",
+  "condition": "matches(ikay)"
+},
+{
+  "text": "Ika'y",
+  "condition": "matches(Ikay)"
+}
+    ]
+  },
+  {
+    "id": "8.TAYOY",
+    "name": "TAYO'Y",
+    "pattern": [
+      {
+        "regex": "\\b[Tt]ayoy\\b"
+      }
+    ],
+    "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+    "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
+    "examples": [
+      { "incorrect": "tayo'y mas mabuti", "correct": "higit tayo'y mas mabuti" }
+    ],
+    "suggestions": [
+      {
+  "text": "tayo'y",
+  "condition": "matches(tayoy)"
+},
+{
+  "text": "Tayo'y",
+  "condition": "matches(Tayoy)"
+}
+    ]
+  },
+  {
+    "id": "8.AKOY",
+    "name": "AKO'Y",
+    "pattern": [
+      {
+        "regex": "\\b[Aa]koy\\b"
+      }
+    ],
+    "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+    "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
+    "examples": [
+      { "incorrect": "ako'y mas mabuti", "correct": "higit ako'y mas mabuti" }
+    ],
+    "suggestions": [
+      {
+  "text": "ako'y",
+  "condition": "matches(akoy)"
+},
+{
+  "text": "Ako'y",
+  "condition": "matches(Akoy)"
+}
+    ]
+  },
+  {
+    "id": "8.SIYAY",
+    "name": "SIYA'Y",
+    "pattern": [
+      {
+        "regex": "\\b[Ss]iyay\\b"
+      }
+    ],
+    "message": "Gamitin ang 'higit' para sa comparative na pang-uri; 'higit pa' para sa pagdaragdag o pagpapalakas ng kaalaman.",
+    "description": "Ang kudlit (') ay ginagamit upang ipakita ang pagtanggal ng mga letra o bahagi ng mga salita kapag pinagsasama ang mga ito.",
+    "examples": [
+      { "incorrect": "siya'y mas mabuti", "correct": "higit siya'y mas mabuti" }
+    ],
+    "suggestions": [
+      {
+  "text": "siya'y",
+  "condition": "matches(siyay)"
+},
+{
+  "text": "Siya'y",
+  "condition": "matches(Syay)"
+}
+    ]
+  }
+
+,
 {
   "id": "IKA_PREFIX_USAGE",
   "name": "Usage of 'Ika-' Prefix with Numbers and Words",
