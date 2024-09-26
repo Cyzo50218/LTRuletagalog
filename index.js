@@ -252,7 +252,7 @@ if (!grammarRules.length)  {
   "description": "Kapag ang salitang-ugat ay nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'.",
   "suggestions": [
     {
-      "text": "$2uan",
+      "text": "$1uan",
       "condition": "endsWith('o')",
       "exceptions": [
         "buhos", "sampu", "dito", "Sino", "rito", "Tayo", "tayo", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
