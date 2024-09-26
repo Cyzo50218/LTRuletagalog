@@ -1644,31 +1644,6 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "KUDLIT_REPLACEMENT_CASE2",
-  "name": "Kudlit Replacement",
-  "pattern": [
-    {
-      "regex": "(\\b\\w+\\s)at\\s(?!\\d+)(\\w+\\b)"
-    },
-    {
-      "regex": "(\\b\\w+\\s)ay\\s(?!\\d+)(\\w+\\b)"
-    }
-  ],
-  "message": "Gumamit ng kudlit (’) sa pagitan ng dalawang salita kapag may nawawalang letra/letra. Halimbawa: 'tuwa’t hapis' mula sa 'tuwa at hapis'.",
-"description": "Ginagamit ang kudlit (’) bilang kapalit ng nawawalang letra/letra sa pagitan ng dalawang salita kapag ang pang-ugnay o pananda ('at' o 'ay') ay ikinakabit sa unang salita.",
-  "example": "tuwa’t hapis, kaliwa’t kanan, tayo’y aalis, tahana’y maligaya",
-  "suggestions": [
-    {
-      "text": "$1’t $2",
-      "condition": "matches('\\b\\w+\\s+at\\s+(?!\\d+)\\w+\\b')"
-    },
-    {
-      "text": "$1’y $2",
-      "condition": "matches('\\b\\w+\\s+ay\\s+(?!\\d+)\\w+\\b')"
-    }
-  ]
-},
-{
   "id": "KUDLIT_REPLACEMENT",
   "name": "Kudlit Replacement",
   "pattern": [
