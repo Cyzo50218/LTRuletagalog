@@ -244,7 +244,7 @@ if (!grammarRules.length)  {
   "name": "Pagbabago ng huling pantig ng salitang-ugat (o)",
   "pattern": [
     {
-      "regex": "\\b(?!buhos|sino|Ano|Sino|rito|dito|sampu|tayo|tao|to|telepono|nilo|kilo|po|opo|Opo|Po|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(\\w*o)\\b",
+      "regex": "\\b(?!buhos|sino|Ano|Sino|rito|dito|sampu|tayo|tao|to|telepono|nilo|kilo|po|opo|Opo|Po|litro|metro|reto|calle|niño|mantequilla|espejo|coche|maestro|casa|cuatro|sabado|nueve|año|libro|piedra|anoano|ano|sino|sinosino|pito|pitopito|halo|halohalo|buto|butobuto|piso|pisopiso|pa\\w*o|hello|ako|mo|bago|barko|baso|buko|damo|ginto|hilo|kanto|kubo|lako|lobo|pako|plato|puto|sako|sulo|tabo|talo|tubo|ulo|zero|hero|piano|photo|mango|potato|avocado|echo|bingo|logo|memo|silo|soprano|tornado|volcano|arroz|codo|dedo|fuego|gusto|hilo|palo|queso|rato|santo|sombrero|vino|zapato)(.+)(o)\\b",
       "exceptions": ["\\b(\\w+\\1)\\b", "\\b(pa\\w*o)\\b"]
     }
   ],
@@ -252,12 +252,8 @@ if (!grammarRules.length)  {
   "description": "Kapag ang salitang-ugat ay nagtatapos sa 'o', ang huling pantig ay nagiging 'u' at ang hulapi ay '-an'.",
   "suggestions": [
     {
-      "text": "$1an",
+      "text": "$1u-an",
       "condition": "endsWith('o')",
-      "replace": {
-        "pattern": "o$",
-        "replacement": "u"
-      },
       "exceptions": [
         "buhos", "sampu", "dito", "Sino", "rito", "Tayo", "tayo", "tao", "telepono", "nilo", "kilo", "litro", "metro", "reto", "calle", "niño", "mantequilla", "espejo", "coche", "maestro", "casa", "cuatro", "sabado", "nueve", "año", "libro", "piedra",
         "hello", "ako", "mo", "bago", "barko", "baso", "buko", "damo", "ginto", "hilo", "kanto", "kubo", "lako", "lobo", "pako", "plato", "puto", "sako", "sulo", "tabo", "talo", "tubo", "ulo",
@@ -267,7 +263,6 @@ if (!grammarRules.length)  {
     }
   ]
 }
-
 
 ,
 {
