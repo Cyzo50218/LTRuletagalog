@@ -1,12 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 import stanza
-
-# Initialize Stanza pipeline for Filipino
-stanza.download('tl')  # Download Filipino language model
-nlp = stanza.Pipeline('tl')  # Initialize Filipino pipeline
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Initialize Stanza pipeline for Filipino
+stanza.download('tl')
+nlp = stanza.Pipeline('tl')
 
 @app.route('/v2/check/stanza/', methods=['POST'])
 def process_text():
@@ -15,9 +15,11 @@ def process_text():
     tokens = []
     for sentence in doc.sentences:
         for word in sentence.words:
-            tokens.append({'word': word.text, 'pos': word.upos})  # Use upos for universal POS tags
-    return jsonify(tokens)
+            tokens.append({'word': word.text, 'pos': word.upos})
+    
+    response = make_response(jsonify(tokens))
+    response.headers['Vary'] = 'Cookie'  # Set the Vary header to avoid caching issues
+    return response
 
-# The handler that Vercel will call
 def handler(event, context):
     return app(event, context)
