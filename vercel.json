@@ -5,6 +5,10 @@
     {
       "src": "generatesuggestions.js",
       "use": "@vercel/node"
+},
+{
+  "src": "api/stanza/stanza.py",
+  "use": "@vercel/python"
 }
   ],
   "routes": [
@@ -12,6 +16,10 @@
     {
       "src": "/api/v2/geminiapi",
       "dest": "/generatesuggestions.js"
+},
+{
+  "src": "/v2/check/stanza/",
+  "dest": "api/stanza/stanza.py"
 }
   ]
 }

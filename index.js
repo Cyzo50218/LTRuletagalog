@@ -3375,3 +3375,32 @@ app.listen(port, () => {
 
 module.exports = app;
 
+async function isPandiwa(word) {
+  const response = await fetch('http://localhost:9000/?properties={"annotators":"tokenize,pos","outputFormat":"json"}', {
+    method: 'POST',
+    body: word,
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  });
+
+  const data = await response.json();
+  const tokens = data.sentence[0].tokens;
+
+  for (const token of tokens) {
+    if (token.word.toLowerCase() === word.toLowerCase() && token.pos.startsWith('VB')) {
+      return true; // It is a pandiwa
+    }
+  }
+  return false; // Not a pandiwa
+}
+
+// Example usage
+const wordToCheck = 'tumakbo'; // Change this to the word you want to check
+isPandiwa(wordToCheck).then(result => {
+  if (result) {
+    console.log(`Ang salitang '${wordToCheck}' ay isang pandiwa.`);
+  } else {
+    console.log(`Ang salitang '${wordToCheck}' ay hindi isang pandiwa.`);
+  }
+});
