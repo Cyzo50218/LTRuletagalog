@@ -1,12 +1,16 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 import stanza
+import os
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Initialize Stanza pipeline for Filipino
-stanza.download('tl')
-nlp = stanza.Pipeline('tl')
+# Ensure the model is downloaded at runtime instead of at deployment
+@app.before_first_request
+def setup_stanza():
+    if not os.path.exists(stanza.models.common.DEFAULT_MODEL_DIR):
+        stanza.download('tl')  # Download Filipino language model only when needed
+    global nlp
+    nlp = stanza.Pipeline('tl')
 
 @app.route('/v2/check/stanza/', methods=['POST'])
 def process_text():
@@ -16,10 +20,7 @@ def process_text():
     for sentence in doc.sentences:
         for word in sentence.words:
             tokens.append({'word': word.text, 'pos': word.upos})
-    
-    response = make_response(jsonify(tokens))
-    response.headers['Vary'] = 'Cookie'  # Set the Vary header to avoid caching issues
-    return response
+    return jsonify(tokens)
 
 def handler(event, context):
     return app(event, context)
