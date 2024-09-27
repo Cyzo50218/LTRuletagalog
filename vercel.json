@@ -19,7 +19,7 @@
 },
 {
   "src": "/v2/check/stanza/",
-  "dest": "api/stanza/stanza.py"
+  "dest": "/api/stanza/stanza.py"
 }
   ]
 }
