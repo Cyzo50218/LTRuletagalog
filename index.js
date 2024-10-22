@@ -3090,7 +3090,7 @@ if (!grammarRules.length)  {
   "name": "Add Exclamation Mark for Padamdam",
   "pattern": [
     {
-      "regex": "\\b(Uy|Aray|Wow|Hala|Ay|uyy|Uyy|HALA|ARAYY|ARAY|WOW|AY|AYY)\\b(?!\\!)"
+      "regex": "\\b(Uy|Aray|Wow|Hala|Ay|uyy|Uyy|HALA|ARAYY|ARAY|WOW)\\b(?!\\!)"
     }
   ],
   "message": "Ang bantas na padamdam ay ginagamit sa hulihan ng isang kataga, parirala o masidhing damdamin.",
