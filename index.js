@@ -92,31 +92,6 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "A1",
-  "name": "Proper Nouns with 'pa' Prefix",
-  "description": "Magdagdag ng gitling sa mga pangngalan kapag may panlaping 'pa' o 'pag' at 'mag' o 'nag' o 'tag' at ang pangngalang pantangi ay nagsisimula sa patinig.",
-  "pattern": [
-    { "regex": "\\b(Pag|pag|Pa|pa|tag|Tag|mag|Mag|nag|Nag)\\s*([AEIOUaeiou]\\w+)(?!\\b([Mm]agaling|[Mm]aganda|[Mm]agilas|[Mm]agulang|[Mm]aginoo|[Mm]agalang|[Mm]agunaw|[Mm]agarbo|[Mm]agarbo)\\b)\\b" }
-  ],
-  "message": "Ginigitlingan ang pangngalang pantangi kapag may panlaping 'pa' o 'pag' at nagsisimula sa patinig.",
-  "suggestions": [
-    { "text": "$1-$2", "description": "Maglagay ng 'pa-' na panlapi na may gitling bago ang pangngalan." }
-  ],
-  "examples": [
-    { "incorrect": "paAteneo", "correct": "pa-Ateneo" },
-    { "incorrect": "paIloilo", "correct": "pa-Iloilo" },
-    { "incorrect": "pagUrbiztondo", "correct": "pag-Urbiztondo" },
-    { "incorrect": "pagAbra", "correct": "pag-Abra" }
-  ],
-  "exceptions": [
-    "paa", "paano", "paanong", "paaralan", "pababa", "pabango", "pabaya", "pabor", "paborita", "paborito",
-    "pabrika", "padala", "pader", "padre", "padrino", "padyak", "padyama", "pagal", "pagano", "pagasa",
-    "pagbabago", "pagbasa", "pagbati", "pagbili", "pagbuo", "pagdaan", "pagdaka", "pagdating", "pagdiriwang",
-    "paggalang", "paggawa", "paghinga", "pagi", "pagibig", "pagitan", "pagka", "pagkain", "pagkakaisa",
-    "pagkakataon", "pagkanta", "pag-asa", "pag-ibig", "pag-iisa", "pag-unlad"
-  ]
-},
-{
   "id": "A2",
   "name": "Words with 'maka' Prefix",
   "description": "Magdagdag ng gitling sa mga salitang may panlaping 'maka'.",
