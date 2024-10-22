@@ -3228,9 +3228,7 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
 */
 
 const checkTextAgainstRules = async (text, rules) => {
-  let matches = null;  // Set matches to null for testing
-
-  console.log('Testing: matches is initially set to null');  // Log to verify the initial state
+  let matches = [];
 
   for (const rule of rules) {
     for (const patternObj of rule.pattern) {
@@ -3272,39 +3270,33 @@ const checkTextAgainstRules = async (text, rules) => {
           });
         }
 
-        // Normally this would be pushed to the matches array
-        // Since matches is null, this won't be added in this test
-        if (matches !== null) {
-          matches.push({
-            message: rule.message,              // Message explaining the issue
-            shortMessage: rule.name || '',      // Optional short description
-            replacements: suggestions,          // The suggestions for correction
-            offset: match.index,                // Where in the text the match occurs
-            length: match[0].length,            // Length of the matched text
-            context: {
-              text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
-              offset: Math.min(20, match.index),
-              length: match[0].length
-            },
-            sentence: text.slice(
-              Math.max(0, text.lastIndexOf('.', match.index) + 1),
-              text.indexOf('.', match.index + match[0].length) + 1
-            ),
-            rule: {
-              id: rule.id,
-              description: rule.description || rule.name  // Rule description
-            }
-          });
-        }
+        // Add match to results with suggestions
+        matches.push({
+          message: rule.message,              // Message explaining the issue
+          shortMessage: rule.name || '',      // Optional short description
+          replacements: suggestions,          // The suggestions for correction
+          offset: match.index,                // Where in the text the match occurs
+          length: match[0].length,            // Length of the matched text
+          context: {
+            text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
+            offset: Math.min(20, match.index),
+            length: match[0].length
+          },
+          sentence: text.slice(
+            Math.max(0, text.lastIndexOf('.', match.index) + 1),
+            text.indexOf('.', match.index + match[0].length) + 1
+          ),
+          rule: {
+            id: rule.id,
+            description: rule.description || rule.name  // Rule description
+          }
+        });
       }
     }
   }
 
-  console.log('Final matches:', matches);  // Log the final state of matches for testing
-
   return { matches };
 };
-
 
 app.post('/api/v2/check', async (req, res) => {
   const { text, language } = req.body;
