@@ -177,9 +177,9 @@ if (!grammarRules.length)  {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
-{
-  "regex": "\\b(\\w+)\\s+\\1\\b"
-}
+    {
+      "regex": "\\b(\\w+)\\s+(?=\\1\\b)([a-z]+)\\b"
+    }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
@@ -187,14 +187,16 @@ if (!grammarRules.length)  {
     { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
     { "incorrect": "bente bente", "correct": "bente-bente" },
     { "incorrect": "pale pale", "correct": "pale-pale" },
-    { "incorrect": "tseketseke", "correct": "tseke-tseke" }
+    { "incorrect": "tseketseke", "correct": "tseke-tseke" },
+    { "incorrect": "Kaway kaway", "correct": "Kaway-kaway" }
   ],
   "suggestions": [
     {
-  "text": "$1-$1"
-}
+      "text": "$1-$2"
+    }
   ]
-},
+}
+,
 {
   "id": "PAGHULAPIAN_E",
   "name": "Pagbabago ng huling pantig ng salitang-ugat (e)",
