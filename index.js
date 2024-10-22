@@ -66,31 +66,6 @@ if (!grammarRules.length)  {
   "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
   "suggestions": ["makina"]
 },
-  {
-  "id": "PAGUULIT_O",
-  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
-  "pattern": [
-    {
-      "regex": "\\b(\\w+o)(\\1)\\b"
-    },
-    {
-  "regex": "\\b(\\w+o)\\s+\\1\\b"
-}
-  ],
-  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
-  "description": "Sa pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o', hindi ito pinapalitan ng letrang 'u'. Ginagamitan ng gitling sa pagitan ng salitang-ugat.",
-  "examples": [
-    "ano - ano-ano",
-    "sino - sino-sino",
-    "pito - pito-pito",
-    "halo - halo-halo (magkakasama ang iba't ibang bagay)",
-    "buto - buto-buto",
-    "piso - piso-piso"
-  ],
-  "suggestions": [
-    { "text": "$1-$1" }
-  ]
-},
 {
   "id": "A2",
   "name": "Words with 'maka' Prefix",
@@ -217,9 +192,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
-
-,
-{
+/* {
   "id": "PAGHULAPIAN_E",
   "name": "Pagbabago ng huling pantig ng salitang-ugat (e)",
   "pattern": [
@@ -262,7 +235,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
-
+*/
 ,
 {
   "id": "PAGTUNOG_E_O",
@@ -2792,7 +2765,7 @@ if (!grammarRules.length)  {
     }
   ]
 }
-,
+/* ,
 {
   "id": "PREFIX_HYPHENATION",
   "name": "Gumamit ng Gitling para sa Mga Prefix na 'de' at 'di'",
@@ -2844,7 +2817,8 @@ if (!grammarRules.length)  {
       "correct": "Di-kolor"
     }
   ]
-},
+} */
+,
 {
   "id": "BATING_PANIMULA_SEMICOLON",
   "name": "Tutuldok-Kuwit for Bating Panimula ng Liham Pangalakal",
