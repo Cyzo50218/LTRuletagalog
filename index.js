@@ -3208,7 +3208,7 @@ const preprocessText = (text, excludedWords = []) => {
   return processedText.trim(); // Trim any leading/trailing whitespace
 };
 
-/*
+
 const callLanguageToolAPI = async (text, excludedWords = []) => {
   const preprocessedText = preprocessText(text, excludedWords);
 
@@ -3225,7 +3225,7 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
     return null;
   }
 };
-*/
+
 
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
@@ -3248,18 +3248,22 @@ const checkTextAgainstRules = async (text, rules) => {
       while ((match = regex.exec(text)) !== null) {
         let suggestions = [];
 
-        // Custom suggestion logic based on your rule definitions
+        // Handle repeated words with whitespace
+        const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
+        let repeatedMatch;
+
+        // Existing suggestion logic
         if (rule.suggestions) {
           rule.suggestions.forEach(suggestion => {
             if (typeof suggestion === 'string') {
-              suggestions.push(suggestion);  // Direct string suggestion
+              suggestions.push(suggestion);
             } else if (suggestion.text) {
               let suggestionText = suggestion.text;
 
-              // Replace capturing groups (e.g., $1, $2) with matched content
+              // Replace capturing groups with the matched content
               for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
                 if (match[i]) {
-                  // Replace $i with the matched group
+                  // Replace $i with the match[i] value
                   const groupRegex = new RegExp(`\\$${i}`, 'g');
                   suggestionText = suggestionText.replace(groupRegex, match[i]);
                 }
@@ -3272,11 +3276,11 @@ const checkTextAgainstRules = async (text, rules) => {
 
         // Add match to results with suggestions
         matches.push({
-          message: rule.message,              // Message explaining the issue
-          shortMessage: rule.name || '',      // Optional short description
-          replacements: suggestions,          // The suggestions for correction
-          offset: match.index,                // Where in the text the match occurs
-          length: match[0].length,            // Length of the matched text
+          message: rule.message,
+          shortMessage: rule.name || '',
+          replacements: suggestions,
+          offset: match.index,
+          length: match[0].length,
           context: {
             text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
             offset: Math.min(20, match.index),
@@ -3288,7 +3292,7 @@ const checkTextAgainstRules = async (text, rules) => {
           ),
           rule: {
             id: rule.id,
-            description: rule.description || rule.name  // Rule description
+            description: rule.description || rule.name
           }
         });
       }
@@ -3319,8 +3323,38 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    // Combine matches from custom rules
+    const excludedWords = ["kendi", "Kendi", "Sen", "Sen.", "Joel", "Senador", "January", "degree", "Bulakenyo", "College", "State", "state", "college", "Gloria", "Macapagal Arroyo", "Arroyo", " Gloria Macapagal Arroyo "]; // Add "kundi" to excluded words
+
+    // Then call the LanguageTool API
+    const languageToolResult = await callLanguageToolAPI(text, excludedWords);
+
+    // Combine matches from both custom rules and LanguageTool API
     let combinedMatches = [...customRulesResult.matches];
+
+    if (languageToolResult && languageToolResult.matches) {
+      const languageToolMatches = languageToolResult.matches.map(match => ({
+        message: match.message,
+        shortMessage: match.rule.issueType || '',
+        replacements: match.replacements.map(replacement => replacement.value),
+        offset: match.offset,
+        length: match.length,
+        context: {
+          text: text.slice(Math.max(0, match.offset - 20), match.offset + match.length + 20),
+          offset: Math.min(20, match.offset),
+          length: match.length
+        },
+        sentence: text.slice(
+          Math.max(0, text.lastIndexOf('.', match.offset) + 1),
+          text.indexOf('.', match.offset + match.length) + 1
+        ),
+        rule: {
+          id: match.rule.id,
+          description: match.rule.description
+        }
+      }));
+
+      combinedMatches = combinedMatches.concat(languageToolMatches);
+    }
 
     console.log('Number of combined matches:', combinedMatches.length);
     return res.json({ matches: combinedMatches });
