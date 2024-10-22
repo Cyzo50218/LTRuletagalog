@@ -3208,7 +3208,7 @@ const preprocessText = (text, excludedWords = []) => {
   return processedText.trim(); // Trim any leading/trailing whitespace
 };
 
-
+/*
 const callLanguageToolAPI = async (text, excludedWords = []) => {
   const preprocessedText = preprocessText(text, excludedWords);
 
@@ -3225,7 +3225,7 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
     return null;
   }
 };
-
+*/
 
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
@@ -3248,22 +3248,18 @@ const checkTextAgainstRules = async (text, rules) => {
       while ((match = regex.exec(text)) !== null) {
         let suggestions = [];
 
-        // Handle repeated words with whitespace
-        const repeatedWordRegex = /\b(\w+)\s+\1\b/gi;
-        let repeatedMatch;
-     
-        // Existing suggestion logic
+        // Custom suggestion logic based on your rule definitions
         if (rule.suggestions) {
           rule.suggestions.forEach(suggestion => {
             if (typeof suggestion === 'string') {
-              suggestions.push(suggestion);
+              suggestions.push(suggestion);  // Direct string suggestion
             } else if (suggestion.text) {
               let suggestionText = suggestion.text;
 
-              // Replace capturing groups with the matched content
+              // Replace capturing groups (e.g., $1, $2) with matched content
               for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
                 if (match[i]) {
-                  // Replace $i with the match[i] value
+                  // Replace $i with the matched group
                   const groupRegex = new RegExp(`\\$${i}`, 'g');
                   suggestionText = suggestionText.replace(groupRegex, match[i]);
                 }
@@ -3276,11 +3272,11 @@ const checkTextAgainstRules = async (text, rules) => {
 
         // Add match to results with suggestions
         matches.push({
-          message: rule.message,
-          shortMessage: rule.name || '',
-          replacements: suggestions,
-          offset: match.index,
-          length: match[0].length,
+          message: rule.message,              // Message explaining the issue
+          shortMessage: rule.name || '',      // Optional short description
+          replacements: suggestions,          // The suggestions for correction
+          offset: match.index,                // Where in the text the match occurs
+          length: match[0].length,            // Length of the matched text
           context: {
             text: text.slice(Math.max(0, match.index - 20), match.index + match[0].length + 20),
             offset: Math.min(20, match.index),
@@ -3292,7 +3288,7 @@ const checkTextAgainstRules = async (text, rules) => {
           ),
           rule: {
             id: rule.id,
-            description: rule.description || rule.name
+            description: rule.description || rule.name  // Rule description
           }
         });
       }
