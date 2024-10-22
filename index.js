@@ -3323,7 +3323,7 @@ app.post('/api/v2/check', async (req, res) => {
     let combinedMatches = [...customRulesResult.matches];
 
     console.log('Number of combined matches:', combinedMatches.length);
-    return res.json({ matches: customRulesResult.matches });
+    return res.json({ matches: combinedMatches });
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).json({ error: error.message });
