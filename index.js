@@ -66,16 +66,6 @@ if (!grammarRules.length)  {
   "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
   "suggestions": ["makina"]
 },
-{
-  "id": "FILIPINO1",
-  "name": "1. Hiram Mula sa Español",
-  "pattern": [
-    { "token": { "value": "parin" } }
-      ],
-  "message": "Walang salitang ‘parin’ ito ay binabaybay ng ‘pa rin’.",
-  "description": "Walang salitang ‘parin’ ito ay binabaybay ng ‘pa rin’.",
-  "suggestions": ["pa rin"]
-},
   {
   "id": "PAGUULIT_O",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'",
@@ -998,6 +988,23 @@ if (!grammarRules.length)  {
       }
     ]
   },
+{
+  "id": "PARIN TO PA RIN",
+  "name": "NAMATAY at NAPATAY",
+  "pattern": [
+    {
+      "regex": "\\b(parin)\\b"
+      }
+    ],
+  "message":"Walang salitang ‘parin’ ito ay binabaybay ng ‘pa rin’.",
+  "description": "Walang salitang ‘parin’ ito ay binabaybay ng ‘pa rin’.",
+  "example": "Namatay ang kanyang lolo dahil sa sakit sa atay. Napatay ang aking alagang aso.",
+  "suggestions": [
+    {
+      "text": "pa rin"
+      }
+    ]
+},
   {
   "id": "20.KATA at KITA",
   "name": "NAMATAY at NAPATAY",
