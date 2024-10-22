@@ -3219,12 +3219,7 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
   params.append('language', 'tl-PH');
 
   try {
-    const response = await axios.post(apiUrl, params, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
-    return response.data;
+    return null;
   } catch (error) {
     console.error('Error calling LanguageTool API:', error);
     return null;
