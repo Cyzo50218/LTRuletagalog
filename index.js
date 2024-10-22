@@ -3328,37 +3328,8 @@ app.post('/api/v2/check', async (req, res) => {
     // Run custom rule checking first
     const customRulesResult = await checkTextAgainstRules(text, grammarRules);
 
-    const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"," Gloria Macapagal Arroyo "]; // Add "kundi" to excluded words
-    
-    // Then call the LanguageTool API
-    const languageToolResult = null
-    // Combine matches from both custom rules and LanguageTool API
+    // Combine matches from custom rules
     let combinedMatches = [...customRulesResult.matches];
-
-    if (languageToolResult && languageToolResult.matches) {
-      const languageToolMatches = languageToolResult.matches.map(match => ({
-        message: match.message,
-        shortMessage: match.rule.issueType || '',
-        replacements: match.replacements.map(replacement => replacement.value),
-        offset: match.offset,
-        length: match.length,
-        context: {
-          text: text.slice(Math.max(0, match.offset - 20), match.offset + match.length + 20),
-          offset: Math.min(20, match.offset),
-          length: match.length
-        },
-        sentence: text.slice(
-          Math.max(0, text.lastIndexOf('.', match.offset) + 1),
-          text.indexOf('.', match.offset + match.length) + 1
-        ),
-        rule: {
-          id: match.rule.id,
-          description: match.rule.description
-        }
-      }));
-
-      combinedMatches = combinedMatches.concat(languageToolMatches);
-    }
 
     console.log('Number of combined matches:', combinedMatches.length);
     return res.json({ matches: combinedMatches });
