@@ -3331,8 +3331,7 @@ app.post('/api/v2/check', async (req, res) => {
     const excludedWords = ["kendi","Kendi","Sen","Sen.","Joel","Senador","January","degree","Bulakenyo","College","State","state","college","Gloria","Macapagal Arroyo","Arroyo"," Gloria Macapagal Arroyo "]; // Add "kundi" to excluded words
     
     // Then call the LanguageTool API
-    const languageToolResult = await callLanguageToolAPI(text,excludedWords);
-
+    const languageToolResult = null
     // Combine matches from both custom rules and LanguageTool API
     let combinedMatches = [...customRulesResult.matches];
 
