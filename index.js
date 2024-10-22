@@ -148,8 +148,8 @@ if (!grammarRules.length)  {
       "text": "$1-$2"
     }
   ]
-},
-{
+}
+/* {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
@@ -166,11 +166,11 @@ if (!grammarRules.length)  {
   ],
   "suggestions": [
     {
-  "text": "${1/o/}-$2"
+  "text": "$1-$2"
 }
   ]
-}
-/* {
+},
+ {
   "id": "PAGHULAPIAN_E",
   "name": "Pagbabago ng huling pantig ng salitang-ugat (e)",
   "pattern": [
