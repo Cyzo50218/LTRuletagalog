@@ -1541,19 +1541,19 @@ if (!grammarRules.length)  {
   "description": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
   "suggestions": [
     {
-      "text": "din",
+      "text": "$1 din",
       "condition": "matches('rin')"
     },
     {
-      "text": "daw",
+      "text": "$1 daw",
       "condition": "matches('raw')"
     },
     {
-      "text": "doon",
+      "text": "$1 doon",
       "condition": "matches('roon')"
     },
     {
-      "text": "dito",
+      "text": "$1 dito",
       "condition": "matches('rito')"
     }
   ]
