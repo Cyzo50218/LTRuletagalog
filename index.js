@@ -2797,7 +2797,7 @@ if (!grammarRules.length)  {
       "correct": "Di-kolor"
     }
   ]
-} */
+} 
 {
   "id": "BATING_PANIMULA_SEMICOLON",
   "name": "Tutuldok-Kuwit for Bating Panimula ng Liham Pangalakal",
@@ -2815,8 +2815,8 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b(Ginoo|Bb|Gng|Dr|Pang|Sen|Hon)\\b(?!\\.)')"
     }
   ]
-}
-,
+}*/
+
 {
   "id": "SEMICOLON_BEFORE_PHRASES",
   "name": "Tutuldok-Kuwit Bago ang Mga Salita o Parirala",
