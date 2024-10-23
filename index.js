@@ -2856,25 +2856,6 @@ if (!grammarRules.length)  {
   "description": "Idagdag ang tatlong tuldok (.) sa pagtatapos ng pangungusap o talata na may isang salita na walang tamang bantas."
 }
   ]
-},
-{
-  "id": "40.et_to_k",
-  "name": "ET to K Conversion",
-  "pattern": [
-    {
-      "regex": "\\b([A-Za-z]+)ct\\b"
-    }
-  ],
-  "message": "'et' sa mga salitang Ingles ay nagiging 'k' kapag binaybay sa Filipino.",
-  "description": "Ang 'et' sa dulo ng mga salitang Ingles ay nagiging 'k' kapag isinalin sa Filipino.",
-  "example": "abstract -> abstrak, contract -> kontrak",
-  "suggestions": [
-    {
-      "text": "$1k",
-      "condition": "matches([a-zA-Z]+et)",
-      "description": "Palitan ang 'et' ng 'k' sa salitang Filipino."
-    }
-  ]
 }
 /* {
   "id": "41.ch_to_ts",
@@ -3001,32 +2982,7 @@ if (!grammarRules.length)  {
       "description": "Maglagay ng tuldok pagkatapos ng mga dinaglat na titulo o ranggo."
     }
   ]
-},
-
-{
-  "id": "47.add_question_mark_pananong",
-  "name": "Add Question Mark for Pananong",
-  "pattern": [
-    {
-      "regex": "^(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)(.*[^\\!.,])$"
-    }
-  ],
-  "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
-  "description": "Magdagdag ng tandang pananong sa mga salitang patanong.",
-  "example": "Ano ang pangalan mo -> Ano ang pangalan mo?",
-  "suggestions": [
-    {
-      "text": "$1$2?",
-      "description": "Magdagdag ng tandang pananong sa katapusan ng pangungusap."
-    }
-  ]
 }
-
-
-
-
-
-
 ,
 {
   "id": "48.add_exclamation_padamdam",
@@ -3045,10 +3001,7 @@ if (!grammarRules.length)  {
       "description": "Magdagdag ng tandang padamdam sa salitang '$0' sa katapusan ng pangungusap."
     }
   ]
-},
-
-
-
+}
 ,
 {
   "id": "NANG_REPEATED_WORDS",
