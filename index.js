@@ -66,7 +66,7 @@ if (!grammarRules.length)  {
   "description": "Ito ay sa pagbaybay ng mga salitang mula sa Español, baybayin ito ayon sa ABAKADA.",
   "suggestions": ["makina"]
 },
-{
+/*{
   "id": "A2",
   "name": "Words with 'maka' Prefix",
   "description": "Magdagdag ng gitling sa mga salitang may panlaping 'maka'.",
@@ -82,6 +82,7 @@ if (!grammarRules.length)  {
     { "incorrect": "makabayan", "correct": "maka-bayan" }
   ]
 },
+
 {
   "id": "B",
   "name": "Attach First KP Sound in Prefixes",
@@ -106,6 +107,7 @@ if (!grammarRules.length)  {
     { "incorrect": "magfokus", "correct": "magfo-kus" }
   ]
 },
+*/
 {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng buong salita",
@@ -2458,8 +2460,8 @@ if (!grammarRules.length)  {
       "condition": "matches('\\b(ika)-?isandaan\\b')"
     }
   ]
-},
-{
+}
+/* {
   "id": "HYPHENATED_LAST_NAMES",
   "name": "Hyphenated Last Names for Married Women",
   "description": "Ginagamit ang gitling '-'kapag pinagkakabit o pinagsasama ang apelyido ng babae at ng kanyang bana o asawa",
@@ -2482,7 +2484,7 @@ if (!grammarRules.length)  {
 }
   ]
 }
-
+*/
 ,
 {
   "id": "PANAKLONG_CLARIFICATION",
@@ -2699,7 +2701,7 @@ if (!grammarRules.length)  {
   ]
 }
 ,
-{
+/*{
   "id": "PANAKLONG_YEARS",
   "name": "Gumamit ng Panaklong para sa Taon",
   "description": "Gumamit ng panaklong () upang kulungin ang mga pamilang na nagpapahayag ng taon, at tiyaking tama ang spacing sa pagitan ng mga taon at dash para sa mga saklaw ng taon.",
@@ -2743,7 +2745,8 @@ if (!grammarRules.length)  {
     }
   ]
 }
-/* ,
+
+,
 {
   "id": "PREFIX_HYPHENATION",
   "name": "Gumamit ng Gitling para sa Mga Prefix na 'de' at 'di'",
@@ -2796,7 +2799,6 @@ if (!grammarRules.length)  {
     }
   ]
 } */
-,
 {
   "id": "BATING_PANIMULA_SEMICOLON",
   "name": "Tutuldok-Kuwit for Bating Panimula ng Liham Pangalakal",
@@ -2872,8 +2874,8 @@ if (!grammarRules.length)  {
       "description": "Palitan ang 'et' ng 'k' sa salitang Filipino."
     }
   ]
-},
-{
+}
+/* {
   "id": "41.ch_to_ts",
   "name": "CH to TS Conversion",
   "pattern": [
@@ -2892,8 +2894,6 @@ if (!grammarRules.length)  {
     }
   ]
 },
-
-/*
 {
   "id": "42.ch_and_c_to_k",
   "name": "CH and C to K Conversion",
@@ -2942,7 +2942,7 @@ if (!grammarRules.length)  {
 },
 
 */
-{
+/*{
   "id": "43.sh_to_sy",
   "name": "SH to SY Conversion",
   "pattern": [
@@ -2960,27 +2960,8 @@ if (!grammarRules.length)  {
       "description": "Palitan ang 'sh' ng 'sy' sa salitang Filipino."
     }
   ]
-},
-{
-  "id": "45.remove_repeated_letters",
-  "name": "Remove Repeated Letters",
-  "pattern": [
-    {
-      "regex": "\\b([a-zA-Z])\\1([a-zA-Z]*)\\b"
-    }
-  ],
-  "message": "Tanggalin ang isa sa mga magkasunod na parehong katinig sa mga salitang hiram.",
-  "description": "Ang mga salitang hiram na may dalawang magkasunod na parehong katinig ay kinakaltas ang isa.",
-  "example": "bulletin -> buletin, grammar -> gramar",
-  "suggestions": [
-    {
-      "text": "$1$2",
-      "condition": "matches([a-zA-Z])\\1([a-zA-Z]*)",
-      "description": "Tanggalin ang isa sa mga magkasunod na parehong katinig."
-    }
-  ]
-},
-{
+},*/
+/*{
   "id": "49.add_period_single_letters",
   "name": "Add Period After Single Letters or Roman Numerals",
   "pattern": [
@@ -2999,6 +2980,8 @@ if (!grammarRules.length)  {
     }
   ]
 },
+*/
+,
 {
   "id": "48.add_period_titles",
   "name": "Add Period in Titles or Abbreviations",
@@ -3023,11 +3006,11 @@ if (!grammarRules.length)  {
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "\\b(mo|ba|kaya|yun|daw|raw|naman|ako|kanaba|sino|kailan|po|bakit|papaano|paano|ilan|alin|saan|sya)\\b(?=(\\s?(?!\\S)))(?!\\!)"
+      "regex": "\\b(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)\\b(?=(\\s?(?!\\S)))(?!\\!)"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
-  "description": "Magdagdag ng tandang pananong sa katapusan ng mga salitang patanong kung hindi pa ito nagtatapos sa tandang pananong.",
+  "description": "Magdagdag ng tandang pananong sa mga salitang patanong.",
   "example": "Ano ang pangalan mo -> Ano ang pangalan mo?",
   "suggestions": [
     {
