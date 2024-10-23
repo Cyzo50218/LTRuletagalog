@@ -1544,7 +1544,8 @@ if (!grammarRules.length)  {
       "condition": "matches('rin')"
     },
     {
-      "text": "daw"
+      "text": "daw",
+      "condition": "matches('raw')"
     },
     {
       "text": "doon",
@@ -1555,7 +1556,8 @@ if (!grammarRules.length)  {
       "condition": "matches('rito')"
     }
   ]
-},
+}
+,
 {
   "id": "RIN_RAW_ROON_RITO",
   "name": "Wastong Gamit ng Rin/Raw/Roon/Rito",
