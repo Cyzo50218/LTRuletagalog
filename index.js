@@ -3005,7 +3005,7 @@ if (!grammarRules.length)  {
   "name": "Add Question Mark for Pananong",
   "pattern": [
     {
-      "regex": "^(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)\\b.*[^\\?!]$"
+      "regex": "^(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)(.*[^\\?!])$"
     }
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
@@ -3013,11 +3013,12 @@ if (!grammarRules.length)  {
   "example": "Ano ang pangalan mo -> Ano ang pangalan mo?",
   "suggestions": [
     {
-      "text": "$0?",
+      "text": "$1$2?",
       "description": "Magdagdag ng tandang pananong sa katapusan ng pangungusap."
     }
   ]
 }
+
 
 
 ,
