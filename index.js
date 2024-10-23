@@ -3044,6 +3044,27 @@ if (!grammarRules.length)  {
     }
   ]
 },
+
+{
+  "id": "UpperCase",
+  "name": "Add Exclamation Mark for Padamdam",
+  "pattern": [
+    {
+      "regex": "^(\\b[a-z]+\\b)(?!\\!)"
+    }
+  ],
+  "message": "Ang bantas na padamdam ay ginagamit sa hulihan ng isang kataga, parirala o masidhing damdamin.",
+  "description": "Uppercase word",
+  "example": "uyy ang ganda ng bago mong sapatos -> Uyy ang ganda ng bago mong sapatos",
+  "suggestions": [
+    {
+      "text": "$1.charAt(0).toUpperCase() + $1.slice(1)",
+      "description": "Magdagdag ng tandang padamdam sa salitang '$1' sa katapusan ng pangungusap, at i-capitalize ang unang letra."
+    }
+  ]
+}
+
+,
 {
   "id": "NANG_REPEATED_WORDS",
   "name": "Wastong Gamit ng Nang para sa Inuulit na Salita",
