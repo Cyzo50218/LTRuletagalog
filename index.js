@@ -3150,14 +3150,24 @@ const callLanguageToolAPI = async (text, excludedWords = []) => {
 const checkTextAgainstRules = async (text, rules) => {
   let matches = [];
 
+  console.log("Starting to check text against rules");
+
   for (const rule of rules) {
+    console.log(`Checking rule: ${rule.id}`);
+
+    if (!rule.pattern || !Array.isArray(rule.pattern)) {
+      console.error(`Invalid or missing pattern for rule ${rule.id}`);
+      continue;
+    }
+
     for (const patternObj of rule.pattern) {
       let regex;
+
       if (patternObj.token && patternObj.token.value) {
-        // Exact match for tokens
+        console.log(`Using token match: ${patternObj.token.value}`);
         regex = new RegExp(`\\b${patternObj.token.value}\\b`, 'gi');
       } else if (patternObj.regex) {
-        // Regex pattern
+        console.log(`Using regex pattern: ${patternObj.regex}`);
         regex = new RegExp(patternObj.regex, 'gi');
       } else {
         console.warn(`Invalid pattern in rule ${rule.id}`);
@@ -3166,6 +3176,8 @@ const checkTextAgainstRules = async (text, rules) => {
 
       let match;
       while ((match = regex.exec(text)) !== null) {
+        console.log(`Match found for rule ${rule.id}:`, match[0]);
+
         let suggestions = [];
 
         // Handle repeated words with whitespace
@@ -3174,6 +3186,7 @@ const checkTextAgainstRules = async (text, rules) => {
 
         // Existing suggestion logic
         if (rule.suggestions) {
+          console.log(`Processing suggestions for rule ${rule.id}`);
           rule.suggestions.forEach(suggestion => {
             if (typeof suggestion === 'string') {
               suggestions.push(suggestion);
@@ -3181,9 +3194,8 @@ const checkTextAgainstRules = async (text, rules) => {
               let suggestionText = suggestion.text;
 
               // Replace capturing groups with the matched content
-              for (let i = 1; i < match.length; i++) { // Start from 1 because $0 is the whole match
+              for (let i = 1; i < match.length; i++) {
                 if (match[i]) {
-                  // Replace $i with the match[i] value
                   const groupRegex = new RegExp(`\\$${i}`, 'g');
                   suggestionText = suggestionText.replace(groupRegex, match[i]);
                 }
@@ -3193,6 +3205,9 @@ const checkTextAgainstRules = async (text, rules) => {
             }
           });
         }
+
+        // Log the suggestions for debugging
+        console.log(`Suggestions for match: ${suggestions}`);
 
         // Add match to results with suggestions
         matches.push({
@@ -3215,9 +3230,13 @@ const checkTextAgainstRules = async (text, rules) => {
             description: rule.description || rule.name
           }
         });
+
+        console.log(`Match added for rule ${rule.id}`);
       }
     }
   }
+
+  console.log("Finished checking text against rules");
 
   return { matches };
 };
