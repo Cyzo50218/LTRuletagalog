@@ -1534,7 +1534,7 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Din/Daw/Doon/Dito",
   "pattern": [
     {
-  "regex": "(<=\\w*[bcdfghjklmnpqrstvxzi]\\s)(rin|raw|roon|rito)\\b"
+  "regex": "(<=\\[A-Z][a-z][bcdfghjklmnpqrstvxzi]\\s)(rin|raw|roon|rito)\\b"
 }
 
   ],
