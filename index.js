@@ -150,7 +150,33 @@ if (!grammarRules.length)  {
       "text": "$1-$2"
     }
   ]
+},
+{
+  "id": "PAGUULIT",
+  "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
+  "pattern": [
+    {
+      "regex": "\\b(\\w*ng)\\s+(?=\\1(?!ng)\\b)(\\w+)\\b"
+    }
+  ],
+  "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
+  "description": "Sa pag-uulit ng salitang-ugat kinakabitan ito ng '-' ",
+  "examples": [
+    { "incorrect": "laging lagi", "correct": "laging-lagi" },
+    { "incorrect": "samang sama", "correct": "sama-ng-sama" },
+    { "incorrect": "tseke tseke", "correct": "tseke-tseke" },
+    { "incorrect": "bente bente", "correct": "bente-bente" },
+    { "incorrect": "pale pale", "correct": "pale-pale" },
+    { "incorrect": "tseketseke", "correct": "tseke-tseke" },
+    { "incorrect": "Kaway kaway", "correct": "Kaway-kaway" }
+  ],
+  "suggestions": [
+    {
+      "text": "$1-$2"
+    }
+  ]
 }
+
 /* {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
