@@ -3005,9 +3005,9 @@ if (!grammarRules.length)  {
   "id": "47.add_question_mark_pananong",
   "name": "Add Question Mark for Pananong",
   "pattern": [
-    {
-      "regex": "^(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)\\b.*\\b(\\w+)\\b[^\\?!]$"
-    }
+{
+  "regex": "^(Ano|ano|Sino|sino|Saan|saan|Kailan|kailan|Bakit|bakit|Papaano|papaano|paano|Paano)\\b.*?\\b(\\w+)\\b[^?!]$"
+}
   ],
   "message": "Ang pananong ay ginagamit sa katapusan ng mga pangungusap na patanong.",
   "description": "Magdagdag ng tandang pananong sa mga salitang patanong.",
