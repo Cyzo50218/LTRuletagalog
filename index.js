@@ -1635,7 +1635,7 @@ if (!grammarRules.length)  {
   "name": "Kudlit Replacement",
   "pattern": [
     {
-  "regex": "(\\b(\\w+)t\\s+(\\2)\\b)"  // Matches "ibat iba" where the first word ends with "t" and the second word is the same without the "t"
+  "regex": "(\\b(\\w+)t\\s+(\\2)\\b)" 
 }
 
 
