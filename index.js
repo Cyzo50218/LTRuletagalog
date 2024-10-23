@@ -1534,26 +1534,26 @@ if (!grammarRules.length)  {
   "name": "Wastong Gamit ng Din/Daw/Doon/Dito",
   "pattern": [
     {
-  "regex": "(<=\\[A-Z][a-z][bcdfghjklmnpqrstvxzi]\\s)(rin|raw|roon|rito)\\b"
+  "regex": "(\\w*[bcdfghjklmnpqrstvxzi]\\s)(rin|raw|roon|rito)\\b"
 }
 
   ],
   "description": "Mas tamang gamitin ang 'din', 'daw', 'doon', o 'dito' dahil ang sinusundang salita ay nagtatapos sa katinig maliban sa 'w' at 'y'.",
   "suggestions": [
     {
-      "text": "din",
+      "text": "$1 din",
       "condition": "matches('rin')"
     },
     {
-      "text": "daw",
+      "text": "$1 daw",
       "condition": "matches('raw')"
     },
     {
-      "text": "doon",
+      "text": "$1 doon",
       "condition": "matches('roon')"
     },
     {
-      "text": "dito",
+      "text": "$1 dito",
       "condition": "matches('rito')"
     }
   ]
