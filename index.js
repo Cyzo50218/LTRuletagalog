@@ -1541,7 +1541,7 @@ if (!grammarRules.length)  {
   "suggestions": [
     {
       "text": "din",
-      "condition": "matches('rin')"
+      "condition": "matches('\\b\\w*[bcdfghjklmnpqrstvxz]\\s')"
     },
     {
       "text": "daw"
@@ -2699,8 +2699,7 @@ if (!grammarRules.length)  {
       ]
     }
   ]
-}
-,
+},
 /*{
   "id": "PANAKLONG_YEARS",
   "name": "Gumamit ng Panaklong para sa Taon",
