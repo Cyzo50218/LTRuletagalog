@@ -150,10 +150,7 @@ if (!grammarRules.length)  {
       "text": "$1-$2"
     }
   ]
-}
-
-
-
+},
 {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
