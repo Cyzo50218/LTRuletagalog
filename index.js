@@ -154,7 +154,7 @@ if (!grammarRules.length)  {
 
 
 
-/* {
+{
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
@@ -175,6 +175,7 @@ if (!grammarRules.length)  {
 }
   ]
 },
+/*
  {
   "id": "PAGHULAPIAN_E",
   "name": "Pagbabago ng huling pantig ng salitang-ugat (e)",
@@ -219,7 +220,6 @@ if (!grammarRules.length)  {
   ]
 }
 */
-,
 {
   "id": "PAGTUNOG_E_O",
   "name": "Pagbabago ng tunog na 'e' at 'o' sa mga hiram na salita",
