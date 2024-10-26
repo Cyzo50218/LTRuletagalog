@@ -156,8 +156,8 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     {
-      "regex": "\\b(\\w*[ng])\\s+(\\w*[\\w])ng\\b"
-    }
+  "regex": "\\b(\\w*ng)\\s+(?=\\1\\b)([a-z]+)ng\\b"
+}
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
