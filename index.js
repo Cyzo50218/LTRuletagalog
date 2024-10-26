@@ -152,7 +152,7 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "PAGUULIT_NG",
+  "id": "PAGUULIT_NA_MAY_NG",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     {
