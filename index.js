@@ -181,7 +181,7 @@ if (!grammarRules.length)  {
     }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
-  "description": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
+  "description": "Dahil ang tamang pagbubuo ng mga salitang inuulit ay sumusunod sa orihinal na anyo ng salita bago ito ulitin.",
   "examples": [
     { "incorrect": "Batu bato", "correct": "Bato-bato" },
     { "incorrect": "Sinu Sinu", "correct": "Sino-sino" },
