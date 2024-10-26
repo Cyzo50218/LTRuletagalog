@@ -160,7 +160,7 @@ if (!grammarRules.length)  {
     }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
-  "description": "Sa pag-uulit ng salitang-ugat kinakabitan to ng '-' ",
+  "description": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
   "examples": [
     { "incorrect": "Batu bato", "correct": "Batu-bato" },
     { "incorrect": "Sinu Sinu", "correct": "Sinu-sino" },
