@@ -152,26 +152,27 @@ if (!grammarRules.length)  {
   ]
 },
 {
-  "id": "PAGUULIT",
+  "id": "PAGUULIT_NG",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     {
-      "regex": "\\b(\\w*[\\w])ng\\s+(\\w*[\\w])\\b"
+      "regex": "\\b(\\w*[\\w])ng\\s+(\\w*[\\w])ng\\b"
     }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
   "examples": [
-    { "incorrect": "Batu bato", "correct": "Bato-bato" },
-    { "incorrect": "Sinu Sinu", "correct": "Sino-sino" },
-    { "incorrect": "test test", "correct": "test-test" }
+    { "incorrect": "Batu ng bato", "correct": "Bato-ng bato" },
+    { "incorrect": "Sinu ng Sinu", "correct": "Sino-ng Sinu" },
+    { "incorrect": "test ng test", "correct": "test-ng test" }
   ],
   "suggestions": [
     {
-      "text": "$1-$3"
+      "text": "$1ng-$3"
     }
   ]
-},
+}
+,
 {
   "id": "PAGUULIT",
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
