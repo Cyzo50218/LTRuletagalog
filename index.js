@@ -344,6 +344,45 @@ if (!grammarRules.length)  {
   ]
 },
 {
+  "id": "MAY GITLING",
+  "name": "KAPAG at KUNG",
+  "pattern": [
+    {
+      "regex": "\\b(abalang abala|Abalang abala)\\b"
+    }
+  ],
+  "message": "Gamitin ang 'kung' para sa di-katiyakan at 'kapag' para sa kalagayang tiyak.",
+  "description": "Ipinakikilala ng 'kung' ang di-katiyakan ng isang kalagayan; ipinakikilala ng 'kapag' ang isang kalagayang tiyak.",
+  "example": "Umuuwi siya sa probinsiya kapag araw ng Sabado. Mag-ingat ka naman kapag nagmamaneho ka. Hindi niya masabi kung Sabado o Linggo ang pag-uwi niya sa probinsiya. Mag-ingat ka kung ikaw ang magmamaneho ng kotse.",
+  "suggestions": [
+    {
+      "text": "Abalang-abala"
+    },
+    {
+  "text": "abalang-abala"
+}
+  ]
+},
+{
+  "id": "1.KAPAG_KUNG",
+  "name": "KAPAG at KUNG",
+  "pattern": [
+    {
+      "regex": "\\b(kpg|kapg|kpag)\\b"
+    }
+  ],
+  "message": "Gamitin ang 'kung' para sa di-katiyakan at 'kapag' para sa kalagayang tiyak.",
+  "description": "Ipinakikilala ng 'kung' ang di-katiyakan ng isang kalagayan; ipinakikilala ng 'kapag' ang isang kalagayang tiyak.",
+  "example": "Umuuwi siya sa probinsiya kapag araw ng Sabado. Mag-ingat ka naman kapag nagmamaneho ka. Hindi niya masabi kung Sabado o Linggo ang pag-uwi niya sa probinsiya. Mag-ingat ka kung ikaw ang magmamaneho ng kotse.",
+  "suggestions": [
+    {
+      "text": "kapag",
+      "condition": "matches(kpg|kapg|kpag)",
+      "description": "'Kapag' ang tamang gamitin kapag tinutukoy ang isang kalagayan na tiyak."
+    }
+  ]
+},
+{
   "id": "2.KIBO_IMIK",
   "name": "KIBO at IMIK",
   "pattern": [
@@ -3059,9 +3098,968 @@ if (!grammarRules.length)  {
       "condition": "matches('ng')"
     }
   ]
-}
-
-
+},
+    {
+      "id": "GITLING_1",
+      "name": "Add Gitling - abalang abala",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]balang)\\s)(abala)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_2",
+      "name": "Add Gitling - abang aba",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]bang)\\s)(aba)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_3",
+      "name": "Add Gitling - abong abo",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]bong)\\s)(abo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_4",
+      "name": "Add Gitling - akong ako",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]kong)\\s)(ako)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_5",
+      "name": "Add Gitling - alagang alaga",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]lagang)\\s)(alaga)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_6",
+      "name": "Add Gitling - among amo",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]mong)\\s)(amo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_7",
+      "name": "Add Gitling - asang asa",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]sang)\\s)(asa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_8",
+      "name": "Add Gitling - asawang asawa",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]sawang)\\s)(asawa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_9",
+      "name": "Add Gitling - awang awa",
+      "pattern": [
+        {
+          "regex": "(\\b([Aa]wang)\\s)(awa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_10",
+      "name": "Add Gitling - babaeng babae",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]abaeng)\\s)(babae)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_11",
+      "name": "Add Gitling - babang baba",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]abang)\\s)(baba)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_12",
+      "name": "Add Gitling - bagang baga",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]agang)\\s)(baga)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_13",
+      "name": "Add Gitling - bagong bago",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]agong)\\s)(bago)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_14",
+      "name": "Add Gitling - bagyong bagyo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]agyong)\\s)(bagyo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_15",
+      "name": "Add Gitling - bahang baha",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ahang)\\s)(baha)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_16",
+      "name": "Add Gitling - baklang bakla",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]aklang)\\s)(bakla)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_17",
+      "name": "Add Gitling - banyong banyo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]anyong)\\s)(banyo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_18",
+      "name": "Add Gitling - basang basa",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]asang)\\s)(basa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_19",
+      "name": "Add Gitling - batang bata",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]atang)\\s)(bata)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_20",
+      "name": "Add Gitling - batong bato",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]atong)\\s)(bato)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    }
+    ,
+    {
+      "id": "GITLING_21",
+      "name": "Add Gitling - bawing bawi",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]awing)\\s)(bawi)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_22",
+      "name": "Add Gitling - bayaning bayani",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ayaning)\\s)(bayani)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_23",
+      "name": "Add Gitling - bayong bayo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ayong)\\s)(bayo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_24",
+      "name": "Add Gitling - berdeng berde",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]erdeng)\\s)(berde)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_25",
+      "name": "Add Gitling - besong beso",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]esong)\\s)(beso)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_26",
+      "name": "Add Gitling - bibong bibo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ibong)\\s)(bibo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_27",
+      "name": "Add Gitling - bidang bida",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]idang)\\s)(bida)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_28",
+      "name": "Add Gitling - bikining bikini",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ikining)\\s)(bikini)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_29",
+      "name": "Add Gitling - biling bili",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]iling)\\s)(bili)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_30",
+      "name": "Add Gitling - binging bingi",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]inging)\\s)(bingi)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_31",
+      "name": "Add Gitling - biyaheng biyahe",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]iyaheng)\\s)(biyahe)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_32",
+      "name": "Add Gitling - bokang boka",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]okang)\\s)(boka)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_33",
+      "name": "Add Gitling - bolang bola",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]olang)\\s)(bola)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_34",
+      "name": "Add Gitling - botong boto",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]otong)\\s)(boto)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_35",
+      "name": "Add Gitling - bugsong bugso",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ugsong)\\s)(bugso)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_36",
+      "name": "Add Gitling - bukang buka",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ukang)\\s)(buka)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_37",
+      "name": "Add Gitling - bukong buko",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ukong)\\s)(buko)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_38",
+      "name": "Add Gitling - bulang bula",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ulang)\\s)(bula)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_39",
+      "name": "Add Gitling - bungong bungo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]ungong)\\s)(bungo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_40",
+      "name": "Add Gitling - buryong buryo",
+      "pattern": [
+        {
+          "regex": "(\\b([Bb]uryong)\\s)(buryo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_41",
+      "name": "Add Gitling - daang daan",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]aang)\\s)(daan)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_42",
+      "name": "Add Gitling - dalang dala",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]alang)\\s)(dala)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_43",
+      "name": "Add Gitling - daling dali",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]aling)\\s)(dali)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_44",
+      "name": "Add Gitling - damang dama",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]amang)\\s)(dama)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_45",
+      "name": "Add Gitling - dating dati",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]ating)\\s)(dati)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_46",
+      "name": "Add Gitling - diyosang diyosa",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]iyosang)\\s)(diyosa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_47",
+      "name": "Add Gitling - duming dumi",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]uming)\\s)(dumi)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_48",
+      "name": "Add Gitling - dusang dusa",
+      "pattern": [
+        {
+          "regex": "(\\b([Dd]usang)\\s)(dusa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_49",
+      "name": "Add Gitling - gabi gabing",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]abi)\\s)(gabing)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_50",
+      "name": "Add Gitling - gabing gabi",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]abing)\\s)(gabi)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_51",
+      "name": "Add Gitling - galang gala",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]alang)\\s)(gala)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_52",
+      "name": "Add Gitling - ganang gana",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]anang)\\s)(gana)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_53",
+      "name": "Add Gitling - gandang ganda",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]andang)\\s)(ganda)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_54",
+      "name": "Add Gitling - ganoong ganoon",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]anoong)\\s)(ganoon)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_55",
+      "name": "Add Gitling - gawang gawa",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]awang)\\s)(gawa)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_56",
+      "name": "Add Gitling - gintong ginto",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]intong)\\s)(ginto)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_57",
+      "name": "Add Gitling - guhong guho",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]uhong)\\s)(guho)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_58",
+      "name": "Add Gitling - gulong gulo",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]ulong)\\s)(gulo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_59",
+      "name": "Add Gitling - gustong gusto",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]ustong)\\s)(gusto)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    },
+    {
+      "id": "GITLING_60",
+      "name": "Add Gitling - guwapong guwapo",
+      "pattern": [
+        {
+          "regex": "(\\b([Gg]uwapong)\\s)(guwapo)"
+        }
+      ],
+      "message": "maglagay ng gitling",
+      "description": "add gitling",
+      "suggestions": [
+        {
+          "text": "$1-$2"
+        }
+      ]
+    }
 
 
 
