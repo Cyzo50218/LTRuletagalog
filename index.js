@@ -156,22 +156,23 @@ if (!grammarRules.length)  {
   "name": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'",
   "pattern": [
     {
-      "regex": "\\b(\\w*[u])\\s+(\\w*[o])\\b"
+      "regex": "\\b(\\w*[\\w])u\\s+(\\w*[o])\\b"
     }
   ],
   "message": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'e'. Hindi ito pinapalitan ng letrang 'i'.",
   "description": "Pag-uulit ng salitang-ugat na nagtatapos sa patinig na 'o'. Hindi ito pinapalitan ng letrang 'u'.",
   "examples": [
-    { "incorrect": "Batu bato", "correct": "Batu-bato" },
-    { "incorrect": "Sinu Sinu", "correct": "Sinu-sino" },
+    { "incorrect": "Batu bato", "correct": "Bato-bato" },
+    { "incorrect": "Sinu Sinu", "correct": "Sino-sino" },
     { "incorrect": "test test", "correct": "test-test" }
   ],
   "suggestions": [
     {
-  "text": "$1-o-$2"
-}
+      "text": "$1o-$2"
+    }
   ]
-},
+}
+,
 /*
  {
   "id": "PAGHULAPIAN_E",
