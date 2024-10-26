@@ -168,7 +168,7 @@ if (!grammarRules.length)  {
   ],
   "suggestions": [
     {
-      "text": "$1ng-$3"
+      "text": "$1-ng-$2"
     }
   ]
 }
