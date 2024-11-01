@@ -3083,7 +3083,7 @@ if (!grammarRules.length)  {
   "description": "ang salitang iba't iba ay pinaikli mula sa iba at iba, kaya hindi kinakailangan ng isa pang gitling sa pagitan ng iba't iba",
   "suggestions": [
         {
-          "text": "$1'$2 $4"
+          "text": "$1'$3 $4"
         }
       ]
     },
