@@ -3092,7 +3092,7 @@ if (!grammarRules.length)  {
       "name": "Add Gitling - abalang abala",
       "pattern": [
         {
-          "regex": "(\\b([Aa]balang)\\s)(abala)ng"
+          "regex": "(\\b([Aa]balang))(abala)ng"
         }
       ],
       "message": "maglagay ng gitling",
@@ -3108,7 +3108,7 @@ if (!grammarRules.length)  {
       "name": "Add Gitling - abang aba",
       "pattern": [
         {
-          "regex": "(\\b([Aa]bang)\\s)(aba)"
+          "regex": "(\\b([Aa]bang))(aba)"
         }
       ],
       "message": "maglagay ng gitling",
