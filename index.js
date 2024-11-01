@@ -3092,14 +3092,14 @@ if (!grammarRules.length)  {
       "name": "Add Gitling - abalang abala",
       "pattern": [
         {
-          "regex": "(\\b([Aa]balang))(abala)ng"
-        }
+  "regex": "(\\b([Aa]balang))\\s+(\\b(abala))"
+}
       ],
       "message": "maglagay ng gitling",
-      "description": "add gitling",
-      "suggestions": [
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
         {
-          "text": "$1-$2"
+          "text": "$1-$4"
         }
       ]
     },
