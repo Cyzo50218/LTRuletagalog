@@ -3135,22 +3135,6 @@ if (!grammarRules.length)  {
         }
       ]
 },
-{
-  "id": "GITLING_1",
-  "name": "Add Gitling - abalang abala",
-  "pattern": [
-    {
-      "regex": "(\\b([Ii]ba))(t)(-)(\\b(ibang))"
-}
-      ],
-  "message": "maglagay ng gitling",
-  "description": "ang salitang iba't iba ay pinaikli mula sa iba at iba, kaya hindi kinakailangan ng isa pang gitling sa pagitan ng iba't iba",
-  "suggestions": [
-    {
-      "text": "$1'$3 $5"
-        }
-      ]
-},
     {
       "id": "GITLING_1",
       "name": "Add Gitling - abalang abala",
