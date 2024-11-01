@@ -3104,21 +3104,21 @@ if (!grammarRules.length)  {
       ]
     },
     {
-      "id": "GITLING_2",
-      "name": "Add Gitling - abang aba",
-      "pattern": [
-        {
-          "regex": "(\\b([Aa]bang))\\s(\\b(aba))"
-        }
-      ],
-      "message": "maglagay ng gitling",
-      "description": "Sa pag-uulit ng nga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
-      "suggestions": [
-        {
-          "text": "$1-$3"
-        }
-      ]
-    },
+  "id": "GITLING_2",
+  "name": "Add Gitling - abang aba",
+  "pattern": [
+    {
+      "regex": "(\\b([Aa]bang))\\s+(\\b(aba))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
     {
       "id": "GITLING_3",
       "name": "Add Gitling - abong abo",
