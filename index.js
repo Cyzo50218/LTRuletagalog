@@ -3150,7 +3150,7 @@ if (!grammarRules.length)  {
       "text": "$1'$3 $5"
         }
       ]
-}
+},
     {
       "id": "GITLING_1",
       "name": "Add Gitling - abalang abala",
