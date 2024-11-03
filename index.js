@@ -4609,6 +4609,326 @@ if (!grammarRules.length)  {
       "text": "$1-$4"
     }
   ]
+},
+{
+  "id": "GITLING_101",
+  "name": "Add Gitling - kating kati",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]ating))\\s+(\\b(kati))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_102",
+  "name": "Add Gitling - kawawang kawawa",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]awawang))\\s+(\\b(kawawa))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_103",
+  "name": "Add Gitling - kayang kaya",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]ayang))\\s+(\\b(kaya))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_104",
+  "name": "Add Gitling - kayumangging kayumanggi",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]ayumangging))\\s+(\\b(kayumanggi))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_105",
+  "name": "Add Gitling - kesong keso",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]esong))\\s+(\\b(keso))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_106",
+  "name": "Add Gitling - kilalang kilala",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]ilalang))\\s+(\\b(kilala))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_107",
+  "name": "Add Gitling - kitang kita",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]itang))\\s+(\\b(kita))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_108",
+  "name": "Add Gitling - konting konti",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]onting))\\s+(\\b(konti))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_109",
+  "name": "Add Gitling - kuhang kuha",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]uhang))\\s+(\\b(kuha))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_110",
+  "name": "Add Gitling - kulong kulo",
+  "pattern": [
+    {
+      "regex": "(\\b([Kk]ulong))\\s+(\\b(kulo))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_111",
+  "name": "Add Gitling - labang laba",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]abang))\\s+(\\b(laba))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_112",
+  "name": "Add Gitling - lagang laga",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]agang))\\s+(\\b(laga))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_113",
+  "name": "Add Gitling - lagong lago",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]agong))\\s+(\\b(lago))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_114",
+  "name": "Add Gitling - lahing lahi",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]ahing))\\s+(\\b(lahi))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_115",
+  "name": "Add Gitling - laking laki",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]aking))\\s+(\\b(laki))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_116",
+  "name": "Add Gitling - lalaking lalaki",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]alaking))\\s+(\\b(lalaki))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_117",
+  "name": "Add Gitling - lalong lalo",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]along))\\s+(\\b(lalo))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_118",
+  "name": "Add Gitling - langong lango",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]angong))\\s+(\\b(lango))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_119",
+  "name": "Add Gitling - larong laro",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]arong))\\s+(\\b(laro))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_120",
+  "name": "Add Gitling - latang lata",
+  "pattern": [
+    {
+      "regex": "(\\b([Ll]atang))\\s+(\\b(lata))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
   },
 
 ];
