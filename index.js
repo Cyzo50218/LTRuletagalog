@@ -3934,12 +3934,137 @@ if (!grammarRules.length)  {
       "text": "$1-$4"
     }
   ]
-  },
-  /* Batch 50 to 60 must continue here
-  
-  */
-  {
-  "id": "GITLING_60",
+},
+{
+  "id": "GITLING_51",
+  "name": "Add Gitling - diyosang diyosa",
+  "pattern": [
+    {
+      "regex": "(\\b([Dd]iyosang))\\s+(\\b(diyosa))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_52",
+  "name": "Add Gitling - duming dumi",
+  "pattern": [
+    {
+      "regex": "(\\b([Dd]uming))\\s+(\\b(dumi))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_53",
+  "name": "Add Gitling - dusang dusa",
+  "pattern": [
+    {
+      "regex": "(\\b([Dd]usang))\\s+(\\b(dusa))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_54",
+  "name": "Add Gitling - gabi gabing",
+  "pattern": [
+    {
+      "regex": "(\\b([Gg]abi))\\s+(\\b(gabing))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_55",
+  "name": "Add Gitling - gabing gabi",
+  "pattern": [
+    {
+      "regex": "(\\b([Gg]abing))\\s+(\\b(gabi))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_56",
+  "name": "Add Gitling - galang gala",
+  "pattern": [
+    {
+      "regex": "(\\b([Gg]alang))\\s+(\\b(gala))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_57",
+  "name": "Add Gitling - ganang gana",
+  "pattern": [
+    {
+      "regex": "(\\b([Gg]anang))\\s+(\\b(gana))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_58",
+  "name": "Add Gitling - gandang ganda",
+  "pattern": [
+    {
+      "regex": "(\\b([Gg]andang))\\s+(\\b(ganda))"
+    }
+  ],
+  "message": "maglagay ng gitling",
+  "description": "Sa pag-uulit ng mga salitang-ugat, nananatili ang orihinal na anyo. Ang pag-uulit ng salita ay hindi kinakailangang baguhin dahil ito'y may tiyak na naaayon na orihinal na anyo ng salita.",
+  "suggestions": [
+    {
+      "text": "$1-$4"
+    }
+  ]
+},
+{
+  "id": "GITLING_59",
   "name": "Add Gitling - ganoong ganoon",
   "pattern": [
     {
