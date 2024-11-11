@@ -11,7 +11,7 @@
   ],
   "routes": [
     { "src": "/api/v2/check", "dest": "/index.js" },
-    { "src": "/api/givngo/trigger", "dest": "/index.js" },
+    { "src": "/api/givngo/trigger", "dest": "/sendNotification.js" },
     {
       "src": "/api/v2/geminiapi",
       "dest": "/generatesuggestions.js"
