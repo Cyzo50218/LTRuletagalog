@@ -17,9 +17,9 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { fcmToken, title, body , donorEmail } = req.body;
+    const { fcmToken, title, body , email } = req.body;
 
-    if (!fcmToken || !title || !body || !donorEmail) {
+    if (!fcmToken || !title || !body || !email) {
         return res.status(400).json({ error: "Missing fields" });
     }
 
@@ -29,8 +29,10 @@ export default async function handler(req, res) {
             body: body,
         },
         token: fcmToken,
-        donorEmail: donorEmail
-    };
+        data: {
+  email: email
+}
+};
 
     try {
         await admin.messaging().send(message);
