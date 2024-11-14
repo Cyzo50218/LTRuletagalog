@@ -35,9 +35,18 @@ export default async function handler(req, res) {
 };
 
     try {
-        await admin.messaging().send(message);
-        res.status(200).json({ success: true, message: "Notification sent" });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
+  const response = await admin.messaging().send(message);
+  res.status(200).json({
+    success: true,
+    message: "Notification sent",
+    response: response, // include the response to check the status
+    sentToToken: fcmToken
+  });
+} catch (error) {
+  res.status(500).json({
+    success: false,
+    error: error.message,
+    sentToToken: fcmToken // include the attempted token for context
+  });
+}
 }
