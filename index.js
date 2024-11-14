@@ -344,6 +344,8 @@ if (!grammarRules.length)  {
     }
   ]
 },
+
+/*
 {
   "id": "3.DAHIL_DAHILAN",
   "name": "DAHIL at DAHILAN",
@@ -387,6 +389,9 @@ if (!grammarRules.length)  {
     }
   ]
 },
+
+*/
+
 {
   "id": "4.HABANG_SAMANTALANG",
   "name": "HABANG at SAMANTALANG",
