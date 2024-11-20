@@ -34,36 +34,45 @@ export default async function handler(req, res) {
     };
 
     try {
-        const response = await admin.messaging().send(message);
-        res.status(200).json({
-            success: true,
-            message: "Notification sent",
-            response,
-            sentToToken: fcmToken,
-        });
-    } catch (error) {
-        let specificError = "Unknown error";
-        if (error.code) {
-            switch (error.code) {
-                case "messaging/invalid-recipient":
-                    specificError = "The provided token is invalid.";
-                    break;
-                case "messaging/invalid-payload":
-                    specificError = "Invalid payload sent in the message.";
-                    break;
-                case "messaging/auth-error":
-                    specificError = "Authentication issue. Check your credentials.";
-                    break;
-                default:
-                    specificError = error.message;
-            }
+    const response = await admin.messaging().send(message);
+    res.status(200).json({
+        success: true,
+        message: "Notification sent",
+        response,
+        sentToToken: fcmToken,
+    });
+} catch (error) {
+    let specificError = "Unknown error";
+    if (error.code) {
+        switch (error.code) {
+            case "messaging/invalid-recipient":
+                specificError = "The provided token is invalid.";
+                break;
+            case "messaging/invalid-payload":
+                specificError = "Invalid payload sent in the message.";
+                break;
+            case "messaging/auth-error":
+                specificError = "Authentication issue. Check your credentials.";
+                break;
+            default:
+                specificError = error.message;
         }
-
-        res.status(500).json({
-            success: false,
-            error: specificError,
-            originalError: error.message,
-            attemptedToken: fcmToken,
-        });
     }
+
+    // Log the error details
+    console.error("Error sending notification:", {
+        specificError,
+        originalError: error.message,
+        errorCode: error.code || "No error code provided",
+        attemptedToken: fcmToken,
+    });
+
+    res.status(500).json({
+        success: false,
+        error: specificError,
+        originalError: error.message,
+        attemptedToken: fcmToken,
+    });
+}
+
 }
