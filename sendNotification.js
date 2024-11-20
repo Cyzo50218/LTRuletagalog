@@ -1,4 +1,3 @@
-// api/sendNotification.js
 const admin = require("firebase-admin");
 
 // Initialize Firebase Admin SDK with your service account credentials
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { fcmToken, title, body , email } = req.body;
+    const { fcmToken, title, body, email } = req.body;
 
     if (!fcmToken || !title || !body || !email) {
         return res.status(400).json({ error: "Missing fields" });
@@ -25,28 +24,46 @@ export default async function handler(req, res) {
 
     const message = {
         notification: {
-            title: title,
-            body: body,
+            title,
+            body,
         },
         token: fcmToken,
         data: {
-  email: email
-}
-};
+            email,
+        },
+    };
 
     try {
-  const response = await admin.messaging().send(message);
-  res.status(200).json({
-    success: true,
-    message: "Notification sent",
-    response: response, // include the response to check the status
-    sentToToken: fcmToken
-  });
-} catch (error) {
-  res.status(500).json({
-    success: false,
-    error: error.message,
-    sentToToken: fcmToken // include the attempted token for context
-  });
-}
+        const response = await admin.messaging().send(message);
+        res.status(200).json({
+            success: true,
+            message: "Notification sent",
+            response,
+            sentToToken: fcmToken,
+        });
+    } catch (error) {
+        let specificError = "Unknown error";
+        if (error.code) {
+            switch (error.code) {
+                case "messaging/invalid-recipient":
+                    specificError = "The provided token is invalid.";
+                    break;
+                case "messaging/invalid-payload":
+                    specificError = "Invalid payload sent in the message.";
+                    break;
+                case "messaging/auth-error":
+                    specificError = "Authentication issue. Check your credentials.";
+                    break;
+                default:
+                    specificError = error.message;
+            }
+        }
+
+        res.status(500).json({
+            success: false,
+            error: specificError,
+            originalError: error.message,
+            attemptedToken: fcmToken,
+        });
+    }
 }
