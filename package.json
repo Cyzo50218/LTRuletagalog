@@ -19,6 +19,7 @@
     "@google/generative-ai": "^0.13.0",
     "openai": "^4.0.0",
     "firebase-admin": "^12.7.0",
+    "uuid": "^9.0.0", 
     "express-rate-limit": "^7.0.0" 
   }
 }
