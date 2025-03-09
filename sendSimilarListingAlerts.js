@@ -81,7 +81,7 @@ export default async function handler(req, res) {
       const alertUserId = alertData.userId;
       const alertCategory = alertData.category || "";
       const alertTitle = alertData.title || "";
-      const alertPrice = alertData.price;
+      const alertPrice = alertData.price || "";
 
       // 4a. Category check (exact match, case-insensitive).
       if (alertCategory.toLowerCase() !== newListingCategoryLower) {
@@ -98,18 +98,21 @@ export default async function handler(req, res) {
       let priceMatches = false;
       let priceMatchType = "";  // To store the type of price match.
 
-      if (typeof alertPrice === "number") {
-        if (price < alertPrice) {
-          priceMatches = true;
-          priceMatchType = "lower";
-        } else if (price > alertPrice) {
-          priceMatches = true;
-          priceMatchType = "higher";
-        } else if (price === alertPrice) {
-          priceMatches = true;
-          priceMatchType = "same";
-        }
-      }
+      
+  // Convert alertPrice and price to integers for comparison
+  const alertPriceInt = parseInt(alertPrice, 10);
+  const priceInt = parseInt(price, 10);
+
+  if (priceInt < alertPriceInt) {
+    priceMatches = true;
+    priceMatchType = "lower";
+  } else if (priceInt > alertPriceInt) {
+    priceMatches = true;
+    priceMatchType = "higher";
+  } else if (priceInt === alertPriceInt) {
+    priceMatches = true;
+    priceMatchType = "same";
+  }
 
       // Log price match type for debugging in Vercel logs.
       console.log(`Price match type: ${priceMatchType}, New listing price: ${price}, Alert price: ${alertPrice}`);
