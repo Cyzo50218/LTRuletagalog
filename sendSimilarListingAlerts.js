@@ -116,7 +116,7 @@ if (alertTitle && alertTitle.trim() !== "") {
       let priceMatchType = "";  // To store the type of price match.
 
       
-  // Convert alertPrice and price to integers for comparison
+  // Convert alertPrice and price 
   const alertPriceInt = parseInt(alertPrice, 10);
   const priceInt = parseInt(price, 10);
 
