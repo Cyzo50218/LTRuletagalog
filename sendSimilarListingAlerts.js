@@ -58,16 +58,11 @@ export default async function handler(req, res) {
     // Use the provided timestamp or default to a server-generated timestamp.
     const postTimestamp = timestamp || admin.firestore.FieldValue.serverTimestamp();
 
-    // 2. Define a threshold for price matching (20% difference allowed).
-    const priceThreshold = 0.2;
-
     // Prepare lowercase values for case-insensitive matching.
     const newListingTitleLower = title.toLowerCase();
     const newListingCategoryLower = category.toLowerCase();
 
     // 3. Query all saved similar listing alerts.
-    // Alerts are stored at:
-    // ShopNGo → document("users") → collection("SimilarListings")
     const alertsSnapshot = await admin.firestore()
       .collection("ShopNGo")
       .doc("users")
@@ -83,14 +78,14 @@ export default async function handler(req, res) {
       // Only process if this alert is enabled.
       if (!alertData.enabled) continue;
 
-      const alertUserId = alertData.userId; // User who should receive the notification.
+      const alertUserId = alertData.userId;
       const alertCategory = alertData.category || "";
-      const alertTitle = alertData.title || ""; // Keyword or title fragment.
-      const alertPrice = alertData.price;       // Target price for matching.
+      const alertTitle = alertData.title || "";
+      const alertPrice = alertData.price;
 
       // 4a. Category check (exact match, case-insensitive).
       if (alertCategory.toLowerCase() !== newListingCategoryLower) {
-        continue; // Skip this alert if category does not match.
+        continue;
       }
 
       // 4b. Title check: if a keyword is specified, it must appear in the new post title.
@@ -99,16 +94,28 @@ export default async function handler(req, res) {
         titleMatches = newListingTitleLower.includes(alertTitle.toLowerCase());
       }
 
-      // 4c. Price check: if a target price is provided, ensure the difference is within threshold.
-      let priceMatches = true;
+      // 4c. Updated Price check: handle lower, higher, or same price cases.
+      let priceMatches = false;
+      let priceMatchType = "";  // To store the type of price match.
+
       if (typeof alertPrice === "number") {
-        const diff = Math.abs(price - alertPrice);
-        priceMatches = (diff / alertPrice) <= priceThreshold;
+        if (price < alertPrice) {
+          priceMatches = true;
+          priceMatchType = "lower";
+        } else if (price > alertPrice) {
+          priceMatches = true;
+          priceMatchType = "higher";
+        } else if (price === alertPrice) {
+          priceMatches = true;
+          priceMatchType = "same";
+        }
       }
+
+      // Log price match type for debugging in Vercel logs.
+      console.log(`Price match type: ${priceMatchType}, New listing price: ${price}, Alert price: ${alertPrice}`);
 
       // 5. If both title and price checks pass, consider this a matching alert.
       if (titleMatches && priceMatches) {
-        // Generate a random UUID for the notification document.
         const notificationId = uuidv4();
 
         // Build the document reference for the user's notifications.
@@ -133,7 +140,7 @@ export default async function handler(req, res) {
           sellerId,
           postTimestamp,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          matchCriteria: { alertTitle, alertCategory, alertPrice }
+          matchCriteria: { alertTitle, alertCategory, alertPrice, priceMatchType }  // Include price match type.
         });
         notificationsCreated++;
 
@@ -147,21 +154,22 @@ export default async function handler(req, res) {
 
         if (accountDoc.exists) {
           const accountData = accountDoc.data();
-          const fcmToken = accountData.fcmToken; // Assume the FCM token is stored here.
+          const fcmToken = accountData.fcmToken;
 
           if (fcmToken) {
-            // Prepare a payload for FCM.
+            // Prepare a payload for FCM with a toast for debugging.
             const payload = {
               notification: {
                 title: "New Similar Listing Alert",
-                body: `${title} in ${category} at ₱${price} was just posted.`,
+                body: `${title} in ${category} at ₱${price} was just posted (${priceMatchType} than your target).`,
               },
               data: {
                 postId,
                 sellerId,
                 category,
                 price: price.toString(),
-                notificationId
+                notificationId,
+                toast: `New similar listing found with a ${priceMatchType} price!`  // Debugging toast message.
               },
             };
 
