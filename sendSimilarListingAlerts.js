@@ -170,6 +170,8 @@ if (alertTitle && alertTitle.trim() !== "") {
           .doc("Users")
           .collection("Accounts")
           .doc(alertUserId)
+          .collection("Marketplace")
+          .doc("userData")
           .get();
 
         if (accountDoc.exists) {
