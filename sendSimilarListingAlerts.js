@@ -89,10 +89,27 @@ export default async function handler(req, res) {
       }
 
       // 4b. Title check: if a keyword is specified, it must appear in the new post title.
-      let titleMatches = true;
-      if (alertTitle && alertTitle.trim() !== "") {
-        titleMatches = newListingTitleLower.includes(alertTitle.toLowerCase());
-      }
+      let titleMatches = false;
+let matchType = "none";
+
+if (alertTitle && alertTitle.trim() !== "") {
+  const alertWords = alertTitle.toLowerCase().split(/\s+/); // Split alertTitle into words
+  const matchedWords = alertWords.filter(word => newListingTitleLower.includes(word));
+
+  if (matchedWords.length === alertWords.length) {
+    titleMatches = true;
+    matchType = "exact match";
+    console.log("Exact Match: All words in alert title are found in the new listing title.");
+  } else if (matchedWords.length > 0) {
+    titleMatches = true;
+    matchType = "partial match";
+    console.log("Partial Match: Some words in alert title are found in the new listing title.");
+  } else {
+    console.log("None: No words in alert title are found in the new listing title.");
+  }
+} else {
+  console.log("None: No alert title specified or it's empty.");
+}
 
       // 4c. Updated Price check: handle lower, higher, or same price cases.
       let priceMatches = false;
