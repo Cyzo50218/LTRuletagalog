@@ -42,6 +42,7 @@ if (!admin.apps.length) {
  *   ShopNGo/Users/Accounts/{alertUserId}
  * If a token exists, it sends a push notification via FCM.
  */
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -52,93 +53,114 @@ export default async function handler(req, res) {
     // 1. Extract new post details from the request body.
     const { postId, title, category, price, sellerId, timestamp } = req.body;
     if (!postId || !title || !category || price === undefined) {
+      console.log("Missing required fields in the request body.");
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    // Use the provided timestamp or default to a server-generated timestamp.
+    console.log("Received new post:", { postId, title, category, price, sellerId });
+
     const postTimestamp = timestamp || admin.firestore.FieldValue.serverTimestamp();
 
-    // Prepare lowercase values for case-insensitive matching.
     const newListingTitleLower = title.toLowerCase();
     const newListingCategoryLower = category.toLowerCase();
 
-    // 3. Query all saved similar listing alerts.
+    // 2. Fetch all saved similar listing alerts.
     const alertsSnapshot = await admin.firestore()
       .collection("ShopNGo")
       .doc("users")
       .collection("SimilarListings")
       .get();
 
+    if (alertsSnapshot.empty) {
+      console.log("No similar listing alerts found.");
+      return res.status(200).json({ message: "No alerts to process." });
+    }
+
+    console.log(`Found ${alertsSnapshot.docs.length} alert documents.`);
+
+    // Store alert documents in an array for iteration.
+    const alertDocuments = alertsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
     let notificationsCreated = 0;
 
-    // 4. Iterate over each saved alert document.
-    for (const doc of alertsSnapshot.docs) {
-      const alertData = doc.data();
+    // Initialize Firestore batch for efficient writing.
+    const batch = admin.firestore().batch();
 
-      // Only process if this alert is enabled.
-      if (!alertData.enabled) continue;
+    // 3. Iterate over each saved alert document.
+    for (const alertData of alertDocuments) {
+      const { id: alertDocId, ...alertInfo } = alertData;
 
-      const alertUserId = alertData.userId;
-      const alertCategory = alertData.category || "";
-      const alertTitle = alertData.title || "";
-      const alertPrice = alertData.price || "";
+      console.log(`Processing alert document ID: ${alertDocId}`);
 
-      // 4a. Category check (exact match, case-insensitive).
-      if (alertCategory.toLowerCase() !== newListingCategoryLower) {
+      if (!alertInfo.enabled) {
+        console.log(`Alert ID ${alertDocId} is disabled. Skipping.`);
         continue;
       }
 
-      // 4b. Title check: if a keyword is specified, it must appear in the new post title.
+      const alertUserId = alertInfo.userId;
+      const alertCategory = alertInfo.category || "";
+      const alertTitle = alertInfo.title || "";
+      const alertPrice = alertInfo.price || "";
+
+      // Skip if the sellerId matches the alertUserId
+      if (sellerId === alertUserId) {
+        console.log(`Seller ID matches Alert User ID (${alertUserId}). Skipping.`);
+        continue;
+      }
+
+      // 3a. Category check.
+      if (alertCategory.toLowerCase() !== newListingCategoryLower) {
+        console.log(`Category mismatch for alert ID ${alertDocId}. Skipping.`);
+        continue;
+      }
+
+      // 3b. Title check.
       let titleMatches = false;
-let matchType = "none";
+      let matchType = "none";
 
-if (alertTitle && alertTitle.trim() !== "") {
-  const alertWords = alertTitle.toLowerCase().split(/\s+/); // Split alertTitle into words
-  const matchedWords = alertWords.filter(word => newListingTitleLower.includes(word));
+      if (alertTitle && alertTitle.trim() !== "") {
+        const alertWords = alertTitle.toLowerCase().split(/\s+/);
+        const matchedWords = alertWords.filter(word => newListingTitleLower.includes(word));
 
-  if (matchedWords.length === alertWords.length) {
-    titleMatches = true;
-    matchType = "exact match";
-    console.log("Exact Match: All words in alert title are found in the new listing title.");
-  } else if (matchedWords.length > 0) {
-    titleMatches = true;
-    matchType = "partial match";
-    console.log("Partial Match: Some words in alert title are found in the new listing title.");
-  } else {
-    console.log("None: No words in alert title are found in the new listing title.");
-  }
-} else {
-  console.log("None: No alert title specified or it's empty.");
-}
+        if (matchedWords.length === alertWords.length) {
+          titleMatches = true;
+          matchType = "exact match";
+          console.log(`Exact match for alert ID ${alertDocId}.`);
+        } else if (matchedWords.length > 0) {
+          titleMatches = true;
+          matchType = "partial match";
+          console.log(`Partial match for alert ID ${alertDocId}. Matched words: ${matchedWords.join(", ")}`);
+        } else {
+          console.log(`No match for alert ID ${alertDocId}.`);
+        }
+      } else {
+        console.log(`No alert title specified for alert ID ${alertDocId}.`);
+      }
 
-      // 4c. Updated Price check: handle lower, higher, or same price cases.
+      // 3c. Price check.
       let priceMatches = false;
-      let priceMatchType = "";  // To store the type of price match.
+      let priceMatchType = "";
 
-      
-  // Convert alertPrice and price 
-  const alertPriceInt = parseInt(alertPrice, 10);
-  const priceInt = parseInt(price, 10);
+      const alertPriceInt = parseInt(alertPrice, 10);
+      const priceInt = parseInt(price, 10);
 
-  if (priceInt < alertPriceInt) {
-    priceMatches = true;
-    priceMatchType = "lower";
-  } else if (priceInt > alertPriceInt) {
-    priceMatches = true;
-    priceMatchType = "higher";
-  } else if (priceInt === alertPriceInt) {
-    priceMatches = true;
-    priceMatchType = "same";
-  }
+      if (priceInt < alertPriceInt) {
+        priceMatches = true;
+        priceMatchType = "lower";
+      } else if (priceInt > alertPriceInt) {
+        priceMatches = true;
+        priceMatchType = "higher";
+      } else if (priceInt === alertPriceInt) {
+        priceMatches = true;
+        priceMatchType = "same";
+      }
 
-      // Log price match type for debugging in Vercel logs.
-      console.log(`Price match type: ${priceMatchType}, New listing price: ${price}, Alert price: ${alertPrice}`);
+      console.log(`Price match type for alert ID ${alertDocId}: ${priceMatchType}`);
 
-      // 5. If both title and price checks pass, consider this a matching alert.
+      // 4. Save matching alerts to Firestore.
       if (titleMatches && priceMatches) {
         const notificationId = uuidv4();
 
-        // Build the document reference for the user's notifications.
         const notifRef = admin.firestore()
           .collection("ShopNGo")
           .doc("Users")
@@ -151,8 +173,7 @@ if (alertTitle && alertTitle.trim() !== "") {
           .collection("Alerts")
           .doc(notificationId);
 
-        // Write a notification document containing details of the new post.
-        await notifRef.set({
+        const notificationData = {
           postId,
           title,
           category,
@@ -160,59 +181,20 @@ if (alertTitle && alertTitle.trim() !== "") {
           sellerId,
           postTimestamp,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          matchCriteria: { alertTitle, alertCategory, alertPrice, priceMatchType }  // Include price match type.
-        });
+          matchCriteria: { alertTitle, alertCategory, alertPrice, priceMatchType }
+        };
+
+        console.log(`Saving notification for user ${alertUserId} with ID ${notificationId}`);
+        batch.set(notifRef, notificationData);
         notificationsCreated++;
-
-        // 6. Retrieve the account document for this alertUserId to get the FCM token.
-        const accountDoc = await admin.firestore()
-          .collection("ShopNGo")
-          .doc("Users")
-          .collection("Accounts")
-          .doc(alertUserId)
-          .collection("Marketplace")
-          .doc("userData")
-          .get();
-
-        if (accountDoc.exists) {
-          const accountData = accountDoc.data();
-          const fcmToken = accountData.fcmToken;
-
-          if (fcmToken) {
-            // Prepare a payload for FCM with a toast for debugging.
-            const payload = {
-              notification: {
-                title: "New Similar Listing Alert",
-                body: `${title} in ${category} at ₱${price} was just posted (${priceMatchType} than your target).`,
-              },
-              data: {
-                postId,
-                sellerId,
-                category,
-                price: price.toString(),
-                notificationId,
-                toast: `New similar listing found with a ${priceMatchType} price!`  // Debugging toast message.
-              },
-            };
-
-            // Send the push notification to the FCM token.
-            admin.messaging().sendToDevice(fcmToken, payload)
-              .then(response => {
-                console.log(`Push notification sent to user ${alertUserId} (token: ${fcmToken})`, response);
-              })
-              .catch(error => {
-                console.error(`Error sending push notification to user ${alertUserId}:`, error);
-              });
-          } else {
-            console.warn(`No FCM token found for user ${alertUserId}.`);
-          }
-        } else {
-          console.warn(`Account document for user ${alertUserId} does not exist.`);
-        }
       }
     }
 
-    // 7. Respond with the number of notifications created.
+    // Commit the batch write to Firestore.
+    await batch.commit();
+    console.log(`Batch write completed with ${notificationsCreated} notifications created.`);
+
+        // 7. Respond with the number of notifications created.
     res.status(200).json({
       message: "Processed similar listing alerts",
       notificationsCreated,
@@ -222,3 +204,4 @@ if (alertTitle && alertTitle.trim() !== "") {
     res.status(500).json({ error: error.toString() });
   }
 }
+
