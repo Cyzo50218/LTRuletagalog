@@ -188,64 +188,69 @@ export default async function handler(req, res) {
           
 const notificationData = {
   documentKey: {
-    value: postId,  // Replace `postId` with `documentKey` here
+    value: String(postId),  // Converted to string
     type: "string",
     description: "Unique identifier for the document"
   },
   itemName: {
-    value: title,
+    value: String(title),  // Converted to string
     type: "string",
     description: "Title of the notification"
   },
   category: {
-    value: category,
+    value: String(category),  // Converted to string
     type: "string",
     description: "Category of the post"
   },
   price: {
-    value: String(price),
-    type: "number",
+    value: String(price),  // Already a string, kept as is
+    type: "string",  // Updated type to string
     currency: "USD",
     description: "Price of the item"
   },
   sellerId: {
-    value: sellerId,
+    value: String(sellerId),  // Converted to string
     type: "string",
     description: "Unique identifier for the seller"
   },
   notificationType: {
-    value: 'SimilarListings',
+    value: String('SimilarListings'),  // Explicitly converted to string
     type: "string",
-    description: "Unique identifier for the seller"
+    description: "Type of the notification"
   },
   timePosted: {
-    value: postTimestamp,
-    type: "timestamp",
+    value: String(postTimestamp),  // Converted to string
+    type: "string",  // Updated type to string
     formatted: new Date(postTimestamp).toLocaleString(),
     description: "Time when the post was created"
   },
   createdAt: {
-    value: admin.firestore.FieldValue.serverTimestamp(),
-    type: "timestamp",
+    value: String(admin.firestore.FieldValue.serverTimestamp()),  // Converted to string
+    type: "string",  // Updated type to string
     description: "Time when the notification was created"
   }
 };
 
         
         const similarListing = {
-          postId,
-          title,
-          category,
-          price,
-          sellerId,
-          postTimestamp,
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          matchCriteria: { alertTitle, alertCategory, alertPrice, priceMatchType }
-        };
+  postId: String(postId),  // Converted to string
+  title: String(title),  // Converted to string
+  category: String(category),  // Converted to string
+  price: String(price),  // Converted to string
+  sellerId: String(sellerId),  // Converted to string
+  postTimestamp: String(postTimestamp),  // Converted to string
+  createdAt: String(admin.firestore.FieldValue.serverTimestamp()),  // Converted to string
+  matchCriteria: {  // Kept as is
+    alertTitle,
+    alertCategory,
+    alertPrice,
+    priceMatchType
+  }
+};
 
         console.log(`Saving notification for user ${alertUserId} with ID ${notificationId}`);
         batch.set(notifRef, notificationData, { merge: true });
-        batch.set(savedSimListings, similarListing);
+        batch.set(savedSimListings, similarListing, { merge: true });
         notificationsCreated++;
       }
     }
