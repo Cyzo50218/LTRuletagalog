@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
   try {
     // 1. Extract new post details from the request body.
-    const { postId, title, category, price, sellerId, timestamp } = req.body;
+    const { postId, title, category, price, sellerId, timestamp, imgThumbnail} = req.body;
     if (!postId || !title || !category || price === undefined) {
       console.log("Missing required fields in the request body.");
       return res.status(400).json({ error: "Missing required fields" });
@@ -213,6 +213,11 @@ const notificationData = {
     type: "string",
     description: "Unique identifier for the seller"
   },
+  itemThumbnail: {
+    value: String(imgThumbnail), // Converted to string
+    type: "string",
+    description: "Unique identifier for the seller"
+  },
   notificationType: {
     value: String('SimilarListings'),  // Explicitly converted to string
     type: "string",
@@ -235,6 +240,7 @@ const notificationData = {
         const similarListing = {
   postId: String(postId),  // Converted to string
   title: String(title),  // Converted to string
+  itemThumbnail: String(imgThumbnail),  // Converted to string
   category: String(category),  // Converted to string
   price: String(price),  // Converted to string
   sellerId: String(sellerId),  // Converted to string
