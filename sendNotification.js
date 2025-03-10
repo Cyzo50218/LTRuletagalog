@@ -43,6 +43,8 @@ export default async function handler(req, res) {
     });
 } catch (error) {
     let specificError = "Unknown error";
+    
+    //Send Multiple Logs error back to user's device 
     if (error.code) {
         switch (error.code) {
             case "messaging/invalid-recipient":
@@ -59,7 +61,7 @@ export default async function handler(req, res) {
         }
     }
 
-    // Log the error details
+    // Log error details
     console.error("Error sending notification:", {
         specificError,
         originalError: error.message,

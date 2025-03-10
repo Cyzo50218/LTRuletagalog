@@ -172,8 +172,30 @@ export default async function handler(req, res) {
           .doc("AllContents")
           .collection("Alerts")
           .doc(notificationId);
+          
+          const savedSimListings = admin.firestore()
+          .collection("ShopNGo")
+          .doc("Users")
+          .collection("Accounts")
+          .doc(alertUserId)
+          .collection("Marketplace")
+          .doc("userData")
+          .collection("MySimilarListings")
+          .doc(postId)
+          .collection('SimilarListings')
+          .doc(notificationId);
 
         const notificationData = {
+          postId,
+          title,
+          category,
+          price,
+          sellerId,
+          postTimestamp,
+          createdAt: admin.firestore.FieldValue.serverTimestamp()
+        };
+        
+        const similarListing = {
           postId,
           title,
           category,
@@ -186,6 +208,7 @@ export default async function handler(req, res) {
 
         console.log(`Saving notification for user ${alertUserId} with ID ${notificationId}`);
         batch.set(notifRef, notificationData);
+        batch.set(savedSimListings, similarListing);
         notificationsCreated++;
       }
     }
