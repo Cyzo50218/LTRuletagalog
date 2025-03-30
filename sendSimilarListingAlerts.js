@@ -163,27 +163,17 @@ export default async function handler(req, res) {
 
         
           const savedSimListings = admin.firestore()
-          .collection("ShopNGo")
-          .doc("Users")
-          .collection("Accounts")
+          .collection("Users")
           .doc(alertUserId)
-          .collection("Marketplace")
-          .doc("userData")
           .collection("MySimilarListings")
           .doc(postId)
           .collection('SimilarListings')
           .doc(notificationId);
           
           const notifRef = admin.firestore()
-          .collection("ShopNGo")
-          .doc("Users")
-          .collection("Accounts")
-          .doc(alertUserId)
-          .collection("Marketplace")
-          .doc("userData")
+          .collection("Users")
+  .doc(alertUserId)
           .collection("Notifications")
-          .doc("AllContents")
-          .collection("Alerts")
           .doc(notificationId);
           
 const notificationData = {
