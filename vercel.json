@@ -5,18 +5,20 @@
     { "src": "index.js", "use": "@vercel/node" },
     { "src": "sendNotification.js", "use": "@vercel/node" },
     { "src": "sendSimilarListingAlerts.js", "use": "@vercel/node" },
-    {
-      "src": "generatesuggestions.js",
-      "use": "@vercel/node"
-}
+    { "src": "generatesuggestions.js", "use": "@vercel/node" }
   ],
+
   "routes": [
     { "src": "/api/v2/check", "dest": "/index.js" },
-    { "src": "/api/givngo/trigger", "dest": "/sendNotification.js" },
-    { "src": "/api/shopngo/alert/similarlisting", "dest": "/sendSimilarListingAlerts.js" }, 
+    { "src": "/api/token/push", "dest": "/sendNotification.js" },
+    { "src": "/api/shopngo/alert/similarlisting", "dest": "/sendSimilarListingAlerts.js" },
+    { "src": "/api/v2/geminiapi", "dest": "/generatesuggestions.js" }
+  ],
+
+  "rewrites": [
     {
-      "src": "/api/v2/geminiapi",
-      "dest": "/generatesuggestions.js"
-}
+      "source": "/item/:itemId",
+      "destination": "/redirect.html"
+    }
   ]
 }
