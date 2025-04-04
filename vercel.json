@@ -13,12 +13,5 @@
     { "src": "/api/token/push", "dest": "/sendNotification.js" },
     { "src": "/api/shopngo/alert/similarlisting", "dest": "/sendSimilarListingAlerts.js" },
     { "src": "/api/v2/geminiapi", "dest": "/generatesuggestions.js" }
-  ],
-
-  "rewrites": [
-    {
-      "source": "/item/:itemId",
-      "destination": "/redirect.html"
-    }
   ]
 }
